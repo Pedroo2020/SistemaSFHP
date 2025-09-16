@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Header Padrão -->
     <header class="header">
         <div class="div-header">
             <img src="assets/img/Logo-SFHP-Branca.png" alt="Logo" class="icon-logo">
@@ -47,5 +46,75 @@
         </section>
     </main>
 
+    <div id="modalNovoPaciente" class="modal">
+        <div class="modal-conteudo">
+
+            <img src="assets/img/setaesquerda.svg" alt="Voltar" class="fechar">
+            <h2 class="cor-blue-dark center">Cadastrar Paciente</h2>
+
+            <form>
+                <div class="campo">
+                    <label for="cpf" class="cor-blue-dark">CPF</label>
+                    <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" required>
+                </div>
+
+                <div class="campo">
+                    <label for="nome" class="cor-blue-dark">Nome</label>
+                    <input type="text" id="nome" name="nome" placeholder="Digite o nome" required>
+                </div>
+
+                <div class="campo">
+                    <label for="sus" class="cor-blue-dark">Número do SUS</label>
+                    <input type="text" id="sus" name="sus" placeholder="Digite o número do SUS" required>
+                </div>
+
+                <div class="campo">
+                    <label for="email" class="cor-blue-dark">E-mail</label>
+                    <input type="email" id="email" name="email" placeholder="exemplo@gmail.com" required>
+                </div>
+
+                <div class="campo">
+                    <label for="telefone" class="cor-blue-dark">Telefone</label>
+                    <input type="tel" id="telefone" name="telefone" placeholder="(00) 0000-0000" required>
+                </div>
+
+                <div class="campo">
+                    <label for="sexo" class="cor-blue-dark">Sexo</label>
+                    <select id="sexo" name="sexo" required>
+                        <option value="feminino">Feminino</option>
+                        <option value="masculino">Masculino</option>
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label for="nascimento" class="cor-blue-dark">Nascimento</label>
+                    <input type="date" id="nascimento" name="nascimento" required>
+                </div>
+
+                <button type="submit" class="botao1">Cadastrar</button>
+            </form>
+
+        </div>
+    </div>
+
+    <script>
+        const botaoNovoPaciente = document.querySelector('.botao1');
+        const modal = document.getElementById('modalNovoPaciente');
+        const fechar = document.querySelector('.fechar');
+
+        botaoNovoPaciente.addEventListener('click', () => {
+            modal.style.display = 'flex';
+        });
+
+        fechar.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
