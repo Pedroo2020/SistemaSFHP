@@ -5,7 +5,6 @@
 }
 
 :root {
-    /* Cores */
     --gray-100: #FAFAFA;
     --gray-200: #ECECEC;
     --gray-300: #DCDCDC;
@@ -14,7 +13,6 @@
     --blue-base: #46A2D3;
     --blue-dark: #116694;
 
-    /* Alertas */
     --red-light: #FFC6C7;
     --red-base: #FF233D;
     --red-dark: #AF1111;
@@ -23,14 +21,11 @@
     --green-base: #23FFA3;
     --green-dark: #11AF68;
 
-    /* Cores Alertas */
     --red-protocol: #AF1111;
     --orange-protocol: #FE6500;
     --yellow-protocol: #FFB200;
     --green-protocol: #00742B;
     --blue-protocol: #060478;
-
-    /* Branco e Preto */
 
     --black: black;
     --white: white;
@@ -144,6 +139,21 @@ body {
     margin-left: 10px;
 }
 
+.botao3 {
+    width: 100%;
+    background-color: var(--blue-dark);
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    padding: 8px 14px;
+    font-size: 15px;
+    font-weight: bold;
+    height: 42px;
+    margin-top: 20px;
+    margin-bottom: 12px;
+      box-shadow: 0 4px 6px rgba(49, 52, 54, 0.321);
+}
+
 .icones {
     width: 20px;
 }
@@ -165,7 +175,7 @@ body {
     background-color: var(--white);
     padding: 20px 30px;
     border-radius: 10px;
-    width: 555px;
+    width: 500px;
     max-width: 90%;
     display: flex;
     flex-direction: column;
@@ -173,10 +183,10 @@ body {
 }
 
 .fechar {
-    width: 28px;
-    height: 28px;
+    width: 22px;
+    height: 22px;
     cursor: pointer;
-    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .modal-conteudo input,
@@ -208,4 +218,79 @@ form .campo {
 form .campo label {
     font-weight: 500;
     margin-bottom: 4px;
+}
+
+.tamfont {
+    font-size: 14px;
+}
+
+.alin-lad {
+    display: flex;
+    gap: 20px;
+}
+
+.camp-lad {
+    width: 46.2%;
+}
+
+.camp-lad label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.camp-lad select,
+.camp-lad input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+
+@media (max-width: 426px) {
+    .conteudo1 {
+        flex-wrap: wrap;
+    }
+
+    .subtitulo {
+        margin-bottom: 20px;
+    }
+
+    .linha {
+        background-color: var(--blue-dark);
+    }
+
+    .desaparecer {
+        color: var(--blue-dark);
+    }
+
+    .a {
+        width: 100%;
+    }
+
+    .botao1 {
+        width: 50%;
+        justify-content: center;
+    }
+
+    .botao2 {
+        width: 45%;
+        justify-content: center;
+        margin-left: 12.81px;
+    }
+}
+
+@media (max-width: 376px) {
+    .botao1 {
+        margin-left: 0px;
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 12px;
+    }
+
+    .botao2 {
+        margin-left: 0px;
+        width: 100%;
+        justify-content: center;
+    }
 }
