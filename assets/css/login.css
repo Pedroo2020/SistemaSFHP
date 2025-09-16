@@ -1,0 +1,80 @@
+:root {
+    /* Cores */
+    --gray-100: #FAFAFA;
+    --gray-200: #ECECEC;
+    --gray-300: #DCDCDC;
+
+    --blue-light: #C1E6FA;
+    --blue-base: #46A2D3;
+    --blue-dark: #116694;
+
+    /* Alertas */
+    --red-light: #FFC6C7;
+    --red-base: #FF233D;
+    --red-dark: #AF1111;
+
+    --red-light: #C6FFDB;
+    --green-base: #23FFA3;
+    --green-dark: #11AF68;
+
+    /* Cores Alertas */
+    --red-protocol: #AF1111;
+    --orange-protocol: #FE6500;
+    --yellow-protocol: #FFB200;
+    --green-protocol: #00742B;
+    --blue-protocol: #060478;
+
+    /* Branco e Preto */
+
+    --black: black;
+    --white: white;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url(../img/imagem-fundo.png);
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.sistema {
+    display: flex;
+    flex-direction: row;
+}
+
+.formulario {
+    text-align: center;
+    flex-direction: column;
+    background:var(--gray-100)
+}
+
+.titulo {
+    color: var(--blue-dark);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    background-color: var(--gray-100);
+    border: 3px solid var(--gray-300);
+    border-radius: 20px;
+    padding: 30px 100px;
+    margin: 20px;
+    color: var(--gray-300);
+}
+
+.input::placeholder {
+    flex-direction: start;
+    font-size: 20px;
+}
