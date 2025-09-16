@@ -35,6 +35,8 @@ body {
     background-color: #F5F5F5;
 }
 
+/* Início - Cabeçalho */
+
 .fundo {
     background-color: var(--blue-dark);
     color: var(--white);
@@ -64,10 +66,72 @@ body {
     display: flex;
     align-items: center;
     gap: 5px;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .icone-sair {
     width: 22px;
     height: 22px;
+}
+
+/* Fim - Cabeçalho */
+
+.conteudo1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+}
+
+.titulo {
+    color: var(--blue-dark);
+    font-weight: bold;
+    font-size: 25px;
+    margin-bottom: 2px;
+}
+
+
+.subtitulo {
+    color: var(--blue-dark);
+}
+
+.subtitulo .bemvindo {
+    font-weight: lighter;
+}
+
+.subtitulo .nome {
+    font-weight: bold;
+}
+
+.botao1 {
+    background-color: var(--blue-dark);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+.botao2 {
+    background-color: var(--white);
+    color: var(--blue-dark);
+    border: 1px solid var(--blue-dark);
+    border-radius: 8px;
+    padding: 8px 14px;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.icones {
+    width: 20px;
 }
