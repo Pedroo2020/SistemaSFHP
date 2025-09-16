@@ -1,0 +1,73 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+:root {
+    --gray-100: #FAFAFA;
+    --gray-200: #ECECEC;
+    --gray-300: #DCDCDC;
+
+    --blue-light: #C1E6FA;
+    --blue-base: #46A2D3;
+    --blue-dark: #116694;
+
+    --red-light: #FFC6C7;
+    --red-base: #FF233D;
+    --red-dark: #AF1111;
+
+    --green-light: #C6FFDB;
+    --green-base: #23FFA3;
+    --green-dark: #11AF68;
+
+    --red-protocol: #AF1111;
+    --orange-protocol: #FE6500;
+    --yellow-dark: #FFB200;
+    --green-protocol: #00742B;
+    --blue-protocol: #060478;
+
+    --white: #FFFFFF;
+    --black: #000000;
+}
+
+body {
+    background-color: #F5F5F5;
+}
+
+.fundo {
+    background-color: var(--blue-dark);
+    color: var(--white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    height: 50px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.icone-logo {
+    width: 30px;
+    height: 30px;
+}
+
+.sair {
+    color: var(--white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+}
+
+.icone-sair {
+    width: 22px;
+    height: 22px;
+}
