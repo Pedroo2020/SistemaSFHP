@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
 }
 
 :root {
@@ -40,6 +41,7 @@ body {
     background-color: var(--gray-200);
 }
 
+/* Início - Cabeçalho */
 .header {
     background-color: var(--blue-dark);
     color: var(--white);
@@ -47,7 +49,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 40px;
-    height: 50px;
+    height: 60px;
 }
 
 .div-header {
@@ -76,6 +78,7 @@ body {
     text-decoration: none;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 5px;
     font-size: 16px;
 }
@@ -84,7 +87,11 @@ body {
     width: 22px;
     height: 22px;
 }
+/* Fim - Cabeçalho */
 
+
+
+/* Início - Seção Título e SubTítulo */
 .sec-title-subtitle {
     display: flex;
     flex-direction: column;
@@ -105,3 +112,44 @@ body {
     font-weight: 300;
     color: var(--blue-dark);
 }
+/* Fim - Seção Título e SubTítulo */
+
+
+
+/* Início - Footer */
+.footer {
+    background-color: var(--blue-dark);
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-items: center;
+    width: 100%;
+}
+
+.title-footer {
+    font-weight: bold;
+}
+
+.div-footer-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    gap: 15px;
+}
+
+.div-direitos-reservados {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--blue-base);
+    width: 100%;
+    height: 40px;
+}
+
+.text-footer {
+    font-size: 14px;
+}
+/* Fim - Footer */
