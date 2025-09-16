@@ -246,6 +246,13 @@ form .campo label {
     border: 1px solid #ccc;
 }
 
+@media (max-width: 769px) {
+    .fechar {
+        width: 18px;
+        height: 18px;
+    }
+}
+
 
 @media (max-width: 426px) {
     .conteudo1 {
