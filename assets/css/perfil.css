@@ -40,8 +40,6 @@ body {
     background-color: var(--gray-200);
 }
 
-/* Início - Cabeçalho */
-
 .header {
     background-color: var(--blue-dark);
     color: var(--white);
@@ -87,64 +85,23 @@ body {
     height: 22px;
 }
 
-/* Fim - Cabeçalho */
-
-.conteudo1 {
+.sec-title-subtitle {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
+    flex-direction: column;
+    padding: 50px;
+    gap: 5px;
 }
 
-.titulo {
-    color: var(--blue-dark);
-    font-weight: bold;
-    font-size: 25px;
-    margin-bottom: 2px;
-}
-
-
-.subtitulo {
+.title{
     color: var(--blue-dark);
 }
 
-.subtitulo .bemvindo {
-    font-weight: lighter;
-}
-
-.subtitulo .nome {
+.span-font-weight {
     font-weight: bold;
-}
-
-.botao1 {
-    background-color: var(--blue-dark);
-    color: var(--white);
-    border: none;
-    border-radius: 8px;
-    padding: 8px 14px;
-    gap: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    display: inline-flex;
-    align-items: center;
-    font-weight: bold;
-}
-
-.botao2 {
-    background-color: var(--white);
     color: var(--blue-dark);
-    border: 1px solid var(--blue-dark);
-    border-radius: 8px;
-    padding: 8px 14px;
-    gap: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    display: inline-flex;
-    align-items: center;
-    font-weight: bold;
-    margin-left: 10px;
 }
 
-.icones {
-    width: 20px;
+.subtitle {
+    font-weight: 300;
+    color: var(--blue-dark);
 }
