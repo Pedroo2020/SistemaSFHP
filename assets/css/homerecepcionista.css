@@ -285,6 +285,14 @@ form .campo label {
         justify-content: center;
         margin-left: 12.81px;
     }
+
+    .modal-conteudo {
+        width: 70%;
+    }
+
+    .camp-lad select, .camp-lad input {
+        width: 89%;
+    }
 }
 
 @media (max-width: 376px) {
@@ -299,5 +307,24 @@ form .campo label {
         margin-left: 0px;
         width: 100%;
         justify-content: center;
+    }
+
+    .center {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .camp-lad select, .camp-lad input {
+        width: 86%;
+    }
+}
+
+@media (max-width: 321px) {
+    .alin-lad {
+        gap: 6px;
+    }
+
+    .camp-lad select, .camp-lad input {
+        width: 91%;
     }
 }
