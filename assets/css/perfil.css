@@ -79,7 +79,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
     gap: 5px;
     font-size: 16px;
 }
@@ -89,8 +88,6 @@ body {
     height: 22px;
 }
 /* Fim - Cabeçalho */
-
-
 
 /* Início - Seção Título e SubTítulo */
 .sec-title-subtitle {
