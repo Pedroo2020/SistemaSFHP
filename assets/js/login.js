@@ -133,16 +133,16 @@ $('.formulario').on('submit', (e) => {
             // Redireciona para a página designada
             if (typeUser === 1) {
                 // ADM
-                location.href = 'administrador-perfil.html';
+                window.location.href = 'administrador-perfil.html';
             } else if (typeUser === 2) {
                 // Médico
-                location.href = 'medico-perfil.html';
+                window.location.href = 'medico-perfil.html';
             } else if (typeUser === 3) {
                 // Enfermeiro
-                location.href = 'enfermeiro-perfil.html';
+                window.location.href = 'enfermeiro-perfil.html';
             } else if (typeUser === 4) {
                 // Recepcionista
-                location.href = 'recepcionista-perfil.html';
+                window.location.href = 'recepcionista-perfil.html';
             } else {
                 // Inválido
                 alertMsg('Login inválido', 'error');  
