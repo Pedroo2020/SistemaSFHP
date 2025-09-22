@@ -246,6 +246,37 @@ form .campo label {
     border: 1px solid #ccc;
 }
 
+.campo-cpf {
+    display: flex;
+    flex-direction: column;
+}
+
+#cpf {
+    padding: 10px;
+    font-size: 16px;
+    width: 95.9%;
+}
+
+.informacao-busca {
+    font-size: 15px;
+    background-color: var(--gray-200);
+    width: 97.5%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding-left: 13px;
+}
+
+.mar-bot {
+    margin-bottom: 15px !important;
+    color: var(--blue-dark);
+    text-align: center;
+}
+
+.esp {
+    margin-bottom: 5px;
+}
+
 @media (max-width: 769px) {
     .fechar {
         width: 18px;
@@ -293,6 +324,18 @@ form .campo label {
     .camp-lad select, .camp-lad input {
         width: 89%;
     }
+
+    .mar-bot {
+        margin-top: 15px !important;
+    }
+
+    .informacao-busca {
+        width: 95.5%;
+    }
+
+    #cpf {
+        width: 92.9%;
+    }
 }
 
 @media (max-width: 376px) {
@@ -317,6 +360,14 @@ form .campo label {
     .camp-lad select, .camp-lad input {
         width: 86%;
     }
+
+    #cpf {
+        width: 92.3%;
+    }
+
+    .informacao-busca {
+        width: 95.2%;
+    }
 }
 
 @media (max-width: 321px) {
@@ -326,5 +377,13 @@ form .campo label {
 
     .camp-lad select, .camp-lad input {
         width: 91%;
+    }
+
+    .informacao-busca {
+        width: 94%;
+    }
+
+    #cpf {
+        width: 90.3%;
     }
 }
