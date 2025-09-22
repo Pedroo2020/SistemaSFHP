@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,10 +12,11 @@
 
     <!-- Perfil JS em comum -->
     <script type="module" src="assets/js/perfil.js" defer></script>
-    
+
     <link rel="icon" href="assets/img/Logo-SFHP-Branca.png">
     <title>SFHP - Página do Médico</title>
 </head>
+
 <body>
     <!-- Header Padrão -->
     <header class="header">
@@ -31,86 +33,81 @@
     </header>
     <!-- Fim do Header -->
 
-
-        <main>
-
-        <main class="container">
-            <div class="painel">
-                <div class="controle">
-                    <h2 class="titulo">Painel de Controle</h2>
-                    <p class="texto">Bem-vindo(a), <span>Thomás!</span></p>
-                </div>
-            
-                <div class="acoes-paciente">
-                    <button class="btn-Chamar">Chamar Paciente</button>
-                    <button class="btn-Atualizar">Atualizar</button>
-                </div>
+    <main class="container">
+        <div class="painel">
+            <div class="controle">
+                <h2 class="titulo">Painel de Controle</h2>
+                <p class="texto">Bem-vindo(a), <span>Thomás!</span></p>
             </div>
 
-            <div class="cartoes">
-                <div class="cartao">
-                    <h3>Total de Pacientes</h3>
-                    <p>Pacientes aguardando atendimento</p>
-                </div>
-                <div class="cartao">
-                    <h3>Casos Urgentes</h3>
-                    <p>Vermelho e laranja</p>
-                </div>
-                <div class="cartao">
-                    <h3>Tempo Médio de Atendimento</h3>
-                    <p>Por consulta</p>
-                </div>
+            <div class="acoes-paciente">
+                <button class="btn-Chamar">Chamar Paciente</button>
+                <button class="btn-Atualizar">Atualizar</button>
+            </div>
+        </div>
+
+        <div class="cartoes">
+            <div class="cartao">
+                <h3>Total de Pacientes</h3>
+                <p>Pacientes aguardando atendimento</p>
+            </div>
+            <div class="cartao">
+                <h3>Casos Urgentes</h3>
+                <p>Vermelho e laranja</p>
+            </div>
+            <div class="cartao">
+                <h3>Tempo Médio de Atendimento</h3>
+                <p>Por consulta</p>
+            </div>
+        </div>
+
+        <div class="informacoes">
+
+            <div class="abas">
+                <button class="aba ativa" onclick="ativarAba(this)">Todos os Pacientes</button>
+                <button class="aba" onclick="ativarAba(this)">Triagem</button>
+                <button class="aba" onclick="ativarAba(this)">Concluídos</button>
             </div>
 
-            <div class="informacoes"> 
-
-                <div class="abas">
-                    <button class="aba ativa" onclick="ativarAba(this)">Todos os Pacientes</button>
-                    <button class="aba" onclick="ativarAba(this)">Triagem</button>
-                    <button class="aba" onclick="ativarAba(this)">Concluídos</button>
-                </div>
-
-                <script>
-                    function ativarAba(botao) {
+            <script>
+                function ativarAba(botao) {
                     const botoes = document.querySelectorAll('.aba');
                     botoes.forEach(b => b.classList.remove('ativa'));
                     botao.classList.add('ativa');
-                    }
-                </script>
+                }
+            </script>
 
-                <div class="buscar">
-                    <input placeholder="Buscar pacientes..." type="text">
-                </div>
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nome</th>
-                            <th>Idade</th>
-                            <th>Sexo</th>
-                            <th>Prioridade</th>
-                            <th>Entrada</th>
-                            <th>Tempo Decorrido</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>(ID)</td>
-                            <td>(Nome)</td>
-                            <td>(Idade)</td>
-                            <td>(Sexo)</td>
-                            <td>(Prioridade)</td>
-                            <td>(Entrada)</td>
-                            <td>(Tempo Decorrido)</td>
-                            <td>(Ações)</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="buscar">
+                <input placeholder="Buscar pacientes..." type="text">
             </div>
-        </main>
 
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Idade</th>
+                        <th>Sexo</th>
+                        <th>Prioridade</th>
+                        <th>Entrada</th>
+                        <th>Tempo Decorrido</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>(ID)</td>
+                        <td>(Nome)</td>
+                        <td>(Idade)</td>
+                        <td>(Sexo)</td>
+                        <td>(Prioridade)</td>
+                        <td>(Entrada)</td>
+                        <td>(Tempo Decorrido)</td>
+                        <td>(Ações)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </main>
 
 
@@ -121,11 +118,12 @@
             <span class="linha"></span>
             <p class="title-footer">SFHP</p>
         </div>
-        
+
         <div class="div-direitos-reservados">
             <p class="text-footer">© 2025 SFHP. Todos os direitos reservados.</p>
         </div>
     </footer>
     <!-- Fim do Footer -->
 </body>
+
 </html>

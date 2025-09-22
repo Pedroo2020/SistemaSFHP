@@ -6,11 +6,12 @@
     font-family: 'Inter', sans-serif;
 }
 
+
 :root {
     /* Cores */
     --gray-100: #FAFAFA;
     --gray-200: #ECECEC;
-    --gray-300: #DCDCDC;
+    --gray-300: #bebebe;
 
     --blue-light: #C1E6FA;
     --blue-base: #46A2D3;
@@ -22,7 +23,7 @@
     --red-dark: #AF1111;
 
     --red-light: #C6FFDB;
-    --green-base: #23FFA3;
+    --green-base: #1fd388;
     --green-dark: #11AF68;
 
     /* Cores Alertas */
@@ -33,7 +34,6 @@
     --blue-protocol: #060478;
 
     /* Branco e Preto */
-
     --black: black;
     --white: white;
 
@@ -196,7 +196,7 @@ body {
     width: 100%;
 }
 
-#form-cadastro {
+#form-cadastro, #form-consulta {
     display: none;
     flex-direction: column;
     width: 100%;
@@ -282,7 +282,7 @@ form .campo input {
     padding-left: 13px;
 }
 
-.title {
+.title-form {
     color: var(--blue-dark);
     text-align: center;
     width: 100%;
@@ -292,56 +292,9 @@ form .campo input {
     margin-bottom: 5px;
 }
 
-@media (max-width: 426px) {
-    .a {
-        width: 100%;
-    }
-
-    .botao1 {
-        width: 50%;
-        justify-content: center;
-    }
-
-    .botao2 {
-        width: 45%;
-        justify-content: center;
-        margin-left: 12.81px;
-    }
-
+@media (max-width: 768px) {
     .modal-conteudo {
-        width: 70%;
-    }
-
-    .camp-lad select, .camp-lad input {
-        width: 89%;
-    }
-}
-
-@media (max-width: 376px) {
-    .botao1 {
-        margin-left: 0px;
-        width: 100%;
-        justify-content: center;
-        margin-bottom: 12px;
-    }
-
-    .botao2 {
-        margin-left: 0px;
-        width: 100%;
-        justify-content: center;
-    }
-
-    .camp-lad select, .camp-lad input {
-        width: 86%;
-    }
-}
-
-@media (max-width: 321px) {
-    .alin-lad {
-        gap: 6px;
-    }
-
-    .camp-lad select, .camp-lad input {
-        width: 91%;
+        width: 90%;
+        padding: 20px;
     }
 }

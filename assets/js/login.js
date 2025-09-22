@@ -1,7 +1,9 @@
 // Importa a URL da API
 import URL_API from './urlAPI.js';
 // Função para formatar CPF
-import formatCPF from './formatCPF.js';
+import { formatCPF } from './components/format.js';
+// Função para mostrar mensagens de alerta
+import alertMsg from './alertMsg.js';
 
 // Ao carregar a página, adiciona as formatações ao input
 $(document).ready(() => {
@@ -32,32 +34,6 @@ $('.showPassword').click(() => {
     }
 
 })
-
-// Mostrar mensagem de erro
-function alertMsg(msg, type) {
-    
-    // Obtém a div de mensagem
-    const $divMsg = $('.div-message');
-
-    // Cria a div
-    const $div = $('<div></div>')
-                    .addClass(`msg ${type}`);
-
-    // Cria o ícone
-    const $icon = $('<i></i>')
-                    .addClass(`fa-solid ${type === 'error' ? 'fa-xmark' : 'fa-check'}`);
-
-    // Cria o parágrafo
-    const $p = $('<p></p>')
-                    .text(msg);
-
-    // Adiciona cada elemento a seu respectivo pai
-    $div.append($icon, $p).appendTo($divMsg);
-
-    $div.on('animationend', () => {
-        $div.remove();
-    })
-}
 
 // Envio do formulário de login
 $('.formulario').on('submit', (e) => {
@@ -106,12 +82,12 @@ $('.formulario').on('submit', (e) => {
                 window.location.href = 'recepcionista-perfil.html';
             } else {
                 // Inválido
-                alertMsg('Login inválido', 'error');  
+                alertMsg('Login inválido', 'error', '.div-message');  
             }
         },
         error: (err) => {
             // Exibe a mensagem de erro
-            alertMsg(err.responseJSON.error, 'error');  
+            alertMsg(err.responseJSON.error, 'error', '.div-message');  
         }
     })
 })

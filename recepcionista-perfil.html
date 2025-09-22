@@ -54,7 +54,7 @@
             <div class="a">
                 <button class="btn-novo-paciente">
                     <img src="assets/img/novopaciente.svg" alt="Ícone - Novo Paciente" class="icones">
-                    Novo Paciente
+                    Novo paciente
                 </button>
 
                 <button class="btn-refresh">
@@ -64,77 +64,128 @@
             </div>
         </section>
 
-    </main>
+        <!-- Modal Novo Paciente -->
+        <div id="modalNovoPaciente" class="modal">
+            <div class="modal-conteudo">
+                <i class="fa-solid fa-arrow-left fechar" id="fechar-modal"></i>
+                <i class="fa-solid fa-arrow-left fechar" id="voltar-cpf" style="display: none;"></i>
 
-    <!-- Modal Novo Paciente -->
-    <div id="modalNovoPaciente" class="modal">
-        <div class="modal-conteudo">
-            <i class="fa-solid fa-arrow-left fechar" id="fechar-modal"></i>
-            <i class="fa-solid fa-arrow-left fechar" id="voltar-cpf" style="display: none;"></i>
+                <!-- Formulário de CPF -->
+                <form id="form-cpf">
+                    <h2 class="title-form">Adicionar nova consulta</h2>
 
-            <!-- Formulário de CPF -->
-            <form id="form-cpf">
-                <h2 class="title">Adicionar Nova Consulta</h2>
-
-                <div class="campo-cpf">
-                    <label for="cpf" class="esp cor-blue-dark tamfont">CPF</label>
-                    <div class="div-input-tip">
-                        <input type="text" id="input-cpf" name="cpf" placeholder="000.000.000-00" required>
-                        <span class="info-busca">Busque pelo paciente</span>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn-next">Prosseguir <i class="fa-solid fa-arrow-right"></i></button>
-            </form>
-
-            <!-- Formulário Completo para Cadastro -->
-            <form id="form-cadastro">
-                <h2 class="title">Cadastrar paciente</h2>
-
-                <div class="campo">
-                    <label for="nome" class="cor-blue-dark tamfont">Nome</label>
-                    <input type="text" id="cpf-blocked" name="cpf-blocked" placeholder="CPF" readonly>
-                </div>
-
-                <div class="campo">
-                    <label for="nome" class="cor-blue-dark tamfont">Nome</label>
-                    <input type="text" id="nome" name="nome" placeholder="Digite o nome" required>
-                </div>
-
-                <div class="campo">
-                    <label for="sus" class="cor-blue-dark tamfont">Número do SUS</label>
-                    <input type="text" id="sus" name="sus" placeholder="Digite o número do SUS" required>
-                </div>
-
-                <div class="campo">
-                    <label for="email" class="cor-blue-dark tamfont">E-mail</label>
-                    <input type="email" id="email" name="email" placeholder="exemplo@gmail.com" required>
-                </div>
-
-                <div class="campo">
-                    <label for="telefone" class="cor-blue-dark tamfont">Telefone</label>
-                    <input type="tel" id="telefone" name="telefone" placeholder="(00) 0000-0000" required>
-                </div>
-
-                <div class="alin-lad">
-                    <div class="camp-lad">
-                        <label for="sexo" class="cor-blue-dark tamfont">Sexo</label>
-                        <select id="sexo" name="sexo" required>
-                            <option value="masculino">Masculino</option>
-                            <option value="feminino">Feminino</option>
-                        </select>
+                    <div class="campo-cpf">
+                        <label for="cpf" class="esp cor-blue-dark tamfont">CPF</label>
+                        <div class="div-input-tip">
+                            <input type="text" id="input-cpf" name="cpf" placeholder="000.000.000-00" required>
+                            <span class="info-busca">Busque pelo paciente</span>
+                        </div>
                     </div>
 
-                    <div class="camp-lad">
-                        <label for="nascimento" class="cor-blue-dark tamfont">Nascimento</label>
-                        <input type="date" id="nascimento" name="nascimento" required>
-                    </div>
-                </div>
+                    <button type="submit" class="btn-next">Prosseguir <i class="fa-solid fa-arrow-right"></i></button>
+                </form>
 
-                <button type="submit" class="botao3">Cadastrar</button>
-            </form>
+                <!-- Formulário Completo para Cadastro -->
+                <form id="form-cadastro">
+                    <h2 class="title-form">Cadastrar paciente</h2>
+
+                    <div class="campo">
+                        <label for="nome" class="cor-blue-dark tamfont">CPF</label>
+                        <input type="text" id="cpf-cadastro" name="cpf-cadastro" placeholder="CPF" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="nome" class="cor-blue-dark tamfont">Nome</label>
+                        <input type="text" id="nome-cadastro" name="nome-cadastro" placeholder="Digite o nome" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="sus" class="cor-blue-dark tamfont">Número do SUS</label>
+                        <input type="text" id="sus-cadastro" name="sus-cadastro" placeholder="Digite o número do SUS" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="email" class="cor-blue-dark tamfont">E-mail</label>
+                        <input type="email" id="email-cadastro" name="email-cadastro" placeholder="exemplo@gmail.com" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="telefone" class="cor-blue-dark tamfont">Telefone</label>
+                        <input type="tel" id="telefone-cadastro" name="telefone-cadastro" placeholder="(00) 0000-0000" required>
+                    </div>
+
+                    <div class="alin-lad">
+                        <div class="camp-lad">
+                            <label for="sexo" class="cor-blue-dark tamfont">Sexo</label>
+                            <select id="sexo-cadastro" name="sexo-cadastro" required>
+                                <option value="masculino">Masculino</option>
+                                <option value="feminino">Feminino</option>
+                            </select>
+                        </div>
+
+                        <div class="camp-lad">
+                            <label for="nascimento" class="cor-blue-dark tamfont">Nascimento</label>
+                            <input type="date" id="nascimento-cadastro" name="nascimento-cadastro" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="botao3">Cadastrar</button>
+                </form>
+
+                <!-- Formulário Completo para cadastrar consulta -->
+                <form id="form-consulta">
+                    <h2 class="title-form">Cadastrar consulta</h2>
+
+                    <div class="campo">
+                        <label for="nome" class="cor-blue-dark tamfont">CPF</label>
+                        <input type="text" id="cpf-consulta" name="cpf-consulta" placeholder="CPF" disabled>
+                    </div>
+
+                    <div class="campo">
+                        <label for="nome" class="cor-blue-dark tamfont">Nome</label>
+                        <input type="text" id="nome-consulta" name="nome-consulta" placeholder="Digite o nome" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="sus" class="cor-blue-dark tamfont">Número do SUS</label>
+                        <input type="text" id="sus-consulta" name="sus-consulta" placeholder="Digite o número do SUS" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="email" class="cor-blue-dark tamfont">E-mail</label>
+                        <input type="email" id="email-consulta" name="email-consulta" placeholder="exemplo@gmail.com" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="telefone" class="cor-blue-dark tamfont">Telefone</label>
+                        <input type="tel" id="telefone-consulta" name="telefone-consulta" placeholder="(00) 0000-0000" required>
+                    </div>
+
+                    <div class="alin-lad">
+                        <div class="camp-lad">
+                            <label for="sexo" class="cor-blue-dark tamfont">Sexo</label>
+                            <select id="sexo-consulta" name="sexo-consulta" required>
+                                <option value="masculino">Masculino</option>
+                                <option value="feminino">Feminino</option>
+                            </select>
+                        </div>
+
+                        <div class="camp-lad">
+                            <label for="nascimento" class="cor-blue-dark tamfont">Nascimento</label>
+                            <input type="date" id="nascimento-consulta" name="nascimento-consulta" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="botao3">Cadastrar</button>
+                </form>
+            </div>
+ 
+            <div class="div-message" id="div-msg-modal"></div>
         </div>
-    </div>
+
+        <div class="div-message"></div>
+
+    </main>
 
     <!-- Footer Padrão -->
     <footer class="footer">
