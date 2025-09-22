@@ -1,3 +1,6 @@
+@import url(https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif:opsz@12..24&display=swap);
+
 * {
     margin: 0;
     padding: 0;
@@ -142,33 +145,37 @@ body {
 .texto span {
     font-weight: bold;
     color: var(--blue-dark);
-}
-
-.acoes-paciente button{
-    padding: 10px 20px;
-    border: none;
-    border-radius: 6px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
+}   
 
 .btn-Chamar {
+    padding: 10px 10px;
+    border-radius: 8px;
     background-color: var(--blue-dark);
+    border: 2px solid var(--blue-dark);
     color: var(--white);
+    font-weight: bold;
+    transition: 0.3s;
+    font-size: 15px;
 }
-
 .btn-Chamar:hover {
     background-color: var(--blue-base);
+    border: 2px solid var(--blue-base);
+    transition: 0.3s;
 }
 
 .btn-Atualizar {
+    padding: 10px 10px;
+    border-radius: 8px;
     background-color: var(--white);
     color: var(--blue-dark);
+    border: 2px solid var(--blue-dark);
+    font-weight: bold;
+    transition: 0.3s;
+    font-size: 15px;
 }
-
 .btn-Atualizar:hover {
     background-color: var(--gray-200);
+    transition: 0.3s;
 }
 
 .cartoes {
@@ -188,19 +195,19 @@ body {
     box-shadow: 0px 4px 12px rgba(0,0,0,0.05);
 }
 
-.cartao h3 {
+.titulo-cartao {
     font-size: 1.1rem;
     margin-bottom: 8px;
     color: var(--black);
 }
 
-.cartao p {
+.texto-cartao {
     font-size: 0.9rem;
-    color: var(--gray);
+    color: var(--gray-dark);
 }
 
 .informacoes {
-    padding: 10px;
+    padding: 20px;
     background-color: var(--white);
     display: flex;
     justify-content: space-between;
@@ -233,7 +240,6 @@ body {
 .aba.ativa {
     background: var(--white);
     color: var(--black);
-    font-weight: 700;
 }
 
 .buscar input {
@@ -243,6 +249,25 @@ body {
     width: 250px;
 }
 
+.icon-user {
+    color: var(--blue-dark);
+    font-size: 35px;
+
+}
+
+.icon-urgency{
+    background-color: var(--red-dark);
+    color: var(--white);
+    font-size: 30px;
+    border: 3px solid var(--red-dark);
+    border-radius: 30px;
+}
+
+.icon-clock {
+    color: var(--blue-dark);
+    font-size: 35px;
+
+}
 
 table {
     width: 100%;
