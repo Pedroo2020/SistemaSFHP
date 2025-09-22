@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/medico-home.css">
+    <link rel="stylesheet" href="assets/css/medico.css">
+    <link rel="stylesheet" href="assets/css/perfil.css">
 
     <!-- Font awesome -->
-     <script src="https://kit.fontawesome.com/ac1aaaa398.js" crossorigin="anonymous"></script>
-     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/ac1aaaa398.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -22,12 +23,12 @@
 </head>
 
 <body>
-    <!-- Header Padrão -->
+       <!-- Header Padrão -->
     <header class="header">
         <div class="div-header">
             <img src="assets/img/Logo-SFHP-Branca.png" alt="Logo" class="icon-logo">
             <span class="linha"></span>
-            <span>SFHP - Página do Administrador</span>
+            <span>SFHP - Página do Recepcionista</span>
         </div>
 
         <div class="sair">
@@ -35,88 +36,51 @@
             <p>Sair</p>
         </div>
     </header>
-    <!-- Fim do Header -->
 
-    <main class="container">
-        <div class="painel">
-            <div class="controle">
-                <h2 class="titulo">Painel de Controle</h2>
-                <p class="texto">Bem-vindo(a), <span>Thomás!</span></p>
+    <main>
+
+        <section class="container-painel">
+            <div class="sec-title-subtitle">
+                <h2 class="title">Painel de Controle</h2>
+                <h3 class="subtitle">Bem vindo(a), <span class="span-font-weight" id="nome"></span></h3>
             </div>
 
             <div class="acoes-paciente">
-                <button class="btn-Chamar">Chamar Paciente</button>
-                <button class="btn-Atualizar">Atualizar</button>
+                <button class="btn-Chamar">
+                    <i class="fa-solid fa-user-plus"></i>
+                    Chamar Paciente
+                </button>
+                <button class="btn-Atualizar">
+                    <i class="fa-solid fa-arrows-rotate"></i>
+                    Atualizar
+                </button>
             </div>
-        </div>
+        </section>
 
         <div class="cartoes">
             <div class="cartao">
-                <h3>Total de Pacientes</h3>
-                <p>Pacientes aguardando atendimento</p>
+                <h3 class="titulo-cartao">Total de Pacientes</h3>
+                <p class="texto-cartao">Pacientes aguardando atendimento</p>
+                <i class="fa-regular fa-user icon-user"></i>
             </div>
             <div class="cartao">
-                <h3>Casos Urgentes</h3>
-                <p>Vermelho e laranja</p>
+                <h3 class="titulo-cartao">Casos Urgentes</h3>
+                <p class="texto-cartao">Vermelho e laranja</p>
+                <i class="fa-solid fa-circle-exclamation icon-urgency"></i>
             </div>
             <div class="cartao">
-                <h3>Tempo Médio de Atendimento</h3>
-                <p>Por consulta</p>
+                <h3 class="titulo-cartao">Tempo Médio de Atendimento</h3>
+                <p class="texto-cartao">Por consulta</p>
+                <i class="fa-regular fa-clock icon-clock"></i>
             </div>
         </div>
 
         <div class="informacoes">
-
             <div class="abas">
                 <button class="aba ativa" onclick="ativarAba(this)">Todos os Pacientes</button>
                 <button class="aba" onclick="ativarAba(this)">Triagem</button>
                 <button class="aba" onclick="ativarAba(this)">Concluídos</button>
-
-        <main class="container">
-            <div class="painel">
-                <div class="controle">
-                    <h2 class="titulo">Painel de Controle</h2>
-                    <p class="texto">Bem-vindo(a), <span>Thomás!</span></p>
-                </div>
-            
-                <div class="acoes-paciente">
-                    <button class="btn-Chamar">
-                        <i class="fa-solid fa-user-plus"></i>
-                        Chamar Paciente
-                    </button>
-                    <button class="btn-Atualizar">
-                        <i class="fa-solid fa-arrows-rotate"></i>
-                        Atualizar
-                    </button>
-                </div>
             </div>
-
-            <div class="cartoes">
-                <div class="cartao">
-                    <h3 class="titulo-cartao">Total de Pacientes</h3>
-                    <p class="texto-cartao">Pacientes aguardando atendimento</p>
-                    <i class="fa-regular fa-user icon-user"></i>
-
-                </div>
-                <div class="cartao">
-                    <h3 class="titulo-cartao">Casos Urgentes</h3>
-                    <p class="texto-cartao">Vermelho e laranja</p>
-                    <i class="fa-solid fa-circle-exclamation icon-urgency"></i>
-                </div>
-                <div class="cartao">
-                    <h3 class="titulo-cartao">Tempo Médio de Atendimento</h3>
-                    <p class="texto-cartao">Por consulta</p>
-                    <i class="fa-regular fa-clock icon-clock"></i>
-                </div>
-            </div>
-
-            <script>
-                function ativarAba(botao) {
-                    const botoes = document.querySelectorAll('.aba');
-                    botoes.forEach(b => b.classList.remove('ativa'));
-                    botao.classList.add('ativa');
-                }
-            </script>
 
             <div class="buscar">
                 <input placeholder="Buscar pacientes..." type="text">
@@ -164,6 +128,14 @@
         </div>
     </footer>
     <!-- Fim do Footer -->
+
+    <script>
+        function ativarAba(botao) {
+            const botoes = document.querySelectorAll('.aba');
+            botoes.forEach(b => b.classList.remove('ativa'));
+            botao.classList.add('ativa');
+        }
+    </script>
 </body>
 
 </html>
