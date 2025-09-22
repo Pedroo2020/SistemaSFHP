@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap);
+
 * {
     margin: 0;
     padding: 0;
@@ -5,10 +7,39 @@
 }
 
 :root {
+    /* Cores */
     --gray-100: #FAFAFA;
     --gray-200: #ECECEC;
+    --gray-300: #DCDCDC;
+
+    --blue-light: #C1E6FA;
+    --blue-base: #46A2D3;
     --blue-dark: #116694;
+
+    /* Alertas */
+    --red-light: #FFC6C7;
+    --red-base: #FF233D;
+    --red-dark: #AF1111;
+
+    --red-light: #C6FFDB;
+    --green-base: #23FFA3;
+    --green-dark: #11AF68;
+
+    /* Cores Alertas */
+    --red-protocol: #AF1111;
+    --orange-protocol: #FE6500;
+    --yellow-protocol: #FFB200;
+    --green-protocol: #00742B;
+    --blue-protocol: #060478;
+
+    /* Branco e Preto */
+
+    --black: black;
     --white: white;
+
+    /* Cores adicionais */
+    --blue-hover: #1876ac;
+    --gray-dark: #747474;
 }
 
 body {
@@ -36,26 +67,31 @@ body {
     font-weight: bold;
 }
 
-.botao1 {
-    background-color: var(--blue-dark);
+.btn-novo-paciente {
+    background-color: var(--blue-hover);
     color: var(--white);
     border: none;
     border-radius: 8px;
-    padding: 8px 14px;
+    padding: 14px;
     gap: 8px;
     cursor: pointer;
     font-size: 16px;
     display: inline-flex;
     align-items: center;
     font-weight: bold;
+    cursor: pointer;
+    transition: 0.1s;
+    &:hover {
+        background-color: var(--blue-dark);
+    }
 }
 
-.botao2 {
+.btn-refresh {
     background-color: var(--white);
     color: var(--blue-dark);
     border: 1px solid var(--blue-dark);
     border-radius: 8px;
-    padding: 8px 14px;
+    padding: 14px;
     gap: 8px;
     cursor: pointer;
     font-size: 16px;
@@ -63,9 +99,14 @@ body {
     align-items: center;
     font-weight: bold;
     margin-left: 10px;
+    cursor: pointer;
+    transition: 0.1s;
+    &:hover {
+        background-color: var(--gray-200);
+    }
 }
 
-.botao3 {
+.btn-next {
     width: 100%;
     background-color: var(--blue-dark);
     color: var(--white);
@@ -75,9 +116,16 @@ body {
     font-size: 15px;
     font-weight: bold;
     height: 42px;
-    margin-top: 20px;
-    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     box-shadow: 0 4px 6px rgba(49, 52, 54, 0.321);
+    cursor: pointer;
+    transition: 0.1s;
+    &:hover {
+        background-color: var(--blue-hover);
+    }
 }
 
 .icones {
@@ -99,28 +147,36 @@ body {
 
 .modal-conteudo {
     background-color: var(--white);
-    padding: 20px 30px;
+    padding: 35px;
     border-radius: 10px;
     width: 500px;
-    max-width: 90%;
+    max-width: 90vw;
     display: flex;
     flex-direction: column;
+    gap: 20px;
     position: relative;
 }
 
 .fechar {
-    width: 22px;
-    height: 22px;
     cursor: pointer;
-    margin-top: 10px;
+    top: 15px;
+    left: 20px;
+    font-size: 1.5rem;
+    color: var(--blue-dark);
+    padding: 5px;
+    position: absolute;
 }
 
 .modal-conteudo input,
 .modal-conteudo select {
-    padding: 8px 10px;
+    padding: 10px;
     border-radius: 6px;
-    border: 1px solid #ccc;
-    font-family: "Inter", sans-serif;
+    border: 1px solid var(--gray-300);
+    outline-color: var(--blue-dark);
+
+    &:disabled {
+        background-color: var(--gray-200);
+    }
 }
 
 .modal-conteudo label {
@@ -131,8 +187,19 @@ body {
     color: var(--blue-dark);
 }
 
+#form-cpf {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 25px;
+    width: 100%;
+}
+
 #form-cadastro {
     display: none;
+    flex-direction: column;
+    width: 100%;
 }
 
 form .campo {
@@ -144,6 +211,10 @@ form .campo {
 form .campo label {
     font-weight: 500;
     margin-bottom: 4px;
+}
+
+form .campo input {
+    padding: 10px;
 }
 
 .tamfont {
@@ -175,39 +246,50 @@ form .campo label {
 .campo-cpf {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
-#cpf {
+.div-input-tip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--gray-200);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#input-cpf {
+    background-color: var(--gray-100);
+    border: 2px solid var(--gray-300);
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
     padding: 10px;
-    font-size: 16px;
-    width: 95.9%;
+    color: var(--black);
+    font-size: 1rem;
+    text-align: left;
+    outline-color: var(--blue-dark);
 }
 
-.informacao-busca {
+.info-busca { 
     font-size: 15px;
     background-color: var(--gray-200);
-    width: 97.5%;
+    width: 100%;
     height: 40px;
     display: flex;
     align-items: center;
     padding-left: 13px;
 }
 
-.mar-bot {
-    margin-bottom: 15px !important;
+.title {
     color: var(--blue-dark);
     text-align: center;
+    width: 100%;
 }
 
 .esp {
     margin-bottom: 5px;
-}
-
-@media (max-width: 769px) {
-    .fechar {
-        width: 18px;
-        height: 18px;
-    }
 }
 
 @media (max-width: 426px) {
@@ -233,14 +315,6 @@ form .campo label {
     .camp-lad select, .camp-lad input {
         width: 89%;
     }
-
-    .informacao-busca {
-        width: 95.5%;
-    }
-
-    #cpf {
-        width: 92.9%;
-    }
 }
 
 @media (max-width: 376px) {
@@ -260,14 +334,6 @@ form .campo label {
     .camp-lad select, .camp-lad input {
         width: 86%;
     }
-
-    #cpf {
-        width: 92.3%;
-    }
-
-    .informacao-busca {
-        width: 95.2%;
-    }
 }
 
 @media (max-width: 321px) {
@@ -277,13 +343,5 @@ form .campo label {
 
     .camp-lad select, .camp-lad input {
         width: 91%;
-    }
-
-    .informacao-busca {
-        width: 94%;
-    }
-
-    #cpf {
-        width: 90.3%;
     }
 }
