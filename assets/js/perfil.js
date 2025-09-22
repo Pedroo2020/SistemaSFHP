@@ -64,7 +64,7 @@ $(document).ready(() => {
             await redirectWindow(dataUser.tipo_usuario);
 
             // Carrega o nome
-            $('.nome').text(dataUser.nome);
+            $('#nome').text(`${dataUser.nome}!`);
         },
         error: (err) => {
             // Limpa o token

@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS de Perfil -->
     <link rel="stylesheet" href="assets/css/perfil.css">
+    <!-- CSS da recepcao -->
+    <link rel="stylesheet" href="assets/css/recepcao.css">
+
+    <!-- Font awesome -->
     <script src="https://kit.fontawesome.com/ac1aaaa398.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -13,18 +19,22 @@
 
     <!-- Perfil JS em comum -->
     <script type="module" src="assets/js/perfil.js" defer></script>
+    
+    <!-- Recepcao JS -->
+    <script type="module" src="assets/js/recepcao.js" defer></script>
 
     <link rel="icon" href="assets/img/Logo-SFHP-Branca.png">
     <title>SFHP - Página do Recepcionista</title>
 </head>
 <body>
+    <!-- Header Padrão -->
     <header class="header">
         <div class="div-header">
             <img src="assets/img/Logo-SFHP-Branca.png" alt="Logo" class="icon-logo">
             <span class="linha"></span>
-            <span class="desaparecer">SFHP - Página do Recepcionista</span>
+            <span>SFHP - Página do Recepcionista</span>
         </div>
-    
+
         <div class="sair">
             <i class="fa-solid fa-right-from-bracket"></i>
             <p>Sair</p>
@@ -32,13 +42,11 @@
     </header>
 
     <main>
-        <section class="conteudo1">
-            <div>
-                <h1 class="titulo">Painel de Controle</h1>
-                <h3 class="subtitulo">
-                    <span class="bemvindo">Bem-vindo(a),</span>
-                    <span class="nome"></span>!
-                </h3>
+
+        <section class="container-painel">
+            <div class="sec-title-subtitle">
+                <h2 class="title">Painel de Controle</h2>
+                <h3 class="subtitle">Bem vindo(a), <span class="span-font-weight" id="nome"></span></h3>
             </div>
 
             <div class="a">
@@ -53,6 +61,7 @@
                 </button>
             </div>
         </section>
+
     </main>
 
     <!-- Modal Novo Paciente -->
@@ -62,7 +71,7 @@
             <h2 class="mar-bot">Adicionar Nova Consulta</h2>
 
             <!-- Formulário de CPF -->
-            <div id="form-cpf">
+            <form id="form-cpf">
                 <div class="campo-cpf">
                     <label for="cpf" class="esp cor-blue-dark tamfont">CPF</label>
                     <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" required>
@@ -73,126 +82,62 @@
                 </div>
 
                 <button type="button" id="buscar-paciente" class="botao3">Prosseguir -></button>
-            </div>
-
-            <!-- Formulário Completo para Cadastro -->
-            <div id="form-completo" style="display:none;">
-                <form>
-                    <div class="campo">
-                        <label for="nome" class="cor-blue-dark tamfont">Nome</label>
-                        <input type="text" id="nome" name="nome" placeholder="Digite o nome" required>
-                    </div>
-
-                    <div class="campo">
-                        <label for="sus" class="cor-blue-dark tamfont">Número do SUS</label>
-                        <input type="text" id="sus" name="sus" placeholder="Digite o número do SUS" required>
-                    </div>
-
-                    <div class="campo">
-                        <label for="email" class="cor-blue-dark tamfont">E-mail</label>
-                        <input type="email" id="email" name="email" placeholder="exemplo@gmail.com" required>
-                    </div>
-
-                    <div class="campo">
-                        <label for="telefone" class="cor-blue-dark tamfont">Telefone</label>
-                        <input type="tel" id="telefone" name="telefone" placeholder="(00) 0000-0000" required>
-                    </div>
-
-                    <div class="alin-lad">
-                        <div class="camp-lad">
-                            <label for="sexo" class="cor-blue-dark tamfont">Sexo</label>
-                            <select id="sexo" name="sexo" required>
-                                <option value="feminino">Masculino</option>
-                                <option value="masculino">Feminino</option>
-                            </select>
-                        </div>
-
-                        <div class="camp-lad">
-                            <label for="nascimento" class="cor-blue-dark tamfont">Nascimento</label>
-                            <input type="date" id="nascimento" name="nascimento" required>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="botao3">Cadastrar</button>
-                </form>
-            </div>
+            </form>
         </div>
     </div>
 
-    <script>
-        const botaoNovoPaciente = document.querySelector('.botao1');
-        const modal = document.getElementById('modalNovoPaciente');
-        const fechar = document.querySelector('.fechar');
+    <!-- Formulário Completo para Cadastro -->
+    <form id="form-cadastro">
+        <div class="campo">
+            <label for="nome" class="cor-blue-dark tamfont">Nome</label>
+            <input type="text" id="nome" name="nome" placeholder="Digite o nome" required>
+        </div>
 
-        botaoNovoPaciente.addEventListener('click', () => {
-            modal.style.display = 'flex';
-        });
+        <div class="campo">
+            <label for="sus" class="cor-blue-dark tamfont">Número do SUS</label>
+            <input type="text" id="sus" name="sus" placeholder="Digite o número do SUS" required>
+        </div>
 
-        fechar.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
+        <div class="campo">
+            <label for="email" class="cor-blue-dark tamfont">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="exemplo@gmail.com" required>
+        </div>
 
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
+        <div class="campo">
+            <label for="telefone" class="cor-blue-dark tamfont">Telefone</label>
+            <input type="tel" id="telefone" name="telefone" placeholder="(00) 0000-0000" required>
+        </div>
 
-        document.getElementById("buscar-paciente").addEventListener("click", function() {
-            const cpf = document.getElementById("cpf").value.replace(/[^\d]+/g, ''); // Remove caracteres não numéricos
-            if (cpf.length === 11) {
-                buscarPaciente(cpf);
-            } else {
-                alert("CPF inválido!");
-            }
-        });
+        <div class="alin-lad">
+            <div class="camp-lad">
+                <label for="sexo" class="cor-blue-dark tamfont">Sexo</label>
+                <select id="sexo" name="sexo" required>
+                    <option value="feminino">Masculino</option>
+                    <option value="masculino">Feminino</option>
+                </select>
+            </div>
 
-        // Função para buscar o paciente no backend
-        function buscarPaciente(cpf) {
-            fetch(`http://localhost:3000/buscar-paciente/${cpf}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.pacienteEncontrado) {
-                    preencherFormulario(data.paciente);
-                } else {
-                    limparFormulario();
-                }
-            })
-            .catch(error => {
-                console.error("Erro ao buscar paciente: ", error);
-                alert("Erro ao buscar o paciente!");
-            });
-        }
+            <div class="camp-lad">
+                <label for="nascimento" class="cor-blue-dark tamfont">Nascimento</label>
+                <input type="date" id="nascimento" name="nascimento" required>
+            </div>
+        </div>
 
-        // Função para preencher o formulário com os dados encontrados
-        function preencherFormulario(paciente) {
-            document.getElementById("nome").value = paciente.nome;
-            document.getElementById("sus").value = paciente.sus;
-            document.getElementById("email").value = paciente.email;
-            document.getElementById("telefone").value = paciente.telefone;
-            document.getElementById("sexo").value = paciente.sexo;
-            document.getElementById("nascimento").value = paciente.nascimento;
-            
-            // Mostrar o formulário completo
-            document.getElementById("form-completo").style.display = "block";
-        }
+        <button type="submit" class="botao3">Cadastrar</button>
+    </form>
 
-        // Função para limpar o formulário
-        function limparFormulario() {
-            document.getElementById("nome").value = '';
-            document.getElementById("sus").value = '';
-            document.getElementById("email").value = '';
-            document.getElementById("telefone").value = '';
-            document.getElementById("sexo").value = '';
-            document.getElementById("nascimento").value = '';
-
-            document.getElementById("form-completo").style.display = "block";
-        }
-    </script>
+    <!-- Footer Padrão -->
+    <footer class="footer">
+        <div class="div-footer-logo">
+            <img src="assets/img/Logo-SFHP-Branca.png" alt="Logo" class="icon-logo">
+            <span class="linha"></span>
+            <p class="title-footer">SFHP</p>
+        </div>
+        
+        <div class="div-direitos-reservados">
+            <p class="text-footer">© 2025 SFHP. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    <!-- Fim do Footer -->
 </body>
 </html>

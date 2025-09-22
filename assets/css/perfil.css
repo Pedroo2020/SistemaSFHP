@@ -92,10 +92,17 @@ body {
 
 /* Página ADM */
 /* Início - Seção Título e SubTítulo */
+
+.container-painel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px;
+}
+
 .sec-title-subtitle {
     display: flex;
     flex-direction: column;
-    padding: 50px;
     gap: 5px;
 }
 
