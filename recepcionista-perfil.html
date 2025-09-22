@@ -128,6 +128,62 @@
                 modal.style.display = 'none';
             }
         });
+
+        document.getElementById("buscar-paciente").addEventListener("click", function() {
+            const cpf = document.getElementById("cpf").value.replace(/[^\d]+/g, ''); // Remove caracteres não numéricos
+            if (cpf.length === 11) {
+                buscarPaciente(cpf);
+            } else {
+                alert("CPF inválido!");
+            }
+        });
+
+        // Função para buscar o paciente no backend
+        function buscarPaciente(cpf) {
+            fetch(`http://localhost:3000/buscar-paciente/${cpf}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.pacienteEncontrado) {
+                    preencherFormulario(data.paciente);
+                } else {
+                    limparFormulario();
+                }
+            })
+            .catch(error => {
+                console.error("Erro ao buscar paciente: ", error);
+                alert("Erro ao buscar o paciente!");
+            });
+        }
+
+        // Função para preencher o formulário com os dados encontrados
+        function preencherFormulario(paciente) {
+            document.getElementById("nome").value = paciente.nome;
+            document.getElementById("sus").value = paciente.sus;
+            document.getElementById("email").value = paciente.email;
+            document.getElementById("telefone").value = paciente.telefone;
+            document.getElementById("sexo").value = paciente.sexo;
+            document.getElementById("nascimento").value = paciente.nascimento;
+            
+            // Mostrar o formulário completo
+            document.getElementById("form-completo").style.display = "block";
+        }
+
+        // Função para limpar o formulário
+        function limparFormulario() {
+            document.getElementById("nome").value = '';
+            document.getElementById("sus").value = '';
+            document.getElementById("email").value = '';
+            document.getElementById("telefone").value = '';
+            document.getElementById("sexo").value = '';
+            document.getElementById("nascimento").value = '';
+
+            document.getElementById("form-completo").style.display = "block";
+        }
     </script>
 </body>
 </html>
