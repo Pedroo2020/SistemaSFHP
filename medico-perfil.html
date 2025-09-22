@@ -4,7 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/perfil.css">
+    <link rel="stylesheet" href="assets/css/medico-home.css">
+
+    <!-- Font awesome -->
+     <script src="https://kit.fontawesome.com/ac1aaaa398.js" crossorigin="anonymous"></script>
+     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -67,6 +71,43 @@
                 <button class="aba ativa" onclick="ativarAba(this)">Todos os Pacientes</button>
                 <button class="aba" onclick="ativarAba(this)">Triagem</button>
                 <button class="aba" onclick="ativarAba(this)">Concluídos</button>
+
+        <main class="container">
+            <div class="painel">
+                <div class="controle">
+                    <h2 class="titulo">Painel de Controle</h2>
+                    <p class="texto">Bem-vindo(a), <span>Thomás!</span></p>
+                </div>
+            
+                <div class="acoes-paciente">
+                    <button class="btn-Chamar">
+                        <i class="fa-solid fa-user-plus"></i>
+                        Chamar Paciente
+                    </button>
+                    <button class="btn-Atualizar">
+                        <i class="fa-solid fa-arrows-rotate"></i>
+                        Atualizar
+                    </button>
+                </div>
+            </div>
+
+            <div class="cartoes">
+                <div class="cartao">
+                    <h3 class="titulo-cartao">Total de Pacientes</h3>
+                    <p class="texto-cartao">Pacientes aguardando atendimento</p>
+                    <i class="fa-regular fa-user icon-user"></i>
+
+                </div>
+                <div class="cartao">
+                    <h3 class="titulo-cartao">Casos Urgentes</h3>
+                    <p class="texto-cartao">Vermelho e laranja</p>
+                    <i class="fa-solid fa-circle-exclamation icon-urgency"></i>
+                </div>
+                <div class="cartao">
+                    <h3 class="titulo-cartao">Tempo Médio de Atendimento</h3>
+                    <p class="texto-cartao">Por consulta</p>
+                    <i class="fa-regular fa-clock icon-clock"></i>
+                </div>
             </div>
 
             <script>
@@ -109,7 +150,6 @@
             </table>
         </div>
     </main>
-
 
     <!-- Footer Padrão -->
     <footer class="footer">
