@@ -55,21 +55,6 @@
     margin: 20px;
 }
 
-.titulo {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: var(--blue-dark);
-}
-
-.texto {
-    font-size: 1rem;
-    color: var(--blue-dark);
-}
-.texto span {
-    font-weight: bold;
-    color: var(--blue-dark);
-}   
-
 .btn-Chamar {
     padding: 10px 10px;
     border-radius: 8px;
@@ -119,13 +104,13 @@
 }
 
 .titulo-cartao {
-    font-size: 1.1rem;
+    font-size: 20px;
     margin-bottom: 8px;
     color: var(--black);
 }
 
 .texto-cartao {
-    font-size: 0.9rem;
+    font-size: 15px;
     color: var(--gray-dark);
 }
 
