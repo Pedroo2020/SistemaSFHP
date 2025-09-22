@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/perfil.css">
+    <link rel="stylesheet" href="assets/css/adm.css">
     <script src="https://kit.fontawesome.com/ac1aaaa398.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -96,136 +97,136 @@
 
         <!-- Início Tabela Usuários -->
         <section class="sec-tabela-usuario">
-            <div class="div-search">
-                <div class="div-text-search">
-                    <div class="aba-todos-usuarios">
-                        <p>Todos os Usuários</p>
+            <div class="div-scroll-table">
+                <div class="div-search">
+                    <div class="div-text-search">
+                        <div class="aba-todos-usuarios">
+                            <p>Todos os Usuários</p>
+                        </div>
+
+                        <div class="search-box">
+                            <i class="fa fa-search"></i>
+                            <input type="text" placeholder="Buscar...">
+                        </div>
                     </div>
 
-                    <div class="search-box">
-                        <i class="fa fa-search"></i>
-                        <input type="text" placeholder="Buscar...">
-                    </div>
+                    <button class="btn-add-user">
+                        <i class="fa-solid fa-user-plus" style="color: #ffffff;"></i>
+
+                        Adicionar Usuário
+                    </button>
                 </div>
 
-                <button class="btn-add-user">
-                    <i class="fa-solid fa-user-plus" style="color: #ffffff;"></i>
-
-                    Adicionar Usuário
-                </button>
+                <div class="div-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Nome</th>
+                                <th>Idade</th>
+                                <th>Sexo</th>
+                                <th>Cargo</th>
+                                <th>SUS/CRM/COREN</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>01</td>
+                                <td>Ana Maria Almeida</td>
+                                <td>32</td>
+                                <td>Feminino</td>
+                                <td>Enfermeiro</td>
+                                <td>0123456-ENF</td>
+                                <td>...</td>
+                            </tr>
+                            <tr>
+                                <td>02</td>
+                                <td>Pedro Santos</td>
+                                <td>28</td>
+                                <td>Masculino</td>
+                                <td>Paciente</td>
+                                <td>123.456.789.10</td>
+                                <td>...</td>
+                            </tr>
+                            <tr>
+                                <td>03</td>
+                                <td>Ana Souza</td>
+                                <td>65</td>
+                                <td>Feminino</td>
+                                <td>Médica</td>
+                                <td>00012345-XX</td>
+                                <td>...</td>
+                            </tr>
+                            <tr>
+                                <td>04</td>
+                                <td>Carlos Ferreira</td>
+                                <td>18</td>
+                                <td>Masculino</td>
+                                <td>Médico</td>
+                                <td>00012345-XX</td>
+                                <td>...</td>
+                            </tr>
+                            <tr>
+                                <td>05</td>
+                                <td>Marina Silva</td>
+                                <td>14</td>
+                                <td>Feminino</td>
+                                <td>Paciente</td>
+                                <td>123.456.789.10</td>
+                                <td>...</td>
+                            </tr>
+                            <tr>
+                                <td>05</td>
+                                <td>Marina Silva</td>
+                                <td>14</td>
+                                <td>Feminino</td>
+                                <td>Paciente</td>
+                                <td>123.456.789.10</td>
+                                <td>...</td>
+                            </tr>
+                            <tr>
+                                <td>05</td>
+                                <td>Marina Silva</td>
+                                <td>14</td>
+                                <td>Feminino</td>
+                                <td>Paciente</td>
+                                <td>123.456.789.10</td>
+                                <td>...</td>
+                            </tr>
+                            <tr>
+                                <td>05</td>
+                                <td>Marina Silva</td>
+                                <td>14</td>
+                                <td>Feminino</td>
+                                <td>Paciente</td>
+                                <td>123.456.789.10</td>
+                                <td>...</td>
+                            </tr>
+                            <tr>
+                                <td>05</td>
+                                <td>Marina Silva</td>
+                                <td>14</td>
+                                <td>Feminino</td>
+                                <td>Paciente</td>
+                                <td>123.456.789.10</td>
+                                <td>...</td>
+                            </tr>
+                            <tr>
+                                <td>05</td>
+                                <td>Marina Silva</td>
+                                <td>14</td>
+                                <td>Feminino</td>
+                                <td>Paciente</td>
+                                <td>123.456.789.10</td>
+                                <td>...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-
-            <div class="div-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Código</th>
-                            <th>Nome</th>
-                            <th>Idade</th>
-                            <th>Sexo</th>
-                            <th>Cargo</th>
-                            <th>SUS/CRM/COREN</th>
-                            <th>Ação</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>01</td>
-                            <td>Ana Maria Almeida</td>
-                            <td>32</td>
-                            <td>Feminino</td>
-                            <td>Enfermeiro</td>
-                            <td>0123456-ENF</td>
-                            <td>...</td>
-                        </tr>
-                        <tr>
-                            <td>02</td>
-                            <td>Pedro Santos</td>
-                            <td>28</td>
-                            <td>Masculino</td>
-                            <td>Paciente</td>
-                            <td>123.456.789.10</td>
-                            <td>...</td>
-                        </tr>
-                        <tr>
-                            <td>03</td>
-                            <td>Ana Souza</td>
-                            <td>65</td>
-                            <td>Feminino</td>
-                            <td>Médica</td>
-                            <td>00012345-XX</td>
-                            <td>...</td>
-                        </tr>
-                        <tr>
-                            <td>04</td>
-                            <td>Carlos Ferreira</td>
-                            <td>18</td>
-                            <td>Masculino</td>
-                            <td>Médico</td>
-                            <td>00012345-XX</td>
-                            <td>...</td>
-                        </tr>
-                        <tr>
-                            <td>05</td>
-                            <td>Marina Silva</td>
-                            <td>14</td>
-                            <td>Feminino</td>
-                            <td>Paciente</td>
-                            <td>123.456.789.10</td>
-                            <td>...</td>
-                        </tr>
-                        <tr>
-                            <td>05</td>
-                            <td>Marina Silva</td>
-                            <td>14</td>
-                            <td>Feminino</td>
-                            <td>Paciente</td>
-                            <td>123.456.789.10</td>
-                            <td>...</td>
-                        </tr>
-                        <tr>
-                            <td>05</td>
-                            <td>Marina Silva</td>
-                            <td>14</td>
-                            <td>Feminino</td>
-                            <td>Paciente</td>
-                            <td>123.456.789.10</td>
-                            <td>...</td>
-                        </tr>
-                        <tr>
-                            <td>05</td>
-                            <td>Marina Silva</td>
-                            <td>14</td>
-                            <td>Feminino</td>
-                            <td>Paciente</td>
-                            <td>123.456.789.10</td>
-                            <td>...</td>
-                        </tr>
-                        <tr>
-                            <td>05</td>
-                            <td>Marina Silva</td>
-                            <td>14</td>
-                            <td>Feminino</td>
-                            <td>Paciente</td>
-                            <td>123.456.789.10</td>
-                            <td>...</td>
-                        </tr>
-                        <tr>
-                            <td>05</td>
-                            <td>Marina Silva</td>
-                            <td>14</td>
-                            <td>Feminino</td>
-                            <td>Paciente</td>
-                            <td>123.456.789.10</td>
-                            <td>...</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
         </section>
         <!-- Fim Tabela Usuários -->
-
 
     </main>
 
