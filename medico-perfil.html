@@ -3,14 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/perfil.css">
+    <link rel="stylesheet" href="assets/css/medico-home.css">
+
+    <!-- Font awesome -->
+     <script src="https://kit.fontawesome.com/ac1aaaa398.js" crossorigin="anonymous"></script>
+     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
     <!-- Perfil JS em comum -->
-    <script type="module" src="assets/js/perfil.js" defer></script>
+    
     
     <link rel="icon" href="assets/img/Logo-SFHP-Branca.png">
     <title>SFHP - Página do Médico</title>
@@ -32,7 +36,6 @@
     <!-- Fim do Header -->
 
 
-        <main>
 
         <main class="container">
             <div class="painel">
@@ -42,23 +45,33 @@
                 </div>
             
                 <div class="acoes-paciente">
-                    <button class="btn-Chamar">Chamar Paciente</button>
-                    <button class="btn-Atualizar">Atualizar</button>
+                    <button class="btn-Chamar">
+                        <i class="fa-solid fa-user-plus"></i>
+                        Chamar Paciente
+                    </button>
+                    <button class="btn-Atualizar">
+                        <i class="fa-solid fa-arrows-rotate"></i>
+                        Atualizar
+                    </button>
                 </div>
             </div>
 
             <div class="cartoes">
                 <div class="cartao">
-                    <h3>Total de Pacientes</h3>
-                    <p>Pacientes aguardando atendimento</p>
+                    <h3 class="titulo-cartao">Total de Pacientes</h3>
+                    <p class="texto-cartao">Pacientes aguardando atendimento</p>
+                    <i class="fa-regular fa-user icon-user"></i>
+
                 </div>
                 <div class="cartao">
-                    <h3>Casos Urgentes</h3>
-                    <p>Vermelho e laranja</p>
+                    <h3 class="titulo-cartao">Casos Urgentes</h3>
+                    <p class="texto-cartao">Vermelho e laranja</p>
+                    <i class="fa-solid fa-circle-exclamation icon-urgency"></i>
                 </div>
                 <div class="cartao">
-                    <h3>Tempo Médio de Atendimento</h3>
-                    <p>Por consulta</p>
+                    <h3 class="titulo-cartao">Tempo Médio de Atendimento</h3>
+                    <p class="texto-cartao">Por consulta</p>
+                    <i class="fa-regular fa-clock icon-clock"></i>
                 </div>
             </div>
 
@@ -110,8 +123,6 @@
                 </table>
             </div>
         </main>
-
-    </main>
 
 
     <!-- Footer Padrão -->
