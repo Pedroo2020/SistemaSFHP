@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif:opsz@12..24&display=swap);
 
 :root {
     /* Cores */
@@ -16,7 +17,7 @@
     --red-dark: #AF1111;
 
     --red-light: #C6FFDB;
-    --green-base: #23FFA3;
+    --green-base: #1fd388;
     --green-dark: #11AF68;
 
     /* Cores Alertas */
@@ -58,17 +59,36 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    gap: 50px;
+    gap: 70px;
 }
 
-.sistema {
+.div-logo {
     display: flex;
-    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    & img {
+        width: 100px;
+        height: auto;
+    }
+
+    .brand {
+        font-size: 2.5rem;
+        color: var(--gray-100);
+        font-family: "Hedvig Letters Serif", serif;
+    }
+
+    .brand-descricao {
+        font-size: 1.2rem;
+        color: var(--gray-100);
+        font-family: "Hedvig Letters Serif", serif;
+    }
 }
 
 .formulario {
     text-align: center;
-    background:var(--gray-100);
+    background: var(--gray-100);
     justify-content: center;
     align-items: center;
     border-radius: 20px;
@@ -76,9 +96,17 @@ body {
     flex-direction: column;
     padding: 35px;
     gap: 20px;
+    width: 430px;
+}
+
+.linha {
+    height: 120px;
+    width: 1px;
+    background-color: var(--gray-300);
 }
 
 .titulo {
+    font-size: 1.6rem;
     color: var(--blue-dark);
 }
 
@@ -86,17 +114,17 @@ body {
     background-color: var(--gray-100);
     border: 2px solid var(--gray-300);
     border-radius: 10px;
-    width: 400px;
+    width: 100%;
     height: 100%;
     padding: 10px;
     color: var(--black);
-    font-size: 18px;
+    font-size: 1rem;
     text-align: left;
+    outline-color: var(--blue-dark);
 }
 
-.logo {
-    width: auto;
-    height: 130px;
+#input-cpf {
+    caret-color: transparent;
 }
 
 .div-input {
@@ -105,33 +133,40 @@ body {
     align-items: flex-end;
     position: relative;
     height: 50px;
+    width: 100%;
+}
+
+.div-showPassword {
+    width: 50px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 2px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .showPassword {
     background: none;
-    border: none;
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
     color: var(--gray-300);
     cursor: pointer;
     font-size: 1.2rem;
-    padding: 10px;
 }
 
 .btn {
     background: var(--blue-dark);
     color: var(--gray-100);
     border: none;
-    width: 400px;
+    width: 100%;
     height: 60px;
     font-weight: bold;
     border-radius: 10px;
-    font-size: 20px;
+    font-size: 1rem;
     transition: 0.4s;
     cursor: pointer;
-    box-shadow: 0px 7px 14px rgba(0,0,0,0.2);
+    box-shadow: 0px 7px 14px rgba(0, 0, 0, 0.2);
 
 }
 
@@ -144,13 +179,124 @@ body {
     color: var(--gray-300);
     text-align: right;
     align-self: flex-end;
-    font-size: 1.2rem;
+    font-size: 1rem;
     cursor: pointer;
     transition: 0.1s;
     border-bottom: 2px solid var(--gray-300);
-    
 
     &:hover {
         color: var(--black);
+    }
+}
+
+.div-message {
+    position: fixed;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    .msg {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+        border-radius: 10px;
+        animation: showMsg 5s ease;
+
+        &.error {
+            background-color: var(--red-base);
+        }
+
+        &.success {
+            background-color: var(--green-base);
+        }
+
+        & i, p {
+            color: var(--white);
+        }
+    }
+
+}
+
+@keyframes showMsg {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@media (max-width: 920px) {
+    .container {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .linha {
+        display: none;
+    }
+
+    .div-logo {
+
+        & img {
+            width: 60px;
+        }
+
+        .brand {
+            font-size: 2rem;
+        }
+
+        .brand-descricao {
+            font-size: 1rem;
+        }
+    }
+
+}
+
+@media (max-width: 475px) {
+
+    .div-logo {
+
+        & img {
+            width: 55px;
+        }
+
+        .brand {
+            font-size: 1.6rem;
+        }
+    }
+
+    .formulario {
+        width: 90vw;
+    }
+
+    .titulo {
+        font-size: 1.4rem;
+    }
+
+    .input {
+        font-size: 0.9rem;
+    }
+
+    .rec-senha {
+        font-size: 0.85rem;
+    }
+
+    .btn {
+        height: 50px;
+        font-size: 0.9rem;
     }
 }
