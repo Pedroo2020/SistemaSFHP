@@ -83,6 +83,7 @@ body {
     gap: 5px;
     font-size: 16px;
     cursor: pointer;
+
     &:hover {
         opacity: 0.75;
     }
@@ -92,6 +93,7 @@ body {
     width: 22px;
     height: 22px;
 }
+
 /* Fim - Cabeçalho */
 
 /* Página ADM */
@@ -101,7 +103,6 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 50px;
 }
 
 .sec-title-subtitle {
@@ -110,7 +111,7 @@ body {
     gap: 5px;
 }
 
-.title{
+.title {
     font-size: 1.7rem;
     color: var(--blue-dark);
 }
@@ -125,6 +126,7 @@ body {
     font-weight: 300;
     color: var(--blue-dark);
 }
+
 /* Fim - Seção Título e SubTítulo */
 
 
@@ -134,7 +136,6 @@ body {
     display: flex;
     justify-content: center;
     width: 100%;
-    padding: 0 50px;
     gap: 15px;
 }
 
@@ -176,204 +177,132 @@ body {
     font-size: 1.5rem;
     font-weight: bolder;
 }
-/* Fim - Seção Blocos Informativos */
-/* Fim Página ADM */
 
-/* Página Recepcionista */
-.conteudo1 {
+/* Fim - Seção Blocos Informativos */
+
+/* Início Seção da Tabela de Usuários */
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 50px;
+}
+
+.div-table {
+    overflow-y: auto;
+    width: 100%;
+    height: 400px;
+}
+
+.sec-tabela-usuario {
+    background-color: var(--gray-100);
+    padding: 0px 30px 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+}
+
+.div-search {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 40px;
-}
-
-.titulo {
-    color: var(--blue-dark);
-    font-weight: bold;
-    font-size: 25px;
-    margin-bottom: 2px;
-}
-
-.subtitulo {
-    color: var(--blue-dark);
-}
-
-.subtitulo .bemvindo {
-    font-weight: lighter;
-}
-
-.subtitulo .nome {
-    font-weight: bold;
-}
-
-.botao1 {
-    background-color: var(--blue-dark);
-    color: var(--white);
-    border: none;
-    border-radius: 8px;
-    padding: 8px 14px;
-    gap: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    display: inline-flex;
-    align-items: center;
-    font-weight: bold;
-}
-
-.botao2 {
-    background-color: var(--white);
-    color: var(--blue-dark);
-    border: 1px solid var(--blue-dark);
-    border-radius: 8px;
-    padding: 8px 14px;
-    gap: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    display: inline-flex;
-    align-items: center;
-    font-weight: bold;
-    margin-left: 10px;
-}
-
-.botao3 {
     width: 100%;
-    background-color: var(--blue-dark);
-    color: var(--white);
-    border: none;
-    border-radius: 5px;
-    padding: 8px 14px;
-    font-size: 15px;
-    font-weight: bold;
-    height: 42px;
-    margin-top: 20px;
-    margin-bottom: 12px;
-    box-shadow: 0 4px 6px rgba(49, 52, 54, 0.321);
+    padding: 20px 0;
 }
 
-.icones {
-    width: 20px;
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+.div-text-search {
+    display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    gap: 30px;
 }
 
-.modal-conteudo {
-    background-color: var(--white);
-    padding: 20px 30px;
-    border-radius: 10px;
-    width: 500px;
-    max-width: 90%;
-    display: flex;
-    flex-direction: column;
+.aba-todos-usuarios{
+    padding: 10px 20px;
+    background-color: var(--gray-100);
+    border: 8px solid var(--gray-200);
+    border-radius: 50px;
+    font-weight: bold;
+}
+
+.search-box {
     position: relative;
+    width: 400px;
 }
 
-.fechar {
-    width: 22px;
-    height: 22px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-.modal-conteudo input,
-.modal-conteudo select {
-    padding: 8px 10px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-family: "Inter", sans-serif;
-}
-
-.modal-conteudo label {
-    font-weight: 500;
-}
-
-.cor-blue-dark {
-    color: var(--blue-dark);
-}
-
-.center {
-    text-align: center;
-}
-
-form .campo {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 12px;
-}
-
-form .campo label {
-    font-weight: 500;
-    margin-bottom: 4px;
-}
-
-.tamfont {
-    font-size: 14px;
-}
-
-.alin-lad {
-    display: flex;
-    gap: 20px;
-}
-
-.camp-lad {
-    width: 46.2%;
-}
-
-.camp-lad label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.camp-lad select,
-.camp-lad input {
+.search-box input {
     width: 100%;
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
+    padding: 15px 15px 15px 40px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s;
 }
 
-.campo-cpf {
-    display: flex;
-    flex-direction: column;
+.search-box input:focus {
+    border-color: #aaa;
 }
 
-#cpf {
-    padding: 10px;
+.search-box i {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
     font-size: 16px;
-    width: 95.9%;
+    color: #aaa;
 }
 
-.informacao-busca {
-    font-size: 15px;
-    background-color: var(--gray-200);
-    width: 97.5%;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    padding-left: 13px;
+.btn-add-user {
+    background-color: var(--blue-dark);
+    padding: 15px 30px;
+    border-style: none;
+    color: var(--white);
+    font-weight: 500;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
-.mar-bot {
-    margin-bottom: 15px !important;
-    color: var(--blue-dark);
+table {
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    width: 100%;
+}
+
+th,
+td {
+    border-bottom: 1px solid var(--gray-300);
+    padding: 20px;
     text-align: center;
+    font-weight: 600;
 }
 
-.esp {
-    margin-bottom: 5px;
+td:first-child {
+    border-left: 1px solid var(--gray-300);
 }
-/* Fim Página Recepcionista */
 
+td:last-child {
+    border-right: 1px solid var(--gray-300);
+}
+
+th {
+    background-color: var(--gray-200);
+    font-weight: bold;
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+
+/* Fim Seção da Tabela de Usuários */
+
+/* Fim Página ADM */
 
 /* Início - Footer */
 .footer {
@@ -411,122 +340,5 @@ form .campo label {
 .text-footer {
     font-size: 14px;
 }
+
 /* Fim - Footer */
-
-/* Responsivo Página Recepcionista */
-
-@media (max-width: 769px) {
-    .fechar {
-        width: 18px;
-        height: 18px;
-    }
-}
-
-
-@media (max-width: 426px) {
-    .conteudo1 {
-        flex-wrap: wrap;
-    }
-
-    .subtitulo {
-        margin-bottom: 20px;
-    }
-
-    .linha {
-        background-color: var(--blue-dark);
-    }
-
-    .desaparecer {
-        color: var(--blue-dark);
-    }
-
-    .a {
-        width: 100%;
-    }
-
-    .botao1 {
-        width: 50%;
-        justify-content: center;
-    }
-
-    .botao2 {
-        width: 45%;
-        justify-content: center;
-        margin-left: 12.81px;
-    }
-
-    .modal-conteudo {
-        width: 70%;
-    }
-
-    .camp-lad select,
-    .camp-lad input {
-        width: 89%;
-    }
-
-    .mar-bot {
-        margin-top: 15px !important;
-    }
-
-    .informacao-busca {
-        width: 95.5%;
-    }
-
-    #cpf {
-        width: 92.9%;
-    }
-}
-
-@media (max-width: 376px) {
-    .botao1 {
-        margin-left: 0px;
-        width: 100%;
-        justify-content: center;
-        margin-bottom: 12px;
-    }
-
-    .botao2 {
-        margin-left: 0px;
-        width: 100%;
-        justify-content: center;
-    }
-
-    .center {
-        margin-top: 15px;
-        margin-bottom: 15px;
-    }
-
-    .camp-lad select,
-    .camp-lad input {
-        width: 86%;
-    }
-
-    #cpf {
-        width: 92.3%;
-    }
-
-    .informacao-busca {
-        width: 95.2%;
-    }
-}
-
-@media (max-width: 321px) {
-    .alin-lad {
-        gap: 6px;
-    }
-
-    .camp-lad select,
-    .camp-lad input {
-        width: 91%;
-    }
-
-    .informacao-busca {
-        width: 94%;
-    }
-
-    #cpf {
-        width: 90.3%;
-    }
-}
-
-/* Fim Responsivo Página Recepcionista */
