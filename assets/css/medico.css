@@ -42,6 +42,7 @@
     /* Cores adicionais */
     --blue-hover: #1876ac;
     --gray-dark: #747474;
+    --orange-fundo: #fe660067;
 }
 
 /* Começo - Main */
@@ -53,21 +54,6 @@
     flex-wrap: wrap;
     margin: 20px;
 }
-
-.titulo {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: var(--blue-dark);
-}
-
-.texto {
-    font-size: 1rem;
-    color: var(--blue-dark);
-}
-.texto span {
-    font-weight: bold;
-    color: var(--blue-dark);
-}   
 
 .btn-Chamar {
     padding: 10px 10px;
@@ -118,19 +104,17 @@
 }
 
 .titulo-cartao {
-    font-size: 1.1rem;
+    font-size: 20px;
     margin-bottom: 8px;
     color: var(--black);
 }
 
 .texto-cartao {
-    font-size: 0.9rem;
+    font-size: 15px;
     color: var(--gray-dark);
 }
 
 .informacoes {
-    padding: 20px;
-    background-color: var(--white);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -147,6 +131,14 @@
     margin-bottom: 20px;
 }
 
+.laranja {
+    color: var(--orange-protocol);
+    background-color: var(--orange-fundo);
+    border-radius: 20px;
+    padding: 5px 10px;
+    border: 3px solid var(--orange-protocol); 
+}
+
 .aba {
     flex: 1;
     border: none;
@@ -154,9 +146,10 @@
     padding: 6px;
     border-radius: 20px;
     cursor: pointer;
-    font-weight: 500;
+    font-weight: bold;
     transition: all 0.3s;
     white-space: nowrap;
+    font-size: 14px;
 }
 
 .aba.ativa {
