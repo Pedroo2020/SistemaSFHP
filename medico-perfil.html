@@ -16,14 +16,14 @@
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
     <!-- Perfil JS em comum -->
-    <script type="module" src="assets/js/perfil.js" defer></script>
+
 
     <link rel="icon" href="assets/img/Logo-SFHP-Branca.png">
     <title>SFHP - Página do Médico</title>
 </head>
 
 <body>
-       <!-- Header Padrão -->
+    <!-- Header Padrão -->
     <header class="header">
         <div class="div-header">
             <img src="assets/img/Logo-SFHP-Branca.png" alt="Logo" class="icon-logo">
@@ -39,6 +39,7 @@
 
     <main>
 
+        <!-- Título e SubTítulo -->
         <section class="container-painel">
             <div class="sec-title-subtitle">
                 <h2 class="title">Painel de Controle</h2>
@@ -56,63 +57,95 @@
                 </button>
             </div>
         </section>
+        <!-- Fim do Título e SubTítulo -->
 
-        <div class="cartoes">
-            <div class="cartao">
-                <h3 class="titulo-cartao">Total de Pacientes</h3>
-                <p class="texto-cartao">Pacientes aguardando atendimento</p>
-                <i class="fa-regular fa-user icon-user"></i>
-            </div>
-            <div class="cartao">
-                <h3 class="titulo-cartao">Casos Urgentes</h3>
-                <p class="texto-cartao">Vermelho e laranja</p>
-                <i class="fa-solid fa-circle-exclamation icon-urgency"></i>
-            </div>
-            <div class="cartao">
-                <h3 class="titulo-cartao">Tempo Médio de Atendimento</h3>
-                <p class="texto-cartao">Por consulta</p>
-                <i class="fa-regular fa-clock icon-clock"></i>
-            </div>
-        </div>
+        <!-- Blocos Informativos -->
+        <section class="sec-blocos-gerais">
+            <div class="bloco">
+                <div class="div-title-subtitle-bloco">
+                    <h3 class="titulo-cartao">Total de Pacientes</h3>
+                    <p class="texto-cartao">Pacientes aguardando atendimento</p>
+                </div>
 
-        <div class="informacoes">
-            <div class="abas">
-                <button class="aba ativa" onclick="ativarAba(this)">Todos os Pacientes</button>
-                <button class="aba" onclick="ativarAba(this)">Triagem</button>
-                <button class="aba" onclick="ativarAba(this)">Concluídos</button>
+
+                <div class="div-icon-text">
+                    <i class="fa-regular fa-user icon-user"></i>
+                    <p class="info-bloco">5</p>
+                </div>
             </div>
 
-            <div class="buscar">
-                <input placeholder="Buscar pacientes..." type="text">
+            <div class="bloco">
+                <div class="div-title-subtitle-bloco">
+                    <h3 class="titulo-cartao">Casos Urgentes</h3>
+                    <p class="texto-cartao">Vermelho e laranja</p>
+                </div>
+
+
+                <div class="div-icon-text">
+                    <i class="fa-solid fa-circle-exclamation icon-urgency"></i>
+                    <p class="info-bloco">2</p>
+                </div>
             </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Idade</th>
-                        <th>Sexo</th>
-                        <th>Prioridade</th>
-                        <th>Entrada</th>
-                        <th>Tempo Decorrido</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>(ID)</td>
-                        <td>(Nome)</td>
-                        <td>(Idade)</td>
-                        <td>(Sexo)</td>
-                        <td>(Prioridade)</td>
-                        <td>(Entrada)</td>
-                        <td>(Tempo Decorrido)</td>
-                        <td>(Ações)</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+            <div class="bloco">
+                <div class="div-title-subtitle-bloco">
+                    <h3 class="titulo-cartao">Tempo Médio de Atendimento</h3>
+                    <p class="texto-cartao">Por consulta</p>
+                </div>
+
+
+                <div class="div-icon-text">
+                    <i class="fa-regular fa-clock icon-clock"></i>
+                    <p class="info-bloco">50 min</p>
+                </div>
+            </div>
+        </section>
+        <!-- Fim Blocos Informativos -->
+
+        <!-- Início Tabela Usuários -->
+        <section class="sec-tabela-usuario">
+            <div class="informacoes">
+                <div class="abas">
+                    <button class="aba ativa" onclick="ativarAba(this)">Todos os Pacientes</button>
+                    <button class="aba" onclick="ativarAba(this)">Triagem</button>
+                    <button class="aba" onclick="ativarAba(this)">Concluídos</button>
+                </div>
+
+                <div class="buscar">
+                    <input placeholder="Buscar pacientes..." type="text">
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Idade</th>
+                            <th>Sexo</th>
+                            <th>Prioridade</th>
+                            <th>Entrada</th>
+                            <th>Tempo Decorrido</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Felipe </td>
+                            <td>18</td>
+                            <td>Masculino</td>
+                            <td><p class="laranja">Laranja</p></td>
+                            <td>13:15</td>
+                            <td>02:00</td>
+                            <td>(Ações)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+        <!-- Fim Tabela Usuários -->
+
     </main>
 
     <!-- Footer Padrão -->
@@ -129,13 +162,6 @@
     </footer>
     <!-- Fim do Footer -->
 
-    <script>
-        function ativarAba(botao) {
-            const botoes = document.querySelectorAll('.aba');
-            botoes.forEach(b => b.classList.remove('ativa'));
-            botao.classList.add('ativa');
-        }
-    </script>
 </body>
 
 </html>
