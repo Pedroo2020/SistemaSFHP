@@ -52,13 +52,6 @@ body {
     align-items: center;
 }
 
-.title {
-    color: var(--blue-dark);
-    font-weight: bold;
-    font-size: 25px;
-    margin-bottom: 2px;
-}
-
 .subtitle {
     color: var(--blue-dark);
 }
@@ -98,7 +91,6 @@ body {
     display: inline-flex;
     align-items: center;
     font-weight: bold;
-    margin-left: 10px;
     cursor: pointer;
     transition: 0.1s;
     &:hover {
@@ -296,5 +288,11 @@ form .campo input {
     .modal-conteudo {
         width: 90%;
         padding: 20px;
+        padding-top: 50px;
+    }
+
+    .title-form {
+        font-size: 1.2rem;
+        text-align: center;
     }
 }

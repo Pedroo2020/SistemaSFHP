@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS de Perfil -->
     <link rel="stylesheet" href="assets/css/perfil.css">
-    
+
+    <!-- Font awesome -->
+    <script src="https://kit.fontawesome.com/ac1aaaa398.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -13,15 +20,16 @@
     <script type="module" src="assets/js/perfil.js" defer></script>
 
     <link rel="icon" href="assets/img/Logo-SFHP-Branca.png">
-    <title>SFHP - Página do Enfermeiro</title>
+    <title>SFHP - Página do Recepcionista</title>
 </head>
+
 <body>
     <!-- Header Padrão -->
     <header class="header">
         <div class="div-header">
             <img src="assets/img/Logo-SFHP-Branca.png" alt="Logo" class="icon-logo">
             <span class="linha"></span>
-            <span>SFHP - Página do Administrador</span>
+            <span>SFHP - Página do Enfermeiro</span>
         </div>
 
         <div class="sair">
@@ -29,7 +37,19 @@
             <p>Sair</p>
         </div>
     </header>
-    <!-- Fim do Header -->
+
+    <main>
+
+        <section class="container-painel">
+            <div class="sec-title-subtitle">
+                <h2 class="title">Painel de Controle</h2>
+                <h3 class="subtitle">Bem vindo(a), <span class="span-font-weight" id="nome"></span></h3>
+            </div>
+        </section>
+
+        <div class="div-message"></div>
+
+    </main>
 
     <!-- Footer Padrão -->
     <footer class="footer">
@@ -38,11 +58,12 @@
             <span class="linha"></span>
             <p class="title-footer">SFHP</p>
         </div>
-        
+
         <div class="div-direitos-reservados">
             <p class="text-footer">© 2025 SFHP. Todos os direitos reservados.</p>
         </div>
     </footer>
     <!-- Fim do Footer -->
 </body>
+
 </html>

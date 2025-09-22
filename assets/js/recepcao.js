@@ -77,7 +77,7 @@ formCPF.on('submit', ((e) => {
         },
         success: (res) => {
             // Exibe mensagem de erro
-            alertMsg('Usuário encontrado', 'success', '#div-msg-modal');
+            alertMsg('Usuário encontrado.', 'success', '#div-msg-modal');
 
             // Obtém os dados do usuário
             const user = res.user;
