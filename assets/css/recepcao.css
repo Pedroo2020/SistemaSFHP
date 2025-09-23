@@ -205,13 +205,13 @@ body {
 #form-cadastro, #form-consulta {
     display: none;
     flex-direction: column;
+    gap: 15px;
     width: 100%;
 }
 
 form .campo {
     display: flex;
     flex-direction: column;
-    margin-bottom: 12px;
 }
 
 form .campo label {
