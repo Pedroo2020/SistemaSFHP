@@ -1,3 +1,37 @@
+:root {
+    /* Cores */
+    --gray-100: #FAFAFA;
+    --gray-200: #ECECEC;
+    --gray-300: #bebebe;
+
+    --blue-light: #C1E6FA;
+    --blue-base: #46A2D3;
+    --blue-dark: #116694;
+
+    /* Alertas */
+    --red-light: #FFC6C7;
+    --red-base: #FF233D;
+    --red-dark: #AF1111;
+
+    --red-light: #C6FFDB;
+    --green-base: #1fd388;
+    --green-dark: #11AF68;
+
+    /* Cores Alertas */
+    --red-protocol: #AF1111;
+    --orange-protocol: #FE6500;
+    --yellow-protocol: #FFB200;
+    --green-protocol: #00742B;
+    --blue-protocol: #060478;
+
+    /* Branco e Preto */
+    --black: black;
+    --white: white;
+
+    /* Cores adicionais */
+    --blue-hover: #1876ac;
+    --gray-dark: #747474;
+}
 
 /* Início - Seção Blocos Informativos */
 .sec-blocos-gerais {
@@ -100,7 +134,7 @@ main {
     gap: 15px;
 }
 
-.aba-todos-usuarios{
+.aba-todos-usuarios {
     padding: 10px 20px;
     background-color: var(--gray-100);
     border: 8px solid var(--gray-200);
@@ -173,6 +207,33 @@ td:last-child {
     border-right: 1px solid var(--gray-300);
 }
 
+table th:nth-child(1),
+table td:nth-child(1),
+table th:nth-child(3),
+table td:nth-child(3),
+table th:nth-child(6),
+table td:nth-child(6) {
+    text-align: right;
+}
+
+table th:nth-child(2),
+table td:nth-child(2),
+table th:nth-child(4),
+table td:nth-child(4),
+table th:nth-child(5),
+table td:nth-child(5) {
+    text-align: left;
+    padding-left: 12px;
+}
+
+table th:nth-child(6),
+table td:nth-child(6) {
+    width: 160px;
+    white-space: nowrap;
+    text-align: right;
+    padding-right: 12px;
+}
+
 th {
     background-color: var(--gray-200);
     font-weight: bold;
@@ -183,7 +244,235 @@ thead th {
     top: 0;
     z-index: 2;
 }
+
+.icon-more-details {
+    border: 2px solid var(--black);
+    width: 30px;
+    height: 30px;
+    padding-top: 5.5px;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    cursor: pointer;
+}
+
 /* Fim Seção da Tabela de Usuários */
+
+/* Início Modal Adiconar Usuário */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-conteudo {
+    background-color: var(--white);
+    padding: 35px;
+    border-radius: 10px;
+    width: 500px;
+    max-width: 90vw;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+}
+
+.fechar {
+    cursor: pointer;
+    top: 15px;
+    left: 20px;
+    font-size: 1.5rem;
+    color: var(--blue-dark);
+    padding: 5px;
+    position: absolute;
+}
+
+.modal-conteudo input,
+.modal-conteudo select {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid var(--gray-300);
+    outline-color: var(--blue-dark);
+
+    &:disabled {
+        background-color: var(--gray-200);
+    }
+}
+
+.modal-conteudo label {
+    font-weight: 500;
+}
+
+.cor-blue-dark {
+    color: var(--blue-dark);
+}
+
+#form-cadastro {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+
+form .campo {
+    display: flex;
+    flex-direction: column;
+}
+
+form .campo label {
+    font-weight: 500;
+}
+
+form .campo input {
+    padding: 10px;
+}
+
+.tamfont {
+    font-size: 14px;
+}
+
+.alin-lad {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+}
+
+.camp-lad {
+    width: 50%;
+}
+
+.camp-lad label {
+    display: block;
+}
+
+.camp-lad select,
+.camp-lad input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.campo-cpf {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.div-input-tip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--gray-200);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#input-cpf {
+    background-color: var(--gray-100);
+    border: 2px solid var(--gray-300);
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    color: var(--black);
+    font-size: 1rem;
+    text-align: left;
+    outline-color: var(--blue-dark);
+}
+
+.info-busca {
+    font-size: 15px;
+    background-color: var(--gray-200);
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding-left: 13px;
+}
+
+.title-form {
+    color: var(--blue-dark);
+    text-align: center;
+    width: 100%;
+}
+
+.esp {
+    margin-bottom: 5px;
+}
+
+.btn-next {
+    width: 100%;
+    background-color: var(--blue-dark);
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    margin-top: 15px;
+    padding: 8px 14px;
+    font-size: 15px;
+    font-weight: bold;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: 0.1s;
+
+    &:hover {
+        background-color: var(--blue-hover);
+    }
+}
+
+/* Fim Modal Adiconar Usuário */
+
+/* Início Modal Editar Usuário */
+
+.div-botoes {
+    display: flex;
+    gap: 20px;
+}
+
+.btn-consulta {
+    width: 100%;
+    background-color: var(--white);
+    color: var(--blue-dark);
+    border: 1.5px solid var(--blue-dark);
+    border-radius: 5px;
+    margin-top: 15px;
+    padding: 8px 14px;
+    font-size: 15px;
+    font-weight: bold;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: 0.1s;
+
+    &:hover {
+        background-color: var(--gray-200);
+    }
+}
+
+/* Fim Modal Editar Usuário */
+
+/* Início Responsivo */
+@media (max-width: 768px) {
+    .modal-conteudo {
+        width: 90%;
+        padding: 20px;
+    }
+}
+
 
 @media (max-width: 1178px) {
     .bloco {
@@ -194,7 +483,7 @@ thead th {
         flex-direction: column;
         gap: 15px;
     }
-    
+
     .div-text-search {
         width: 100%;
     }
@@ -227,7 +516,12 @@ thead th {
 
 @media (max-width: 550px) {
     .search-box {
-        display: none;
+        display: flex;
+        width: 100%;
+    }
+
+    .div-text-search {
+        flex-direction: column;
     }
 
     .aba-todos-usuarios {
@@ -267,3 +561,5 @@ thead th {
         }
     }
 }
+
+/* Fim Responsivo */

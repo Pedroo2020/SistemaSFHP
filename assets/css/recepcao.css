@@ -228,12 +228,13 @@ form .campo input {
 }
 
 .alin-lad {
+    width: 100%;
     display: flex;
     gap: 20px;
 }
 
 .camp-lad {
-    width: 46.2%;
+    width: 50%;
 }
 
 .camp-lad label {
