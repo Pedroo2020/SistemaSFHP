@@ -81,7 +81,14 @@ $(document).ready(() => {
     })
 })
 
+// Logout
 $('.sair').click(() => {
+    // Obtém o token
+    const token = localStorage.getItem('token');
+
+    // Autentica com o token
+    socket.emit("logout", { token });
+
     // Limpa o local storage
     localStorage.clear();
 
