@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS de Perfil -->
+    <link rel="stylesheet" href="assets/css/triagem.css">
+
+    <!-- Font awesome -->
+    <script src="https://kit.fontawesome.com/ac1aaaa398.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <link rel="icon" href="assets/img/Logo-SFHP-Branca.png">
+    <title>SFHP - Página do Enfermeiro - Triagem</title>
+</head>
+
+<body>
+    <!-- Header Padrão -->
+    <header class="header">
+        <div class="div-header">
+            <img src="assets/img/Logo-SFHP-Branca.png" alt="Logo" class="icon-logo">
+            <span class="linha"></span>
+            <span>SFHP - Página do Enfermeiro - Triagem</span>
+        </div>
+
+        <div class="sair">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <p>Sair</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="container-painel">
+            <div class="sec-title-subtitle">
+                <h2 class="title">Triagem</h2>
+            </div>
+
+            <div class="a">
+                <button class="btn-voltar">
+                    <i class="fa-solid fa-arrow-left icons-blocos2" style="color: #ffffff;"></i>
+                    Voltar
+                </button>
+            </div>
+        </section>
+
+        <form class="formulario-container">
+    
+            <div class="coluna-esquerda">
+                <h2>Dados do Usuário:</h2>
+                
+                <div class="campo-grupo">
+                    <label>Nome completo:</label>
+                    <div class="dado-exibido">Nome do Paciente</div> 
+                </div>
+
+                <div class="campos-linha">
+                    <div class="campo-grupo">
+                        <label>Idade:</label>
+                        <div class="dado-exibido">Idade</div> 
+                    </div>
+                    <div class="campo-grupo">
+                        <label>Sexo:</label>
+                        <div class="dado-exibido">Masculino</div> 
+                    </div>
+                </div>
+
+                <div class="campos-linha">
+                    <div class="campo-grupo">
+                        <label>CPF:</label>
+                        <div class="dado-exibido">CPF do Paciente</div> 
+                    </div>
+                    <div class="campo-grupo">
+                        <label>Telefone:</label>
+                        <div class="dado-exibido">Telefone do Paciente</div> 
+                    </div>
+                </div>
+                
+                <div class="campo-grupo">
+                    <label>Queixa Principal:</label>
+                    <div class="dado-exibido dado-multilinha">Descreva os sintomas e as queixas do paciente</div>
+                </div>
+            </div>
+
+            <div class="coluna-direita">
+                <h2>Dados para Triagem:</h2>
+
+                <div class="campos-linha">
+                    <div class="campo-grupo">
+                        <label for="temperatura">Temperatura (°C):</label>
+                        <input type="text" id="temperatura" name="temperatura">
+                    </div>
+                    <div class="campo-grupo">
+                        <label for="pressao-arterial">Pressão Arterial (mmHg):</label>
+                        <input type="text" id="pressao-arterial" name="pressao-arterial">
+                    </div>
+                </div>
+                
+                <div class="campos-linha">
+                    <div class="campo-grupo">
+                        <label for="frequencia-cardiaca">Frequência Cardíaca (bpm):</label>
+                        <input type="text" id="frequencia-cardiaca" name="frequencia-cardiaca">
+                    </div>
+                    <div class="campo-grupo">
+                        <label for="saturacao-o2">Saturação O2 (%):</label>
+                        <input type="text" id="saturacao-o2" name="saturacao-o2">
+                    </div>
+                </div>
+
+                <div class="campo-grupo">
+                    <label>Nível de dor (0 a 10):</label>
+                    <div class="niveis-dor">
+                        <input type="radio" id="dor0" name="nivel-dor" value="0" checked><label for="dor0">0</label>
+                        <input type="radio" id="dor1" name="nivel-dor" value="1"><label for="dor1">1</label>
+                        <input type="radio" id="dor2" name="nivel-dor" value="2"><label for="dor2">2</label>
+                        <input type="radio" id="dor3" name="nivel-dor" value="3"><label for="dor3">3</label>
+                        <input type="radio" id="dor4" name="nivel-dor" value="4"><label for="dor4">4</label>
+                        <input type="radio" id="dor5" name="nivel-dor" value="5"><label for="dor5">5</label>
+                        <input type="radio" id="dor6" name="nivel-dor" value="6"><label for="dor6" class="selecionado">6</label> 
+                        <input type="radio" id="dor7" name="nivel-dor" value="7"><label for="dor7">7</label>
+                        <input type="radio" id="dor8" name="nivel-dor" value="8"><label for="dor8">8</label>
+                        <input type="radio" id="dor9" name="nivel-dor" value="9"><label for="dor9">9</label>
+                        <input type="radio" id="dor10" name="nivel-dor" value="10"><label for="dor10">10</label>
+                    </div>
+                </div>
+
+                <div class="campo-grupo">
+                    <label for="alergias">Alergias:</label>
+                    <input type="text" id="alergias" name="alergias" placeholder="Alergias conhecidas">
+                </div>
+
+                <div class="campo-grupo">
+                    <label for="medicamentos">Medicamentos em Uso:</label>
+                    <input type="text" id="medicamentos" name="medicamentos" placeholder="Medicamentos que o paciente utiliza">
+                </div>
+
+                <div class="campo-grupo">
+                    <label for="classificacao-risco">Classificação de Risco:</label>
+                    <select id="classificacao-risco" name="classificacao-risco">
+                        <option value="verde" selected>Verde - Pouco Urgente</option>
+                        <option value="azul">Azul - Não Urgente</option>
+                        <option value="amarelo">Amarelo - Urgente</option>
+                        <option value="laranja">Laranja - Muito Urgente</option>
+                        <option value="vermelho">Vermelho - Emergência</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </main>
+
+    <!-- Footer Padrão -->
+    <footer class="footer">
+        <div class="div-footer-logo">
+            <img src="assets/img/Logo-SFHP-Branca.png" alt="Logo" class="icon-logo">
+            <span class="linha"></span>
+            <p class="title-footer">SFHP</p>
+        </div>
+
+        <div class="div-direitos-reservados">
+            <p class="text-footer">© 2025 SFHP. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    <!-- Fim do Footer -->
+</body>
+
+</html>
