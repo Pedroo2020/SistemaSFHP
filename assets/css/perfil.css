@@ -301,16 +301,17 @@ table {
 }
 
 .div-scroll-table {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     overflow-x: auto;
     width: 100%;
 }
 
 .sec-tabela-usuario {
     background-color: var(--gray-100);
-    padding: 0px 30px 20px;
+    padding: 30px;
     width: 100%;
-    display: flex;
-    flex-direction: column;
     border-radius: 20px;
 }
 
@@ -319,7 +320,6 @@ table {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 20px 0;
 }
 
 .div-text-search {
@@ -342,7 +342,7 @@ table {
 
 .search-box {
     position: relative;
-    width: 400px;
+    width: 270px;
 }
 
 .search-box input {
@@ -384,7 +384,6 @@ th,
 td {
     padding: 20px;
     text-align: left !important;
-    font-weight: 600;
 }
 
 td {
