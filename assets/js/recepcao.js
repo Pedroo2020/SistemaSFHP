@@ -1,5 +1,5 @@
 // Função para formatar CPF
-import { formatCPF, formatSUS, formatTelefone, formatarNumeroSUS, formatarNumeroTelefone} from './components/format.js';
+import { formatCPF, formatSUS, formatTelefone, formatarNumeroSUS, formatarNumeroTelefone } from './components/format.js';
 import { URL_API } from './urlAPI.js';
 import alertMsg from './alertMsg.js';
 
@@ -30,6 +30,7 @@ const formConsulta = $('#form-consulta');
 // Abre o modal de novo paciente
 botaoNovoPaciente.click(() => {
     modal.css('display', 'flex');
+    formCPF.css('display', 'flex');
 
     // Desabilita o scroll
     disabledScroll();
@@ -81,7 +82,7 @@ formCPF.on('submit', ((e) => {
 
             // Obtém os dados do usuário
             const user = res.user;
-            
+
             // Preenche o input com o cpf do usuário
             $('#cpf-consulta').val(cpf);
 
@@ -101,7 +102,7 @@ formCPF.on('submit', ((e) => {
             formatTelefone('#telefone-consulta', user.telefone);
             formatSUS('#sus-consulta', user.coren_crm_sus);
 
-        }, 
+        },
         error: (err) => {
 
             // Exibe mensagem de erro
@@ -120,7 +121,7 @@ formCPF.on('submit', ((e) => {
                 formCPF.hide();
                 formCadastro.css('display', 'flex');
             }
-            
+
         }
     })
 }))
@@ -171,7 +172,47 @@ formCadastro.on('submit', function (e) {
 
             // Exibe o form de cadastro de consulta
             formCadastro.hide();
+            formCadastro[0].reset();
             formConsulta.css('display', 'flex');
+        },
+        error: (err) => {
+            // Exibe mensagem de erro
+            alertMsg(err.responseJSON.error, 'error', '#div-msg-modal');
+        }
+    })
+})
+
+// Form de cadastro de consulta
+formConsulta.on('submit', function (e) {
+    // Previne o evento padrão do navegador
+    e.preventDefault();
+
+    // Cria o objeto data
+    const data = {
+        situacao: 1,
+        cpf: $('#cpf-consulta').val().replace(/\D/g, ''),
+    }
+
+    $.ajax({
+        url: `${URL_API}/consulta`,
+        method: 'POST',
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+        },
+        contentType: 'Application/json',
+        data: JSON.stringify(data),
+        success: (res) => {
+            // Fecha o modal e habilita o scroll
+            modal.hide();
+            formConsulta.hide();
+            abledScroll();
+
+            // Reseta os valores dos forms
+            formConsulta[0].reset();
+            formCPF[0].reset();
+
+            // Exibe mensagem de sucesso
+            alertMsg(res.success, 'success', '#div-msg');
         },
         error: (err) => {
             // Exibe mensagem de erro

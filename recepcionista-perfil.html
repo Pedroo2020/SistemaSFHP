@@ -67,6 +67,110 @@
             </div>
         </section>
 
+        <!-- Blocos Informativos -->
+        <section class="sec-blocos-gerais">
+            <div class="bloco">
+                <div class="div-title-subtitle-bloco">
+                    <h3>Total de pacientes</h3>
+                    <p class="subtitle-bloco">Pacientes em atendimento</p>
+                </div>
+
+
+                <div class="div-icon-text">
+                    <i class="fa-light fa-solid fa-user icons-blocos"></i>
+                    <p class="info-bloco">5</p>
+                </div>
+            </div>
+
+            <div class="bloco">
+                <div class="div-title-subtitle-bloco">
+                    <h3>Casos urgentes</h3>
+                    <p class="subtitle-bloco">Vermelho e laranja</p>
+                </div>
+
+
+                <div class="div-icon-text">
+                    <i class="fa-light fa-solid fa-circle-exclamation icons-blocos icon-alert" style="color: #116694;"></i>
+                    <p class="info-bloco">2</p>
+                </div>
+            </div>
+
+            <div class="bloco">
+                <div class="div-title-subtitle-bloco">
+                    <h3>Tempo médio de espera</h3>
+                    <p class="subtitle-bloco">Todos os pacientes</p>
+                </div>
+
+
+                <div class="div-icon-text">
+                    <i class="fa-light fa-regular fa-clock icons-blocos"></i>
+                    <p class="info-bloco">50 min</p>
+                </div>
+            </div>
+        </section>
+        <!-- Fim Blocos Informativos -->
+
+        <!-- Início Tabela Usuários -->
+        <section class="sec-tabela-usuario">
+            <div class="div-scroll-table">
+                <div class="div-search">
+                    <div class="div-text-search">
+                        <div class="aba-todos-usuarios">
+                            <p>Todos os Usuários</p>
+                        </div>
+
+                        <div class="search-box">
+                            <i class="fa fa-search"></i>
+                            <input type="text" placeholder="Buscar...">
+                        </div>
+                    </div>
+
+                    <button class="btn-add-user">
+                        <i class="fa-solid fa-user-plus" style="color: #ffffff;"></i>
+
+                        Adicionar Usuário
+                    </button>
+                </div>
+
+                <div class="div-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Nome</th>
+                                <th>Idade</th>
+                                <th>Sexo</th>
+                                <th>Cargo</th>
+                                <th>SUS/CRM/COREN</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>01</td>
+                                <td>Ana Maria Almeida</td>
+                                <td>32</td>
+                                <td>Feminino</td>
+                                <td>Enfermeiro</td>
+                                <td>123456-ENF</td>
+                                <td><i class="fa-solid fa-ellipsis icon-more-details" id="more-details"></i></td>
+                            </tr>
+                            <tr>
+                                <td>02</td>
+                                <td>Pedro Santos</td>
+                                <td>28</td>
+                                <td>Masculino</td>
+                                <td>Paciente</td>
+                                <td>123.456.789.10</td>
+                                <td><i class="fa-solid fa-ellipsis icon-more-details"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <!-- Fim Tabela Usuários -->
+
         <!-- Modal Novo Paciente -->
         <div id="modalNovoPaciente" class="modal">
             <div class="modal-conteudo">
@@ -186,7 +290,7 @@
             <div class="div-message" id="div-msg-modal"></div>
         </div>
 
-        <div class="div-message"></div>
+        <div class="div-message" id="div-msg"></div>
 
     </main>
 

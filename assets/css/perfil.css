@@ -232,10 +232,18 @@ main {
     display: flex;
     flex-direction: column;
     gap: 30px;
+    
+    & .icon-alert {
+        border: 4px solid var(--red-dark);
+        border-radius: 50%;
+        color: white !important;
+        background-color: var(--red-dark);
+    }
 }
 
 .icons-blocos {
     font-size: 35px;
+    color: var(--blue-dark);
 }
 
 .div-icon-text {
@@ -280,7 +288,16 @@ main {
 .div-table {
     overflow-y: auto;
     width: 100%;
-    height: 400px;
+    max-height: 400px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--gray-300);
+}
+
+table {
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    width: 100%;
 }
 
 .div-scroll-table {
@@ -354,7 +371,7 @@ main {
 .btn-add-user {
     background-color: var(--blue-dark);
     width: 195px;
-    padding: 15px 30px;
+    padding: 15px;
     margin-left: 10px;
     border-style: none;
     color: var(--white);
@@ -363,45 +380,15 @@ main {
     cursor: pointer;
 }
 
-table {
-    border-collapse: collapse;
-    font-family: Arial, sans-serif;
-    width: 100%;
-}
-
 th,
 td {
-    border-bottom: 1px solid var(--gray-300);
     padding: 20px;
-    text-align: center;
+    text-align: left !important;
     font-weight: 600;
 }
 
-td:first-child {
-    border-left: 1px solid var(--gray-300);
-}
-
-td:last-child {
-    border-right: 1px solid var(--gray-300);
-}
-
-table th:nth-child(1),
-table td:nth-child(1),
-table th:nth-child(4),
-table td:nth-child(4),
-table th:nth-child(5),
-table td:nth-child(5) {
-    text-align: right;
-}
-
-table th:nth-child(2),
-table td:nth-child(2),
-table th:nth-child(3),
-table td:nth-child(3),
-table th:nth-child(6),
-table td:nth-child(6) {
-    text-align: left;
-    padding-left: 12px;
+td {
+    border-top: 1px solid var(--gray-300);
 }
 
 th {
@@ -423,6 +410,7 @@ thead th {
     border-radius: 50%;
     aspect-ratio: 1/1;
     cursor: pointer;
+    text-align: center;
 }
 
 .icons-blocos2 {
