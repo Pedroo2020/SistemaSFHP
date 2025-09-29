@@ -331,14 +331,29 @@ table {
 }
 
 .aba-todos-usuarios {
-    padding: 10px 20px;
-    background-color: var(--gray-100);
-    border: 8px solid var(--gray-200);
+    padding: 10px;
+    background-color: var(--gray-200);
     border-radius: 50px;
     font-weight: bold;
     font-size: 0.9rem;
     min-width: 190px;
     text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    & p {
+        color: var(--gray-dark);
+        padding: 10px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    & .active {
+        color: var(--black);
+        background-color: var(--white);
+        border-radius: 50px;
+    }
 }
 
 .search-box {
@@ -384,7 +399,18 @@ table {
 th,
 td {
     padding: 20px;
-    text-align: left !important;
+}
+
+.td-numero {
+    text-align: right;
+}
+
+.td-string {
+    text-align: left;
+}
+
+.td-time {
+    text-align: center;
 }
 
 td {

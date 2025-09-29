@@ -1,6 +1,6 @@
 // Função para formatar CPF
-import { formatCPF, formatSUS, formatTelefone, formatarNumeroSUS, formatarNumeroTelefone } from './components/format.js';
-import { URL_API } from './urlAPI.js';
+import { formatCPF, formatSUS, formatTelefone, formatarNumeroSUS, formatarNumeroTelefone, formatarMinutos } from './components/format.js';
+import { socket, URL_API } from './urlAPI.js';
 import alertMsg from './alertMsg.js';
 
 // Ao carregar a página, adiciona as formatações ao input
@@ -211,6 +211,9 @@ formConsulta.on('submit', function (e) {
             formConsulta[0].reset();
             formCPF[0].reset();
 
+            // Atualiza as consultas
+            carregarConsultas();
+
             // Exibe mensagem de sucesso
             alertMsg(res.success, 'success', '#div-msg');
         },
@@ -220,3 +223,99 @@ formConsulta.on('submit', function (e) {
         }
     })
 })
+
+// Carrega a tabela ao carregar a página
+$(document).ready(async () => {
+    
+    await carregarConsultas();
+
+})
+
+// Ao clicar no botão, atualiza as consultas
+$('#refresh-consultas').on('click', carregarConsultas);
+
+// Função para carregar consultas
+function carregarConsultas() {
+    $.ajax({
+        url: `${URL_API}/consultas`,
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+        },
+        success: (res) => {
+            // Obtém as consultas
+            const consultas = res.consultas;
+
+            // Limpa a tabela antes de carregar novos dados
+            $('#table-consultas').empty();
+
+            // Carrega as consultas na tabela
+            consultas.map((consulta) => addConsulta(consulta));
+        },
+        error: (err) => {
+            // Exibe mensagem de erro
+            alertMsg(err.responseJSON.error, 'error', '#div-msg-modal');
+        }
+    })
+}
+
+
+// Função para adicionar os dados a tabela
+function addConsulta(consulta) {
+    // tbody
+    const $tbody = $('#table-consultas');
+
+    // Cria a <tr></tr> 
+    const $tr = $('<tr></tr>');
+
+    // Cria as tds
+    const posicao = $('<td></td>')
+                        .text("1°")
+                        .addClass('td-numero')
+
+    const nome = $('<td></td>')
+                        .text(consulta.nome)
+                        .addClass('td-string')
+
+    const idade = $('<td></td>')
+                        .text(consulta.idade)
+                        .addClass('td-numero')
+
+    const sexo = $('<td></td>')
+                        .text(consulta.sexo)
+                        .addClass('td-string')
+
+    const prioridade = $('<td></td>')
+                        .text(consulta.prioridade)
+                        .addClass('td-string')
+
+    const entrada = $('<td></td>')
+                        .text(consulta.data_entrada)
+                        .addClass('td-time')
+
+    const tempoDecorrido = $('<td></td>')
+                        .text(formatarMinutos(consulta.tempo_decorrido))
+                        .addClass('td-time')
+
+    const etapa = $('<td></td>')
+                        .text(consulta.situacao)
+                        .addClass('td-time')
+
+    // Ícone de ação
+    const iconeMoreDetails = $('<i></i>').addClass('fa-solid fa-ellipsis icon-more-details');
+    const iconAcao = $('<td></td>').append(iconeMoreDetails);
+                        
+    // Adiciona os elementos ao tr
+    $tr
+        .append(posicao)
+        .append(nome)
+        .append(idade)
+        .append(sexo)
+        .append(prioridade)
+        .append(entrada)
+        .append(tempoDecorrido)
+        .append(etapa)
+        .append(iconAcao)
+
+    // Adiciona ao tbody
+    $tbody.append($tr);
+}

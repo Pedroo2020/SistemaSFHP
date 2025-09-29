@@ -145,5 +145,24 @@ function formatarNumeroTelefone(value) {
         .replace(/(\d{4,5})(\d{4})$/, "$1-$2");
 }
 
+// Função para formatar minutos em horas e minutos
+function formatarMinutos(minutos) {
+    // Obtém hora e minuto separado
+    let horas = String(Math.floor(minutos / 60));
+    let min = String(minutos % 60);
 
-export { formatCPF, formatSUS, formatTelefone, formatarNumeroSUS, formatarNumeroTelefone };
+    // Adiciona um 0 caso seja menor que 10 minutos
+    if (min.length < 2) {
+        min = `0${min}`;
+    }
+
+    // Adiciona um 0 caso seja menor que 10 horas
+    if (horas.length < 2) {
+        horas = `0${horas}`;
+    }
+
+    // Retorna formatado
+    return `${horas}h ${min}min`
+}
+
+export { formatCPF, formatSUS, formatTelefone, formatarNumeroSUS, formatarNumeroTelefone, formatarMinutos };

@@ -60,7 +60,7 @@
                     Novo paciente
                 </button>
 
-                <button class="btn-refresh">
+                <button class="btn-refresh" id="refresh-consultas">
                     <img src="assets/img/atualizar.svg" alt="Ícone - Atualizar" class="icones">
                     Atualizar
                 </button>
@@ -116,6 +116,12 @@
                 <div class="div-search">
                     <div class="div-text-search">
                         <div class="aba-todos-usuarios">
+                            <p class="active">Todos os Usuários</p>
+                            
+                            <p>Todos os Usuários</p>
+                            
+                            <p>Todos os Usuários</p>
+                            
                             <p>Todos os Usuários</p>
                         </div>
 
@@ -135,41 +141,18 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Posição</th>
-                                <th>Nome</th>
-                                <th>Idade</th>
-                                <th>Sexo</th>
-                                <th>Prioridade</th>
-                                <th>Entrada</th>
-                                <th>Tempo decorrido</th>
-                                <th>Etapa</th>
-                                <th>Ação</th>
+                                <th class="td-numero">Posição</th>
+                                <th class="td-string">Nome</th>
+                                <th class="td-numero">Idade</th>
+                                <th class="td-string">Sexo</th>
+                                <th class="td-string">Prioridade</th>
+                                <th class="td-time">Entrada</th>
+                                <th class="td-time">Tempo decorrido</th>
+                                <th class="td-time">Etapa</th>
+                                <th class="td-time">Ação</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>1°</td>
-                                <td>Ana Maria Almeida</td>
-                                <td>32</td>
-                                <td>Feminino</td>
-                                <td>Enfermeiro</td>
-                                <td>123456-ENF</td>
-                                <td>Feminino</td>
-                                <td>Enfermeiro</td>
-                                <td><i class="fa-solid fa-ellipsis icon-more-details" id="more-details"></i></td>
-                            </tr>
-                            <tr>
-                                <td>2°</td>
-                                <td>Pedro Santos</td>
-                                <td>28</td>
-                                <td>Masculino</td>
-                                <td>Paciente</td>
-                                <td>123.456.789.10</td>
-                                <td>Feminino</td>
-                                <td>Enfermeiro</td>
-                                <td><i class="fa-solid fa-ellipsis icon-more-details"></i></td>
-                            </tr>
-                        </tbody>
+                        <tbody id="table-consultas"></tbody>
                     </table>
                 </div>
             </div>
