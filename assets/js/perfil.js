@@ -1,5 +1,5 @@
 // Importa a URL da API
-import URL_API from "./urlAPI.js";
+import { URL_API, socket } from "./urlAPI.js";
 
 // Redirecionar para a página correta
 function redirectWindow(typeUser) {
@@ -42,6 +42,12 @@ function redirectWindow(typeUser) {
 
 // Ao carregar a página
 $(document).ready(() => {
+
+    // TESTANDO SOCKET
+    socket.on("autenticado", (data) => {
+        console.log(data);
+    });
+
     // Obtém o token
     const token = localStorage.getItem('token');
 
@@ -75,7 +81,14 @@ $(document).ready(() => {
     })
 })
 
+// Logout
 $('.sair').click(() => {
+    // Obtém o token
+    const token = localStorage.getItem('token');
+
+    // Autentica com o token
+    socket.emit("logout", { token });
+
     // Limpa o local storage
     localStorage.clear();
 

@@ -532,6 +532,11 @@ thead th {
         align-items: flex-start !important;
         gap: 20px;
     }
+
+    .bloco {
+        min-width: 212px;
+        gap: 13px;
+    }
 }
 
 @media (max-width: 450px) {
@@ -559,5 +564,38 @@ thead th {
 
     main {
         padding: 30px;
+    }
+
+    .div-text-search {
+        flex-direction: column;
+        gap: 17px;
+    }
+
+    .search-box {
+        width: 304px;
+    }
+
+    .aba-todos-usuarios {
+        min-width: 304px;
+    }
+}
+
+@media (max-width: 376px) {
+    .aba-todos-usuarios {
+        min-width: 253px;
+    }
+
+    .search-box {
+        width: 253px;
+    }
+}
+
+@media (max-width: 321px) {
+    .search-box {
+        width: 200px;
+    }
+
+    .aba-todos-usuarios {
+        min-width: 200px;
     }
 }

@@ -1,6 +1,6 @@
 // Função para formatar CPF
 import { formatCPF, formatSUS, formatTelefone, formatarNumeroSUS, formatarNumeroTelefone} from './components/format.js';
-import URL_API from './urlAPI.js';
+import { URL_API } from './urlAPI.js';
 import alertMsg from './alertMsg.js';
 
 // Ao carregar a página, adiciona as formatações ao input
