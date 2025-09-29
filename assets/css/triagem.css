@@ -1,0 +1,237 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Cores */
+    --gray-100: #FAFAFA;
+    --gray-200: #ECECEC;
+    --gray-300: #bebebe;
+
+    --blue-light: #C1E6FA;
+    --blue-base: #46A2D3;
+    --blue-dark: #116694;
+
+    /* Alertas */
+    --red-light: #FFC6C7;
+    --red-base: #FF233D;
+    --red-dark: #AF1111;
+
+    --red-light: #C6FFDB;
+    --green-base: #1fd388;
+    --green-dark: #11AF68;
+
+    /* Cores Alertas */
+    --red-protocol: #AF1111;
+    --orange-protocol: #FE6500;
+    --yellow-protocol: #FFB200;
+    --green-protocol: #00742B;
+    --blue-protocol: #060478;
+
+    /* Branco e Preto */
+    --black: black;
+    --white: white;
+
+    /* Cores adicionais */
+    --blue-hover: #1876ac;
+    --gray-dark: #747474;
+}
+
+body {
+    background-color: var(--gray-200);
+}
+
+/* Início - Cabeçalho */
+.header {
+    background-color: var(--blue-dark);
+    color: var(--white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    height: 60px;
+}
+
+.div-header {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    gap: 20px;
+}
+
+.linha {
+    background-color: var(--white);
+    width: 1px;
+    height: 35px;
+    border-radius: 10px
+}
+
+.icon-logo {
+    width: 35px;
+    height: 35px;
+}
+
+.sair {
+    color: var(--white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 16px;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.75;
+    }
+}
+
+.icon-sair {
+    width: 22px;
+    height: 22px;
+}
+
+/* Fim - Cabeçalho */
+
+.container-painel {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.sec-title-subtitle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.title {
+    font-size: 1.7rem;
+    color: var(--blue-dark);
+    margin-left: 60px;
+}
+
+.a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-voltar {
+    background-color: var(--blue-dark);
+    color: var(--white);
+    border: none;
+    border-radius: 11px;
+    padding: 14px;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.1s;
+    width: 163px;
+    margin-right: 60px;
+    &:hover {
+        background-color: var(--blue-dark);
+    }
+}
+
+/* Início - Footer */
+.footer {
+    background-color: var(--blue-dark);
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-items: center;
+    width: 100%;
+}
+
+.title-footer {
+    font-weight: bold;
+}
+
+.div-footer-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    gap: 15px;
+}
+
+.div-direitos-reservados {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--blue-base);
+    width: 100%;
+    height: 40px;
+}
+
+.text-footer {
+    font-size: 14px;
+}
+
+.div-message {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    z-index: 999;
+    width: 100%;
+
+    .msg {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+        border-radius: 10px;
+        animation: showMsg 5s ease;
+
+        &.error {
+            background-color: var(--red-base);
+        }
+
+        &.success {
+            background-color: var(--green-base);
+        }
+
+        & i, p {
+            color: var(--white);
+        }
+    }
+
+}   
+
+@keyframes showMsg {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Fim - Footer */
