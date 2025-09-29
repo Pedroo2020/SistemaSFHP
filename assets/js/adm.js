@@ -53,7 +53,7 @@ fecharModalEditarUsuario.click(() => {
     abledScroll();
 });
 
-// Mudar número do SUS dependendo do tipo usuário
+// Mudar inputs dependendo do tipo usuário do modal de adicionar usuário
 $(document).ready(function () {
     const tipoUsuario = $("#tipo-user-cadastro");
     const labelSus = $("label[for='sus']");
@@ -133,4 +133,81 @@ $(document).ready(function () {
     tipoUsuario.trigger("change");
 });
 
-// Abrir modal consultas
+
+// Mudar inputs dependendo do tipo usuário do modal de editar usuário
+$(document).ready(function () {
+    const tipoUsuarioEditar = $("#modalEditarUsuario #tipo-user-cadastro");
+    const labelSusEditar = $("#modalEditarUsuario label[for='sus']");
+    const inputSusEditar = $("#modalEditarUsuario #sus-cadastro");
+    const campoExtraEditar = $("#modalEditarUsuario #campo-extra");
+    const labelExtraEditar = $("#modalEditarUsuario #campo-extra label");
+    const inputExtraEditar = $("#modalEditarUsuario #extra-cadastro");
+
+    tipoUsuarioEditar.on("change", function () {
+        let tipo = $(this).val();
+
+        if (tipo === "paciente") {
+            // Paciente → Número do SUS
+            labelSusEditar.text("Número do SUS");
+            inputSusEditar.attr("type", "text")
+                .attr("placeholder", "Digite o número do SUS")
+                .attr("name", "sus-cadastro")
+                .val("");
+
+            campoExtraEditar.hide();
+            inputSusEditar.prop("required", true);
+            inputExtraEditar.prop("required", false);
+
+        } else if (tipo === "recepcionista" || tipo === "Administrador") {
+            // Recepcionista / Administrador → Senha
+            labelSusEditar.text("Senha");
+            inputSusEditar.attr("type", "password")
+                .attr("placeholder", "Digite a senha")
+                .attr("name", "senha-cadastro")
+                .val("");
+
+            campoExtraEditar.hide();
+            inputSusEditar.prop("required", true);
+            inputExtraEditar.prop("required", false);
+
+        } else if (tipo === "enfermeiro") {
+            // Enfermeiro → Senha + COREN
+            labelSusEditar.text("Senha");
+            inputSusEditar.attr("type", "password")
+                .attr("placeholder", "Digite a senha")
+                .attr("name", "senha-cadastro")
+                .val("");
+
+            campoExtraEditar.show();
+            labelExtraEditar.text("COREN");
+            inputExtraEditar.attr("placeholder", "Digite o COREN")
+                .attr("name", "coren-cadastro")
+                .val("");
+
+            inputSusEditar.prop("required", true);
+            inputExtraEditar.prop("required", true);
+
+        } else if (tipo === "medico") {
+            // Médico → Senha + CRM
+            labelSusEditar.text("Senha");
+            inputSusEditar.attr("type", "password")
+                .attr("placeholder", "Digite a senha")
+                .attr("name", "senha-cadastro")
+                .val("");
+
+            campoExtraEditar.show();
+            labelExtraEditar.text("CRM");
+            inputExtraEditar.attr("placeholder", "Digite o CRM")
+                .attr("name", "crm-cadastro")
+                .val("");
+
+            inputSusEditar.prop("required", true);
+            inputExtraEditar.prop("required", true);
+        }
+    });
+
+    // Dispara o evento para inicializar corretamente
+    tipoUsuarioEditar.trigger("change");
+});
+
+// Puxar dados da API para editar os dados do Usuário

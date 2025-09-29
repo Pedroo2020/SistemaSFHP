@@ -437,11 +437,11 @@ form .campo input {
 
 .div-botoes {
     display: flex;
-    gap: 20px;
+    flex-direction: column;
 }
 
 .btn-consulta {
-    width: 100%;
+    width: 50%;
     background-color: var(--white);
     color: var(--blue-dark);
     border: 1.5px solid var(--blue-dark);
@@ -460,6 +460,34 @@ form .campo input {
 
     &:hover {
         background-color: var(--gray-200);
+    }
+}
+
+.div-gap-btns {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-inativar-user {
+    width: 50%;
+    background-color: var(--red-base);
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    margin-top: 15px;
+    padding: 8px 14px;
+    font-size: 15px;
+    font-weight: bold;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: 0.1s;
+
+    &:hover {
+        background-color: var(--red-dark);
     }
 }
 
