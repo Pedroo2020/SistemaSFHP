@@ -1,5 +1,5 @@
 // Importa a URL da API
-import URL_API from './urlAPI.js';
+import { URL_API, socket } from './urlAPI.js';
 // Função para formatar CPF
 import { formatCPF } from './components/format.js';
 // Função para mostrar mensagens de alerta
@@ -60,6 +60,9 @@ $('.formulario').on('submit', (e) => {
 
             // Obtém o token
             const token = res.token;
+
+            // Autentica com o token
+            socket.emit("autenticar", { token });
 
             // Salva no localStorage
             localStorage.setItem('token', token);

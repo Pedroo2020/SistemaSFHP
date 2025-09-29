@@ -1,5 +1,5 @@
 import { formatCPF, formatSUS, formatTelefone, formatarNumeroSUS, formatarNumeroTelefone } from './components/format.js';
-import URL_API from './urlAPI.js';
+import { URL_API, socket } from './urlAPI.js';
 import alertMsg from './alertMsg.js';
 
 // Função para desabilitar o scroll
