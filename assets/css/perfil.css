@@ -107,7 +107,6 @@ main {
 
 /* Fim - Cabeçalho */
 
-/* Página ADM */
 /* Início - Seção Título e SubTítulo */
 
 .container-painel {
@@ -139,7 +138,298 @@ main {
     color: var(--blue-dark);
 }
 
+.a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-refresh {
+    background-color: var(--white);
+    color: var(--blue-dark);
+    border: 1px solid var(--blue-dark);
+    border-radius: 8px;
+    padding: 14px;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.1s;
+    &:hover {
+        background-color: var(--gray-200);
+    }
+}
+
+.btn-next {
+    width: 100%;
+    background-color: var(--blue-dark);
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    padding: 8px 14px;
+    font-size: 15px;
+    font-weight: bold;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 6px rgba(49, 52, 54, 0.321);
+    cursor: pointer;
+    transition: 0.1s;
+    &:hover {
+        background-color: var(--blue-hover);
+    }
+}
+
+.icones {
+    width: 20px;
+}
+
+.btn-novo-paciente {
+    background-color: var(--blue-hover);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.1s;
+    &:hover {
+        background-color: var(--blue-dark);
+    }
+}
+
 /* Fim - Seção Título e SubTítulo */
+
+/* Início - Seção Blocos Informativos */
+.sec-blocos-gerais {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.bloco {
+    background-color: var(--gray-100);
+    justify-content: center;
+    width: calc(33.33% - 10px);
+    min-width: 350px;
+    height: 200px;
+    padding: 30px;
+    border-radius: 25px;
+    border: 1px solid var(--gray-300);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.icons-blocos {
+    font-size: 35px;
+}
+
+.div-icon-text {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.div-title-subtitle-bloco {
+    font-size: 1.3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    & h3 {
+        font-size: 1.35rem;
+    }
+}
+
+.subtitle-bloco {
+    color: var(--gray-600);
+    font-size: 1.1rem;
+}
+
+.info-bloco {
+    font-size: 1.5rem;
+    font-weight: bolder;
+}
+
+/* Fim - Seção Blocos Informativos */
+
+/* Início Seção da Tabela de Usuários */
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 50px;
+}
+
+.div-table {
+    overflow-y: auto;
+    width: 100%;
+    height: 400px;
+}
+
+.div-scroll-table {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.sec-tabela-usuario {
+    background-color: var(--gray-100);
+    padding: 0px 30px 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+}
+
+.div-search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.div-text-search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.aba-todos-usuarios {
+    padding: 10px 20px;
+    background-color: var(--gray-100);
+    border: 8px solid var(--gray-200);
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    min-width: 190px;
+    text-align: center;
+}
+
+.search-box {
+    position: relative;
+    width: 400px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 15px 15px 15px 40px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.search-box input:focus {
+    border-color: #aaa;
+}
+
+.search-box i {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #aaa;
+}
+
+.btn-add-user {
+    background-color: var(--blue-dark);
+    width: 195px;
+    padding: 15px 30px;
+    margin-left: 10px;
+    border-style: none;
+    color: var(--white);
+    font-weight: 500;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+table {
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    width: 100%;
+}
+
+th,
+td {
+    border-bottom: 1px solid var(--gray-300);
+    padding: 20px;
+    text-align: center;
+    font-weight: 600;
+}
+
+td:first-child {
+    border-left: 1px solid var(--gray-300);
+}
+
+td:last-child {
+    border-right: 1px solid var(--gray-300);
+}
+
+table th:nth-child(1),
+table td:nth-child(1),
+table th:nth-child(4),
+table td:nth-child(4),
+table th:nth-child(5),
+table td:nth-child(5) {
+    text-align: right;
+}
+
+table th:nth-child(2),
+table td:nth-child(2),
+table th:nth-child(3),
+table td:nth-child(3),
+table th:nth-child(6),
+table td:nth-child(6) {
+    text-align: left;
+    padding-left: 12px;
+}
+
+th {
+    background-color: var(--gray-200);
+    font-weight: bold;
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.icon-more-details {
+    border: 2px solid var(--black);
+    width: 30px;
+    height: 30px;
+    padding-top: 5.5px;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    cursor: pointer;
+}
+
+.icons-blocos2 {
+    font-size: 31px;
+}
+
+/* Fim Seção da Tabela de Usuários */
 
 /* Início - Footer */
 .footer {
