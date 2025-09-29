@@ -12,7 +12,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
-        
+
     <!-- Socketio -->
     <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
 
@@ -137,24 +137,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>01</td>
-                                <td>Ana Maria Almeida</td>
-                                <td>32</td>
-                                <td>Feminino</td>
-                                <td>Enfermeiro</td>
-                                <td>123456-ENF</td>
-                                <td><i class="fa-solid fa-ellipsis icon-more-details" id="more-details"></i></td>
-                            </tr>
-                            <tr>
-                                <td>02</td>
-                                <td>Pedro Santos</td>
-                                <td>28</td>
-                                <td>Masculino</td>
-                                <td>Paciente</td>
-                                <td>123.456.789.10</td>
-                                <td><i class="fa-solid fa-ellipsis icon-more-details"></i></td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -167,7 +149,7 @@
             <div class="modal-conteudo">
                 <i class="fa-solid fa-arrow-left fechar" id="fechar-modal-adicionar-usuario"></i>
                 <i class="fa-solid fa-arrow-left fechar" id="voltar-cpf" style="display: none;"></i>
-        
+
                 <!-- Formulário Completo para Cadastro -->
                 <form id="form-cadastro">
                     <h2 class="title-form">Cadastrar Usuário</h2>
@@ -182,35 +164,38 @@
                             <option value="Administrador">Administrador</option>
                         </select>
                     </div>
-        
+
                     <div class="campo">
                         <label for="nome" class="cor-blue-dark tamfont">CPF</label>
                         <input type="text" id="cpf-cadastro" name="cpf-cadastro" placeholder="CPF" required>
                     </div>
-        
+
                     <div class="campo">
                         <label for="nome" class="cor-blue-dark tamfont">Nome</label>
                         <input type="text" id="nome-cadastro" name="nome-cadastro" placeholder="Digite o nome" required>
                     </div>
-        
+
                     <div class="campo">
                         <label for="sus" class="cor-blue-dark tamfont">Número do SUS</label>
-                        <input type="text" id="sus-cadastro" name="sus-cadastro" placeholder="Digite o número do SUS" required>
+                        <input type="text" id="sus-cadastro" name="sus-cadastro" placeholder="Digite o número do SUS"
+                            required>
                     </div>
 
                     <div class="campo" id="campo-extra" style="display: none;">
                         <label for="extra-cadastro" class="cor-blue-dark tamfont">Extra</label>
                         <input type="text" id="extra-cadastro" name="extra-cadastro" placeholder="" required />
                     </div>
-        
+
                     <div class="campo">
                         <label for="email" class="cor-blue-dark tamfont">E-mail</label>
-                        <input type="email" id="email-cadastro" name="email-cadastro" placeholder="exemplo@gmail.com" required>
+                        <input type="email" id="email-cadastro" name="email-cadastro" placeholder="exemplo@gmail.com"
+                            required>
                     </div>
-        
+
                     <div class="campo">
                         <label for="telefone" class="cor-blue-dark tamfont">Telefone</label>
-                        <input type="tel" id="telefone-cadastro" name="telefone-cadastro" placeholder="(00) 0000-0000" required>
+                        <input type="tel" id="telefone-cadastro" name="telefone-cadastro" placeholder="(00) 0000-0000"
+                            required>
                     </div>
 
                     <div class="alin-lad">
@@ -221,13 +206,13 @@
                                 <option value="feminino">Feminino</option>
                             </select>
                         </div>
-        
+
                         <div class="camp-lad">
                             <label for="nascimento" class="cor-blue-dark tamfont">Nascimento</label>
                             <input type="date" id="nascimento-cadastro" name="nascimento-cadastro" required>
                         </div>
                     </div>
-        
+
                     <button type="submit" class="btn-next">Cadastrar</button>
                 </form>
             </div>
@@ -235,18 +220,18 @@
         <!-- Fim Modal Adicionar Usuário -->
 
         <!-- Início Modal Editar Usuário -->
-        <div id="modalEditarUsuario" class="modal">
+        <div id="modalEditarUsuario" class="modal-editar">
             <div class="modal-conteudo">
                 <i class="fa-solid fa-arrow-left fechar" id="fechar-modal-editar-usuario"></i>
                 <i class="fa-solid fa-arrow-left fechar" id="voltar-cpf" style="display: none;"></i>
-        
-                <!-- Formulário Completo para Cadastro -->
+
+                <!-- Formulário Completo para Editar -->
                 <form id="form-cadastro">
                     <h2 class="title-form">Editar Usuário</h2>
-        
+
                     <div class="campo">
                         <label for="tipo-usuario" class="cor-blue-dark tamfont">Tipo Usuário</label>
-                        <select name="tipo-user-cadastro" id="tipo-user-cadastro" required>
+                        <select name="tipo-user-editar" id="tipo-user-editar" required>
                             <option value="paciente">Paciente</option>
                             <option value="recepcionista">Recepcionista</option>
                             <option value="enfermeiro">Enfermeiro</option>
@@ -254,63 +239,66 @@
                             <option value="Administrador">Administrador</option>
                         </select>
                     </div>
-        
+
                     <div class="campo">
                         <label for="nome" class="cor-blue-dark tamfont">CPF</label>
-                        <input type="text" id="cpf-cadastro" name="cpf-cadastro" placeholder="CPF" required>
+                        <input type="text" id="cpf-editar" name="cpf-editar" placeholder="CPF" required>
                     </div>
-        
+
                     <div class="campo">
                         <label for="nome" class="cor-blue-dark tamfont">Nome</label>
-                        <input type="text" id="nome-cadastro" name="nome-cadastro" placeholder="Digite o nome" required>
+                        <input type="text" id="nome-editar" name="nome-editar" placeholder="Digite o nome" required>
                     </div>
-        
+
+                    <div class="campo">
+                        <label for="email" class="cor-blue-dark tamfont">E-mail</label>
+                        <input type="email" id="email-editar" name="email-editar" placeholder="exemplo@gmail.com"
+                            required>
+                    </div>
+
                     <div class="campo">
                         <label for="sus" class="cor-blue-dark tamfont">Número do SUS</label>
-                        <input type="text" id="sus-cadastro" name="sus-cadastro" placeholder="Digite o número do SUS" required>
+                        <input type="text" id="sus-editar" name="sus-editar" placeholder="Digite o número do SUS"
+                            required>
                     </div>
-        
+
                     <div class="campo" id="campo-extra" style="display: none;">
                         <label for="extra-cadastro" class="cor-blue-dark tamfont">Extra</label>
                         <input type="text" id="extra-cadastro" name="extra-cadastro" placeholder="" required />
                     </div>
-        
-                    <div class="campo">
-                        <label for="email" class="cor-blue-dark tamfont">E-mail</label>
-                        <input type="email" id="email-cadastro" name="email-cadastro" placeholder="exemplo@gmail.com" required>
-                    </div>
-        
+
                     <div class="campo">
                         <label for="telefone" class="cor-blue-dark tamfont">Telefone</label>
-                        <input type="tel" id="telefone-cadastro" name="telefone-cadastro" placeholder="(00) 0000-0000" required>
+                        <input type="tel" id="telefone-editar" name="telefone-editar" placeholder="(00) 0000-0000"
+                            required>
                     </div>
-        
+
                     <div class="alin-lad">
                         <div class="camp-lad">
                             <label for="sexo" class="cor-blue-dark tamfont">Sexo</label>
-                            <select id="sexo-cadastro" name="sexo-cadastro" required>
+                            <select id="sexo-editar" name="sexo-editar" required>
                                 <option value="masculino">Masculino</option>
                                 <option value="feminino">Feminino</option>
                             </select>
                         </div>
-        
+
                         <div class="camp-lad">
                             <label for="nascimento" class="cor-blue-dark tamfont">Nascimento</label>
-                            <input type="date" id="nascimento-cadastro" name="nascimento-cadastro" required>
+                            <input type="date" id="nascimento-editar" name="nascimento-editar" required>
                         </div>
                     </div>
-        
+
                     <div class="div-botoes">
                         <button type="submit" class="btn-next">Salvar</button>
 
                         <div class="div-gap-btns">
                             <button type="button" class="btn-consulta">Ver Consultas</button>
-                            
+
                             <button type="button" class="btn-inativar-user">Inativar Usuário</button>
                         </div>
 
                     </div>
-                    
+
                 </form>
             </div>
         </div>
