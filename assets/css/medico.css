@@ -42,18 +42,15 @@
     /* Cores adicionais */
     --blue-hover: #1876ac;
     --gray-dark: #747474;
+    --red-fundo: #AF111167;
     --orange-fundo: #fe660067;
+    --yellow-fundo: #FFB20067;
+    --green-fundo: #00742B67;
+    --blue-fundo: #06047867;
 }
 
 /* Começo - Main */
 
-.painel {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    margin: 20px;
-}
 
 .btn-Chamar {
     padding: 10px 10px;
@@ -82,25 +79,8 @@
     font-size: 15px;
 }
 .btn-Atualizar:hover {
-    background-color: var(--gray-200);
+    background-color: var(--gray-100);
     transition: 0.3s;
-}
-
-.cartoes {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 30px;
-    flex-wrap: wrap;
-    margin: 20px;
-}
-
-.cartao {
-    flex: 1;
-    min-width: 250px;
-    background-color: var(--white);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 12px rgba(0,0,0,0.05);
 }
 
 .titulo-cartao {
@@ -114,54 +94,23 @@
     color: var(--gray-dark);
 }
 
-.informacoes {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    margin: 20px;
-    border-radius: 15px;
-}
-
-.abas {
-    display: flex;
-    background: var(--gray-200);
-    border-radius: 20px;
-    padding: 5px;
-    margin-bottom: 20px;
-}
-
-.laranja {
-    color: var(--orange-protocol);
-    background-color: var(--orange-fundo);
-    border-radius: 20px;
-    padding: 5px 10px;
-    border: 3px solid var(--orange-protocol); 
-}
-
 .aba {
     flex: 1;
     border: none;
     background: transparent;
-    padding: 6px;
+    padding: 3px;
     border-radius: 20px;
     cursor: pointer;
     font-weight: bold;
     transition: all 0.3s;
     white-space: nowrap;
-    font-size: 14px;
+    font-size: 1.0rem;
 }
 
 .aba.ativa {
     background: var(--white);
     color: var(--black);
-}
-
-.buscar input {
-    padding: 8px 12px;
-    border-radius: 6px;
-    border: 2px solid var(--gray-300);
-    width: 250px;
+    padding: 7px;
 }
 
 .icon-user {
@@ -174,42 +123,108 @@
     background-color: var(--red-dark);
     color: var(--white);
     font-size: 30px;
-    border: 3px solid var(--red-dark);
+    border: 4px solid var(--red-dark);
     border-radius: 30px;
 }
 
 .icon-clock {
     color: var(--blue-dark);
     font-size: 35px;
-
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: var(--white);
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0px 4px 12px rgba(0,0,0,0.05);
-}
-
-thead {
-    background-color: var(--gray-200);
-}
-
-th, td {
-    padding: 12px 15px;
-    text-align: left;
-    font-size: 0.95rem;
-    color: var(--black);
-}
-
-th {
-    font-weight: 600;
-}
-
-tbody tr:last-child {
-    border-bottom: none;
 }
 
 /* Final - Main */
+
+
+/* Início Responsivo */
+@media (max-width: 768px) {
+    .modal-conteudo {
+        width: 90%;
+        padding: 20px;
+    }
+}
+
+
+@media (max-width: 1178px) {
+    .bloco {
+        width: calc(50% - 10px);
+    }
+
+    .div-search {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .div-text-search {
+        width: 100%;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+}
+
+@media (max-width: 814px) {
+    .sec-blocos-gerais {
+        flex-direction: column;
+    }
+
+    .bloco {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 40px;
+        height: 120px;
+        min-width: 0;
+    }
+}
+
+@media (max-width: 550px) {
+    .search-box {
+        display: flex;
+        width: 100%;
+    }
+
+    .div-text-search {
+        flex-direction: column;
+    }
+
+    .aba-todos-usuarios {
+        min-width: 100%;
+    }
+
+    main {
+        padding: 30px;
+        padding-bottom: 60px;
+    }
+}
+
+@media (max-width: 450px) {
+    .bloco {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 20px;
+        height: 160px;
+        gap: 20px;
+
+        & h3 {
+            font-size: 1.1rem;
+        }
+
+        & .subtitle-bloco {
+            font-size: 1rem;
+        }
+
+        & i {
+            font-size: 1.8rem;
+        }
+
+        .info-bloco {
+            font-size: 1.4rem;
+        }
+    }
+}
+
+/* Fim Responsivo */

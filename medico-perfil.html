@@ -16,7 +16,7 @@
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
     <!-- Perfil JS em comum -->
-
+    <script type="module" src="assets/js/perfil.js" defer></script>
 
     <link rel="icon" href="assets/img/Logo-SFHP-Branca.png">
     <title>SFHP - Página do Médico</title>
@@ -28,7 +28,7 @@
         <div class="div-header">
             <img src="assets/img/Logo-SFHP-Branca.png" alt="Logo" class="icon-logo">
             <span class="linha"></span>
-            <span>SFHP - Página do Recepcionista</span>
+            <span>SFHP - Página do Médico</span>
         </div>
 
         <div class="sair">
@@ -38,9 +38,9 @@
     </header>
 
     <main>
-
         <!-- Título e SubTítulo -->
         <section class="container-painel">
+
             <div class="sec-title-subtitle">
                 <h2 class="title">Painel de Controle</h2>
                 <h3 class="subtitle">Bem vindo(a), <span class="span-font-weight" id="nome"></span></h3>
@@ -56,6 +56,7 @@
                     Atualizar
                 </button>
             </div>
+
         </section>
         <!-- Fim do Título e SubTítulo -->
 
@@ -63,8 +64,8 @@
         <section class="sec-blocos-gerais">
             <div class="bloco">
                 <div class="div-title-subtitle-bloco">
-                    <h3 class="titulo-cartao">Total de Pacientes</h3>
-                    <p class="texto-cartao">Pacientes aguardando atendimento</p>
+                    <h3>Total de Pacientes</h3>
+                    <p class="subtitle-bloco">Pacientes aguardando atendimento</p>
                 </div>
 
 
@@ -76,8 +77,8 @@
 
             <div class="bloco">
                 <div class="div-title-subtitle-bloco">
-                    <h3 class="titulo-cartao">Casos Urgentes</h3>
-                    <p class="texto-cartao">Vermelho e laranja</p>
+                    <h3>Casos Urgentes</h3>
+                    <p class="subtitle-bloco">Vermelho e laranja</p>
                 </div>
 
 
@@ -89,8 +90,8 @@
 
             <div class="bloco">
                 <div class="div-title-subtitle-bloco">
-                    <h3 class="titulo-cartao">Tempo Médio de Atendimento</h3>
-                    <p class="texto-cartao">Por consulta</p>
+                    <h3>Tempo Médio de Atendimento</h3>
+                    <p class="subtitle-bloco">Por consulta</p>
                 </div>
 
 
@@ -104,45 +105,42 @@
 
         <!-- Início Tabela Usuários -->
         <section class="sec-tabela-usuario">
-            <div class="informacoes">
-                <div class="abas">
-                    <button class="aba ativa" onclick="ativarAba(this)">Todos os Pacientes</button>
-                    <button class="aba" onclick="ativarAba(this)">Triagem</button>
-                    <button class="aba" onclick="ativarAba(this)">Concluídos</button>
+            <div class="div-scroll-table">
+                <div class="div-search">
+                    <div class="div-text-search">
+                        <div class="aba-todos-usuarios">
+                            <p>Todos os Pacientes</p>
+                            <p>Triagem</p>
+                            <p>Concluídos</p>
+                        </div>
+
+                        <div class="search-box">
+                            <i class="fa fa-search"></i>
+                            <input type="text" placeholder="Buscar...">
+                        </div>
+                    </div>
+
                 </div>
 
-                <div class="buscar">
-                    <input placeholder="Buscar pacientes..." type="text">
+                <div class="div-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Nome</th>
+                                <th>Idade</th>
+                                <th>Sexo</th>
+                                <th>Prioridade</th>
+                                <th>Entrada</th>
+                                <th>Tempo Decorrido</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nome</th>
-                            <th>Idade</th>
-                            <th>Sexo</th>
-                            <th>Prioridade</th>
-                            <th>Entrada</th>
-                            <th>Tempo Decorrido</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Felipe </td>
-                            <td>18</td>
-                            <td>Masculino</td>
-                            <td><p class="laranja">Laranja</p></td>
-                            <td>13:15</td>
-                            <td>02:00</td>
-                            <td>(Ações)</td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
-
         </section>
         <!-- Fim Tabela Usuários -->
 
