@@ -233,9 +233,15 @@ $(document).ready(async () => {
 })
 
 // Ao clicar no botão, atualiza as consultas
-$('#refresh-consultas').on('click', () => {
+$('#refresh-consultas').on('click', async () => {
+    // Adiciona a animação de girar ao botão
+    $('#refresh-icon').addClass('refreshing');
+    
     // Recarregar consultas
-    recarregarConsultas();
+    await recarregarConsultas();
+
+    // Remove a animação de girar ao botão
+    $('#refresh-icon').removeClass('refreshing');
 });
 
 // Função para recarrregar consultas com a situação atual
@@ -316,6 +322,34 @@ function carregarConsultas(situacao) {
     })
 }
 
+// Função para criar a etiqueta de prioridade
+function criarEtiquetaPrioridade(prioridade) {
+    // Cria a div principal
+    const div = $('<div></div>').addClass('etiqueta-prioridade');
+
+    // Adiciona a cor de fundo conforme a prioridade
+    if (prioridade === 'Leve') {
+        div.addClass('leve');
+    } else if (prioridade === 'Pouco urgente') {
+        div.addClass('pouco-urgente');
+    }  else if (prioridade === 'Urgente') {
+        div.addClass('urgente');
+    } else if (prioridade === 'Muito urgente') {
+        div.addClass('muito-urgente');
+    } else if (prioridade === 'Risco de vida') {
+        div.addClass('risco-vida');
+    }
+
+    // Cria o elemento de texto
+    const p = $('<p></p>').text(prioridade);
+
+    // Adiciona o p a div
+    div.append(p);
+
+    // Retorna a etiqueta
+    return div;
+}
+
 // Função para adicionar os dados a tabela
 function addConsulta(consulta) {
     // tbody
@@ -342,8 +376,15 @@ function addConsulta(consulta) {
                         .addClass('td-string')
 
     const prioridade = $('<td></td>')
-                        .text(consulta.prioridade ? consulta.prioridade : '~')
                         .addClass('td-string')
+
+    // Caso exista prioridade, cria a etiqueta
+    if (consulta.classificacao_risco) {
+        prioridade.append(criarEtiquetaPrioridade(consulta.classificacao_risco))
+    } else {
+        // Senão, adiciona o texto ~
+        prioridade.text('~');
+    }
 
     const entrada = $('<td></td>')
                         .text(consulta.data_entrada)

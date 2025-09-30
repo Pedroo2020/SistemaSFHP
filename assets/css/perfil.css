@@ -176,6 +176,70 @@ main {
     }
 }
 
+#refresh-icon {
+    font-size: 1.2rem;
+    color: var(--blue-dark);
+}
+
+.refreshing {
+    animation: rotating 1s linear infinite;
+}
+
+@keyframes rotating {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Etiqueta de prioridade */
+.etiqueta-prioridade {
+    padding: 10px;
+    width: 100%;
+    border-radius: 30px;
+    border: 2px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & p {
+        font-weight: 600;
+        font-size: 1rem;
+    }
+}
+
+/* Leve (Azul) */
+.leve {
+    color: var(--blue-protocol);
+    border-color: var(--blue-protocol);
+}
+
+/* Pouco urgente (Verde) */
+.pouco-urgente {
+    color: var(--green-protocol);
+    border-color: var(--green-protocol);
+}
+
+/* Urgente (Amarelo) */
+.urgente {
+    color: var(--yellow-protocol);
+    border-color: var(--yellow-protocol);
+}
+
+/* Muito urgente (Laranja) */
+.muito-urgente {
+    color: var(--orange-protocol);
+    border-color: var(--orange-protocol);
+}
+
+/* Risco de vida (Vermelho) */
+.risco-vida {
+    color: var(--red-protocol);
+    border-color: var(--red-protocol);
+}
+
 .btn-next {
     width: 100%;
     background-color: var(--blue-dark);
