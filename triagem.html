@@ -52,7 +52,7 @@
         <form class="formulario-container">
     
             <div class="coluna-esquerda">
-                <h2>Dados do Usuário:</h2>
+                <p class="title-div">Dados do Usuário:</p>
                 
                 <div class="campo-grupo">
                     <label>Nome completo:</label>
@@ -81,34 +81,34 @@
                     </div>
                 </div>
                 
-                <div class="campo-grupo">
+                <div class="campo-grupo2">
                     <label>Queixa Principal:</label>
                     <div class="dado-exibido dado-multilinha">Descreva os sintomas e as queixas do paciente</div>
                 </div>
             </div>
 
             <div class="coluna-direita">
-                <h2>Dados para Triagem:</h2>
+                <p class="title-div">Dados para Triagem:</p>
 
                 <div class="campos-linha">
                     <div class="campo-grupo">
                         <label for="temperatura">Temperatura (°C):</label>
-                        <input type="text" id="temperatura" name="temperatura">
+                        <input class="input-triagem" type="text" id="temperatura" name="temperatura">
                     </div>
                     <div class="campo-grupo">
                         <label for="pressao-arterial">Pressão Arterial (mmHg):</label>
-                        <input type="text" id="pressao-arterial" name="pressao-arterial">
+                        <input class="input-triagem" type="text" id="pressao-arterial" name="pressao-arterial">
                     </div>
                 </div>
                 
                 <div class="campos-linha">
                     <div class="campo-grupo">
                         <label for="frequencia-cardiaca">Frequência Cardíaca (bpm):</label>
-                        <input type="text" id="frequencia-cardiaca" name="frequencia-cardiaca">
+                        <input class="input-triagem" type="text" id="frequencia-cardiaca" name="frequencia-cardiaca">
                     </div>
                     <div class="campo-grupo">
                         <label for="saturacao-o2">Saturação O2 (%):</label>
-                        <input type="text" id="saturacao-o2" name="saturacao-o2">
+                        <input class="input-triagem" type="text" id="saturacao-o2" name="saturacao-o2">
                     </div>
                 </div>
 
@@ -121,7 +121,8 @@
                         <input type="radio" id="dor3" name="nivel-dor" value="3"><label for="dor3">3</label>
                         <input type="radio" id="dor4" name="nivel-dor" value="4"><label for="dor4">4</label>
                         <input type="radio" id="dor5" name="nivel-dor" value="5"><label for="dor5">5</label>
-                        <input type="radio" id="dor6" name="nivel-dor" value="6"><label for="dor6" class="selecionado">6</label> 
+                        <input type="radio" id="dor6" name="nivel-dor" value="6"><label 
+                        for="dor6" >6</label> 
                         <input type="radio" id="dor7" name="nivel-dor" value="7"><label for="dor7">7</label>
                         <input type="radio" id="dor8" name="nivel-dor" value="8"><label for="dor8">8</label>
                         <input type="radio" id="dor9" name="nivel-dor" value="9"><label for="dor9">9</label>
@@ -129,19 +130,19 @@
                     </div>
                 </div>
 
-                <div class="campo-grupo">
+                <div class="campo-grupo3">
                     <label for="alergias">Alergias:</label>
-                    <input type="text" id="alergias" name="alergias" placeholder="Alergias conhecidas">
+                    <input class="input-triagem2" type="text" id="alergias" name="alergias" placeholder="Alergias conhecidas">
                 </div>
 
-                <div class="campo-grupo">
+                <div class="campo-grupo3">
                     <label for="medicamentos">Medicamentos em Uso:</label>
-                    <input type="text" id="medicamentos" name="medicamentos" placeholder="Medicamentos que o paciente utiliza">
+                    <input class="input-triagem2" type="text" id="medicamentos" name="medicamentos" placeholder="Medicamentos que o paciente utiliza">
                 </div>
 
-                <div class="campo-grupo">
+                <div class="campo-grupo4">
                     <label for="classificacao-risco">Classificação de Risco:</label>
-                    <select id="classificacao-risco" name="classificacao-risco">
+                    <select class="input-triagem22" id="classificacao-risco" name="classificacao-risco">
                         <option value="verde" selected>Verde - Pouco Urgente</option>
                         <option value="azul">Azul - Não Urgente</option>
                         <option value="amarelo">Amarelo - Urgente</option>
@@ -151,6 +152,10 @@
                 </div>
             </div>
         </form>
+
+        <div class="btn-salvar1">
+            <button class="btn-salvar2">Enviar</button>
+        </div>
     </main>
 
     <!-- Footer Padrão -->
