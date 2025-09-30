@@ -54,16 +54,19 @@
                 <h3 class="subtitle">Bem vindo(a), <span class="span-font-weight" id="nome"></span></h3>
             </div>
 
-            <div class="a">
-                <button class="btn-novo-paciente">
-                    <img src="assets/img/novopaciente.svg" alt="Ícone - Novo Paciente" class="icones">
-                    Novo paciente
-                </button>
+            <div class="container-btn">
+                <p class="last-att">Última atualização: 30/09/25 10:06</p>
+                <div class="a">
+                    <button class="btn-novo-paciente">
+                        <img src="assets/img/novopaciente.svg" alt="Ícone - Novo Paciente" class="icones">
+                        Novo paciente
+                    </button>
 
-                <button class="btn-refresh" id="refresh-consultas">
-                    <img src="assets/img/atualizar.svg" alt="Ícone - Atualizar" class="icones">
-                    Atualizar
-                </button>
+                    <button class="btn-refresh" id="refresh-consultas">
+                        <img src="assets/img/atualizar.svg" alt="Ícone - Atualizar" class="icones">
+                        Atualizar
+                    </button>
+                </div>
             </div>
         </section>
 
@@ -116,13 +119,15 @@
                 <div class="div-search">
                     <div class="div-text-search">
                         <div class="aba-todos-usuarios">
-                            <p class="active">Todos os Usuários</p>
+                            <p class="filtro-consulta active" sit="1">Entrada</p>
                             
-                            <p>Todos os Usuários</p>
+                            <p class="filtro-consulta" sit="2">Triagem</p>
                             
-                            <p>Todos os Usuários</p>
+                            <p class="filtro-consulta" sit="3">Em espera</p>
                             
-                            <p>Todos os Usuários</p>
+                            <p class="filtro-consulta" sit="4">Consulta</p>
+                            
+                            <p class="filtro-consulta" sit="5">Alta</p>
                         </div>
 
                         <div class="search-box">
@@ -130,11 +135,6 @@
                             <input type="text" placeholder="Buscar...">
                         </div>
                     </div>
-
-                    <button class="btn-add-user">
-                        <i class="fa-solid fa-user-plus" style="color: #ffffff;"></i>
-                        Adicionar Usuário
-                    </button>
                 </div>
 
                 <div class="div-table">
