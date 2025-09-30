@@ -94,6 +94,48 @@
     color: var(--gray-dark);
 }
 
+.vermelho {
+    color: var(--red-protocol);
+    background-color: var(--red-fundo);
+    border-radius: 20px;
+    padding: 5px 5px;
+    border: 3px solid var(--red-protocol); 
+    font-weight: bold;
+    text-align: center;
+}.laranja {
+    color: var(--orange-protocol);
+    background-color: var(--orange-fundo);
+    border-radius: 20px;
+    padding: 5px 5px;
+    border: 3px solid var(--orange-protocol); 
+    font-weight: bold;
+    text-align: center;
+}.amarelo {
+    color: var(--yellow-protocol);
+    background-color: var(--yellow-fundo);
+    border-radius: 20px;
+    padding: 5px 5px;
+    border: 3px solid var(--yellow-protocol); 
+    font-weight: bold;
+    text-align: center;
+}.verde {
+    color: var(--green-protocol);
+    background-color: var(--green-fundo);
+    border-radius: 20px;
+    padding: 5px 5px;
+    border: 3px solid var(--green-protocol); 
+    font-weight: bold;
+    text-align: center;
+}.azul {
+    color: var(--blue-protocol);
+    background-color: var(--blue-fundo);
+    border-radius: 20px;
+    padding: 5px 5px;
+    border: 3px solid var(--blue-protocol); 
+    font-weight: bold;
+    text-align: center;
+}
+
 .aba {
     flex: 1;
     border: none;
