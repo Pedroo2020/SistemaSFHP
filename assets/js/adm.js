@@ -203,12 +203,9 @@ $(document).ready(function () {
     const tipoUsuario = $("#tipo-user-cadastro");
     const labelSus = $("label[for='sus']");
     const inputSus = $("#sus-cadastro");
-    const labelSenha = $("label[for='senha-cadastro-label']");
-    const inputSenha = $("#senha-cadastro");
-    const labelCRM = $("label[for='crm-cadastro-label']");
-    const inputCRM = $("#crm-cadastro");
-    const labelCOREN = $("label[for='coren-cadastro-label']");
-    const inputCOREN = $("#coren-cadastro")
+
+    const campoExtraCRM = $(".campo-extra-crm")
+    const campoExtraCoren = $(".campo-extra-coren")
 
     tipoUsuario.on("change", function () {
         let tipo = $(this).val();
@@ -220,18 +217,20 @@ $(document).ready(function () {
                 .attr("id", "sus-cadastro")
                 .attr("name", "sus-cadastro")
                 .val("");
-            campoExtra.hide();
+            campoExtraCRM.css("display", "none");
+            campoExtraCoren.css("display", "none");
             inputSus.prop("required", true);
             inputExtra.prop("required", false);
 
-        } else if (tipo === "Recepcionista" || tipo === "Administrador") {
+        } else if (tipo === "Recepcionista" || tipo === "Administrador") {  
             labelSus.text("Senha");
             inputSus.attr("type", "password")
                 .attr("placeholder", "Digite a senha")
                 .attr("id", "senha-cadastro")
                 .attr("name", "senha-cadastro")
                 .val("");
-            campoExtra.hide();
+            campoExtraCRM.css("display", "none");
+            campoExtraCoren.css("display", "none");
             inputSus.prop("required", true);
             inputExtra.prop("required", false);
 
@@ -242,13 +241,9 @@ $(document).ready(function () {
                 .attr("id", "senha-cadastro")
                 .attr("name", "senha-cadastro")
                 .val("");
-            campoExtra.show();
-            labelExtra.text("COREN");
-            inputExtra.attr("placeholder", "Digite o COREN")
-                .attr("name", "coren-cadastro")
-                .val("");
-            inputSus.prop("required", true);
-            inputExtra.prop("required", true);
+            campoExtraCoren.css("display", "flex");
+            campoExtraCRM.css("display", "none");
+
 
         } else if (tipo === "Medico") {
             labelSus.text("Senha");
@@ -257,13 +252,8 @@ $(document).ready(function () {
                 .attr("id", "senha-cadastro")
                 .attr("name", "senha-cadastro")
                 .val("");
-            campoExtra.show();
-            labelExtra.text("CRM");
-            inputExtra.attr("placeholder", "Digite o CRM")
-                .attr("name", "crm-cadastro")
-                .val("");
-            inputSus.prop("required", true);
-            inputExtra.prop("required", true);
+            campoExtraCRM.css("display", "flex");
+            campoExtraCoren.css("display", "none");
         }
     });
 

@@ -98,6 +98,21 @@
     gap: 10px;
 }
 
+.campo-extra-senha {
+    display: none;
+    flex-direction: column;
+}
+
+.campo-extra-crm {
+    display: none;
+    flex-direction: column;
+}
+
+.campo-extra-coren {
+    display: none;
+    flex-direction: column;
+}
+
 form .campo {
     display: flex;
     flex-direction: column;
