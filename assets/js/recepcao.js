@@ -275,6 +275,24 @@ function carregarConsultas(situacao) {
             // Limpa a tabela antes de carregar novos dados
             $('#table-consultas').empty();
 
+            if (consultas.length > 0) {
+                // Carrega as consultas na tabela
+                consultas.map((consulta) => addConsulta(consulta));
+            } else {
+
+                // Adiciona uma mensagem de sem resultados encontrados
+                const consultasNotFound = $('<tr></tr>')
+                                                .append($('<td></td>')
+                                                            .text('Nenhum resultado encontrado para essa busca')
+                                                            .addClass('consultas-not-found')
+                                                            .attr('colspan', 9))
+
+                // Adiciona a cédula a tabela
+                $('#table-consultas').append(consultasNotFound);
+
+            }
+            
+
             // Obtém a data e hora atual
             const dataAtual = new Date()
 
@@ -290,9 +308,6 @@ function carregarConsultas(situacao) {
 
             // Atualiza a data e hora da última atualização
             $('.last-att').text(`Última atualização: ${dataFormatada}`);
-
-            // Carrega as consultas na tabela
-            consultas.map((consulta) => addConsulta(consulta));
         },
         error: (err) => {
             // Exibe mensagem de erro
