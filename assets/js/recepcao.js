@@ -376,7 +376,7 @@ function addConsulta(consulta) {
                         .addClass('td-string')
 
     const prioridade = $('<td></td>')
-                        .addClass('td-string')
+                        .addClass('td-time')
 
     // Caso exista prioridade, cria a etiqueta
     if (consulta.classificacao_risco) {
