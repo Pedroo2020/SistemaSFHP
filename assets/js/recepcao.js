@@ -212,7 +212,7 @@ formConsulta.on('submit', function (e) {
             formCPF[0].reset();
 
             // Atualiza as consultas
-            carregarConsultas();
+            recarregarConsultas();
 
             // Exibe mensagem de sucesso
             alertMsg(res.success, 'success', '#div-msg');
@@ -226,18 +226,45 @@ formConsulta.on('submit', function (e) {
 
 // Carrega a tabela ao carregar a página
 $(document).ready(async () => {
-    
-    await carregarConsultas();
+
+    // Carrega as consultas na fase de entrada
+    await carregarConsultas('1');
 
 })
 
 // Ao clicar no botão, atualiza as consultas
-$('#refresh-consultas').on('click', carregarConsultas);
+$('#refresh-consultas').on('click', () => {
+    // Recarregar consultas
+    recarregarConsultas();
+});
+
+// Função para recarrregar consultas com a situação atual
+function recarregarConsultas() {
+    // Declara a variável
+    let situacao;
+
+    // Percorre todos os elementos do filtro consulta
+    $('.filtro-consulta').each((_, item) => {
+        // Transforma em objeto jquery
+        const $item = $(item);
+
+        // Caso o objeto tenha a class active
+        if ($item.hasClass('active')) {
+            // Atualiza o valor da situação
+            return situacao = $item.attr('sit');
+        }
+    })
+
+    // Caso situação exista, refaz a busca
+    if (situacao) {
+        carregarConsultas(situacao);
+    }
+}
 
 // Função para carregar consultas
-function carregarConsultas() {
+function carregarConsultas(situacao) {
     $.ajax({
-        url: `${URL_API}/consultas`,
+        url: `${URL_API}/consultas/${situacao}`,
         headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
         },
@@ -247,6 +274,22 @@ function carregarConsultas() {
 
             // Limpa a tabela antes de carregar novos dados
             $('#table-consultas').empty();
+
+            // Obtém a data e hora atual
+            const dataAtual = new Date()
+
+            // Formata a data em padrão brasileiro
+            const dataFormatada = dataAtual.toLocaleString("pt-BR", {
+                                                            day: "2-digit",
+                                                            month: "2-digit",
+                                                            year: "numeric",
+                                                            hour: "2-digit",
+                                                            minute: "2-digit",
+                                                            hour12: false // mantém no formato 24h
+                                                            });
+
+            // Atualiza a data e hora da última atualização
+            $('.last-att').text(`Última atualização: ${dataFormatada}`);
 
             // Carrega as consultas na tabela
             consultas.map((consulta) => addConsulta(consulta));
@@ -258,7 +301,6 @@ function carregarConsultas() {
     })
 }
 
-
 // Função para adicionar os dados a tabela
 function addConsulta(consulta) {
     // tbody
@@ -269,7 +311,7 @@ function addConsulta(consulta) {
 
     // Cria as tds
     const posicao = $('<td></td>')
-                        .text("1°")
+                        .text(`${consulta.posicao}°`)
                         .addClass('td-numero')
 
     const nome = $('<td></td>')
@@ -285,7 +327,7 @@ function addConsulta(consulta) {
                         .addClass('td-string')
 
     const prioridade = $('<td></td>')
-                        .text(consulta.prioridade)
+                        .text(consulta.prioridade ? consulta.prioridade : '~')
                         .addClass('td-string')
 
     const entrada = $('<td></td>')
@@ -319,3 +361,34 @@ function addConsulta(consulta) {
     // Adiciona ao tbody
     $tbody.append($tr);
 }
+
+// Filtro da consulta
+$('.filtro-consulta').each((_, element) => {
+    // Transforma em objeto jquery
+    const $element = $(element);
+
+    // Função on click
+    $element.on('click', function () {
+        // Percorre todos os elementos do filtro consulta
+        $('.filtro-consulta').each((_, item) => {
+            // Transforma em objeto jquery
+            const $item = $(item);
+
+            // Verifica se o objeto é diferente do objeto clicado
+            if ($item[0] !== this) {
+                // Remove a class active
+                return $item.removeClass('active');
+            }
+
+            // Obtém a situação do filtro
+            const situacao = $item.attr('sit');
+            
+            // Carrega as consultas
+            carregarConsultas(situacao);
+
+            // Adiciona a class active
+            return $item.addClass('active');
+        })
+    })
+    
+})

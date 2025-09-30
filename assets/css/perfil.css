@@ -138,6 +138,18 @@ main {
     color: var(--blue-dark);
 }
 
+.container-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+
+    & .last-att {
+        font-size: 0.95rem;
+        color: var(--gray-dark);
+    }
+}
+
 .a {
     display: flex;
     align-items: center;
@@ -290,7 +302,6 @@ main {
     width: 100%;
     max-height: 400px;
     border-radius: 10px;
-    overflow: hidden;
     border: 1px solid var(--gray-300);
 }
 
@@ -331,7 +342,7 @@ table {
 }
 
 .aba-todos-usuarios {
-    padding: 10px;
+    padding: 7px;
     background-color: var(--gray-200);
     border-radius: 50px;
     font-weight: bold;
@@ -340,11 +351,10 @@ table {
     text-align: center;
     display: flex;
     align-items: center;
-    gap: 10px;
 
     & p {
         color: var(--gray-dark);
-        padding: 10px;
+        padding: 12px 20px;
         cursor: pointer;
         transition: 0.2s;
     }
