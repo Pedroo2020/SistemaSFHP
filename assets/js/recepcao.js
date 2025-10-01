@@ -400,7 +400,9 @@ function addConsulta(consulta) {
 
     // Ícone de ação
     const iconeMoreDetails = $('<i></i>').addClass('fa-solid fa-ellipsis icon-more-details');
-    const iconAcao = $('<td></td>').append(iconeMoreDetails);
+    const iconAcao = $('<td></td>')
+                            .append(iconeMoreDetails)
+                            .addClass('td-time');
                         
     // Adiciona os elementos ao tr
     $tr

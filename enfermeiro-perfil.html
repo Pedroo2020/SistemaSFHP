@@ -7,7 +7,10 @@
 
     <!-- CSS de Perfil -->
     <link rel="stylesheet" href="assets/css/perfil.css">
-    
+
+    <!-- CSS de enfermeiro -->
+     <link rel="stylesheet" href="assets/css/enfermeiro.css">
+
     <!-- Socketio -->
     <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
 
@@ -21,6 +24,9 @@
 
     <!-- Perfil JS em comum -->
     <script type="module" src="assets/js/perfil.js" defer></script>
+
+    <!-- Enfermeiro JS -->
+    <script type="module" src="assets/js/enfermeiro.js" defer></script>
 
     <link rel="icon" href="assets/img/Logo-SFHP-Branca.png">
     <title>SFHP - Página do Enfermeiro</title>
@@ -50,16 +56,19 @@
                 <h3 class="subtitle">Bem vindo(a), <span class="span-font-weight" id="nome">Paulo!</span></h3>
             </div>
 
-            <div class="a">
-                <button class="btn-novo-paciente">
-                    <img src="assets/img/novopaciente.svg" alt="Ícone - Novo Paciente" class="icones">
-                    Chamar Paciente
-                </button>
+            <div class="container-btn">
+                <p class="last-att">Última atualização:</p>
+                <div class="a">
+                    <button class="btn-novo-paciente">
+                        <img src="assets/img/novopaciente.svg" alt="Ícone - Novo Paciente" class="icones">
+                        Chamar Paciente
+                    </button>
 
-                <button class="btn-refresh">
-                    <img src="assets/img/atualizar.svg" alt="Ícone - Atualizar" class="icones">
-                    Atualizar
-                </button>
+                    <button class="btn-refresh" id="refresh-consultas">
+                        <i class="fa-solid fa-arrows-rotate" id="refresh-icon"></i>
+                        Atualizar
+                    </button>
+                </div>
             </div>
 
         </section>
@@ -113,10 +122,6 @@
             <div class="div-scroll-table">
                 <div class="div-search">
                     <div class="div-text-search">
-                        <div class="aba-todos-usuarios">
-                            <p>Todos os Usuários</p>
-                        </div>
-
                         <div class="search-box">
                             <i class="fa fa-search"></i>
                             <input type="text" placeholder="Buscar pacientes...">
@@ -128,61 +133,54 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Nome</th>
-                                <th>Sexo</th>
-                                <th>Idade</th>
-                                <th>Entrada</th>
-                                <th>Ação</th>
+                                <th class="td-numero">Posição</th>
+                                <th class="td-string">Nome</th>
+                                <th class="td-numero">Idade</th>
+                                <th class="td-string">Sexo</th>
+                                <th class="td-time">Entrada</th>
+                                <th class="td-time">Tempo decorrido</th>
+                                <th class="td-time">Ação</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>01</td>
-                                <td>Maria Oliveira</td>
-                                <td>Feminino</td>
-                                <td>32</td>
-                                <td>13:30</td>
-                                <td><i class="fa-solid fa-square-plus icons-blocos2" style="color: #bebebe;"></i></td>
-                            </tr>
-                            <tr>
-                                <td>02</td>
-                                <td>Pedro Santos</td>
-                                <td>Masculino</td>
-                                <td>28</td>
-                                <td>13:15</td>
-                                <td><i class="fa-solid fa-square-plus icons-blocos2" style="color: #bebebe;"></i></td>
-                            </tr>
-                            <tr>
-                                <td>03</td>
-                                <td>Ana Souza</td>
-                                <td>Feminino</td>
-                                <td>65</td>
-                                <td>12:45</td>
-                                <td><i class="fa-solid fa-square-plus icons-blocos2" style="color: #bebebe;"></i></td>
-                            </tr>
-                            <tr>
-                                <td>04</td>
-                                <td>Carlos Ferreira</td>
-                                <td>Masculino</td>
-                                <td>18</td>
-                                <td>12:15</td>
-                                <td><i class="fa-solid fa-square-plus icons-blocos2" style="color: #bebebe;"></i></td>
-                            </tr>
-                            <tr>
-                                <td>05</td>
-                                <td>Marina Silva</td>
-                                <td>Feminino</td>
-                                <td>14</td>
-                                <td>12:00</td>
-                                <td><i class="fa-solid fa-square-plus icons-blocos2" style="color: #bebebe;"></i></td>
-                            </tr>
-                        </tbody>
+
+                        <tbody id="table-consultas"></tbody>
                     </table>
                 </div>
             </div>
         </section>
         <!-- Fim Tabela Usuários -->
+
+        <!-- Modal Novo Paciente -->
+        <div id="modalNovoPaciente" class="modal">
+            <div class="modal-conteudo">
+                <i class="fa-solid fa-arrow-left fechar" id="fechar-modal"></i>
+                <i class="fa-solid fa-arrow-left fechar" id="voltar-cpf" style="display: none;"></i>
+
+                <!-- Formulário de CPF -->
+                <form id="form-triagem">
+                    <h2 class="title-form">Adicionar nova consulta</h2>
+
+                    <div class="campo-paciente">
+                        <div class="div-info-user">
+                            <p class="time-entrada">Entrada: ~</p>
+                            <p class="posicao">Posição: ~</p>
+                        </div>
+
+                        <label for="nome-paciente" class="esp cor-blue-dark tamfont">Nome do paciente</label>
+
+                        <select name="paciente-triagem" id="paciente-triagem"></select>
+                    </div>
+
+                    <button type="submit" class="btn-next">Iniciar triagem <i class="fa-solid fa-arrow-right"></i></button>
+                </form>
+
+            </div>
+ 
+            <div class="div-message" id="div-msg-modal"></div>
+        </div>
+
+        <div class="div-message" id="div-msg"></div>
+
     </main>
 
     <!-- Footer Padrão -->
