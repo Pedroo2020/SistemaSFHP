@@ -155,7 +155,7 @@ botaoNovoPaciente.click(async () => {
     const consultas = await carregarConsultas(true);
 
     // Cria as options de consulta
-    consultas.map((consulta) => {
+    consultas.map((consulta, index) => {
         // Cria o objeto
         const option = $('<option></option>')
             .val(consulta.cpf)
@@ -165,6 +165,13 @@ botaoNovoPaciente.click(async () => {
 
         // Adiciona ao select
         selectPaciente.append(option);
+
+        // Altera os dados da entrada e posição caso seja index 0
+        if (index === 0) {
+            // Atualiza o horário de entrada
+            $('.time-entrada').text(`Entrada: ${consulta.data_entrada}`);
+            $('.posicao').text(`Posição: ${consulta.posicao}°`)
+        }
     })
 
     // Desabilita o scroll

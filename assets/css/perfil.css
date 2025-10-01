@@ -80,6 +80,21 @@ main {
     border-radius: 10px
 }
 
+.pagina {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    & span {
+        font-weight: 600;
+    }
+
+    & p {
+        font-weight: 200;
+    }
+}
+
 .icon-logo {
     width: 35px;
     height: 35px;
