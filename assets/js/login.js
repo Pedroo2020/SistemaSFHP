@@ -8,6 +8,24 @@ import alertMsg from './alertMsg.js';
 // Ao carregar a página, adiciona as formatações ao input
 $(document).ready(() => {
     formatCPF('#input-cpf');
+
+    const logout = localStorage.getItem('logout');
+
+    if (logout) {
+        // Remove a mensagema
+        localStorage.removeItem('logout');
+        // Exibe a mensagem
+        alertMsg(logout, 'success', '.div-message');   
+    }
+
+    const msgLogout = localStorage.getItem('msg-logout');
+    
+    if (msgLogout) {
+        // Remove a mensagema
+        localStorage.removeItem('msg-logout');
+        // Exibe a mensagem
+        alertMsg(msgLogout, 'error', '.div-message');   
+    }
 })
 
 // Show password

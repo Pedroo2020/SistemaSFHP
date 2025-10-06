@@ -92,6 +92,9 @@ $('.sair').click(() => {
     // Limpa o local storage
     localStorage.clear();
 
+    // Salva a mensagem
+    localStorage.setItem('logout', 'Logout realizado com sucesso.');
+
     // Redireciona para login
     window.location.href = 'index.html';
 })

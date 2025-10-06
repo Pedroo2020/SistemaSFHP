@@ -197,6 +197,7 @@ main {
     border-radius: 10px;
     width: 50%;
     padding: 30px;
+    border: 1px solid var(--gray-300);
 }
 
 .campo-grupo {
@@ -242,6 +243,7 @@ main {
 
 .dado-multilinha {
     height: 232px;
+    resize: none;
 }
 
 #classificacao-risco option {
@@ -398,6 +400,10 @@ main {
 }
 
 @media (max-width: 716px) {
+    
+    .header {
+        padding: 20px;
+    }
 
     .campos-linha {
         flex-direction: column;

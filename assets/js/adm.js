@@ -109,7 +109,6 @@ function carregarUsuarios() {
     })
 }
 
-
 // Função para adicionar os dados a tabela
 function addUser(user) {
     // Lista de cargos

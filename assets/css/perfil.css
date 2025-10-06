@@ -437,7 +437,6 @@ table {
     border-radius: 50px;
     font-weight: bold;
     font-size: 0.9rem;
-    min-width: 190px;
     text-align: center;
     display: flex;
     align-items: center;
@@ -539,6 +538,10 @@ thead th {
     text-align: center;
 }
 
+.div-icon {
+    position: relative;
+}
+
 .icons-blocos2 {
     font-size: 31px;
 }
@@ -633,6 +636,21 @@ thead th {
     }
 }
 
+.div-action {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 30px;
+    border-radius: 20px;
+    width: 50px;
+    background-color: var(--gray-200);
+    border: 1px solid var(--gray-300);
+
+    &:hover {
+        background-color: var(--gray-200);
+    }
+}
+
 .consultas-not-found {
     text-align: center;
     color: var(--gray-dark);
@@ -699,6 +717,41 @@ thead th {
     }
 }
 
+@media (max-width: 768px) {
+
+    .header {
+        padding: 10px;
+    }
+
+    .container-painel {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 20px;
+    }
+
+    .container-btn {
+        width: 100%;
+        align-items: flex-start;
+
+        & .a {
+            width: 100% !important;
+        }
+
+        & button {
+            width: 50%;
+        }
+    }
+
+    .bloco {
+        min-width: 212px;
+        gap: 13px;
+    }
+    
+    .modal-conteudo {
+        width: 90%;
+        padding: 20px;
+    }
+}
 
 @media (max-width: 670px) {
 
@@ -736,38 +789,6 @@ thead th {
         & .info-bloco {
             font-size: 1.2rem;
         }
-    }
-}
-
-@media (max-width: 768px) {
-
-    .container-painel {
-        flex-direction: column;
-        align-items: flex-start !important;
-        gap: 20px;
-    }
-
-    .container-btn {
-        width: 100%;
-        align-items: flex-start;
-
-        & .a {
-            width: 100% !important;
-        }
-
-        & button {
-            width: 50%;
-        }
-    }
-
-    .bloco {
-        min-width: 212px;
-        gap: 13px;
-    }
-    
-    .modal-conteudo {
-        width: 90%;
-        padding: 20px;
     }
 }
 

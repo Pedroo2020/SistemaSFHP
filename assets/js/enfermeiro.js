@@ -76,7 +76,7 @@ function carregarConsultas(getConsultas, situacao) {
                 $('#table-consultas').empty();
 
                 if (consultas.length > 0) {
-                    consultas.map((consulta) => addConsulta(consulta));
+                    consultas.map((consulta) => addConsulta(consulta, situacao));
                 } else {
                     const consultasNotFound = $('<tr></tr>')
                         .append($('<td></td>')
@@ -100,8 +100,21 @@ function carregarConsultas(getConsultas, situacao) {
                 $('.last-att').text(`Última atualização: ${dataFormatada}`);
                 resolve(); // retorna vazio só pra indicar que terminou
             },
-            error: (err) => {
-                console.log(err);
+            error: (err) => { 
+                // Logout true     
+                if (err.responseJSON.logout) {
+                    // Limpa o local storage
+                    localStorage.clear();
+                    // Salva a mensagem 
+                    localStorage.setItem('msg-logout', err.responseJSON.error);
+                    // Redireciona para login
+                    return window.location.href = 'index.html';
+                }
+
+                // Exibe a mensagem de erro
+                alertMsg(err.responseJSON.error, 'error', '#div-msg');
+                
+                // Retorna error
                 reject(err);
             }
         });
@@ -109,7 +122,7 @@ function carregarConsultas(getConsultas, situacao) {
 }
 
 // Função para adicionar os dados a tabela
-function addConsulta(consulta) {
+function addConsulta(consulta, situacao) {
     // tbody
     const $tbody = $('#table-consultas');
 
@@ -142,10 +155,19 @@ function addConsulta(consulta) {
         .addClass('td-time')
 
     // Ícone de ação
-    const iconeMoreDetails = $('<i></i>').addClass('fa-solid fa-ellipsis icon-more-details');
+    const iconeMoreDetails = $('<i></i>')
+                                    .addClass('fa-solid fa-ellipsis icon-more-details');
+    
+    // Div de ação
+    const divAction = $('<div></div>')
+                            .addClass('div-action');
+    
     const iconAcao = $('<td></td>')
         .append(iconeMoreDetails)
+        .append(divAction)
         .addClass('td-time')
+        .addClass('div-icon');
+
 
     // Adiciona os elementos ao tr
     $tr
@@ -286,7 +308,18 @@ $('#form-triagem').on('submit', (e) => {
             return window.location.href = newUrl;
         },
         error: (err) => {
-            console.log(err)
+            // Logout true     
+            if (err.responseJSON.logout) {
+                // Limpa o local storage
+                localStorage.clear();
+                // Salva a mensagem 
+                localStorage.setItem('msg-logout', err.responseJSON.error);
+                // Redireciona para login
+                return window.location.href = 'index.html';
+            }
+
+            // Exibe a mensagem de erro
+            alertMsg(err.responseJSON.error, 'error', '#div-msg-modal');  
         }
     })
 })

@@ -81,6 +81,8 @@ $(document).ready(() => {
         error: (err) => {
             // Limpa o token
             localStorage.clear();
+            // Define a mensagem de logout
+            localStorage.setItem('msg-logout', err.responseJSON.error);
             // Retorna para login
             return window.location.href = "index.html";
         }
@@ -105,6 +107,9 @@ $('.sair').click(() => {
 
     // Autentica com o token
     socket.emit("logout", { token });
+    
+    // Salva a mensagem
+    localStorage.setItem('logout', 'Logout realizado com sucesso.');
 
     // Limpa o local storage
     localStorage.clear();
@@ -184,6 +189,16 @@ $('.formulario-container').on('submit', function (e) {
             return window.location.href = 'enfermeiro-perfil.html';
         },
         error: (err) => {
+            // Logout true     
+            if (err.responseJSON.logout) {
+                // Limpa o local storage
+                localStorage.clear();
+                // Salva a mensagem 
+                localStorage.setItem('msg-logout', err.responseJSON.error);
+                // Redireciona para login
+                return window.location.href = 'index.html';
+            }
+
             // Exibe a mensagem de erro
             alertMsg(err.responseJSON.error, 'error', '.div-message');  
         }
