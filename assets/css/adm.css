@@ -148,7 +148,7 @@ form .campo label {
 }
 
 form .campo input {
-    padding: 10px;
+    width: 100%;
 }
 
 .tamfont {
@@ -172,7 +172,6 @@ form .campo input {
 .camp-lad select,
 .camp-lad input {
     width: 100%;
-    padding: 8px;
     border-radius: 4px;
     border: 1px solid #ccc;
 }
@@ -385,8 +384,14 @@ form .campo input {
 
 }
 
-
-
-
-
 /* Fim do Responsivo Modal Adicionar Usuário */
+
+/* Responsivo Modal Editar Usuários */
+
+@media (max-width: 320px) {
+
+
+}
+
+
+/* Fim do Responsivo Modal Editar Usuários */

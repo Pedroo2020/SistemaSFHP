@@ -53,7 +53,7 @@ function carregarUsuarios() {
             Authorization: `Bearer ${localStorage.getItem('token')}`
         },
         success: (res) => {
-            
+
             // Obtém os usuários
             const usuarios = res.users;
 
@@ -102,7 +102,7 @@ function carregarUsuarios() {
                 // Redireciona para login
                 return window.location.href = 'index.html';
             }
-            
+
             // Exibe a mensagem
             alertMsg(err.responseJSON.error, 'error', '#div-msg-modal');
         }
@@ -150,8 +150,8 @@ function addUser(user) {
 
     // Ícone de ação
     const iconeMoreDetails = $('<i></i>')
-                                .addClass('fa-solid fa-ellipsis icon-more-details')
-                                .attr('data-cpf', user.cpf);
+        .addClass('fa-solid fa-ellipsis icon-more-details')
+        .attr('data-cpf', user.cpf);
 
     const iconAcao = $('<td></td>')
         .append(iconeMoreDetails)
@@ -173,7 +173,7 @@ function addUser(user) {
 // Puxar dados da API para montar a tabela
 $(document).ready(function () {
     carregarUsuarios();
-    
+
     InativarUser();
 });
 
@@ -214,7 +214,7 @@ $(document).on("click", ".icon-more-details", function () {
             // Preenche com as formatações
             $("#cpf-editar").val(formatarNumeroCPF(user.cpf));
             $("#telefone-editar").val(formatarNumeroTelefone(user.telefone));
-            
+
             // Formata o input de cpf e telefone
             formatCPF($("#cpf-editar"), user.cpf)
             formatTelefone($('#telefone-editar'), user.telefone);
@@ -293,7 +293,7 @@ $(document).on("click", ".icon-more-details", function () {
                 // Redireciona para login
                 return window.location.href = 'index.html';
             }
-            
+
             // Exibe a mensagem
             alertMsg("Erro ao carregar usuário.", "error", "#msg-home");
         }
@@ -306,14 +306,14 @@ fecharModalEditarUsuario.click(() => {
     abledScroll();
 });
 
-// Mudar inputs dependendo do tipo usuário do modal de adicionar usuário
-$(document).ready(function () {
-    const tipoUsuario = $("#tipo-user-cadastro");
 
-    const campoSus = $(".campo-sus-cadastro");
-    const campoSenha = $(".campo-senha-cadastro");
-    const campoCRM = $(".campo-extra-crm");
-    const campoCOREN = $(".campo-extra-coren");
+function alteraSelect(itens) {
+    const tipoUsuario = itens.tipoUsuario
+
+    const campoSus = itens.campoSus
+    const campoSenha = itens.campoSenha
+    const campoCRM = itens.campoCRM
+    const campoCOREN = itens.campoCOREN
 
     tipoUsuario.on("change", function () {
         const tipo = $(this).val();
@@ -326,19 +326,34 @@ $(document).ready(function () {
 
         if (tipo === "Paciente") {
             campoSus.show();
-        }
-        else if (tipo === "Administrador" || tipo === "Recepcionista") {
-            campoSenha.show();
+            $(".camp-lad-cpf").css('width', '100%')
         }
         else if (tipo === "Enfermeiro") {
-            campoSenha.show();
             campoCOREN.show();
+             $(".camp-lad-cpf").css('width', '100%')
         }
         else if (tipo === "Medico") {
-            campoSenha.show();
             campoCRM.show();
+             $(".camp-lad-cpf").css('width', '100%')
+        } else {
+            campoSenha.show();
+            $(".camp-lad-cpf").css('width', '50%')
         }
     });
+}
+
+
+// Mudar inputs dependendo do tipo usuário do modal de adicionar usuário
+$(document).ready(function () {
+    const tipoUsuario = $("#tipo-user-cadastro");
+
+    alteraSelect({
+        tipoUsuario: $("#tipo-user-cadastro"),
+        campoSus: $(".campo-sus-cadastro"),
+        campoSenha: $(".campo-senha-cadastro"),
+        campoCRM: $(".campo-extra-crm"),
+        campoCOREN: $(".campo-extra-coren")
+    })
 
     // Executa ao abrir o modal
     tipoUsuario.trigger("change");
@@ -348,35 +363,13 @@ $(document).ready(function () {
 $(document).ready(function () {
     const tipoUsuarioEditar = $("#tipo-user-editar");
 
-    const campoSusEditar = $(".campo-sus-editar");
-    const campoSenhaEditar = $(".campo-senha-editar");
-    const campoExtraCRMEditar = $(".campo-extra-crm-editar");
-    const campoExtraCorenEditar = $(".campo-extra-coren-editar");
-
-    tipoUsuarioEditar.on("change", function () {
-        const tipo = $(this).val();
-
-        // Esconde tudo inicialmente
-        campoSusEditar.hide();
-        campoSenhaEditar.hide();
-        campoExtraCRMEditar.hide();
-        campoExtraCorenEditar.hide();
-
-        if (tipo === "Paciente") {
-            campoSusEditar.show();
-        }
-        else if (tipo === "Administrador" || tipo === "Recepcionista") {
-            campoSenhaEditar.show();
-        }
-        else if (tipo === "Enfermeiro") {
-            campoSenhaEditar.show();
-            campoExtraCorenEditar.show();
-        }
-        else if (tipo === "Medico") {
-            campoSenhaEditar.show();
-            campoExtraCRMEditar.show();
-        }
-    });
+    alteraSelect({
+        tipoUsuario: $("#tipo-user-editar"),
+        campoSus: $(".campo-sus-editar"),
+        campoSenha: $(".campo-senha-editar"),
+        campoCRM: $(".campo-extra-crm-editar"),
+        campoCOREN: $(".campo-extra-coren-editar")
+    })
 
     tipoUsuarioEditar.trigger("change");
 });
@@ -468,7 +461,7 @@ $(document).ready(function () {
                     // Redireciona para login
                     return window.location.href = 'index.html';
                 }
-                
+
                 // Exibe a mensagem
                 alertMsg(err.responseJSON.error, "error", "#msg-cadastro");
             }
@@ -541,7 +534,7 @@ $("#form-editar").on("submit", function (e) {
                 // Redireciona para login
                 return window.location.href = 'index.html';
             }
-            
+
             // Exibe a mensagem
             alertMsg(err.responseJSON?.error || "Erro ao editar usuário.", "error", "#msg-editar");
         }
@@ -565,25 +558,25 @@ function InativarUser() {
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem('token')}`,
-                "Content-Type": "Application/json" 
+                "Content-Type": "Application/json"
             },
-            data: JSON.stringify({cpf}),
+            data: JSON.stringify({ cpf }),
             success: (res) => {
                 // Reseta o form
                 $("#form-editar")[0].reset();
-                
+
                 // Oculta o form
                 $("#modalEditarUsuario").hide();
-                
+
                 // Habilita o scroll
                 $("body").css("overflow", "auto");
-                
+
                 // Exibe a mensagem
                 alertMsg(res.success, "success", "#msg-home");
 
                 // Recarrega a lista de usuários
                 carregarUsuarios();
-            }, 
+            },
             error: (err) => {
                 // Logout true     
                 if (err.responseJSON.logout) {
@@ -594,7 +587,7 @@ function InativarUser() {
                     // Redireciona para login
                     return window.location.href = 'index.html';
                 }
-                
+
                 // Exibe a mensagem
                 alertMsg(err.responseJSON.error, "error", "#msg-editar");
             }
@@ -602,3 +595,4 @@ function InativarUser() {
 
     })
 }
+

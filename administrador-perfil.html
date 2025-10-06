@@ -123,6 +123,12 @@
                             <input type="text" placeholder="Buscar pacientes...">
                         </div>
                     </div>
+
+                    <button class="btn-add-user">
+                        <i class="fa-solid fa-user-plus" style="color: #ffffff;"></i>
+
+                        Adicionar Usuário
+                    </button>
                 </div>
 
                 <div class="div-table">
@@ -259,30 +265,14 @@
                     </div>
 
                     <div class="campo">
-                        <label class="cor-blue-dark tamfont">CPF</label>
-                        <input type="text" id="cpf-editar" name="cpf-editar" required>
-                    </div>
-
-                    <div class="campo">
                         <label class="cor-blue-dark tamfont">Nome</label>
                         <input type="text" id="nome-editar" name="nome-editar" required>
                     </div>
 
+
                     <div class="campo">
                         <label class="cor-blue-dark tamfont">E-mail</label>
                         <input type="email" id="email-editar" name="email-editar" required>
-                    </div>
-
-                    <!-- Campo SUS -->
-                    <div class="campo campo-sus-editar">
-                        <label class="cor-blue-dark tamfont">Número do SUS</label>
-                        <input type="text" id="sus-editar" name="sus-editar" placeholder="Digite o número do SUS">
-                    </div>
-
-                    <!-- Campo SENHA -->
-                    <div class="campo campo-senha-editar">
-                        <label class="cor-blue-dark tamfont">Senha</label>
-                        <input type="password" id="senha-editar" name="senha-editar" placeholder="Digite a Senha">
                     </div>
 
                     <!-- CRM -->
@@ -302,7 +292,19 @@
                         <input type="tel" id="telefone-editar" name="telefone-editar" placeholder="(00) 0000-0000">
                     </div>
 
+                    <!-- Campo SUS -->
+                    <div class="campo campo-sus-editar">
+                        <label class="cor-blue-dark tamfont">Número do SUS</label>
+                        <input type="text" id="sus-editar" name="sus-editar" placeholder="Digite o número do SUS">
+                    </div>
+
                     <div class="alin-lad">
+
+                        <div class="camp-lad ">
+                            <label class="cor-blue-dark tamfont">Nascimento</label>
+                            <input type="date" id="nascimento-editar" name="nascimento-editar">
+                        </div>
+
                         <div class="camp-lad">
                             <label class="cor-blue-dark tamfont">Sexo</label>
                             <select id="sexo-editar" name="sexo-editar">
@@ -311,10 +313,21 @@
                             </select>
                         </div>
 
-                        <div class="camp-lad">
-                            <label class="cor-blue-dark tamfont">Nascimento</label>
-                            <input type="date" id="nascimento-editar" name="nascimento-editar">
+                    </div>
+
+                    <div class="alin-lad">
+
+                        <div class="camp-lad camp-lad-cpf">
+                            <label class="cor-blue-dark tamfont">CPF</label>
+                            <input type="text" id="cpf-editar" name="cpf-editar" required>
                         </div>
+
+                        <!-- Campo SENHA -->
+                        <div class="camp-lad campo-senha-editar">
+                            <label class="cor-blue-dark tamfont">Senha</label>
+                            <input type="password" id="senha-editar" name="senha-editar" placeholder="Digite a Senha">
+                        </div>
+
                     </div>
 
                     <div class="div-botoes">
