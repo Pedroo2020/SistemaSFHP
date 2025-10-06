@@ -38,6 +38,11 @@
     /* Cores adicionais */
     --blue-hover: #1876ac;
     --gray-dark: #747474;
+    --red-fundo: #AF111135;
+    --orange-fundo: #fe660035;
+    --yellow-fundo: #ffb30035;
+    --green-fundo: #00742B35;
+    --blue-fundo: #06047835;
 }
 
 body {
@@ -229,30 +234,35 @@ main {
 .leve {
     color: var(--blue-protocol);
     border-color: var(--blue-protocol);
+    background-color: var(--blue-fundo);
 }
 
 /* Pouco urgente (Verde) */
 .pouco-urgente {
     color: var(--green-protocol);
     border-color: var(--green-protocol);
+    background-color: var(--green-fundo);
 }
 
 /* Urgente (Amarelo) */
 .urgente {
     color: var(--yellow-protocol);
     border-color: var(--yellow-protocol);
+    background-color: var(--yellow-fundo);
 }
 
 /* Muito urgente (Laranja) */
 .muito-urgente {
     color: var(--orange-protocol);
     border-color: var(--orange-protocol);
+    background-color: var(--orange-fundo);
 }
 
 /* Risco de vida (Vermelho) */
 .risco-vida {
     color: var(--red-protocol);
     border-color: var(--red-protocol);
+    background-color: var(--red-fundo);
 }
 
 .btn-next {
@@ -573,7 +583,7 @@ thead th {
 }
 
 .div-message {
-    position: absolute;
+    position: fixed;
     top: 40px;
     left: 50%;
     transform: translateX(-50%);
@@ -583,7 +593,6 @@ thead th {
     justify-content: center;
     gap: 10px;
     z-index: 999;
-    width: 100%;
 
     .msg {
         display: flex;

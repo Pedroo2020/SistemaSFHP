@@ -318,7 +318,7 @@ main {
 }
 
 .div-message {
-    position: absolute;
+    position: fixed;
     top: 40px;
     left: 50%;
     transform: translateX(-50%);
@@ -328,7 +328,6 @@ main {
     justify-content: center;
     gap: 10px;
     z-index: 999;
-    width: 100%;
 
     .msg {
         display: flex;
@@ -352,7 +351,22 @@ main {
         }
     }
 
-}   
+}
+
+@keyframes showMsg {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
 
 @keyframes showMsg {
     0% {

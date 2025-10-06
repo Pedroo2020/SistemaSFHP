@@ -90,8 +90,8 @@
                 </div>
                 
                 <div class="campo-grupo last">
-                    <label>Queixa Principal:</label>
-                    <textarea class="input-triagem dado-multilinha" placeholder="Descreva os sintomas e as queixas do paciente"></textarea>
+                    <label for="queixa">Queixa Principal:</label>
+                    <textarea class="input-triagem dado-multilinha" placeholder="Descreva os sintomas e as queixas do paciente" id="queixa" name="queixa"></textarea>
                 </div>
             </div>
 
@@ -101,28 +101,28 @@
                 <div class="campos-linha">
                     <div class="campo-grupo">
                         <label for="temperatura">Temperatura (°C):</label>
-                        <input class="input-triagem" type="text" id="temperatura" name="temperatura">
+                        <input class="input-triagem" type="text" id="temperatura" name="temperatura" placeholder="Ex: 38.7">
                     </div>
                     <div class="campo-grupo">
-                        <label for="pressao-arterial">Pressão Arterial (mmHg):</label>
-                        <input class="input-triagem" type="text" id="pressao-arterial" name="pressao-arterial">
+                        <label for="pressao">Pressão Arterial (mmHg):</label>
+                        <input class="input-triagem" type="text" id="pressao" name="pressao" placeholder="Ex: 120/80" maxlength="7">
                     </div>
                 </div>
                 
                 <div class="campos-linha">
                     <div class="campo-grupo">
-                        <label for="frequencia-cardiaca">Frequência Cardíaca (bpm):</label>
-                        <input class="input-triagem" type="text" id="frequencia-cardiaca" name="frequencia-cardiaca">
+                        <label for="frequencia_cardiaca">Frequência Cardíaca (bpm):</label>
+                        <input class="input-triagem" type="text" id="frequencia_cardiaca" name="frequencia_cardiaca" placeholder="Ex: 72" maxlength="3">
                     </div>
                     <div class="campo-grupo">
-                        <label for="saturacao-o2">Saturação O2 (%):</label>
-                        <input class="input-triagem" type="text" id="saturacao-o2" name="saturacao-o2">
+                        <label for="saturacao">Saturação O2 (%):</label>
+                        <input class="input-triagem" type="text" id="saturacao" name="saturacao" placeholder="Ex: 98" maxlength="3">
                     </div>
                 </div>
 
                 <div class="campo-grupo">
-                    <label>Nível de dor (0 a 10):</label>
-                    <div class="niveis-dor">
+                    <label for="nivel_dor">Nível de dor (1 a 10):</label>
+                    <div class="niveis-dor" name="nivel_dor" id="nivel_dor">
                         <input type="radio" id="dor1" name="nivel-dor" value="1" checked><label for="dor1">1</label>
                         <input type="radio" id="dor2" name="nivel-dor" value="2"><label for="dor2">2</label>
                         <input type="radio" id="dor3" name="nivel-dor" value="3"><label for="dor3">3</label>
@@ -138,17 +138,17 @@
 
                 <div class="campo-grupo">
                     <label for="alergias">Alergias:</label>
-                    <input class="input-triagem" type="text" id="alergias" name="alergias" placeholder="Alergias conhecidas">
+                    <input class="input-triagem" type="text" id="alergia" name="alergia" placeholder="Alergias conhecidas">
                 </div>
 
                 <div class="campo-grupo">
-                    <label for="medicamentos">Medicamentos em Uso:</label>
-                    <input class="input-triagem" type="text" id="medicamentos" name="medicamentos" placeholder="Medicamentos que o paciente utiliza">
+                    <label for="medicamento_uso">Medicamentos em Uso:</label>
+                    <input class="input-triagem" type="text" id="medicamento_uso" name="medicamento_uso" placeholder="Medicamentos que o paciente utiliza">
                 </div>
 
                 <div class="campo-grupo last">
-                    <label for="classificacao-risco">Classificação de Risco:</label>
-                    <select class="input-triagem" id="classificacao-risco" name="classificacao-risco">
+                    <label for="classificacao_risco">Classificação de Risco:</label>
+                    <select class="input-triagem" id="classificacao_risco" name="classificacao_risco">
                         <option value="1">Azul - Leve</option>
                         <option value="2">Verde - Pouco urgente</option>
                         <option value="3">Amarelo - Urgente</option>
@@ -163,6 +163,8 @@
             Enviar
             <i class="fa-solid fa-arrow-right icons-blocos2" style="color: #ffffff;"></i>
         </button>
+
+        <div class="div-message"></div>
     </main>
 
     <!-- Footer Padrão -->
