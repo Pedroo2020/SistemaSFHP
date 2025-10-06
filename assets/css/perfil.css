@@ -191,6 +191,7 @@ main {
     font-weight: bold;
     cursor: pointer;
     transition: 0.1s;
+
     &:hover {
         background-color: var(--gray-200);
     }
@@ -209,6 +210,7 @@ main {
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }
@@ -282,6 +284,7 @@ main {
     box-shadow: 0 4px 6px rgba(49, 52, 54, 0.321);
     cursor: pointer;
     transition: 0.1s;
+
     &:hover {
         background-color: var(--blue-hover);
     }
@@ -305,6 +308,7 @@ main {
     font-weight: bold;
     cursor: pointer;
     transition: 0.1s;
+
     &:hover {
         background-color: var(--blue-dark);
     }
@@ -333,7 +337,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    
+
     & .icon-alert {
         border: 3.5px solid var(--red-dark);
         border-radius: 50%;
@@ -538,10 +542,6 @@ thead th {
     text-align: center;
 }
 
-.div-icon {
-    position: relative;
-}
-
 .icons-blocos2 {
     font-size: 31px;
 }
@@ -614,40 +614,58 @@ thead th {
             background-color: var(--green-base);
         }
 
-        & i, p {
+        & i,
+        p {
             color: var(--white);
         }
     }
 
-}   
+}
 
 @keyframes showMsg {
     0% {
         opacity: 0;
     }
+
     10% {
         opacity: 1;
     }
+
     90% {
         opacity: 1;
     }
+
     100% {
         opacity: 0;
     }
 }
 
-.div-action {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    height: 30px;
-    border-radius: 20px;
-    width: 50px;
-    background-color: var(--gray-200);
-    border: 1px solid var(--gray-300);
+.menu-global {
+    position: fixed;
+    /* importante: usar fixed para não ser cortado */
+    display: none;
+    z-index: 9999;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    padding: 6px 0;
+    font-family: inherit;
 
-    &:hover {
-        background-color: var(--gray-200);
+    & .item {
+        display: block;
+        width: 100%;
+        padding: 10px 14px;
+        text-align: left;
+        border: 0;
+        background: none;
+        cursor: pointer;
+        font-size: 14px;
+        transition: 0.1s;
+
+        &:hover {
+            background: var(--gray-200);
+        }
     }
 }
 
@@ -746,7 +764,7 @@ thead th {
         min-width: 212px;
         gap: 13px;
     }
-    
+
     .modal-conteudo {
         width: 90%;
         padding: 20px;
@@ -843,14 +861,16 @@ thead th {
         }
     }
 
-    td, th {
+    td,
+    th {
         font-size: 0.8rem;
     }
 
-    
+
     .header {
         padding: 30px;
     }
+
     .a {
         display: flex;
         flex-direction: column;

@@ -7,6 +7,10 @@ $(document).ready(async () => {
 
     // Carrega as consultas na fase de entrada
     await carregarConsultas(false, 1);
+    
+    // Evento click
+    addMoreDetailsMenu('#menu-entrada', '.details-entrada');
+    addMoreDetailsMenu('#menu-triagem', '.details-triagem');
 
     // Obtém a mensagem
     const msg = localStorage.getItem('triagem-cadastrada');
@@ -24,7 +28,7 @@ $(document).ready(async () => {
 $('#refresh-consultas').on('click', async () => {
     // Adiciona a animação de girar ao botão
     $('#refresh-icon').addClass('refreshing');
-    
+
     // Recarregar consultas
     await recarregarConsultas();
 
@@ -63,7 +67,7 @@ function carregarConsultas(getConsultas, situacao) {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             },
-            success: (res) => {
+            success: async (res) => {
                 const consultas = res.consultas;
 
                 // Retorna a lista de consultas
@@ -76,7 +80,7 @@ function carregarConsultas(getConsultas, situacao) {
                 $('#table-consultas').empty();
 
                 if (consultas.length > 0) {
-                    consultas.map((consulta) => addConsulta(consulta, situacao));
+                    await consultas.map((consulta) => addConsulta(consulta, situacao));
                 } else {
                     const consultasNotFound = $('<tr></tr>')
                         .append($('<td></td>')
@@ -100,7 +104,7 @@ function carregarConsultas(getConsultas, situacao) {
                 $('.last-att').text(`Última atualização: ${dataFormatada}`);
                 resolve(); // retorna vazio só pra indicar que terminou
             },
-            error: (err) => { 
+            error: (err) => {
                 // Logout true     
                 if (err.responseJSON.logout) {
                     // Limpa o local storage
@@ -113,7 +117,7 @@ function carregarConsultas(getConsultas, situacao) {
 
                 // Exibe a mensagem de erro
                 alertMsg(err.responseJSON.error, 'error', '#div-msg');
-                
+
                 // Retorna error
                 reject(err);
             }
@@ -156,18 +160,13 @@ function addConsulta(consulta, situacao) {
 
     // Ícone de ação
     const iconeMoreDetails = $('<i></i>')
-                                    .addClass('fa-solid fa-ellipsis icon-more-details');
-    
-    // Div de ação
-    const divAction = $('<div></div>')
-                            .addClass('div-action');
-    
+        .addClass('fa-solid fa-ellipsis icon-more-details');
+
     const iconAcao = $('<td></td>')
         .append(iconeMoreDetails)
-        .append(divAction)
+        .attr('cpf', consulta.cpf)
         .addClass('td-time')
-        .addClass('div-icon');
-
+        .addClass(situacao == 1 ? 'details-entrada' : situacao == 2 ? 'details-triagem' : '') // muda a class conforme a situação;
 
     // Adiciona os elementos ao tr
     $tr
@@ -182,6 +181,93 @@ function addConsulta(consulta, situacao) {
     // Adiciona ao tbody
     $tbody.append($tr);
 }
+
+// Função para adicionar o menu de mais detalhes
+function addMoreDetailsMenu(menu, classIcon) {
+
+    const $menu = $(menu);
+
+    $(document).on('click', classIcon, function (e) {
+        e.stopPropagation(); // evita fechar pelo listener do document
+
+        if (menu === '#menu-triagem') {
+            $('#cpf-triagem').val($(this).attr('cpf'));
+        } else if (menu === '#menu-entrada') {
+            $('#cpf-entrada').val($(this).attr('cpf'));
+        }
+
+        const btn = this;
+        const rect = btn.getBoundingClientRect(); // posição relativa à viewport
+
+        // mostra invisível para poder medir dimensões (não quebra o layout)
+        $menu.css({ display: 'block', visibility: 'hidden' });
+
+        const menuW = $menu.outerWidth();
+        const menuH = $menu.outerHeight() - 13;
+        const vh = $(window).height();
+
+        // tenta alinhar a borda direita do menu com a borda direita do botão
+        let left = rect.right - 135;
+        // se sair muito pra esquerda, alinha à esquerda do botão
+        if (left < 8) left = rect.left;
+
+        // posiciona abaixo por padrão
+        let top = rect.bottom - 13;
+
+        // se não couber embaixo, abre acima
+        if (top + menuH > vh - 8) {
+            top = rect.top - menuH;
+            if (top < 8) top = 8;
+        }
+
+        // aplica posição (position: fixed usa coords da viewport)
+        $menu.css({
+            top: Math.round(top) + 'px',
+            left: Math.round(left) + 'px',
+            visibility: 'visible'
+        });
+
+        // toggle seguro (fecha se já aberto pelo mesmo botão)
+        if ($menu.is(':visible') && $menu.data('opened-by') === btn) {
+            $menu.hide().data('opened-by', null).attr('aria-hidden', 'true');
+        } else {
+            $menu.show().data('opened-by', btn).attr('aria-hidden', 'false');
+        }
+    });
+
+    // fecha quando clicar fora
+    $(document).on('click', function () {
+        $menu.hide().data('opened-by', null).attr('aria-hidden', 'true');
+    });
+
+    // fecha também ao redimensionar/scroll para evitar menu "solto"
+    $(window).on('resize scroll', function () {
+        $menu.hide().data('opened-by', null).attr('aria-hidden', 'true');
+    });
+
+    // tratar clique nas opções do menu
+    $(document).on('click', `${menu} .item`, function (e) {
+        e.stopPropagation();
+        const action = $(this).data('action');
+        $menu.hide().data('opened-by', null);
+
+        if (action === 'copy') {
+            // exemplo: copiar texto para clipboard
+            console.log('copiar link');
+        } else if (action === 'report') {
+            console.log('denunciar abuso');
+        }
+    });
+
+}
+
+// Ao clicar no botão chamar paciente
+$('#chamarPaciente').on('click', function () {
+    const cpf = $('#cpf-entrada').val();
+
+    // Inicia a triagem
+    startTriagem(cpf);
+})
 
 // Função para desabilitar o scroll
 function disabledScroll() {
@@ -216,7 +302,7 @@ botaoNovoPaciente.click(async () => {
         // Cria o objeto
         const option = $('<option></option>')
             .val(consulta.cpf)
-            .attr('entrada',consulta.data_entrada)
+            .attr('entrada', consulta.data_entrada)
             .attr('posicao', consulta.posicao)
             .text(consulta.nome);
 
@@ -276,6 +362,14 @@ $('#form-triagem').on('submit', (e) => {
     // Evita comportamento padrão
     e.preventDefault();
 
+    // Obtém os elementos option dentro do select
+    const cpfPaciente = selectPaciente.val();
+
+    // Inicia a triagems
+    startTriagem(cpfPaciente);  
+})
+
+function startTriagem(cpf) {
     // Obtém o token
     const token = localStorage.getItem('token');
 
@@ -286,9 +380,6 @@ $('#form-triagem').on('submit', (e) => {
         return window.location.href = "index.html";
     }
 
-    // Obtém os elementos option dentro do select
-    const cpfPaciente = selectPaciente.val();
-
     // Faz a requisição
     $.ajax({
         url: `${URL_API}/start_triagem`,
@@ -298,11 +389,11 @@ $('#form-triagem').on('submit', (e) => {
             'Authorization': `Bearer ${token}`
         },
         data: JSON.stringify({
-            cpf: cpfPaciente
+            cpf: cpf
         }),
         success: (res) => {
             // Cria a url passado CPF como parâmetro
-            let newUrl = `triagem.html?cpf=${encodeURIComponent(cpfPaciente)}`;
+            let newUrl = `triagem.html?cpf=${encodeURIComponent(cpf)}`;
 
             // Redireciona para triagem
             return window.location.href = newUrl;
@@ -319,10 +410,10 @@ $('#form-triagem').on('submit', (e) => {
             }
 
             // Exibe a mensagem de erro
-            alertMsg(err.responseJSON.error, 'error', '#div-msg-modal');  
+            alertMsg(err.responseJSON.error, 'error', '#div-msg-modal');
         }
     })
-})
+}
 
 // Filtro da consulta
 $('.filtro-consulta').each((_, element) => {
@@ -344,7 +435,7 @@ $('.filtro-consulta').each((_, element) => {
 
             // Obtém a situação do filtro
             const situacao = $item.attr('sit');
-            
+
             // Carrega as consultas
             carregarConsultas(false, situacao);
 
@@ -352,5 +443,5 @@ $('.filtro-consulta').each((_, element) => {
             return $item.addClass('active');
         })
     })
-    
+
 })

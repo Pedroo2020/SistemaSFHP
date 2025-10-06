@@ -77,16 +77,6 @@ formCPF.on('submit', ((e) => {
             Authorization: `Bearer ${localStorage.getItem('token')}`
         },
         success: (res) => {
-            // Logout true     
-            if (err.responseJSON.logout) {
-                // Limpa o local storage
-                localStorage.clear();
-                // Salva a mensagem 
-                localStorage.setItem('msg-logout', err.responseJSON.error);
-                // Redireciona para login
-                return window.location.href = 'index.html';
-            }
-            
             // Exibe mensagem de erro
             alertMsg('Usuário encontrado.', 'success', '#div-msg-modal');
 
