@@ -323,3 +323,70 @@ form .campo input {
 }
 
 /* Fim Modal Editar Usuário */
+
+/* Responsivo Modal Adicionar Usuário */
+
+@media (max-width: 768px) {
+    .fechar {
+        font-size: 1.1rem;
+        top: 12px;
+    }
+
+    .modal-conteudo {
+        padding: 15px;
+    }
+
+    .title-form {
+        font-size: 1.2rem;
+    }
+
+    form .campo label {
+        font-size: 0.8rem;
+    }
+}
+
+
+@media (max-width: 426px) {
+    .fechar {
+        font-size: 1.1rem;
+        top: 12px;
+    }
+
+    .modal-conteudo {
+        padding: 15px;
+    }
+
+    .title-form {
+        font-size: 1.2rem;
+    }
+
+    form .campo label {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 376px) {
+    .fechar {
+        font-size: 1.1rem;
+        top: 12px;
+    }
+
+    .modal-conteudo {
+        padding: 15px;
+    }
+
+    .title-form {
+        font-size: 1.2rem;
+    }
+
+    form .campo label {
+        font-size: 0.8rem;
+    }
+
+}
+
+
+
+
+
+/* Fim do Responsivo Modal Adicionar Usuário */

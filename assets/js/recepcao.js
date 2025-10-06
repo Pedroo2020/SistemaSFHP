@@ -77,6 +77,16 @@ formCPF.on('submit', ((e) => {
             Authorization: `Bearer ${localStorage.getItem('token')}`
         },
         success: (res) => {
+            // Logout true     
+            if (err.responseJSON.logout) {
+                // Limpa o local storage
+                localStorage.clear();
+                // Salva a mensagem 
+                localStorage.setItem('msg-logout', err.responseJSON.error);
+                // Redireciona para login
+                return window.location.href = 'index.html';
+            }
+            
             // Exibe mensagem de erro
             alertMsg('Usuário encontrado.', 'success', '#div-msg-modal');
 
@@ -105,8 +115,15 @@ formCPF.on('submit', ((e) => {
         },
         error: (err) => {
 
-            // Exibe mensagem de erro
-            alertMsg(err.responseJSON.error, 'error', '#div-msg-modal');
+            // Logout true     
+            if (err.responseJSON.logout) {
+                // Limpa o local storage
+                localStorage.clear();
+                // Salva a mensagem 
+                localStorage.setItem('msg-logout', err.responseJSON.error);
+                // Redireciona para login
+                return window.location.href = 'index.html';
+            }
 
             // Caso o CPF seja válido mas o usuário não seja encontrado
             if (err.responseJSON.userNotFound) {
@@ -121,6 +138,9 @@ formCPF.on('submit', ((e) => {
                 formCPF.hide();
                 formCadastro.css('display', 'flex');
             }
+            
+            // Exibe mensagem de erro
+            alertMsg(err.responseJSON.error, 'error', '#div-msg-modal');
 
         }
     })
@@ -176,6 +196,16 @@ formCadastro.on('submit', function (e) {
             formConsulta.css('display', 'flex');
         },
         error: (err) => {
+            // Logout true     
+            if (err.responseJSON.logout) {
+                // Limpa o local storage
+                localStorage.clear();
+                // Salva a mensagem 
+                localStorage.setItem('msg-logout', err.responseJSON.error);
+                // Redireciona para login
+                return window.location.href = 'index.html';
+            }
+
             // Exibe mensagem de erro
             alertMsg(err.responseJSON.error, 'error', '#div-msg-modal');
         }
@@ -218,6 +248,16 @@ formConsulta.on('submit', function (e) {
             alertMsg(res.success, 'success', '#div-msg');
         },
         error: (err) => {
+            // Logout true     
+            if (err.responseJSON.logout) {
+                // Limpa o local storage
+                localStorage.clear();
+                // Salva a mensagem 
+                localStorage.setItem('msg-logout', err.responseJSON.error);
+                // Redireciona para login
+                return window.location.href = 'index.html';
+            }
+
             // Exibe mensagem de erro
             alertMsg(err.responseJSON.error, 'error', '#div-msg-modal');
         }
@@ -316,6 +356,16 @@ function carregarConsultas(situacao) {
             $('.last-att').text(`Última atualização: ${dataFormatada}`);
         },
         error: (err) => {
+            // Logout true     
+            if (err.responseJSON.logout) {
+                // Limpa o local storage
+                localStorage.clear();
+                // Salva a mensagem 
+                localStorage.setItem('msg-logout', err.responseJSON.error);
+                // Redireciona para login
+                return window.location.href = 'index.html';
+            }
+
             // Exibe mensagem de erro
             alertMsg(err.responseJSON.error, 'error', '#div-msg-modal');
         }

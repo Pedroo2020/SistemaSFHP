@@ -93,7 +93,17 @@ function carregarUsuarios() {
             $('.last-att').text(`Última atualização: ${dataFormatada}`);
         },
         error: (err) => {
-            // Exibe mensagem de erro
+            // Logout true     
+            if (err.responseJSON.logout) {
+                // Limpa o local storage
+                localStorage.clear();
+                // Salva a mensagem 
+                localStorage.setItem('msg-logout', err.responseJSON.error);
+                // Redireciona para login
+                return window.location.href = 'index.html';
+            }
+            
+            // Exibe a mensagem
             alertMsg(err.responseJSON.error, 'error', '#div-msg-modal');
         }
     })
@@ -162,8 +172,10 @@ function addUser(user) {
 }
 
 // Puxar dados da API para montar a tabela
-$(document).ready(async function () {
-    await carregarUsuarios();
+$(document).ready(function () {
+    carregarUsuarios();
+    
+    InativarUser();
 });
 
 
@@ -273,7 +285,17 @@ $(document).on("click", ".icon-more-details", function () {
             $("body").css("overflow", "hidden");
         },
         error: function (err) {
-            console.log(err)
+            // Logout true     
+            if (err.responseJSON.logout) {
+                // Limpa o local storage
+                localStorage.clear();
+                // Salva a mensagem 
+                localStorage.setItem('msg-logout', err.responseJSON.error);
+                // Redireciona para login
+                return window.location.href = 'index.html';
+            }
+            
+            // Exibe a mensagem
             alertMsg("Erro ao carregar usuário.", "error", "#msg-home");
         }
     });
@@ -438,6 +460,17 @@ $(document).ready(function () {
 
             },
             error: function (err) {
+                // Logout true     
+                if (err.responseJSON.logout) {
+                    // Limpa o local storage
+                    localStorage.clear();
+                    // Salva a mensagem 
+                    localStorage.setItem('msg-logout', err.responseJSON.error);
+                    // Redireciona para login
+                    return window.location.href = 'index.html';
+                }
+                
+                // Exibe a mensagem
                 alertMsg(err.responseJSON.error, "error", "#msg-cadastro");
             }
         });
@@ -500,7 +533,73 @@ $("#form-editar").on("submit", function (e) {
             carregarUsuarios();
         },
         error: function (err) {
+            // Logout true     
+            if (err.responseJSON.logout) {
+                // Limpa o local storage
+                localStorage.clear();
+                // Salva a mensagem 
+                localStorage.setItem('msg-logout', err.responseJSON.error);
+                // Redireciona para login
+                return window.location.href = 'index.html';
+            }
+            
+            // Exibe a mensagem
             alertMsg(err.responseJSON?.error || "Erro ao editar usuário.", "error", "#msg-editar");
         }
     });
 });
+
+// Inativação de Usuário
+function InativarUser() {
+    const botaoExcluir = $(".btn-inativar-user")
+
+    botaoExcluir.click(() => {
+
+        const cpf = $('#old-cpf').val();
+
+        if (!cpf) {
+            return alertMsg('Erro inesperado. Tente novamente mais tarde.', 'error', '#msg-editar');
+        }
+
+        $.ajax({
+            url: `${URL_API}/cadastro`,
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem('token')}`,
+                "Content-Type": "Application/json" 
+            },
+            data: JSON.stringify({cpf}),
+            success: (res) => {
+                // Reseta o form
+                $("#form-editar")[0].reset();
+                
+                // Oculta o form
+                $("#modalEditarUsuario").hide();
+                
+                // Habilita o scroll
+                $("body").css("overflow", "auto");
+                
+                // Exibe a mensagem
+                alertMsg(res.success, "success", "#msg-home");
+
+                // Recarrega a lista de usuários
+                carregarUsuarios();
+            }, 
+            error: (err) => {
+                // Logout true     
+                if (err.responseJSON.logout) {
+                    // Limpa o local storage
+                    localStorage.clear();
+                    // Salva a mensagem 
+                    localStorage.setItem('msg-logout', err.responseJSON.error);
+                    // Redireciona para login
+                    return window.location.href = 'index.html';
+                }
+                
+                // Exibe a mensagem
+                alertMsg(err.responseJSON.error, "error", "#msg-editar");
+            }
+        })
+
+    })
+}
