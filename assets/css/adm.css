@@ -36,6 +36,24 @@
 /* Fim Seção da Tabela de Usuários */
 
 /* Início Modal Adiconar Usuário */
+.aba-todos-usuarios-adm {
+    padding: 7px;
+    background-color: var(--gray-200);
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+
+    & p {
+        color: var(--gray-dark);
+        padding: 12px 20px;
+        transition: 0.2s;
+    }
+}
+
+
 .modal {
     display: none;
     position: fixed;
@@ -92,6 +110,13 @@
 }
 
 #form-cadastro {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+
+#form-editar {
     display: flex;
     flex-direction: column;
     width: 100%;

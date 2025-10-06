@@ -46,6 +46,18 @@ function formatCPF(input, oldValue) {
     });
 }
 
+function formatarNumeroCPF(numero) {
+    // Máscara base
+    let formatted = '___.___.___-__';
+
+    // Preenche a máscara com os números
+    for (let i = 0; i < numero.length && i < 11; i++) {
+        formatted = formatted.replace('_', numero[i]);
+    }
+
+    return formatted;
+}
+
 function formatSUS(input, oldValue) {
     let lastValue = oldValue || '';
 
@@ -165,4 +177,4 @@ function formatarMinutos(minutos) {
     return `${horas}h ${min}min`
 }
 
-export { formatCPF, formatSUS, formatTelefone, formatarNumeroSUS, formatarNumeroTelefone, formatarMinutos };
+export { formatCPF, formatarNumeroCPF, formatSUS, formatTelefone, formatarNumeroSUS, formatarNumeroTelefone, formatarMinutos };
