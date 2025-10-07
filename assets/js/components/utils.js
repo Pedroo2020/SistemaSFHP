@@ -12,4 +12,9 @@ function calcularIdade(dataNascimento) {
     return idade;
 }
 
-export { calcularIdade }
+// Função para remover caracteres não numéricos
+function getNumber(val) {
+    return val.replace(/\D/g, '');
+}
+
+export { calcularIdade, getNumber }

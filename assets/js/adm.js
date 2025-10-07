@@ -1,5 +1,5 @@
 import { formatCPF, formatSUS, formatTelefone, formatarNumeroCPF, formatarNumeroSUS, formatarNumeroTelefone } from './components/format.js';
-import { calcularIdade } from './components/utils.js';
+import { calcularIdade, getNumber } from './components/utils.js';
 import { URL_API, socket } from './urlAPI.js';
 import alertMsg from './alertMsg.js';
 
@@ -368,12 +368,15 @@ $(document).ready(function () {
 
     // Formtação do input de CPF
     formatCPF($('#cpf-cadastro'));
+    formatCPF($('#cpf-editar'));
 
     // Formatação do input de Telefone
     formatTelefone($('#telefone-cadastro'));
+    formatTelefone($('#telefone-editar'));
 
     // Formatação do input do Número do Sus
     formatSUS($('#sus-cadastro'));
+    formatSUS($('#sus-editar'));
 
     $("#form-cadastro").on("submit", function (e) {
         e.preventDefault();
@@ -395,9 +398,9 @@ $(document).ready(function () {
 
         // Captura e formata valores
         const nome = $("#nome-cadastro").val();
-        const cpf = $("#cpf-cadastro").val().replace(/\D/g, '');
+        const cpf = getNumber($("#cpf-cadastro").val());
         const email = $("#email-cadastro").val();
-        const telefone = $("#telefone-cadastro").val().replace(/\D/g, '');
+        const telefone = getNumber($("#telefone-cadastro").val());
         const sexo = sexoMap[$("#sexo-cadastro").val()];
         const nascimento = $("#nascimento-cadastro").val();
 
@@ -405,7 +408,7 @@ $(document).ready(function () {
         let senha = null;
 
         if (tipoSelecionado === "Paciente") {
-            coren_crm_sus = $("#sus-cadastro").val().replace(/\D/g, '');
+            coren_crm_sus = getNumber($("#sus-cadastro").val());
         }
         else if (tipoSelecionado === "Recepcionista" || tipoSelecionado === "Administrador") {
             senha = $("#senha-cadastro").val();
@@ -472,10 +475,10 @@ $("#form-editar").on("submit", function (e) {
     const tipo_usuario = mapTipoUsuario[tipoSelecionado];
 
     const nome = $("#nome-editar").val();
-    const cpfNovo = $("#cpf-editar").val().replace(/\D/g, '');
-    const cpfAntigo = $("#old-cpf").val().replace(/\D/g, '');
+    const cpfNovo = getNumber($("#cpf-editar").val());
+    const cpfAntigo = getNumber($("#old-cpf").val());
     const email = $("#email-editar").val();
-    const telefone = $("#telefone-editar").val().replace(/\D/g, '');
+    const telefone = getNumber($("#telefone-editar").val());
     const sexo = sexoMap[$("#sexo-editar").val()];
     const nascimento = $("#nascimento-editar").val();
 
@@ -483,7 +486,7 @@ $("#form-editar").on("submit", function (e) {
     let senha = null;
 
     if (tipoSelecionado === "Paciente") {
-        coren_crm_sus = $("#sus-editar").val().replace(/\D/g, '');
+        coren_crm_sus = getNumber($("#sus-editar").val());
     } else if (tipoSelecionado === "Recepcionista" || tipoSelecionado === "Administrador") {
         senha = $("#senha-editar").val();
     } else if (tipoSelecionado === "Enfermeiro") {

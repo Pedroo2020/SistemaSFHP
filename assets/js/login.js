@@ -4,6 +4,8 @@ import { URL_API, socket } from './urlAPI.js';
 import { formatCPF } from './components/format.js';
 // Função para mostrar mensagens de alerta
 import alertMsg from './alertMsg.js';
+// Função para remover caracteres nao numericos
+import { getNumber } from './components/utils.js';
 
 // Ao carregar a página, adiciona as formatações ao input
 $(document).ready(() => {
@@ -59,7 +61,7 @@ $('.formulario').on('submit', (e) => {
     e.preventDefault();
 
     // Obtém os valores
-    const cpfVal = $('#input-cpf').val().replace(/\D/g, '');
+    const cpfVal = getNumber($('#input-cpf').val());
     const senhaVal = $('#input-password').val();
 
     // Cria o objeto data

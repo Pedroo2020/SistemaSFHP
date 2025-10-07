@@ -1,5 +1,7 @@
 // Função para formatar CPF
 import { formatCPF, formatSUS, formatTelefone, formatarNumeroSUS, formatarNumeroTelefone, formatarMinutos } from './components/format.js';
+// Fução par aremover caracteres nao numericos
+import { getNumber } from './components/utils.js';
 import { socket, URL_API } from './urlAPI.js';
 import alertMsg from './alertMsg.js';
 
@@ -63,7 +65,7 @@ formCPF.on('submit', ((e) => {
 
     // Obtem o CPF formatado e apenas dígitos
     const cpf = $('#input-cpf').val();
-    const cpfOnlyNumber = cpf.replace(/\D/g, '');
+    const cpfOnlyNumber = getNumber(cpf);
 
     // Altera o botão de voltar
     fechar.hide();
@@ -147,9 +149,9 @@ formCadastro.on('submit', function (e) {
     const data = {
         nome: form.get('nome-cadastro'),
         email: form.get('email-cadastro'),
-        telefone: form.get('telefone-cadastro').replace(/\D/g, ''),
-        cpf: form.get('cpf-cadastro').replace(/\D/g, ''),
-        coren_crm_sus: form.get('sus-cadastro').replace(/\D/g, ''), // String
+        telefone: getNumber(form.get('telefone-cadastro')),
+        cpf: getNumber(form.get('cpf-cadastro')),
+        coren_crm_sus: getNumber(form.get('sus-cadastro')), // String
         sexo: form.get('sexo-cadastro') === 'masculino' ? 1 : 2,
         nascimento: form.get('nascimento-cadastro'),
         tipo_usuario: 5
@@ -210,7 +212,7 @@ formConsulta.on('submit', function (e) {
     // Cria o objeto data
     const data = {
         situacao: 1,
-        cpf: $('#cpf-consulta').val().replace(/\D/g, ''),
+        cpf: getNumber($('#cpf-consulta').val()),
     }
 
     $.ajax({
