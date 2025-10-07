@@ -1,7 +1,7 @@
 // Importa a URL da API
 import { URL_API } from './urlAPI.js';
 // Funções para formatar
-
+import { formatCPF, formatSUS, formatTelefone, formatarNumeroSUS, formatarNumeroTelefone, formatarMinutos, formatarNumeroCPF } from './components/format.js';
 // Função para calcular idade e remover caracteres nao numericos
 import { calcularIdade, getNumber } from './components/utils.js';
 // Função para mostrar mensagens de alerta
