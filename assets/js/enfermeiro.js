@@ -3,7 +3,7 @@ import { URL_API } from './urlAPI.js';
 // Função para formatar os Minutos
 import { formatarMinutos } from './components/format.js';
 // Função para mostrar mensagens de alerta
-import alertMsg from './alertMsg.js';
+import { alertMsg } from './components/utils.js';
 
 // Carrega a tabela ao carregar a página
 $(document).ready(async () => {
@@ -22,19 +22,18 @@ $(document).ready(async () => {
         // Remove a mensagem
         localStorage.removeItem('triagem-cadastrada');
         // Exibe a mensagem
-        alertMsg(msg, 'success', '#div-msg')
+        alertMsg(msg, 'success', '#div-msg');
     }
 
     // Obtém a mensagem
     const msgError = localStorage.getItem('userNotFound');
 
-    if (msg) {
+    if (msgError) {
         // Remove a mensagem
         localStorage.removeItem('userNotFound');
         // Exibe a mensagem
-        alertMsg(msg, 'error', '#div-msg')
+        alertMsg(msgError, 'error', '#div-msg');
     }
-
 
 })
 

@@ -35,8 +35,14 @@ function redirectWindow(typeUser) {
         // Redireciona para a página do recepcionista
         checkRedirect('recepcionista-perfil.html');
     } else {
-        // Inválido
-        alertMsg('Login inválido', 'error');  
+        // Limpa o local storage
+        localStorage.clear();
+
+        // Mensagem de erro
+        localStorage.setItem('msg-logout', 'Login inválido.');
+
+        // Redireciona para login
+        window.location.href = 'index.html';
     }
 }
 

@@ -2,31 +2,21 @@
 import { URL_API, socket } from "./urlAPI.js";
 // Funções para formatar
 import { formatarNumeroCPF, formatarNumeroTelefone, maskInputNumber, maskInputTemperature } from "./components/format.js";
-// Função para mostrar mensagens de alerta
-import alertMsg from "./alertMsg.js";
 // Função para calcular idade
-import { calcularIdade } from './components/utils.js'
-
-// Função para desabilitar o scroll
-function disabledScroll() {
-    $(document.body).css('overflow', 'hidden');
-}
-
-// Função para habilitar o scroll
-function abledScroll() {
-    $(document.body).css('overflow', 'auto');
-}
+import { calcularIdade, alertMsg, abledScroll, disabledScroll } from './components/utils.js'
 
 // Função para mostrar tela loading e desabilitar scroll
 function showLoading() {
     $('#div-loading').css('display', 'flex');
-    disabledScroll();
+    // Desabilita o scroll
+    disabledScroll($(document.body));
 }
 
 // Função para mostrar tela loading e desabilitar scroll
 function hideLoading() {
     $('#div-loading').hide();
-    abledScroll();
+    // Habilita o scroll
+    abledScroll($(document.body));
 }
 
 // Redirecionar para a página correta
@@ -173,7 +163,7 @@ $(document).ready(async () => {
     })
 
     // Função para mostrar tela loading e desabilitar scroll
-    hideLoading()
+    hideLoading();
 })
 
 // Logout
@@ -183,12 +173,12 @@ $('.sair').click(() => {
 
     // Autentica com o token
     socket.emit("logout", { token });
+    
+    // Limpa o local storage
+    localStorage.clear();
 
     // Salva a mensagem
     localStorage.setItem('logout', 'Logout realizado com sucesso.');
-
-    // Limpa o local storage
-    localStorage.clear();
 
     // Redireciona para login
     window.location.href = 'index.html';

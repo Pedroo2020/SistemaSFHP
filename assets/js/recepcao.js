@@ -1,26 +1,14 @@
 // Funções para formatar
 import { formatCPF, formatSUS, formatTelefone, formatarNumeroSUS, formatarNumeroTelefone, formatarMinutos } from './components/format.js';
 // Fução para remover caracteres nao numericos
-import { getNumber } from './components/utils.js';
+import { getNumber, alertMsg, abledScroll, disabledScroll } from './components/utils.js';
 // Importa a URL da API
 import { URL_API } from './urlAPI.js';
-// Função para mostrar mensagens de alerta
-import alertMsg from './alertMsg.js';
 
 // Ao carregar a página, adiciona as formatações ao input
 $(document).ready(() => {
     formatCPF('#input-cpf');
 })
-
-// Função para desabilitar o scroll
-function disabledScroll() {
-    $(document.body).css('overflow', 'hidden');
-}
-
-// Função para habilitar o scroll
-function abledScroll() {
-    $(document.body).css('overflow', 'auto');
-}
 
 // Obtém os botões
 const botaoNovoPaciente = $('.btn-novo-paciente');
@@ -37,7 +25,7 @@ botaoNovoPaciente.click(() => {
     formCPF.css('display', 'flex');
 
     // Desabilita o scroll
-    disabledScroll();
+    disabledScroll($(document.body));
 });
 
 // Fecha o modal de novo paciente
@@ -45,7 +33,7 @@ fechar.click(() => {
     modal.hide();
 
     // Habilita o scroll
-    abledScroll();
+    abledScroll($(document.body));
 });
 
 // Volta para a tela de inserir CPF
@@ -229,7 +217,7 @@ formConsulta.on('submit', function (e) {
             // Fecha o modal e habilita o scroll
             modal.hide();
             formConsulta.hide();
-            abledScroll();
+            abledScroll($(document.body));
 
             // Reseta os valores dos forms
             formConsulta[0].reset();

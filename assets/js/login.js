@@ -2,10 +2,8 @@
 import { URL_API, socket } from './urlAPI.js';
 // Função para formatar CPF
 import { formatCPF } from './components/format.js';
-// Função para mostrar mensagens de alerta
-import alertMsg from './alertMsg.js';
-// Função para remover caracteres nao numericos
-import { getNumber } from './components/utils.js';
+// Função para remover caracteres não numericos
+import { getNumber, alertMsg } from './components/utils.js';
 
 // Ao carregar a página, adiciona as formatações ao input
 $(document).ready(() => {
