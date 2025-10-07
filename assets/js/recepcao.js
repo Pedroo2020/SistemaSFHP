@@ -1,8 +1,10 @@
-// Função para formatar CPF
+// Funções para formatar
 import { formatCPF, formatSUS, formatTelefone, formatarNumeroSUS, formatarNumeroTelefone, formatarMinutos } from './components/format.js';
-// Fução par aremover caracteres nao numericos
+// Fução para remover caracteres nao numericos
 import { getNumber } from './components/utils.js';
-import { socket, URL_API } from './urlAPI.js';
+// Importa a URL da API
+import { URL_API } from './urlAPI.js';
+// Função para mostrar mensagens de alerta
 import alertMsg from './alertMsg.js';
 
 // Ao carregar a página, adiciona as formatações ao input
@@ -130,7 +132,7 @@ formCPF.on('submit', ((e) => {
                 formCPF.hide();
                 formCadastro.css('display', 'flex');
             }
-            
+
             // Exibe mensagem de erro
             alertMsg(err.responseJSON.error, 'error', '#div-msg-modal');
 
@@ -268,7 +270,7 @@ $(document).ready(async () => {
 $('#refresh-consultas').on('click', async () => {
     // Adiciona a animação de girar ao botão
     $('#refresh-icon').addClass('refreshing');
-    
+
     // Recarregar consultas
     await recarregarConsultas();
 
@@ -320,29 +322,29 @@ function carregarConsultas(situacao) {
 
                 // Adiciona uma mensagem de sem resultados encontrados
                 const consultasNotFound = $('<tr></tr>')
-                                                .append($('<td></td>')
-                                                            .text('Nenhum resultado encontrado para essa busca')
-                                                            .addClass('consultas-not-found')
-                                                            .attr('colspan', 9))
+                    .append($('<td></td>')
+                        .text('Nenhum resultado encontrado para essa busca')
+                        .addClass('consultas-not-found')
+                        .attr('colspan', 9))
 
                 // Adiciona a cédula a tabela
                 $('#table-consultas').append(consultasNotFound);
 
             }
-            
+
 
             // Obtém a data e hora atual
             const dataAtual = new Date()
 
             // Formata a data em padrão brasileiro
             const dataFormatada = dataAtual.toLocaleString("pt-BR", {
-                                                            day: "2-digit",
-                                                            month: "2-digit",
-                                                            year: "numeric",
-                                                            hour: "2-digit",
-                                                            minute: "2-digit",
-                                                            hour12: false // mantém no formato 24h
-                                                            });
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false // mantém no formato 24h
+            });
 
             // Atualiza a data e hora da última atualização
             $('.last-att').text(`Última atualização: ${dataFormatada}`);
@@ -374,7 +376,7 @@ function criarEtiquetaPrioridade(prioridade) {
         div.addClass('leve');
     } else if (prioridade === 'Pouco urgente') {
         div.addClass('pouco-urgente');
-    }  else if (prioridade === 'Urgente') {
+    } else if (prioridade === 'Urgente') {
         div.addClass('urgente');
     } else if (prioridade === 'Muito urgente') {
         div.addClass('muito-urgente');
@@ -402,23 +404,23 @@ function addConsulta(consulta) {
 
     // Cria as tds
     const posicao = $('<td></td>')
-                        .text(`${consulta.posicao}°`)
-                        .addClass('td-numero')
+        .text(`${consulta.posicao}°`)
+        .addClass('td-numero')
 
     const nome = $('<td></td>')
-                        .text(consulta.nome)
-                        .addClass('td-string')
+        .text(consulta.nome)
+        .addClass('td-string')
 
     const idade = $('<td></td>')
-                        .text(consulta.idade)
-                        .addClass('td-numero')
+        .text(consulta.idade)
+        .addClass('td-numero')
 
     const sexo = $('<td></td>')
-                        .text(consulta.sexo)
-                        .addClass('td-string')
+        .text(consulta.sexo)
+        .addClass('td-string')
 
     const prioridade = $('<td></td>')
-                        .addClass('td-time')
+        .addClass('td-time')
 
     // Caso exista prioridade, cria a etiqueta
     if (consulta.classificacao_risco) {
@@ -429,23 +431,23 @@ function addConsulta(consulta) {
     }
 
     const entrada = $('<td></td>')
-                        .text(consulta.data_entrada)
-                        .addClass('td-time')
+        .text(consulta.data_entrada)
+        .addClass('td-time')
 
     const tempoDecorrido = $('<td></td>')
-                        .text(formatarMinutos(consulta.tempo_decorrido))
-                        .addClass('td-time')
+        .text(formatarMinutos(consulta.tempo_decorrido))
+        .addClass('td-time')
 
     const etapa = $('<td></td>')
-                        .text(consulta.situacao)
-                        .addClass('td-time')
+        .text(consulta.situacao)
+        .addClass('td-time')
 
     // Ícone de ação
     const iconeMoreDetails = $('<i></i>').addClass('fa-solid fa-ellipsis icon-more-details');
     const iconAcao = $('<td></td>')
-                            .append(iconeMoreDetails)
-                            .addClass('td-time');
-                        
+        .append(iconeMoreDetails)
+        .addClass('td-time');
+
     // Adiciona os elementos ao tr
     $tr
         .append(posicao)
@@ -482,7 +484,7 @@ $('.filtro-consulta').each((_, element) => {
 
             // Obtém a situação do filtro
             const situacao = $item.attr('sit');
-            
+
             // Carrega as consultas
             carregarConsultas(situacao);
 
@@ -490,5 +492,5 @@ $('.filtro-consulta').each((_, element) => {
             return $item.addClass('active');
         })
     })
-    
+
 })

@@ -1,7 +1,10 @@
 // Importa a URL da API
-import alertMsg from "./alertMsg.js";
-import { formatarNumeroCPF, formatarNumeroTelefone, maskInputNumber, maskInputTemperature } from "./components/format.js";
 import { URL_API, socket } from "./urlAPI.js";
+// Funções para formatar
+import { formatarNumeroCPF, formatarNumeroTelefone, maskInputNumber, maskInputTemperature } from "./components/format.js";
+// Função para mostrar mensagens de alerta
+import alertMsg from "./alertMsg.js";
+// Função para calcular idade
 import { calcularIdade } from './components/utils.js'
 
 // Função para desabilitar o scroll
@@ -36,7 +39,7 @@ function redirectWindow(typeUser) {
 
     // Divide o endereço em uma lista
     const urlArray = windowArray[windowArray.length - 1].split('?');
-    
+
     // Obtém a URL atual
     const currentWindowLocation = urlArray[0];
 
@@ -159,7 +162,7 @@ $(document).ready(async () => {
             if (err.responseJSON.userNotFound) {
                 // Mensagem de erro
                 localStorage.setItem('userNotFound', err.responseJSON.text);
-                
+
                 // Redireciona para a página do enfermeiro
                 return window.location.href = "enfermeiro-perfil.html";
             }
@@ -180,7 +183,7 @@ $('.sair').click(() => {
 
     // Autentica com o token
     socket.emit("logout", { token });
-    
+
     // Salva a mensagem
     localStorage.setItem('logout', 'Logout realizado com sucesso.');
 
@@ -273,12 +276,12 @@ $('.formulario-container').on('submit', function (e) {
             }
 
             // Exibe a mensagem de erro
-            alertMsg(err.responseJSON.error, 'error', '.div-message');  
+            alertMsg(err.responseJSON.error, 'error', '.div-message');
         }
     })
 })
 
 // Envia o formulário
 $('.send').on('click', () => {
-  $('.formulario-container').submit();
+    $('.formulario-container').submit();
 });

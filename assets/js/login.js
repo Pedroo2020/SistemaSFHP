@@ -17,16 +17,16 @@ $(document).ready(() => {
         // Remove a mensagema
         localStorage.removeItem('logout');
         // Exibe a mensagem
-        alertMsg(logout, 'success', '.div-message');   
+        alertMsg(logout, 'success', '.div-message');
     }
 
     const msgLogout = localStorage.getItem('msg-logout');
-    
+
     if (msgLogout) {
         // Remove a mensagema
         localStorage.removeItem('msg-logout');
         // Exibe a mensagem
-        alertMsg(msgLogout, 'error', '.div-message');   
+        alertMsg(msgLogout, 'error', '.div-message');
     }
 })
 
@@ -43,13 +43,13 @@ $('.showPassword').click(() => {
         $this.removeClass('fa-eye').addClass('fa-eye-slash');
         // Mostra o conteúdo do input
         $input.prop('type', 'text');
-    
+
     } else {
-    
+
         // Altera o ícone do botão
         $this.removeClass('fa-eye-slash').addClass('fa-eye')
         // Esconde o conteúdo do input
-    
+
         $input.prop('type', 'password');
     }
 
@@ -105,12 +105,12 @@ $('.formulario').on('submit', (e) => {
                 window.location.href = 'recepcionista-perfil.html';
             } else {
                 // Inválido
-                alertMsg('Login inválido', 'error', '.div-message');  
+                alertMsg('Login inválido', 'error', '.div-message');
             }
         },
         error: (err) => {
             // Exibe a mensagem de erro
-            alertMsg(err.responseJSON.error, 'error', '.div-message');  
+            alertMsg(err.responseJSON.error, 'error', '.div-message');
         }
     })
 })

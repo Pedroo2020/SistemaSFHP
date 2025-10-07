@@ -1,5 +1,8 @@
+// Importa a URL da API
 import { URL_API } from './urlAPI.js';
+// Função para formatar os Minutos
 import { formatarMinutos } from './components/format.js';
+// Função para mostrar mensagens de alerta
 import alertMsg from './alertMsg.js';
 
 // Carrega a tabela ao carregar a página
@@ -7,7 +10,7 @@ $(document).ready(async () => {
 
     // Carrega as consultas na fase de entrada
     await carregarConsultas(false, 1);
-    
+
     // Evento click
     addMoreDetailsMenu('#menu-entrada', '.details-entrada');
     addMoreDetailsMenu('#menu-triagem', '.details-triagem');
@@ -369,7 +372,7 @@ $('#form-triagem').on('submit', (e) => {
     const cpfPaciente = selectPaciente.val();
 
     // Inicia a triagems
-    startTriagem(cpfPaciente);  
+    startTriagem(cpfPaciente);
 })
 
 // Ao clicar no botão chamar paciente
