@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="assets/css/perfil.css">
     <!-- CSS da recepcao -->
     <link rel="stylesheet" href="assets/css/recepcao.css">
-    
+
     <!-- Socketio -->
     <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
 
@@ -38,7 +38,7 @@
             <img src="assets/img/Logo-SFHP-Branca.png" alt="Logo" class="icon-logo">
 
             <span class="linha"></span>
-            
+
             <span class="pagina">
                 <p>SFHP</p>
                 <span>/</span>
@@ -127,13 +127,13 @@
                         <div class="container-filtro">
                             <div class="aba-todos-usuarios">
                                 <p class="filtro-consulta active" sit="1">Entrada</p>
-                                
+
                                 <p class="filtro-consulta" sit="2">Triagem</p>
-                                
+
                                 <p class="filtro-consulta" sit="3">Em espera</p>
-                                
+
                                 <p class="filtro-consulta" sit="4">Consulta</p>
-                                
+
                                 <p class="filtro-consulta" sit="5">Alta</p>
                             </div>
                         </div>
@@ -160,7 +160,7 @@
                                 <th class="td-time">Ação</th>
                             </tr>
                         </thead>
-                        
+
                         <tbody id="table-consultas"></tbody>
                     </table>
                 </div>
@@ -205,17 +205,20 @@
 
                     <div class="campo">
                         <label for="sus" class="cor-blue-dark tamfont">Número do SUS</label>
-                        <input type="text" id="sus-cadastro" name="sus-cadastro" placeholder="Digite o número do SUS" required>
+                        <input type="text" id="sus-cadastro" name="sus-cadastro" placeholder="Digite o número do SUS"
+                            required>
                     </div>
 
                     <div class="campo">
                         <label for="email" class="cor-blue-dark tamfont">E-mail</label>
-                        <input type="email" id="email-cadastro" name="email-cadastro" placeholder="exemplo@gmail.com" required>
+                        <input type="email" id="email-cadastro" name="email-cadastro" placeholder="exemplo@gmail.com"
+                            required>
                     </div>
 
                     <div class="campo">
                         <label for="telefone" class="cor-blue-dark tamfont">Telefone</label>
-                        <input type="tel" id="telefone-cadastro" name="telefone-cadastro" placeholder="(00) 0000-0000" required>
+                        <input type="tel" id="telefone-cadastro" name="telefone-cadastro" placeholder="(00) 0000-0000"
+                            required>
                     </div>
 
                     <div class="alin-lad">
@@ -249,22 +252,26 @@
 
                     <div class="campo">
                         <label for="nome" class="cor-blue-dark tamfont">Nome</label>
-                        <input type="text" id="nome-consulta" name="nome-consulta" placeholder="Digite o nome" required disabled>
+                        <input type="text" id="nome-consulta" name="nome-consulta" placeholder="Digite o nome" required
+                            disabled>
                     </div>
 
                     <div class="campo">
                         <label for="sus" class="cor-blue-dark tamfont">Número do SUS</label>
-                        <input type="text" id="sus-consulta" name="sus-consulta" placeholder="Digite o número do SUS" required disabled>
+                        <input type="text" id="sus-consulta" name="sus-consulta" placeholder="Digite o número do SUS"
+                            required disabled>
                     </div>
 
                     <div class="campo">
                         <label for="email" class="cor-blue-dark tamfont">E-mail</label>
-                        <input type="email" id="email-consulta" name="email-consulta" placeholder="exemplo@gmail.com" required disabled>
+                        <input type="email" id="email-consulta" name="email-consulta" placeholder="exemplo@gmail.com"
+                            required disabled>
                     </div>
 
                     <div class="campo">
                         <label for="telefone" class="cor-blue-dark tamfont">Telefone</label>
-                        <input type="tel" id="telefone-consulta" name="telefone-consulta" placeholder="(00) 0000-0000" required disabled>
+                        <input type="tel" id="telefone-consulta" name="telefone-consulta" placeholder="(00) 0000-0000"
+                            required disabled>
                     </div>
 
                     <div class="alin-lad">
@@ -285,11 +292,12 @@
                     <div class="div-buttons">
                         <button type="button" class="btn-next half edit" id="btn-edit-paciente">Editar</button>
                         <button type="submit" class="btn-next half" id="btn-cadastrar-consulta">Cadastrar</button>
-                        <button type="button" class="btn-next half off" id="btn-atualizar-paciente" style="display: none;">Salvar</button>
+                        <button type="button" class="btn-next half off" id="btn-atualizar-paciente"
+                            style="display: none;">Salvar</button>
                     </div>
                 </form>
             </div>
- 
+
             <div class="div-message" id="div-msg-modal"></div>
         </div>
 

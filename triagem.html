@@ -15,12 +15,12 @@
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    
+
     <!-- Socketio -->
     <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
 
     <!-- JS de perfil -->
-     <script type="module" src="assets/js/triagem.js" defer></script>
+    <script type="module" src="assets/js/triagem.js" defer></script>
 
     <link rel="icon" href="assets/img/Logo-SFHP-Branca.png">
     <title>SFHP - Página do Enfermeiro - Triagem</title>
@@ -49,7 +49,7 @@
 
     <main>
         <div id="div-loading">
-            <!-- From Uiverse.io by RaspberryBee --> 
+            <!-- From Uiverse.io by RaspberryBee -->
             <div class="loading">
                 <svg height="48px" width="64px">
                     <polyline id="back" points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24"></polyline>
@@ -68,40 +68,42 @@
         </section>
 
         <form class="formulario-container">
-    
+
             <div class="coluna-esquerda">
                 <p class="title-div">Dados do Usuário:</p>
-                
+
                 <div class="campo-grupo">
                     <label>Nome completo:</label>
-                    <p class="dado-exibido" id="nome-paciente"></p> 
+                    <p class="dado-exibido" id="nome-paciente"></p>
                 </div>
 
                 <div class="campos-linha">
                     <div class="campo-grupo">
                         <label>Idade:</label>
-                        <p class="dado-exibido" id="idade-paciente"></p> 
+                        <p class="dado-exibido" id="idade-paciente"></p>
                     </div>
                     <div class="campo-grupo">
                         <label>Sexo:</label>
-                        <p class="dado-exibido" id="sexo-paciente"></p> 
+                        <p class="dado-exibido" id="sexo-paciente"></p>
                     </div>
                 </div>
 
                 <div class="campos-linha">
                     <div class="campo-grupo">
                         <label>CPF:</label>
-                        <p class="dado-exibido" id="cpf-paciente"></p> 
+                        <p class="dado-exibido" id="cpf-paciente"></p>
                     </div>
                     <div class="campo-grupo">
                         <label>Telefone:</label>
-                        <p class="dado-exibido" id="telefone-paciente"></p> 
+                        <p class="dado-exibido" id="telefone-paciente"></p>
                     </div>
                 </div>
-                
+
                 <div class="campo-grupo last">
                     <label for="queixa">Queixa Principal:</label>
-                    <textarea class="input-triagem dado-multilinha" placeholder="Descreva os sintomas e as queixas do paciente" id="queixa" name="queixa"></textarea>
+                    <textarea class="input-triagem dado-multilinha"
+                        placeholder="Descreva os sintomas e as queixas do paciente" id="queixa"
+                        name="queixa"></textarea>
                 </div>
             </div>
 
@@ -111,22 +113,26 @@
                 <div class="campos-linha">
                     <div class="campo-grupo">
                         <label for="temperatura">Temperatura (°C):</label>
-                        <input class="input-triagem" type="text" id="temperatura" name="temperatura" placeholder="Ex: 38.7">
+                        <input class="input-triagem" type="text" id="temperatura" name="temperatura"
+                            placeholder="Ex: 38.7">
                     </div>
                     <div class="campo-grupo">
                         <label for="pressao">Pressão Arterial (mmHg):</label>
-                        <input class="input-triagem" type="text" id="pressao" name="pressao" placeholder="Ex: 120/80" maxlength="7">
+                        <input class="input-triagem" type="text" id="pressao" name="pressao" placeholder="Ex: 120/80"
+                            maxlength="7">
                     </div>
                 </div>
-                
+
                 <div class="campos-linha">
                     <div class="campo-grupo">
                         <label for="frequencia_cardiaca">Frequência Cardíaca (bpm):</label>
-                        <input class="input-triagem" type="text" id="frequencia_cardiaca" name="frequencia_cardiaca" placeholder="Ex: 72" maxlength="3">
+                        <input class="input-triagem" type="text" id="frequencia_cardiaca" name="frequencia_cardiaca"
+                            placeholder="Ex: 72" maxlength="3">
                     </div>
                     <div class="campo-grupo">
                         <label for="saturacao">Saturação O2 (%):</label>
-                        <input class="input-triagem" type="text" id="saturacao" name="saturacao" placeholder="Ex: 98" maxlength="3">
+                        <input class="input-triagem" type="text" id="saturacao" name="saturacao" placeholder="Ex: 98"
+                            maxlength="3">
                     </div>
                 </div>
 
@@ -138,7 +144,7 @@
                         <input type="radio" id="dor3" name="nivel-dor" value="3"><label for="dor3">3</label>
                         <input type="radio" id="dor4" name="nivel-dor" value="4"><label for="dor4">4</label>
                         <input type="radio" id="dor5" name="nivel-dor" value="5"><label for="dor5">5</label>
-                        <input type="radio" id="dor6" name="nivel-dor" value="6"><label for="dor6" >6</label> 
+                        <input type="radio" id="dor6" name="nivel-dor" value="6"><label for="dor6">6</label>
                         <input type="radio" id="dor7" name="nivel-dor" value="7"><label for="dor7">7</label>
                         <input type="radio" id="dor8" name="nivel-dor" value="8"><label for="dor8">8</label>
                         <input type="radio" id="dor9" name="nivel-dor" value="9"><label for="dor9">9</label>
@@ -148,12 +154,14 @@
 
                 <div class="campo-grupo">
                     <label for="alergias">Alergias:</label>
-                    <input class="input-triagem" type="text" id="alergia" name="alergia" placeholder="Alergias conhecidas">
+                    <input class="input-triagem" type="text" id="alergia" name="alergia"
+                        placeholder="Alergias conhecidas">
                 </div>
 
                 <div class="campo-grupo">
                     <label for="medicamento_uso">Medicamentos em Uso:</label>
-                    <input class="input-triagem" type="text" id="medicamento_uso" name="medicamento_uso" placeholder="Medicamentos que o paciente utiliza">
+                    <input class="input-triagem" type="text" id="medicamento_uso" name="medicamento_uso"
+                        placeholder="Medicamentos que o paciente utiliza">
                 </div>
 
                 <div class="campo-grupo last">
@@ -169,7 +177,7 @@
             </div>
         </form>
 
-        <button class="btn-action send">    
+        <button class="btn-action send">
             Enviar
             <i class="fa-solid fa-arrow-right icons-blocos2" style="color: #ffffff;"></i>
         </button>
