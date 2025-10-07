@@ -318,12 +318,12 @@ function alteraSelect(itens) {
         else if (tipo === "Enfermeiro") {
             campoCOREN.show();
             campoSenha.show();
-             $(".camp-lad-cpf").css('width', '100%')
+            $(".camp-lad-cpf").css('width', '100%')
         }
         else if (tipo === "Medico") {
             campoCRM.show();
             campoSenha.show();
-             $(".camp-lad-cpf").css('width', '100%')
+            $(".camp-lad-cpf").css('width', '100%')
         } else {
             campoSenha.show();
             $(".camp-lad-cpf").css('width', '50%')
