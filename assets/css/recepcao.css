@@ -129,10 +129,26 @@ body {
     box-shadow: 0 4px 6px rgba(49, 52, 54, 0.321);
     cursor: pointer;
     transition: 0.1s;
+
     &:hover {
         background-color: var(--blue-hover);
     }
+
+    &.edit {
+        background-color: var(--gray-100);
+        color: var(--blue-dark);
+        border: 1px solid var(--blue-dark);
+
+        &:hover {
+            background-color: var(--gray-200);
+        }
+    }
+
+    &.half {
+        width: 50%;
+    }
 }
+
 
 .icones {
     width: 20px;
@@ -297,6 +313,13 @@ form .campo input {
 
 .esp {
     margin-bottom: 5px;
+}
+
+.div-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 @media (max-width: 768px) {

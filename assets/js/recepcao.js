@@ -1,5 +1,5 @@
 // Funções para formatar
-import { formatCPF, formatSUS, formatTelefone, formatarNumeroSUS, formatarNumeroTelefone, formatarMinutos } from './components/format.js';
+import { formatCPF, formatSUS, formatTelefone, formatarNumeroSUS, formatarNumeroTelefone, formatarMinutos, formatarNumeroCPF } from './components/format.js';
 // Fução para remover caracteres nao numericos
 import { getNumber, alertMsg, abledScroll, disabledScroll } from './components/utils.js';
 // Importa a URL da API
@@ -62,6 +62,11 @@ formCPF.on('submit', ((e) => {
     voltarParaCPF.show();
 
     // Requisição e lógica para validar cpf
+    buscarCPF(cpfOnlyNumber);
+}))
+
+// Buscar dados consulta
+function buscarCPF(cpfOnlyNumber) {
     $.ajax({
         url: `${URL_API}/cadastro?cpf=${cpfOnlyNumber}`,
         method: 'GET',
@@ -76,7 +81,7 @@ formCPF.on('submit', ((e) => {
             const user = res.user;
 
             // Preenche o input com o cpf do usuário
-            $('#cpf-consulta').val(cpf);
+            $('#cpf-consulta').val(formatarNumeroCPF(cpfOnlyNumber));
 
             // Exibe o form de cadastro de consulta
             formCPF.hide();
@@ -126,7 +131,7 @@ formCPF.on('submit', ((e) => {
 
         }
     })
-}))
+}
 
 // Cadastrar usuário
 formCadastro.on('submit', function (e) {
@@ -147,6 +152,12 @@ formCadastro.on('submit', function (e) {
         tipo_usuario: 5
     }
 
+    // Função para cadastrar usuário
+    cadastrarUsuario(data, form.get('cpf-cadastro'));
+})
+
+// Função para cadastrar usuário
+function cadastrarUsuario(data, cpf) {
     $.ajax({
         url: `${URL_API}/cadastro`,
         method: 'POST',
@@ -160,7 +171,7 @@ formCadastro.on('submit', function (e) {
             alertMsg(res.success, 'success', '#div-msg-modal');
 
             // Preenche os dados do usuário
-            $('#cpf-consulta').val(form.get('cpf-cadastro'));
+            $('#cpf-consulta').val(cpf);
             $('#nome-consulta').val(data.nome);
             $('#sus-consulta').val(formatarNumeroSUS(data.coren_crm_sus));
             $('#email-consulta').val(data.email);
@@ -192,7 +203,7 @@ formCadastro.on('submit', function (e) {
             alertMsg(err.responseJSON.error, 'error', '#div-msg-modal');
         }
     })
-})
+}
 
 // Form de cadastro de consulta
 formConsulta.on('submit', function (e) {
@@ -482,3 +493,134 @@ $('.filtro-consulta').each((_, element) => {
     })
 
 })
+
+// Desabilitar ou habilitar inputs quando inativo
+function ableDisableInputs(form, boolean) {
+    const inputs = $(`${form} input`);
+    const selects = $(`${form} select`);
+
+    // Desabilita os inputs
+    inputs.map((index, input) => {
+        $(input).prop('disabled', boolean);
+    })
+
+    // Desabilita os selects
+    selects.map((index, select) => {
+        $(select).prop('disabled', boolean);
+    })
+
+    // Habilita ou desabilita os botões
+    if (!boolean) {
+        $('#btn-atualizar-paciente').css('display', 'flex');
+        $('#btn-cadastrar-consulta').hide();
+    } else {
+        $('#btn-cadastrar-consulta').css('display', 'flex');
+        $('#btn-atualizar-paciente').hide();
+    }
+}
+
+// Botão de ativar modo de edição
+$('#btn-edit-paciente').click( function () {
+    habilitarDesabilitarEdicao();
+})
+
+// Função para habilitar/desabilitar edição
+function habilitarDesabilitarEdicao() {
+    // Desativa caso ativa
+    if ($('#btn-edit-paciente').hasClass('on')) {
+        $('#btn-edit-paciente')
+            .removeClass('on')
+            .addClass('off')
+            .text('Editar');
+
+        // Desabilita os botões
+        ableDisableInputs('#form-consulta', true);
+
+        // Busca os dados antigos
+        buscarCPF($('#cpf-antigo').val());
+
+    } else {
+        $('#btn-edit-paciente')
+            .removeClass('off')
+            .addClass('on')
+            .text('Cancelar');
+            
+        // Habilita os botões
+        ableDisableInputs('#form-consulta', false);
+
+        // Salva o valor do CPF antigo
+        $('#cpf-antigo').val(getNumber($('#cpf-consulta').val()));
+    }
+
+}
+
+// Botão de salvar alterações
+$('#btn-atualizar-paciente').click(() => {
+    // Cria o objeto data
+    const data = {
+        nome: $('#nome-consulta').val(),
+        email: $('#email-consulta').val(),
+        telefone: getNumber($('#telefone-consulta').val()),
+        cpfAntigo: getNumber($('#cpf-antigo').val()),
+        cpfNovo: getNumber($('#cpf-consulta').val()),
+        coren_crm_sus: getNumber($('#sus-consulta').val()), // String
+        sexo: $('#sexo-consulta').val() === 'masculino' ? 1 : 2,
+        nascimento: $('#nascimento-consulta').val(),
+        tipo_usuario: 5,
+        ativo: 1
+    }
+
+    // Função para cadastrar usuário
+    atualizarUsuario(data, $('#cpf-consulta').val());
+})
+
+// Atualizar usuário
+function atualizarUsuario(data, cpf) {
+    $.ajax({
+        url: `${URL_API}/cadastro`,
+        method: 'PUT',
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+        },
+        contentType: 'Application/json',
+        data: JSON.stringify(data),
+        success: (res) => {
+            // Exibe mensagem de sucesso
+            alertMsg(res.success, 'success', '#div-msg-modal');
+
+            // Preenche os dados do usuário
+            $('#cpf-consulta').val(cpf);
+            $('#nome-consulta').val(data.nome);
+            $('#sus-consulta').val(formatarNumeroSUS(data.coren_crm_sus));
+            $('#email-consulta').val(data.email);
+            $('#telefone-consulta').val(formatarNumeroTelefone(data.telefone));
+            $('#sexo-consulta').val(data.sexo === 1 ? 'masculino' : 'feminino');
+            $('#nascimento-consulta').val(data.nascimento);
+
+            // Formata os inputs de telefone e número do sus 
+            formatTelefone('#telefone-consulta', data.telefone);
+            formatSUS('#sus-consulta', data.coren_crm_sus);
+
+            // Exibe o form de cadastro de consulta
+            formConsulta.css('display', 'flex');
+
+            // Desabilita a edição
+            habilitarDesabilitarEdicao();
+        },
+        error: (err) => {
+            console.log(err)
+            // Logout true     
+            if (err.responseJSON.logout) {
+                // Limpa o local storage
+                localStorage.clear();
+                // Salva a mensagem 
+                localStorage.setItem('msg-logout', err.responseJSON.error);
+                // Redireciona para login
+                return window.location.href = 'index.html';
+            }
+
+            // Exibe mensagem de erro
+            alertMsg(err.responseJSON.error, 'error', '#div-msg-modal');
+        }
+    })
+}
