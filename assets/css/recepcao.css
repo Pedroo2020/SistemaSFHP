@@ -328,3 +328,25 @@ form .campo input {
         padding: 20px;
     }
 }
+
+@media (max-width: 480px) {
+    .title-form {
+        font-size: 1.2rem;
+        padding-top: 5px;
+    }
+
+    #fechar-modal {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 340px) {
+    .title-form {
+        font-size: 1rem;
+        padding-top: 5px;
+    }
+
+    .info-busca {
+        font-size: 0.8rem;
+    }
+}
