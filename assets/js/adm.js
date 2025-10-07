@@ -555,9 +555,11 @@ function ableDisableInputs(form, boolean) {
     if (!boolean) {
         $('#botao-inativar').css('display', 'flex');
         $('#botao-ativar').hide();
+        $('#btn-salvar-edicao').prop('disabled', false)
     } else {
         $('#botao-ativar').css('display', 'flex');
         $('#botao-inativar').hide();
+        $('#btn-salvar-edicao').prop('disabled', true)
     }
 }
 
