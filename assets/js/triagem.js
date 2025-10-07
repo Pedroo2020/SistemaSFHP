@@ -1,7 +1,8 @@
 // Importa a URL da API
 import alertMsg from "./alertMsg.js";
-import { maskInputNumber, maskInputTemperature } from "./components/format.js";
+import { formatarNumeroCPF, formatarNumeroTelefone, maskInputNumber, maskInputTemperature } from "./components/format.js";
 import { URL_API, socket } from "./urlAPI.js";
+import { calcularIdade } from './components/utils.js'
 
 // Redirecionar para a página correta
 function redirectWindow(typeUser) {
@@ -46,11 +47,6 @@ function redirectWindow(typeUser) {
 
 // Ao carregar a página
 $(document).ready(() => {
-
-    // Adiciona as formatações
-    maskInputTemperature($('#temperatura'));
-    maskInputNumber($('#frequencia_cardiaca'), 200);
-    maskInputNumber($('#saturacao'), 100);
 
     // TESTANDO SOCKET
     socket.on("autenticado", (data) => {
@@ -98,6 +94,55 @@ $(document).ready(() => {
     if (!cpf) {
         return window.location.href = 'enfermeiro-perfil.html';
     }
+
+    // Adiciona as formatações
+    maskInputTemperature($('#temperatura'));
+    maskInputNumber($('#frequencia_cardiaca'), 200);
+    maskInputNumber($('#saturacao'), 100);
+
+    $.ajax({
+        url: `${URL_API}/cadastro?cpf=${cpf}`,
+        headers: {
+            'Authorization': `Bearer ${token}`
+        },
+        success: (res) => {
+            // Obtém os dados do usuário
+            const dadosUser = res.user;
+
+            // Nome
+            $('#nome-paciente').text(dadosUser.nome);
+            // Idade
+            $('#idade-paciente').text(calcularIdade(dadosUser.data_nascimento));
+            // Sexo
+            $('#sexo-paciente').text(dadosUser.sexo === 1 ? 'Masculino' : 'Feminino');
+            // CPF
+            $('#cpf-paciente').text(formatarNumeroCPF(dadosUser.cpf));
+            // Telefone
+            $('#telefone-paciente').text(formatarNumeroTelefone(dadosUser.telefone));
+        },
+        error: (err) => {
+            // Usuário token não existe
+            if (err.responseJSON.logout) {
+                // Limpa o local storage
+                localStorage.clear();
+
+                // Redireciona para login
+                return window.location.href = "index.html";
+            }
+
+            // Caso usuário não seja encontrado
+            if (err.responseJSON.userNotFound) {
+                // Mensagem de erro
+                localStorage.setItem('userNotFound', err.responseJSON.text);
+                
+                // Redireciona para a página do enfermeiro
+                return window.location.href = "enfermeiro-perfil.html";
+            }
+
+            // Alert message
+            alertMsg(err.responseJSON.error, 'error', '.div-message');
+        }
+    })
 })
 
 // Logout

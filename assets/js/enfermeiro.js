@@ -22,6 +22,17 @@ $(document).ready(async () => {
         alertMsg(msg, 'success', '#div-msg')
     }
 
+    // Obtém a mensagem
+    const msgError = localStorage.getItem('userNotFound');
+
+    if (msg) {
+        // Remove a mensagem
+        localStorage.removeItem('userNotFound');
+        // Exibe a mensagem
+        alertMsg(msg, 'error', '#div-msg')
+    }
+
+
 })
 
 // Ao clicar no botão, atualiza as consultas
@@ -261,14 +272,6 @@ function addMoreDetailsMenu(menu, classIcon) {
 
 }
 
-// Ao clicar no botão chamar paciente
-$('#chamarPaciente').on('click', function () {
-    const cpf = $('#cpf-entrada').val();
-
-    // Inicia a triagem
-    startTriagem(cpf);
-})
-
 // Função para desabilitar o scroll
 function disabledScroll() {
     $(document.body).css('overflow', 'hidden');
@@ -367,6 +370,25 @@ $('#form-triagem').on('submit', (e) => {
 
     // Inicia a triagems
     startTriagem(cpfPaciente);  
+})
+
+// Ao clicar no botão chamar paciente
+$('#chamarPaciente').on('click', function () {
+    const cpf = $('#cpf-entrada').val();
+
+    // Inicia a triagem
+    startTriagem(cpf);
+})
+
+// Ao clicar no botão chamar paciente
+$('#cadastrarTriagem').on('click', function () {
+    const cpf = $('#cpf-triagem').val();
+
+    // Cria a url passado CPF como parâmetro
+    let newUrl = `triagem.html?cpf=${encodeURIComponent(cpf)}`;
+
+    // Redireciona para triagem
+    return window.location.href = newUrl;
 })
 
 function startTriagem(cpf) {
