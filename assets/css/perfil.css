@@ -712,8 +712,9 @@ thead th {
     }
 
     .aba-todos-usuarios {
-        width: 100%;
-        justify-content: space-between;
+        width: fit-content;
+        justify-content: flex-start;
+        align-self: flex-start;
     }
 
     .search-box {
@@ -774,7 +775,6 @@ thead th {
 @media (max-width: 670px) {
 
     .container-filtro {
-        width: 100%;
         overflow-x: auto;
     }
 
@@ -822,10 +822,6 @@ thead th {
 
     .div-text-search {
         flex-direction: column;
-    }
-
-    .aba-todos-usuarios {
-        min-width: 100%;
     }
 
     main {
@@ -898,27 +894,13 @@ thead th {
         flex-direction: column;
         gap: 17px;
     }
-
-    .aba-todos-usuarios {
-        min-width: 304px;
-    }
 }
 
 @media (max-width: 376px) {
-    .aba-todos-usuarios {
-        min-width: 253px;
-    }
 
     .last-att {
         font-size: 0.85rem !important;
     }
 }
-
-@media (max-width: 321px) {
-    .aba-todos-usuarios {
-        min-width: 200px;
-    }
-}
-
 
 /* Fim Responsivo */
