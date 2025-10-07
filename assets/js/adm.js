@@ -321,12 +321,12 @@ function alteraSelect(itens) {
         else if (tipo === "Enfermeiro") {
             campoCOREN.show();
             campoSenha.show();
-            $(".camp-lad-cpf").css('width', '100%')
+            $(".camp-lad-cpf").css('width', '50%')
         }
         else if (tipo === "Medico") {
             campoCRM.show();
             campoSenha.show();
-            $(".camp-lad-cpf").css('width', '100%')
+            $(".camp-lad-cpf").css('width', '50%')
         } else {
             campoSenha.show();
             $(".camp-lad-cpf").css('width', '50%')
@@ -555,9 +555,11 @@ function ableDisableInputs(form, boolean) {
     if (!boolean) {
         $('#botao-inativar').css('display', 'flex');
         $('#botao-ativar').hide();
+        $('#btn-salvar-edicao').prop('disabled', false)
     } else {
         $('#botao-ativar').css('display', 'flex');
         $('#botao-inativar').hide();
+        $('#btn-salvar-edicao').prop('disabled', true)
     }
 }
 

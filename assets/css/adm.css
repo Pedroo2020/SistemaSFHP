@@ -242,9 +242,20 @@ form .campo input {
     cursor: pointer;
     transition: 0.1s;
 
+    &:disabled {
+        background-color: var(--gray-300);
+        color: var(--gray-200);
+        cursor: not-allowed;
+
+        &:hover {
+                background-color: var(--gray-300);
+            }
+    }
+
     &:hover {
         background-color: var(--blue-hover);
     }
+
 }
 
 /* Fim Modal Adiconar Usuário */
