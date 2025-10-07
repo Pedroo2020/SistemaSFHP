@@ -4,6 +4,28 @@ import { formatarNumeroCPF, formatarNumeroTelefone, maskInputNumber, maskInputTe
 import { URL_API, socket } from "./urlAPI.js";
 import { calcularIdade } from './components/utils.js'
 
+// Função para desabilitar o scroll
+function disabledScroll() {
+    $(document.body).css('overflow', 'hidden');
+}
+
+// Função para habilitar o scroll
+function abledScroll() {
+    $(document.body).css('overflow', 'auto');
+}
+
+// Função para mostrar tela loading e desabilitar scroll
+function showLoading() {
+    $('#div-loading').css('display', 'flex');
+    disabledScroll();
+}
+
+// Função para mostrar tela loading e desabilitar scroll
+function hideLoading() {
+    $('#div-loading').hide();
+    abledScroll();
+}
+
 // Redirecionar para a página correta
 function redirectWindow(typeUser) {
     // Obtém o tipo do usuário
@@ -46,7 +68,10 @@ function redirectWindow(typeUser) {
 }
 
 // Ao carregar a página
-$(document).ready(() => {
+$(document).ready(async () => {
+
+    // Tela de carregamento
+    showLoading();
 
     // TESTANDO SOCKET
     socket.on("autenticado", (data) => {
@@ -62,7 +87,7 @@ $(document).ready(() => {
     }
 
     // Fetch em cadastro (GET)
-    $.ajax({
+    await $.ajax({
         url: `${URL_API}/cadastro`,
         headers: {
             Authorization: `Bearer ${token}`
@@ -100,7 +125,7 @@ $(document).ready(() => {
     maskInputNumber($('#frequencia_cardiaca'), 200);
     maskInputNumber($('#saturacao'), 100);
 
-    $.ajax({
+    await $.ajax({
         url: `${URL_API}/cadastro?cpf=${cpf}`,
         headers: {
             'Authorization': `Bearer ${token}`
@@ -143,6 +168,9 @@ $(document).ready(() => {
             alertMsg(err.responseJSON.error, 'error', '.div-message');
         }
     })
+
+    // Função para mostrar tela loading e desabilitar scroll
+    hideLoading()
 })
 
 // Logout
