@@ -8,6 +8,7 @@ import { URL_API } from './urlAPI.js';
 // Ao carregar a página, adiciona as formatações ao input
 $(document).ready(() => {
     formatCPF('#input-cpf');
+    formatCPF('#cpf-consulta');
 })
 
 // Obtém os botões
@@ -62,11 +63,11 @@ formCPF.on('submit', ((e) => {
     voltarParaCPF.show();
 
     // Requisição e lógica para validar cpf
-    buscarCPF(cpfOnlyNumber);
+    buscarCPF(cpfOnlyNumber, true);
 }))
 
 // Buscar dados consulta
-function buscarCPF(cpfOnlyNumber) {
+function buscarCPF(cpfOnlyNumber, showMsg) {
     $.ajax({
         url: `${URL_API}/cadastro?cpf=${cpfOnlyNumber}`,
         method: 'GET',
@@ -74,8 +75,11 @@ function buscarCPF(cpfOnlyNumber) {
             Authorization: `Bearer ${localStorage.getItem('token')}`
         },
         success: (res) => {
-            // Exibe mensagem de erro
-            alertMsg('Usuário encontrado.', 'success', '#div-msg-modal');
+
+            // Exibe mensagem de sucesso
+            if (showMsg) {
+                alertMsg('Usuário encontrado.', 'success', '#div-msg-modal');
+            }
 
             // Obtém os dados do usuário
             const user = res.user;
@@ -115,7 +119,7 @@ function buscarCPF(cpfOnlyNumber) {
             // Caso o CPF seja válido mas o usuário não seja encontrado
             if (err.responseJSON.userNotFound) {
                 // Preenche o input com o cpf do usuário
-                $('#cpf-cadastro').val(cpf);
+                $('#cpf-cadastro').val(formatarNumeroCPF(cpfOnlyNumber));
                 // Formata o input de CPF
                 formatCPF('#cpf-cadastro', cpfOnlyNumber);
                 formatTelefone('#telefone-cadastro');
@@ -521,13 +525,20 @@ function ableDisableInputs(form, boolean) {
 
 // Botão de ativar modo de edição
 $('#btn-edit-paciente').click( function () {
-    habilitarDesabilitarEdicao();
+
+    if ($('#btn-edit-paciente').hasClass('on')) {
+        // Desabilita a ediçaõ
+        return habilitarDesabilitarEdicao(false, true);
+    }
+
+    // Habilita a edição
+    habilitarDesabilitarEdicao(true, false);
 })
 
 // Função para habilitar/desabilitar edição
-function habilitarDesabilitarEdicao() {
+function habilitarDesabilitarEdicao(editon, canceled) {
     // Desativa caso ativa
-    if ($('#btn-edit-paciente').hasClass('on')) {
+    if (!editon) {
         $('#btn-edit-paciente')
             .removeClass('on')
             .addClass('off')
@@ -536,8 +547,10 @@ function habilitarDesabilitarEdicao() {
         // Desabilita os botões
         ableDisableInputs('#form-consulta', true);
 
-        // Busca os dados antigos
-        buscarCPF($('#cpf-antigo').val());
+        if (canceled) {
+            // Busca os dados antigos
+            buscarCPF($('#cpf-antigo').val(), false);
+        }
 
     } else {
         $('#btn-edit-paciente')
@@ -605,7 +618,7 @@ function atualizarUsuario(data, cpf) {
             formConsulta.css('display', 'flex');
 
             // Desabilita a edição
-            habilitarDesabilitarEdicao();
+            habilitarDesabilitarEdicao(false, false);
         },
         error: (err) => {
             console.log(err)

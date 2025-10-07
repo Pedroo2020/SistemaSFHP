@@ -605,6 +605,7 @@ thead th {
         padding: 15px;
         border-radius: 10px;
         animation: showMsg 5s ease;
+        text-align: center;
 
         &.error {
             background-color: var(--red-base);
