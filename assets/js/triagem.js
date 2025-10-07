@@ -173,7 +173,7 @@ $('.sair').click(() => {
 
     // Autentica com o token
     socket.emit("logout", { token });
-    
+
     // Limpa o local storage
     localStorage.clear();
 

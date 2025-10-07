@@ -2,6 +2,7 @@
 import { URL_API } from './urlAPI.js';
 // Função para calcular idade e remover caracteres nao numericos
 import { calcularIdade, getNumber, alertMsg } from './components/utils.js';
+// Funções para formatar
 import { formatCPF, formatTelefone, formatSUS, formatarNumeroCPF, formatarNumeroTelefone } from './components/format.js';
 
 // Função para desabilitar o scroll
@@ -669,5 +670,5 @@ function InativarUser() {
             alertMsg(err.responseJSON.error, "error", "#msg-editar");
         }
     })
-    
+
 }

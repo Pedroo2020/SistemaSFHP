@@ -8,7 +8,7 @@ function redirectWindow(typeUser) {
 
     // Divide o endereço em uma lista
     const windowArray = window.location.href.split('/');
-    
+
     // Obtém a URL atual
     const currentWindowLocation = windowArray[windowArray.length - 1];
 
