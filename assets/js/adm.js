@@ -161,8 +161,6 @@ function addUser(user) {
 // Puxar dados da API para montar a tabela
 $(document).ready(function () {
     carregarUsuarios();
-
-    InativarUser();
 });
 
 
@@ -194,6 +192,9 @@ $(document).on("click", ".icon-more-details", function () {
         success: function (response) {
 
             const user = response.user;
+
+            // Habilita ou desabilita os inputs
+            ableDisableInputs('#form-editar', !user.ativo);
 
             // Preenche os inputs básicos
             $("#nome-editar").val(user.nome);
@@ -534,58 +535,139 @@ $("#form-editar").on("submit", function (e) {
     });
 });
 
-// Inativação de Usuário
-function InativarUser() {
-    const botaoExcluir = $(".btn-inativar-user")
+// Desabilitar ou habilitar inputs quando inativo
+function ableDisableInputs(form, boolean) {
+    const inputs = $(`${form} input`);
+    const selects = $(`${form} select`);
 
-    botaoExcluir.click(() => {
-
-        const cpf = $('#old-cpf').val();
-
-        if (!cpf) {
-            return alertMsg('Erro inesperado. Tente novamente mais tarde.', 'error', '#msg-editar');
-        }
-
-        $.ajax({
-            url: `${URL_API}/cadastro`,
-            method: "DELETE",
-            headers: {
-                "Authorization": `Bearer ${localStorage.getItem('token')}`,
-                "Content-Type": "Application/json"
-            },
-            data: JSON.stringify({ cpf }),
-            success: (res) => {
-                // Reseta o form
-                $("#form-editar")[0].reset();
-
-                // Oculta o form
-                $("#modalEditarUsuario").hide();
-
-                // Habilita o scroll
-                $("body").css("overflow", "auto");
-
-                // Exibe a mensagem
-                alertMsg(res.success, "success", "#msg-home");
-
-                // Recarrega a lista de usuários
-                carregarUsuarios();
-            },
-            error: (err) => {
-                // Logout true     
-                if (err.responseJSON.logout) {
-                    // Limpa o local storage
-                    localStorage.clear();
-                    // Salva a mensagem 
-                    localStorage.setItem('msg-logout', err.responseJSON.error);
-                    // Redireciona para login
-                    return window.location.href = 'index.html';
-                }
-
-                // Exibe a mensagem
-                alertMsg(err.responseJSON.error, "error", "#msg-editar");
-            }
-        })
-
+    // Desabilita os inputs
+    inputs.map((index, input) => {
+        $(input).prop('disabled', boolean);
     })
+
+    // Desabilita os selects
+    selects.map((index, select) => {
+        $(select).prop('disabled', boolean);
+    })
+
+    // Habilita ou desabilita os botões
+    if (!boolean) {
+        $('#botao-inativar').css('display', 'flex');
+        $('#botao-ativar').hide();
+    } else {
+        $('#botao-ativar').css('display', 'flex');
+        $('#botao-inativar').hide();
+    }
 }
 
+// Ao clicar no botão de ativar usuário
+$('#botao-ativar').click(() => {
+    AtivarUser();
+})
+
+// Ativação de Usuário
+function AtivarUser() {
+
+    const cpf = $('#old-cpf').val();
+
+    if (!cpf) {
+        return alertMsg('Erro inesperado. Tente novamente mais tarde.', 'error', '#msg-editar');
+    }
+
+    $.ajax({
+        url: `${URL_API}/cadastro/ativar`,
+        method: "PUT",
+        headers: {
+            "Authorization": `Bearer ${localStorage.getItem('token')}`,
+            "Content-Type": "Application/json"
+        },
+        data: JSON.stringify({ cpf }),
+        success: (res) => {
+            // Reseta o form
+            $("#form-editar")[0].reset();
+
+            // Oculta o form
+            $("#modalEditarUsuario").hide();
+
+            // Habilita o scroll
+            $("body").css("overflow", "auto");
+
+            // Exibe a mensagem
+            alertMsg(res.success, "success", "#msg-home");
+
+            // Recarrega a lista de usuários
+            carregarUsuarios();
+        },
+        error: (err) => {
+            // Logout true     
+            if (err.responseJSON.logout) {
+                // Limpa o local storage
+                localStorage.clear();
+                // Salva a mensagem 
+                localStorage.setItem('msg-logout', err.responseJSON.error);
+                // Redireciona para login
+                return window.location.href = 'index.html';
+            }
+
+            // Exibe a mensagem
+            alertMsg(err.responseJSON.error, "error", "#msg-editar");
+        }
+    })
+
+}
+
+// Ao clicar no botão de inativar usuário
+$('#botao-inativar').click(() => {
+    InativarUser();
+})
+
+// Inativação de Usuário
+function InativarUser() {
+
+    const cpf = $('#old-cpf').val();
+
+    if (!cpf) {
+        return alertMsg('Erro inesperado. Tente novamente mais tarde.', 'error', '#msg-editar');
+    }
+
+    $.ajax({
+        url: `${URL_API}/cadastro`,
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${localStorage.getItem('token')}`,
+            "Content-Type": "Application/json"
+        },
+        data: JSON.stringify({ cpf }),
+        success: (res) => {
+            // Reseta o form
+            $("#form-editar")[0].reset();
+
+            // Oculta o form
+            $("#modalEditarUsuario").hide();
+
+            // Habilita o scroll
+            $("body").css("overflow", "auto");
+
+            // Exibe a mensagem
+            alertMsg(res.success, "success", "#msg-home");
+
+            // Recarrega a lista de usuários
+            carregarUsuarios();
+        },
+        error: (err) => {
+            // Logout true     
+            if (err.responseJSON.logout) {
+                // Limpa o local storage
+                localStorage.clear();
+                // Salva a mensagem 
+                localStorage.setItem('msg-logout', err.responseJSON.error);
+                // Redireciona para login
+                return window.location.href = 'index.html';
+            }
+
+            // Exibe a mensagem
+            alertMsg(err.responseJSON.error, "error", "#msg-editar");
+        }
+    })
+    
+}

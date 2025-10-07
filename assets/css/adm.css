@@ -297,9 +297,8 @@ form .campo input {
     gap: 10px;
 }
 
-.btn-inativar-user {
+.btn-user {
     width: 50%;
-    background-color: var(--red-base);
     color: var(--white);
     border: none;
     border-radius: 5px;
@@ -315,8 +314,18 @@ form .campo input {
     cursor: pointer;
     transition: 0.1s;
 
-    &:hover {
-        background-color: var(--red-dark);
+    &.ativar {
+        background-color: var(--green-base);
+        &:hover {
+            background-color: var(--green-dark);
+        }
+    }
+
+    &.inativar {
+        background-color: var(--red-base);
+        &:hover {
+            background-color: var(--red-dark);
+        }
     }
 }
 
