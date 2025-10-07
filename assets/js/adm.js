@@ -1,4 +1,5 @@
 import { formatCPF, formatSUS, formatTelefone, formatarNumeroCPF, formatarNumeroSUS, formatarNumeroTelefone } from './components/format.js';
+import { calcularIdade } from './components/utils.js';
 import { URL_API, socket } from './urlAPI.js';
 import alertMsg from './alertMsg.js';
 
@@ -30,20 +31,6 @@ fecharModalAdicionarUsuario.click(() => {
     abledScroll();
     $('#modalNovoUsuario').find('input, textarea').val('');
 });
-
-// Função para calcular idade
-function calcularIdade(dataNascimento) {
-    const nasc = new Date(dataNascimento);
-    const hoje = new Date();
-    let idade = hoje.getFullYear() - nasc.getFullYear();
-    if (
-        hoje.getMonth() < nasc.getMonth() ||
-        (hoje.getMonth() === nasc.getMonth() && hoje.getDate() < nasc.getDate())
-    ) {
-        idade--;
-    }
-    return idade;
-}
 
 // Função para carregar os usuários
 function carregarUsuarios() {
@@ -330,10 +317,12 @@ function alteraSelect(itens) {
         }
         else if (tipo === "Enfermeiro") {
             campoCOREN.show();
+            campoSenha.show();
              $(".camp-lad-cpf").css('width', '100%')
         }
         else if (tipo === "Medico") {
             campoCRM.show();
+            campoSenha.show();
              $(".camp-lad-cpf").css('width', '100%')
         } else {
             campoSenha.show();
