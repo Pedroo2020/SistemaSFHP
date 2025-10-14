@@ -1,7 +1,7 @@
 // Importa a URL da API
 import { URL_API, socket } from './urlAPI.js';
 // Função para formatar CPF
-import { formatCPF } from './components/format.js';
+import { formatCPF, maskInputNumber } from './components/format.js';
 // Função para remover caracteres não numericos
 import { getNumber, alertMsg } from './components/utils.js';
 
@@ -28,33 +28,42 @@ $(document).ready(() => {
     }
 })
 
-// Show password
-$('.showPassword').click(() => {
-    // Elementos
-    const $this = $('.showPassword');
-    const $input = $('#input-password');
+// Função show password
+function showPassword(idBtn, idInput) {
+    $(idBtn).click(() => {
+        // Elementos
+        const $this = $(idBtn);
+        const $input = $(idInput);
 
-    // Verifica se a senha está escondida
-    if ($this.hasClass('fa-eye')) {
+        // Verifica se a senha está escondida
+        if ($this.hasClass('fa-eye')) {
 
-        // Altera o ícone do botão
-        $this.removeClass('fa-eye').addClass('fa-eye-slash');
-        // Mostra o conteúdo do input
-        $input.prop('type', 'text');
+            // Altera o ícone do botão
+            $this.removeClass('fa-eye').addClass('fa-eye-slash');
+            // Mostra o conteúdo do input
+            $input.prop('type', 'text');
 
-    } else {
+        } else {
 
-        // Altera o ícone do botão
-        $this.removeClass('fa-eye-slash').addClass('fa-eye')
-        // Esconde o conteúdo do input
+            // Altera o ícone do botão
+            $this.removeClass('fa-eye-slash').addClass('fa-eye')
+            // Esconde o conteúdo do input
 
-        $input.prop('type', 'password');
-    }
+            $input.prop('type', 'password');
+        }
+    })
+}
 
+// Ao carregar a página
+$(document).ready(() => {
+    // Adiciona a função ao btn de mostrar senha
+    showPassword('#show-password', '#input-password');
+    showPassword('#show-change-password', '#input-change-password');
+    showPassword('#show-confirm-change-password', '#input-confirm-change-password');
 })
 
 // Envio do formulário de login
-$('.formulario').on('submit', (e) => {
+$('#form-login').on('submit', (e) => {
     // Evita o comportamento padrão
     e.preventDefault();
 
@@ -115,5 +124,123 @@ $('.formulario').on('submit', (e) => {
 
 // Btn recuperar senha
 $('.rec-senha').click(() => {
-    // Recuperar senha
+
+    // Obtém o valor do CPF
+    const cpf = getNumber($('#input-cpf').val());
+
+    // Retorna se não tiver CPF
+    if (!cpf) {
+        alertMsg('Insira o CPF para recuperar a senha.', 'error', '.div-message');
+        return;
+    }
+
+    $.ajax({
+        url: `${URL_API}/gerar_codigo?cpf=${cpf}`,
+        method: 'POST',
+        success: (res) => {
+            // Exibe a mensagem de sucesso
+            alertMsg(res.success, 'success', '.div-message');
+
+            // Coloca o email na tela de validar código
+            $('#email-adress').text(res.email);
+
+            // Máscara para input de código
+            maskInputNumber($('#input-codigo'));
+
+            // Mostra o form de validar código
+            $('#form-login').hide();
+            $('#form-validar-codigo').css('display', 'flex');
+        },
+        error: (err) => {
+            // Exibe a mensagem de erro
+            alertMsg(err.responseJSON.error, 'error', '.div-message');
+        }
+    })
+})
+
+// Formulário de validar código
+$('#form-validar-codigo').on('submit', (e) => {
+    // Evita o comportamento padrão
+    e.preventDefault();
+
+    // Obtém o valor do código
+    const codigo = $('#input-codigo').val();
+
+    // Retorna se não tiver código
+    if (!codigo) {
+        alertMsg('Insira o código para validar.', 'error', '.div-message');
+        return;
+    }
+
+    // Obtém o valor do CPF
+    const cpf = getNumber($('#input-cpf').val());
+
+    // Retorna se não tiver CPF
+    if (!cpf) {
+        alertMsg('Insira o CPF para recuperar a senha.', 'error', '.div-message');
+        return;
+    }
+
+    // Requisição para validar o código
+    $.ajax({
+        url: `${URL_API}/validar_codigo?codigo=${codigo}&cpf=${cpf}`,
+        method: 'POST',
+        success: (res) => {
+            // Exibe a mensagem de sucesso
+            alertMsg(res.success, 'success', '.div-message');
+
+            // Mostra o form de redefinir senha
+            $('#form-validar-codigo').hide();
+            $('#form-nova-senha').css('display', 'flex');
+        },
+        error: (err) => {
+            // Exibe a mensagem de erro
+            alertMsg(err.responseJSON.error, 'error', '.div-message');
+        }
+    })
+})
+
+// Formulário de redefinir senha
+$('#form-nova-senha').on('submit', (e) => {
+    // Evita o comportamento padrão
+    e.preventDefault();
+
+    // Obtém o valor do código
+    const senha = $('#input-change-password').val();
+    const confirmarSenha = $('#input-confirm-change-password').val();
+
+    // Retorna se não tiver código
+    if (!senha || !confirmarSenha) {
+        alertMsg('Insira o código para validar.', 'error', '.div-message');
+        return;
+    }
+
+    // Obtém o valor do CPF
+    const cpf = getNumber($('#input-cpf').val());
+
+    // Retorna se não tiver CPF
+    if (!cpf) {
+        alertMsg('Insira o CPF para recuperar a senha.', 'error', '.div-message');
+        return;
+    }
+
+    // Requisição para validar o código
+    $.ajax({
+        url: `${URL_API}/alterar_senha?cpf=${cpf}`,
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ senha, confirmarSenha }),
+        success: (res) => {
+            // Exibe a mensagem de sucesso
+            alertMsg(res.success, 'success', '.div-message');
+
+            // Mostra o form de redefinir senha
+            $('#form-nova-senha').hide();
+            $('#form-login').css('display', 'flex');
+        },
+        error: (err) => {
+            // Exibe a mensagem de erro
+            alertMsg(err.responseJSON.error, 'error', '.div-message');
+        }
+    })
 })
