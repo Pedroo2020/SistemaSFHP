@@ -46,6 +46,12 @@ function carregarUsuarios() {
             // Obtém os usuários
             const usuarios = res.users;
 
+            // Filtra apenas os pacientes (tipo_usuario === 5)
+            const pacientes = usuarios.filter(user => user.tipo_usuario === 5);
+
+            // Mostra o total de pacientes
+            $("#totalPacientes").text(pacientes.length);
+
             // Limpa a tabela antes de carregar novos dados
             $('#table-usuarios').empty();
 
@@ -674,3 +680,53 @@ function InativarUser() {
     })
 
 }
+
+// Show password
+$('.showPasswordCadastro').click(() => {
+    // Elementos
+    const $this = $('.showPasswordCadastro');
+    const $input = $('#senha-cadastro');
+
+    // Verifica se a senha está escondida
+    if ($this.hasClass('fa-eye')) {
+
+        // Altera o ícone do botão
+        $this.removeClass('fa-eye').addClass('fa-eye-slash');
+        // Mostra o conteúdo do input
+        $input.prop('type', 'text');
+
+    } else {
+
+        // Altera o ícone do botão
+        $this.removeClass('fa-eye-slash').addClass('fa-eye')
+        // Esconde o conteúdo do input
+
+        $input.prop('type', 'password');
+    }
+
+})
+
+// Show password
+$('.showPasswordEditar').click(() => {
+    // Elementos
+    const $this = $('.showPasswordEditar');
+    const $input = $('#senha-editar');
+
+    // Verifica se a senha está escondida
+    if ($this.hasClass('fa-eye')) {
+
+        // Altera o ícone do botão
+        $this.removeClass('fa-eye').addClass('fa-eye-slash');
+        // Mostra o conteúdo do input
+        $input.prop('type', 'text');
+
+    } else {
+
+        // Altera o ícone do botão
+        $this.removeClass('fa-eye-slash').addClass('fa-eye')
+        // Esconde o conteúdo do input
+
+        $input.prop('type', 'password');
+    }
+
+})

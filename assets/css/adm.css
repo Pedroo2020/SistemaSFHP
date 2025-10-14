@@ -78,6 +78,18 @@
     position: relative;
 }
 
+.showPasswordCadastro,
+.showPasswordEditar {
+    background: none;
+    color: var(--gray-300);
+    cursor: pointer;
+    font-size: 1rem;
+    justify-content: center;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+}
+
 .fechar {
     cursor: pointer;
     top: 15px;
@@ -404,13 +416,3 @@ form .campo input {
 }
 
 /* Fim do Responsivo Modal Adicionar Usuário */
-
-/* Responsivo Modal Editar Usuários */
-
-@media (max-width: 320px) {
-
-
-}
-
-
-/* Fim do Responsivo Modal Editar Usuários */
