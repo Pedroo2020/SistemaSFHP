@@ -2,6 +2,7 @@
     /* Cores */
     --gray-100: #FAFAFA;
     --gray-200: #ECECEC;
+    --gray-250: #D9D9D9;
     --gray-300: #bebebe;
 
     --blue-light: #C1E6FA;
@@ -260,8 +261,8 @@ form .campo input {
         cursor: not-allowed;
 
         &:hover {
-                background-color: var(--gray-300);
-            }
+            background-color: var(--gray-300);
+        }
     }
 
     &:hover {
@@ -339,6 +340,7 @@ form .campo input {
 
     &.ativar {
         background-color: var(--green-base);
+
         &:hover {
             background-color: var(--green-dark);
         }
@@ -346,6 +348,7 @@ form .campo input {
 
     &.inativar {
         background-color: var(--red-base);
+
         &:hover {
             background-color: var(--red-dark);
         }
@@ -353,6 +356,98 @@ form .campo input {
 }
 
 /* Fim Modal Editar Usuário */
+
+/* Início Modal Consultas */
+
+.overlay-modal-consultas {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+}
+
+.div-modal-consultas {
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    background-color: var(--gray-100);
+    padding: 30px;
+    width: 90%;
+    height: 75%;
+    border-radius: 20px;
+    border: 1px solid var(--gray-300);
+}
+
+.div-table-consultas {
+    overflow-y: auto;
+    width: 100%;
+    max-height: 500px;
+}
+
+
+.div-modal-consultas h2 {
+    font-size: 1.3rem;
+}
+
+.title-consultas {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fa-xmark {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.tabela {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 16px;
+}
+
+.tabela thead th {
+    background-color: var(--gray-100);
+    text-align: left;
+    font-weight: bold;
+    padding: 16px 15px;
+}
+
+.tabela tbody tr {
+    background-color: var(--gray-200);
+    cursor: pointer;
+}
+
+.tabela tbody td {
+    border: none;
+    padding: 20px 15px;
+    font-weight: 600;
+}
+
+.tabela tbody tr td:first-child {
+    border: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.tabela tbody tr td:last-child {
+    border: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+
+
+/* Fim Modal Consultas */
+
+
 
 /* Responsivo Modal Adicionar Usuário */
 

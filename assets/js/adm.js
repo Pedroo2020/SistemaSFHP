@@ -681,7 +681,7 @@ function InativarUser() {
 
 }
 
-// Show password
+// Show password modal adicionar usuario
 $('.showPasswordCadastro').click(() => {
     // Elementos
     const $this = $('.showPasswordCadastro');
@@ -706,7 +706,7 @@ $('.showPasswordCadastro').click(() => {
 
 })
 
-// Show password
+// Show password modal editar usuario
 $('.showPasswordEditar').click(() => {
     // Elementos
     const $this = $('.showPasswordEditar');
@@ -730,3 +730,25 @@ $('.showPasswordEditar').click(() => {
     }
 
 })
+
+const botaoVerConsultas = $('#btn-ver-consultas');
+const iconFecharConsultas = $('#fechar-consultas');
+const modalTodasConsultas = $('.div-modal-consultas');
+const overlayModalConsultas = $('.overlay-modal-consultas')
+
+// Abrir modal todas as consultas
+botaoVerConsultas.click(() => {
+    modalEditarUsuario.css('display', 'none');
+    overlayModalConsultas.css('display', 'flex');
+    modalTodasConsultas.css('display', 'flex');
+    
+    disabledScroll();
+});
+
+// Fecha o modal de todas as consultas
+iconFecharConsultas.click(() => {
+    modalTodasConsultas.hide();
+    overlayModalConsultas.hide();
+
+    abledScroll();
+});
