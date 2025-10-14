@@ -55,6 +55,10 @@ body {
     justify-content: center;
 }
 
+#form-validar-codigo, #form-nova-senha {
+    display: none;
+}
+
 .container {
     display: flex;
     justify-content: space-around;

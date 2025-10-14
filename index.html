@@ -40,7 +40,7 @@
 
         <div class="linha"></div>
 
-        <form class="formulario">
+        <form class="formulario" id="form-login">
             <h1 class="titulo">Login</h1>
 
             <div class="div-input">
@@ -50,13 +50,49 @@
             <div class="div-input">
                 <input class="input" placeholder="Senha" id="input-password" required type="password">
                 <div class="div-showPassword">
-                    <i class="fa-solid fa-eye showPassword"></i>
+                    <i class="fa-solid fa-eye showPassword" id="show-password"></i>
                 </div>
             </div>
 
             <a class="rec-senha">Recuperar senha</a>
 
             <button class="btn" type="submit">Entrar</button>
+
+        </form>
+
+        <!-- Form de Validar Código de verificação -->
+        <form class="formulario" id="form-validar-codigo">
+            <h1 class="titulo">Validar código</h1>
+
+            <p>Código de verificação enviado para <span id="email-adress"></span></p>
+
+            <div class="div-input">
+                <input class="input" placeholder="Código" id="input-codigo" type="text" maxlength="6" required>
+            </div>
+
+            <button class="btn" type="submit">Validar código</button>
+
+        </form>
+
+        <!-- Form alterar senha -->
+        <form class="formulario" id="form-nova-senha">
+            <h1 class="titulo">Alterar senha</h1>
+
+            <div class="div-input">
+                <input class="input" placeholder="Senha" id="input-change-password" type="password" required>
+                <div class="div-showPassword">
+                    <i class="fa-solid fa-eye showPassword" id="show-change-password"></i>
+                </div>
+            </div>
+
+            <div class="div-input">
+                <input class="input" placeholder="Senha" id="input-confirm-change-password" type="password" required>
+                <div class="div-showPassword">
+                    <i class="fa-solid fa-eye showPassword" id="show-confirm-change-password"></i>
+                </div>
+            </div>
+
+            <button class="btn" type="submit">Alterar senha</button>
 
         </form>
 
