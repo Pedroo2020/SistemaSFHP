@@ -237,10 +237,41 @@ $('#form-nova-senha').on('submit', (e) => {
             // Mostra o form de redefinir senha
             $('#form-nova-senha').hide();
             $('#form-login').css('display', 'flex');
+            
+            // Limpa o valor do input
+            $('#input-codigo').val('');
+
+            // Limpa o valor dos inputs de senha
+            $('#input-change-password').val('');
+            $('#input-confirm-change-password').val('');
         },
         error: (err) => {
             // Exibe a mensagem de erro
             alertMsg(err.responseJSON.error, 'error', '.div-message');
         }
     })
+})
+
+// Botão para voltar no form de código de recuperação
+$('#btn-return-login').click(() => {
+    // Mostra o form de redefinir senha
+    $('#form-validar-codigo').hide();
+    $('#form-login').css('display', 'flex');
+
+    // Limpa o valor do input
+    $('#input-codigo').val('');
+})
+
+// Botão para voltar no form de código de recuperação
+$('#btn-return-send-code').click(() => {
+    // Mostra o form de redefinir senha
+    $('#form-nova-senha').hide();
+    $('#form-login').css('display', 'flex');
+    
+    // Limpa o valor do input
+    $('#input-codigo').val('');
+
+    // Limpa o valor dos inputs de senha
+    $('#input-change-password').val('');
+    $('#input-confirm-change-password').val('');
 })

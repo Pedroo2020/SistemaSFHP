@@ -101,6 +101,17 @@ body {
     padding: 35px;
     gap: 20px;
     width: 430px;
+    position: relative;
+}
+
+.btn-return {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 1.3rem;
+    color: var(--blue-dark);
+    padding: 10px;
+    cursor: pointer;
 }
 
 .linha {
