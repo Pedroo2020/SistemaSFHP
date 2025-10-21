@@ -168,6 +168,7 @@ main {
 
 .btn-voltar {
     color: var(--blue-dark);
+    background-color: var(--gray-200);
     border: none;
     display: flex;
     align-items: center;

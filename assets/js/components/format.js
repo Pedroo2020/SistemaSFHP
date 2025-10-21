@@ -243,4 +243,37 @@ function formatarNumeroCPF(numero) {
     return formatted;
 }
 
-export { formatCPF, formatSUS, formatTelefone, formatarNumeroSUS, formatarNumeroTelefone, formatarMinutos, maskInputTemperature, maskInputNumber, formatarNumeroCPF };
+// Função para formatar Pressão Arterial (ex: "12080" -> "120/80 mmHg")
+function formatarPressaoArterial(valor) {
+    if (!valor || valor === "—") return "—";
+
+    // Converte para string e remove espaços
+    valor = valor.toString().trim();
+
+    // Se já tiver barra "/", apenas limpa e garante o formato
+    if (valor.includes("/")) {
+        const partes = valor.split("/");
+        const sistolica = partes[0].replace(/\D/g, "");
+        const diastolica = partes[1] ? partes[1].replace(/\D/g, "") : "";
+
+        if (!sistolica || !diastolica) return "—";
+        return `${sistolica}/${diastolica} mmHg`;
+    }
+
+    // Remove tudo que não for número
+    valor = valor.replace(/\D/g, "");
+
+    // Limita a 6 dígitos (evita erro)
+    valor = valor.slice(0, 6);
+
+    // Se tiver até 3 dígitos, ainda não formata
+    if (valor.length <= 3) return valor;
+
+    // Se tiver 4 dígitos -> "12/08"
+    if (valor.length === 4) return `${valor.slice(0, 2)}/${valor.slice(2)} mmHg`;
+
+    // Se tiver 5 ou 6 dígitos -> "120/80"
+    return `${valor.slice(0, 3)}/${valor.slice(3)} mmHg`;
+}
+
+export { formatCPF, formatSUS, formatTelefone, formatarNumeroSUS, formatarNumeroTelefone, formatarMinutos, maskInputTemperature, maskInputNumber, formatarNumeroCPF, formatarPressaoArterial };

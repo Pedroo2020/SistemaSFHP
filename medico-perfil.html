@@ -132,11 +132,11 @@
                     <div class="div-text-search">
                         <div class="container-filtro">
                             <div class="aba-todos-usuarios">
-                                <p class="filtro-consulta active" sit="1">Triagem</p>
+                                <p class="filtro-consulta active" sit="3">Triagem</p>
 
-                                <p class="filtro-consulta" sit="2">Consulta</p>
+                                <p class="filtro-consulta" sit="4">Consulta</p>
 
-                                <p class="filtro-consulta" sit="3">Concluídos</p>
+                                <p class="filtro-consulta" sit="5">Concluídos</p>
                             </div>
                         </div>
 
@@ -165,10 +165,51 @@
                         <tbody id="table-consultas"></tbody>
                     </table>
                 </div>
+
+                <div id="menu-entrada" class="menu-global">
+                    <input type="hidden" id="cpf-entrada">
+                    <p class="item" id="chamarPaciente">Chamar paciente</p>
+                </div>
+
+                <div id="menu-diagnostico" class="menu-global">
+                    <input type="hidden" id="cpf-diagnostico">
+                    <p class="item" id="cadastrarDiagnostico">Cadastrar diagnóstico</p>
+                </div>
+
             </div>
 
         </section>
         <!-- Fim Tabela Usuários -->
+
+        <!-- Modal Novo Paciente -->
+        <div id="modalNovoPaciente" class="modal">
+            <div class="modal-conteudo">
+                <i class="fa-solid fa-arrow-left fechar" id="fechar-modal"></i>
+                <i class="fa-solid fa-arrow-left fechar" id="voltar-cpf" style="display: none;"></i>
+
+                <!-- Formulário de CPF -->
+                <form id="form-diagnostico">
+                    <h2 class="title-form">Adicionar novo Diagnóstico</h2>
+
+                    <div class="campo-paciente">
+                        <div class="div-info-user">
+                            <p class="time-entrada">Entrada: ~</p>
+                            <p class="posicao">Posição: ~</p>
+                        </div>
+
+                        <label for="nome-paciente" class="esp cor-blue-dark tamfont">Nome do paciente</label>
+
+                        <select name="paciente-diagnostico" id="paciente-diagnostico"></select>
+                    </div>
+
+                    <button type="submit" class="btn-next">Iniciar Diagnóstico <i
+                            class="fa-solid fa-arrow-right"></i></button>
+                </form>
+
+            </div>
+
+            <div class="div-message" id="div-msg-modal"></div>
+        </div>
 
     </main>
 

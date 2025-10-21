@@ -38,6 +38,11 @@
     /* Cores adicionais */
     --blue-hover: #1876ac;
     --gray-dark: #747474;
+    --red-fundo: #AF111135;
+    --orange-fundo: #fe660035;
+    --yellow-fundo: #ffb30035;
+    --green-fundo: #00742B35;
+    --blue-fundo: #06047835;
 }
 
 body {
@@ -125,14 +130,18 @@ main {
 /* Coluna da Esquerda - Dados da Triagem */
 
 .linha-diagnostico {
-  background-color: var(--blue-dark);
-  margin-top: 15px;
-  height: 2px;
-  width: 100%;
+    background-color: var(--blue-dark);
+    margin-top: 15px;
+    height: 2px;
+    width: 100%;
 }
 
 .div-dados-triagem {
-  margin-top: 25px;
+    margin-top: 25px;
+}
+
+.div-dados-triagem p {
+    width: auto;
 }
 
 .container-painel {
@@ -171,7 +180,7 @@ main {
     cursor: pointer;
     transition: 0.1s;
     width: 100%;
-    
+
     &:hover {
         background-color: var(--blue-hover);
     }
@@ -179,6 +188,7 @@ main {
 
 .btn-voltar {
     color: var(--blue-dark);
+    background-color: var(--gray-200);
     border: none;
     display: flex;
     align-items: center;
@@ -191,7 +201,7 @@ main {
     cursor: pointer;
     transition: 0.1s;
     padding: 14px 0;
-    
+
     &:hover {
         color: var(--blue-hover);
     }
@@ -244,19 +254,20 @@ main {
 }
 
 .campos-linha .campo-grupo {
-    flex: 1; 
+    flex: 1;
 }
 
-.dado-exibido, .input-triagem {
+.dado-exibido,
+.input-triagem {
     width: 100%;
     padding: 10px 15px;
     border: 1px solid var(--gray-300);
-    border-radius: 10px; 
-    min-height: 20px; 
+    border-radius: 10px;
+    min-height: 20px;
     box-sizing: border-box;
     font-size: 0.95em;
     font-weight: 400;
-    line-height: 1.5; 
+    line-height: 1.5;
     margin-top: 5px;
     outline-color: var(--blue-dark);
 }
@@ -282,7 +293,7 @@ main {
     justify-content: space-between;
     width: 100%;
     margin-top: 5px;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
 }
 
 .niveis-dor input[type="radio"] {
@@ -301,10 +312,56 @@ main {
     cursor: pointer;
 }
 
-.niveis-dor input[type="radio"]:checked + label {
+.niveis-dor input[type="radio"]:checked+label {
     background-color: var(--blue-dark);
     color: white;
     border-color: var(--blue-dark);
+}
+
+.div-title-dados-triagem {
+    display: flex;
+    align-items: center;
+    gap: 320px;
+}
+
+.div-alergia-medicamento {
+    display: flex;
+    gap: 350px;
+}
+
+/* Leve (Azul) */
+.leve {
+    color: var(--blue-protocol);
+    border-color: var(--blue-protocol);
+    background-color: var(--blue-fundo);
+}
+
+/* Pouco urgente (Verde) */
+.pouco-urgente {
+    color: var(--green-protocol);
+    border-color: var(--green-protocol);
+    background-color: var(--green-fundo);
+}
+
+/* Urgente (Amarelo) */
+.urgente {
+    color: var(--yellow-protocol);
+    border-color: var(--yellow-protocol);
+    background-color: var(--yellow-fundo);
+}
+
+/* Muito urgente (Laranja) */
+.muito-urgente {
+    color: var(--orange-protocol);
+    border-color: var(--orange-protocol);
+    background-color: var(--orange-fundo);
+}
+
+/* Risco de vida (Vermelho) */
+.risco-vida {
+    color: var(--red-protocol);
+    border-color: var(--red-protocol);
+    background-color: var(--red-fundo);
 }
 
 /* Início - Footer */
@@ -373,41 +430,42 @@ main {
             background-color: var(--green-base);
         }
 
-        & i, p {
+        & i,
+        p {
             color: var(--white);
         }
     }
 
 }
 
-/* From Uiverse.io by RaspberryBee */ 
+/* From Uiverse.io by RaspberryBee */
 .loading svg polyline {
-  fill: none;
-  stroke-width: 4.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+    fill: none;
+    stroke-width: 4.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 .loading svg polyline#back {
-  fill: none;
+    fill: none;
 }
 
 .loading svg polyline#front {
-  fill: none;
-  stroke: var(--blue-dark);
-  stroke-dasharray: 72, 216;
-  stroke-dashoffset: 288;
-  animation: dash_682 1s linear infinite;
+    fill: none;
+    stroke: var(--blue-dark);
+    stroke-dasharray: 72, 216;
+    stroke-dashoffset: 288;
+    animation: dash_682 1s linear infinite;
 }
 
 @keyframes dash_682 {
-  72.5% {
-    opacity: 0;
-  }
+    72.5% {
+        opacity: 0;
+    }
 
-  to {
-    stroke-dashoffset: 0;
-  }
+    to {
+        stroke-dashoffset: 0;
+    }
 }
 
 #div-loading {
@@ -427,12 +485,15 @@ main {
     0% {
         opacity: 0;
     }
+
     10% {
         opacity: 1;
     }
+
     90% {
         opacity: 1;
     }
+
     100% {
         opacity: 0;
     }
@@ -442,12 +503,15 @@ main {
     0% {
         opacity: 0;
     }
+
     10% {
         opacity: 1;
     }
+
     90% {
         opacity: 1;
     }
+
     100% {
         opacity: 0;
     }
@@ -462,13 +526,14 @@ main {
         gap: 30px;
     }
 
-    .coluna-esquerda, .coluna-direita {
+    .coluna-esquerda,
+    .coluna-direita {
         width: 100%;
     }
 }
 
 @media (max-width: 716px) {
-    
+
     .header {
         padding: 20px;
     }
@@ -490,7 +555,7 @@ main {
     .formulario-container {
         gap: 20px;
     }
-    
+
     .title-div {
         font-size: 1.1rem;
     }
@@ -499,7 +564,8 @@ main {
         width: 100%;
     }
 
-    .coluna-direita, .coluna-esquerda {
+    .coluna-direita,
+    .coluna-esquerda {
         padding: 25px;
     }
 
@@ -507,7 +573,8 @@ main {
         font-size: 0.9rem;
     }
 
-    .dado-exibido, .input-triagem {
+    .dado-exibido,
+    .input-triagem {
         font-size: 0.85rem;
     }
 

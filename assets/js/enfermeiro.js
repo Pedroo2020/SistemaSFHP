@@ -99,7 +99,7 @@ function carregarConsultas(getConsultas, situacao) {
                         .append($('<td></td>')
                             .text('Nenhum resultado encontrado para essa busca')
                             .addClass('consultas-not-found')
-                            .attr('colspan', 6));
+                            .attr('colspan', 7));
 
                     $('#table-consultas').append(consultasNotFound);
                 }
