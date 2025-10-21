@@ -371,7 +371,7 @@ $('#form-triagem').on('submit', (e) => {
     const cpfPaciente = selectPaciente.val();
 
     // Inicia a triagems
-    startTriagem(cpfPaciente);
+    startTriagem(cpfPaciente, "#div-msg-modal");
 })
 
 // Ao clicar no botão chamar paciente
@@ -379,7 +379,7 @@ $('#chamarPaciente').on('click', function () {
     const cpf = $('#cpf-entrada').val();
 
     // Inicia a triagem
-    startTriagem(cpf);
+    startTriagem(cpf, "#div-msg");
 })
 
 // Ao clicar no botão chamar paciente
@@ -393,7 +393,7 @@ $('#cadastrarTriagem').on('click', function () {
     return window.location.href = newUrl;
 })
 
-function startTriagem(cpf) {
+function startTriagem(cpf, idDivMsg) {
     // Obtém o token
     const token = localStorage.getItem('token');
 
@@ -434,7 +434,7 @@ function startTriagem(cpf) {
             }
 
             // Exibe a mensagem de erro
-            alertMsg(err.responseJSON.error, 'error', '#div-msg-modal');
+            alertMsg(err.responseJSON.error, 'error', idDivMsg);
         }
     })
 }

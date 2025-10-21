@@ -265,6 +265,9 @@ $('.formulario-container').on('submit', function (e) {
                 return window.location.href = 'index.html';
             }
 
+            // Mostra o input vazio
+            showInputEmpty();
+
             // Exibe a mensagem de erro
             alertMsg(err.responseJSON.error, 'error', '.div-message');
         }
@@ -275,3 +278,75 @@ $('.formulario-container').on('submit', function (e) {
 $('.send').on('click', () => {
     $('.formulario-container').submit();
 });
+
+// Função para focar um input / textarea
+function focusInput(input) {
+    $(input)
+        .css({
+            'outline': 'var(--red-base)',
+            'border-color': 'var(--red-base)'
+        })
+        .focus();
+}
+
+// Função para desfocar um input / textarea
+function unfocusInput(input) {
+    $(input)
+        .css({
+            'outline': 'var(--blue-dark)',
+            'border-color': 'var(--gray-300)'
+        })
+}
+
+// Função para marcar em vermelho input vazio
+function showInputEmpty() {
+
+    // Obtém a textarea
+    const textarea = $('#queixa');
+    
+    // Verifica se está vazio
+    if (!textarea.val().trim('')) {
+        
+        // Borda em vermelha e foca a text area
+        focusInput(textarea);
+
+        // Evento input para a textarea
+        textarea.on('input', function() {
+            // Desfoca o input caso esteja preenchido
+            if ($(textarea).val().trim('')) {
+                unfocusInput($(textarea));
+            }
+        })
+
+        return;
+    }
+
+    // Desfoca a textarea
+    unfocusInput(textarea);
+
+    // Obtém todos os inputs da página
+    const listaInputs = $(document).find('input');
+
+    // Percorre um por um
+    listaInputs.each((_, input) => {
+        // Transforma em objeto JQuery
+        const $input = $(input);
+
+        // Caso valor vazio, foca o input
+        if (!$input.val().trim('')) {
+            // Foca o input
+            focusInput($input);
+
+            // Evento input para cada input
+            $input.on('input', function() {
+                // Desfoca o input caso esteja preenchido
+                if ($input.val().trim('')) {
+                    unfocusInput($input);
+                }
+            })
+
+            // Impede que prossiga para os próximos inputs
+            return false;
+        }
+    })
+}
