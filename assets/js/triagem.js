@@ -313,7 +313,7 @@ function showInputEmpty() {
         // Evento input para a textarea
         textarea.on('input', function() {
             // Desfoca o input caso esteja preenchido
-            if ($(textarea).val().trim('')) {
+            if ($(textarea).val().trim()) {
                 unfocusInput($(textarea));
             }
         })
@@ -333,14 +333,14 @@ function showInputEmpty() {
         const $input = $(input);
 
         // Caso valor vazio, foca o input
-        if (!$input.val().trim('')) {
+        if (!$input.val().trim()) {
             // Foca o input
             focusInput($input);
 
             // Evento input para cada input
             $input.on('input', function() {
                 // Desfoca o input caso esteja preenchido
-                if ($input.val().trim('')) {
+                if ($input.val().trim()) {
                     unfocusInput($input);
                 }
             })
