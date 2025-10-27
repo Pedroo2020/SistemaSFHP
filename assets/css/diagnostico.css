@@ -589,6 +589,18 @@ main {
         align-items: center;
         justify-content: center;
     }
+
+    .div-title-dados-triagem {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .div-alergia-medicamento {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
 }
 
 @media (max-width: 635px) {
@@ -598,6 +610,18 @@ main {
         max-width: none;
         max-height: none;
     }
+
+    .div-title-dados-triagem {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .div-alergia-medicamento {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
 }
 
 @media (max-width: 443px) {
@@ -606,5 +630,17 @@ main {
         height: 13vw;
         max-width: none;
         max-height: none;
+    }
+
+    .div-title-dados-triagem {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .div-alergia-medicamento {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
     }
 }
