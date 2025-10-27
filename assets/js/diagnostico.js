@@ -5,6 +5,11 @@ import { formatarNumeroCPF, formatarNumeroTelefone, formatarPressaoArterial } fr
 // Função para calcular idade
 import { calcularIdade, alertMsg, abledScroll, disabledScroll } from './components/utils.js'
 
+// Chama ao carregar a página
+$(document).ready(function () {
+    carregarDadosUser();
+    carregarDadosTriagem();
+});
 
 // Botão de voltar
 $('.btn-voltar').click(() => {
@@ -113,13 +118,6 @@ function carregarDadosTriagem() {
     });
 }
 
-// Chama ao carregar a página
-$(document).ready(function () {
-    carregarDadosUser();
-    carregarDadosTriagem();
-});
-
-
 // Função para criar a etiqueta de prioridade
 function criarEtiquetaPrioridade(prioridade) {
     // Cria a div principal
@@ -147,3 +145,138 @@ function criarEtiquetaPrioridade(prioridade) {
     // Retorna a etiqueta
     return div;
 }
+
+// Função para focar um input / textarea
+function focusInput(input) {
+    $(input)
+        .css({
+            'outline': 'var(--red-base)',
+            'border-color': 'var(--red-base)'
+        })
+        .focus();
+}
+
+// Função para desfocar um input / textarea
+function unfocusInput(input) {
+    $(input)
+        .css({
+            'outline': 'var(--blue-dark)',
+            'border-color': 'var(--gray-300)'
+        })
+}
+
+// Função para marcar em vermelho input vazio
+function showInputEmpty() {
+
+    // Obtém a textarea
+    const diagnostico = $('#diagnostico');
+
+    // Verifica se está vazio
+    if (!diagnostico.val().trim('')) {
+
+        // Borda em vermelha e foca a text area
+        focusInput(diagnostico);
+
+        // Evento input para a textarea
+        diagnostico.on('input', function () {
+            // Desfoca o input caso esteja preenchido
+            if ($(diagnostico).val().trim('')) {
+                unfocusInput($(diagnostico));
+            }
+        })
+
+        return;
+    }
+
+    // Desfoca a textarea
+    unfocusInput(diagnostico);
+
+    // Obtém a textarea
+    const receita = $('#receita');
+
+    // Verifica se está vazio
+    if (!receita.val().trim('')) {
+
+        // Borda em vermelha e foca a text area
+        focusInput(receita);
+
+        // Evento input para a textarea
+        receita.on('input', function () {
+            // Desfoca o input caso esteja preenchido
+            if ($(receita).val().trim('')) {
+                unfocusInput($(receita));
+            }
+        })
+
+        return;
+    }
+
+    // Desfoca a textarea
+    unfocusInput(receita);
+}
+
+// Função para enviar formulário
+$('.formulario-container').on('submit', function (e) {
+    // Evita o comportamento padrão
+    e.preventDefault();
+
+    // Obtém o token
+    const token = localStorage.getItem('token');
+
+    // Redireciona para login
+    if (!token) {
+        localStorage.clear();
+        return window.location.href = 'index.html';
+    }
+
+    // Obtém os parâmetros
+    const params = new URLSearchParams(window.location.search);
+
+    // Obtém o CPF do usuário
+    const cpf = params.get('cpf');
+
+    // Cria o objeto form
+    const formData = new FormData(this);
+
+    // Cria o objeto data da requisição
+    const data = {
+        diagnostico: formData.get('diagnostico'),
+        receita: formData.get('receita'),
+        cpf: cpf
+    }
+
+    // Requisição triagem (POST)
+    $.ajax({
+        url: `${URL_API}/diagnostico`,
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+        data: JSON.stringify(data),
+        success: (res) => {
+            // Salva a mensagem
+            localStorage.setItem('diagnostico-cadastrado', res.success);
+
+            // Redireciona para a página do enfermeiro
+            return window.location.href = 'medico-perfil.html';
+        },
+        error: (err) => {
+            // Logout true     
+            if (err.responseJSON.logout) {
+                // Limpa o local storage
+                localStorage.clear();
+                // Salva a mensagem 
+                localStorage.setItem('msg-logout', err.responseJSON.error);
+                // Redireciona para login
+                return window.location.href = 'index.html';
+            }
+
+            // Mostra o input vazio
+            showInputEmpty();
+
+            // Exibe a mensagem de erro
+            alertMsg(err.responseJSON.error, 'error', '.div-message');
+        }
+    })
+})

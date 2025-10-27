@@ -1,7 +1,7 @@
 // Funções para formatar
 import { formatCPF, formatSUS, formatTelefone, formatarNumeroSUS, formatarNumeroTelefone, formatarMinutos, formatarNumeroCPF } from './components/format.js';
 // Fução para remover caracteres nao numericos
-import { getNumber, alertMsg, abledScroll, disabledScroll } from './components/utils.js';
+import { getNumber, alertMsg, abledScroll, disabledScroll, carregarTotalPacitentes } from './components/utils.js';
 // Importa a URL da API
 import { URL_API } from './urlAPI.js';
 
@@ -9,6 +9,8 @@ import { URL_API } from './urlAPI.js';
 $(document).ready(() => {
     formatCPF('#input-cpf');
     formatCPF('#cpf-consulta');
+
+    carregarTotalPacitentes($("#totalPacientes"), $("#casosUrgentes"));
 })
 
 // Obtém os botões
@@ -76,13 +78,19 @@ function buscarCPF(cpfOnlyNumber, showMsg) {
         },
         success: (res) => {
 
-            // Exibe mensagem de sucesso
+            // Obtém os dados do usuário
+            const user = res.user;
+
+            // Exibe mensagem de usuário inativo
+            if (!user.ativo) {
+                alertMsg('Usuário inativo.', 'error', '#div-msg-modal');
+                return;
+            } 
+            
+            // Mensagem de sucesso
             if (showMsg) {
                 alertMsg('Usuário encontrado.', 'success', '#div-msg-modal');
             }
-
-            // Obtém os dados do usuário
-            const user = res.user;
 
             // Preenche o input com o cpf do usuário
             $('#cpf-consulta').val(formatarNumeroCPF(cpfOnlyNumber));
@@ -266,8 +274,6 @@ $(document).ready(async () => {
 
     // Carrega as consultas na fase de entrada
     await carregarConsultas('1');
-
-    carregarUsuarios();
 
 })
 

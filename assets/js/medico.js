@@ -1,39 +1,29 @@
 // Importa a URL da API
 import { URL_API } from "./urlAPI.js";
 // Função para mostrar mensagens de alerta
-import { alertMsg } from "./components/utils.js";
+import { alertMsg, carregarTotalPacitentes } from "./components/utils.js";
 // Função para formatar os Minutos
 import { formatarMinutos } from "./components/format.js";
 
 // Carrega a tabela ao carregar a página
 $(document).ready(async () => {
-  // Carrega as consultas na fase de triagem concluída
+  // Carrega as consultas na fase de diagnostico concluída
   await carregarConsultas(false, 3);
 
-  carregarUsuarios();
+  carregarTotalPacitentes($("#totalPacientes"), $("#casosUrgentes"));
 
   // Evento click
   addMoreDetailsMenu("#menu-entrada", ".details-entrada");
   addMoreDetailsMenu("#menu-diagnostico", ".details-diagnostico");
 
   // Obtém a mensagem
-  const msg = localStorage.getItem("triagem-cadastrada");
+  const msg = localStorage.getItem('diagnostico-cadastrado');
 
   if (msg) {
     // Remove a mensagem
-    localStorage.removeItem("triagem-cadastrada");
+    localStorage.removeItem('diagnostico-cadastrado');
     // Exibe a mensagem
-    alertMsg(msg, "success", "#div-msg");
-  }
-
-  // Obtém a mensagem
-  const msgError = localStorage.getItem("userNotFound");
-
-  if (msgError) {
-    // Remove a mensagem
-    localStorage.removeItem("userNotFound");
-    // Exibe a mensagem
-    alertMsg(msgError, "error", "#div-msg");
+    alertMsg(msg, 'success', '#div-message');
   }
 });
 
@@ -183,8 +173,8 @@ function addConsulta(consulta, situacao) {
       situacao == 3
         ? "details-entrada"
         : situacao == 4
-        ? "details-diagnostico"
-        : ""
+          ? "details-diagnostico"
+          : ""
     ); // muda a class conforme a situação;
 
   // Adiciona os elementos ao tr
@@ -472,23 +462,3 @@ $(".filtro-consulta").each((_, element) => {
     });
   });
 });
-
-// Função para mostrar o total de paciente
-function carregarUsuarios() {
-  $.ajax({
-    url: `${URL_API}/users`,
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-    success: (res) => {
-      // Obtém os usuarios
-      const usuarios = res.users;
-
-      // Filtra apenas os pacientes (tipo_usuario === 5)
-      const pacientes = usuarios.filter((user) => user.tipo_usuario === 5);
-
-      // Mostra o total de pacientes
-      $("#totalPacientes").text(pacientes.length);
-    },
-  });
-}
