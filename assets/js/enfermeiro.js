@@ -11,6 +11,8 @@ $(document).ready(async () => {
     // Carrega as consultas na fase de entrada
     await carregarConsultas(false, 1);
 
+    carregarUsuarios();
+
     // Evento click
     addMoreDetailsMenu('#menu-entrada', '.details-entrada');
     addMoreDetailsMenu('#menu-triagem', '.details-triagem');
@@ -469,3 +471,23 @@ $('.filtro-consulta').each((_, element) => {
     })
 
 })
+
+// Função para mostrar o total de paciente
+function carregarUsuarios() {
+  $.ajax({
+    url: `${URL_API}/users`,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    success: (res) => {
+      // Obtém os usuarios
+      const usuarios = res.users;
+
+      // Filtra apenas os pacientes (tipo_usuario === 5)
+      const pacientes = usuarios.filter((user) => user.tipo_usuario === 5);
+
+      // Mostra o total de pacientes
+      $("#totalPacientes").text(pacientes.length);
+    },
+  });
+}

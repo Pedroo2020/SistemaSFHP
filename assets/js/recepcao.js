@@ -267,6 +267,8 @@ $(document).ready(async () => {
     // Carrega as consultas na fase de entrada
     await carregarConsultas('1');
 
+    carregarUsuarios();
+
 })
 
 // Ao clicar no botão, atualiza as consultas

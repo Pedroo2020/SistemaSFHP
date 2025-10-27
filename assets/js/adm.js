@@ -752,3 +752,37 @@ iconFecharConsultas.click(() => {
 
     abledScroll();
 });
+
+// Função para carregar o total de consultas
+function carregarTotalConsultas(situacao = 0) {
+    $.ajax({
+        url: `${URL_API}/consultas/${situacao}`,
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+        },
+        success: (res) => {
+            // Verifica se o retorno tem consultas
+            if (res.consultas && Array.isArray(res.consultas)) {
+                const totalConsultas = res.consultas.length;
+
+                // Mostra no console (opcional)
+                console.log(`Total de consultas: ${totalConsultas}`);
+
+                // Exibe o total no HTML (exemplo)
+                $('#totalConsultas').text(totalConsultas);
+            } else {
+                $('#totalConsultas').text('0');
+            }
+        },
+        error: (err) => {
+            console.error('Erro ao carregar total de consultas:', err);
+            $('#totalConsultas').text('—');
+        }
+    });
+}
+
+// Chama a função quando a página carregar
+$(document).ready(() => {
+    carregarTotalConsultas(0); // 0 pode representar "todas as consultas"
+});
