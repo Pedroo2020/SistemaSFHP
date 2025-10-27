@@ -11,7 +11,7 @@ $(document).ready(async () => {
     // Carrega as consultas na fase de entrada
     await carregarConsultas(false, 1);
 
-    carregarTotalPacitentes($("#totalPacientes"), $("#casosUrgentes"));
+    carregarTotalPacitentes($("#totalPacientes"), $("#casosUrgentes"), $("#tempoMedioEspera"));
 
     // Evento click
     addMoreDetailsMenu('#menu-entrada', '.details-entrada');
@@ -72,6 +72,9 @@ function recarregarConsultas() {
     if (situacao) {
         carregarConsultas(false, situacao);
     }
+
+    // Recarrega os dados do painel
+    carregarTotalPacitentes($("#totalPacientes"), $("#casosUrgentes"), $("#tempoMedioEspera"));
 }
 
 // Função para carregar consultas

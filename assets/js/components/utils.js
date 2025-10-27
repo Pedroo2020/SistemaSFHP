@@ -1,4 +1,5 @@
 import { URL_API } from "../urlAPI.js";
+import { formatarTempo } from "./format.js";
 
 // Função para calcular idade
 function calcularIdade(dataNascimento) {
@@ -56,21 +57,60 @@ function abledScroll(body) {
 }
 
 // Função para carregar total de pacientes e o total de casos urgentes
-function carregarTotalPacitentes(pacientesText, casosUrgentesText) {
+function carregarTotalPacitentes(blocoUmText, blocoDoisText, tempoMedioText, isAdm) {
+
+    // Cria um objeto date
+    const date = new Date();
+
+    // Obtém ano, mes e dia
+    const ano = date.getFullYear();
+    const mes = String(date.getMonth() + 1).padStart(2, '0'); // meses começam em 0
+    const dia = String(date.getDate()).padStart(2, '0');
+
+    // Cria a string da data formatada
+    const hoje = `${ano}-${mes}-${dia}`;
+
+    // Cria o objeto url
+    const url = new URLSearchParams();
+
+    // Define os parâmetros i (início) e f (fim)
+
+    // VALOR FIXO NO CÓDIGO
+    url.set('i', '2025-01-01');
+    url.set('f', hoje);
+
+    // Faz a requisição
     $.ajax({
-        url: `${URL_API}/load_painel`,
+        url: `${URL_API}/load_painel?${url}`,
         headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
         },
         success: (res) => {
-            // Obtém os usuarios
-            const totalPacientes = res.total_pacientes;
-            const casosUrgentes = res.casos_urgentes;
 
-            // Mostra o total de pacientes
-            pacientesText.text(totalPacientes);
-            casosUrgentesText.text(casosUrgentes);
+            if (!isAdm) {
+                // Obtém os usuarios
+                const casosUrgentes = res.casos_urgentes;
+    
+                // Mostra o total de pacientes
+                blocoDoisText.text(casosUrgentes);
+            } else {
+                // Obtém os usuarios
+                const totalConsultas = res.total_consultas;
+    
+                // Mostra o total de pacientes
+                blocoDoisText.text(totalConsultas);
+            }
+
+            // Carrega o total de pacientes e tempo médio de espera
+            const tempoMedio = res.tempo_medio;
+            const totalPacientes = res.total_pacientes;
+            
+            tempoMedioText.text(formatarTempo(tempoMedio));
+            blocoUmText.text(totalPacientes);
         },
+        error: (err) => {
+            console.log(err)
+        }
     });
 }
 

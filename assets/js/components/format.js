@@ -276,4 +276,26 @@ function formatarPressaoArterial(valor) {
     return `${valor.slice(0, 3)}/${valor.slice(3)} mmHg`;
 }
 
-export { formatCPF, formatSUS, formatTelefone, formatarNumeroSUS, formatarNumeroTelefone, formatarMinutos, maskInputTemperature, maskInputNumber, formatarNumeroCPF, formatarPressaoArterial };
+function formatarTempo(value) {
+
+    // Calcula as horas
+    let horas = Math.floor(value / 60);
+
+    // Calcula os minutos
+    let minutos = value % 60;
+
+    // Caso tenha apenas 1 dígito, adiciona um 0 antes
+    if (String(minutos).length < 2) {
+        minutos = `0${minutos}`;
+    }
+
+    // Caso tenha apenas 1 dígito, adiciona um 0 antes
+    if (String(horas).length < 2) {
+        horas = `0${horas}`;
+    }
+
+    // Retorna o valor formatado
+    return `${horas}h ${minutos}min`
+}
+
+export { formatCPF, formatSUS, formatTelefone, formatarNumeroSUS, formatarNumeroTelefone, formatarMinutos, maskInputTemperature, maskInputNumber, formatarNumeroCPF, formatarPressaoArterial, formatarTempo };

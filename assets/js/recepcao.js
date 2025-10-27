@@ -10,7 +10,7 @@ $(document).ready(() => {
     formatCPF('#input-cpf');
     formatCPF('#cpf-consulta');
 
-    carregarTotalPacitentes($("#totalPacientes"), $("#casosUrgentes"));
+    carregarTotalPacitentes($("#totalPacientes"), $("#casosUrgentes"), $("#tempoMedioEspera"));
 })
 
 // Obtém os botões
@@ -310,6 +310,9 @@ function recarregarConsultas() {
     if (situacao) {
         carregarConsultas(situacao);
     }
+    
+    // Recarrega os dados do painel
+    carregarTotalPacitentes($("#totalPacientes"), $("#casosUrgentes"), $("#tempoMedioEspera"));
 }
 
 // Função para carregar consultas
