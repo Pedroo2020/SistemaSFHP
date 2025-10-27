@@ -3,7 +3,7 @@ import { URL_API } from './urlAPI.js';
 // Função para formatar os Minutos
 import { formatarMinutos } from './components/format.js';
 // Função para mostrar mensagens de alerta
-import { alertMsg } from './components/utils.js';
+import { alertMsg, carregarTotalPacitentes } from './components/utils.js';
 
 // Carrega a tabela ao carregar a página
 $(document).ready(async () => {
@@ -11,7 +11,7 @@ $(document).ready(async () => {
     // Carrega as consultas na fase de entrada
     await carregarConsultas(false, 1);
 
-    carregarUsuarios();
+    carregarTotalPacitentes($("#totalPacientes"), $("#casosUrgentes"));
 
     // Evento click
     addMoreDetailsMenu('#menu-entrada', '.details-entrada');
@@ -471,23 +471,3 @@ $('.filtro-consulta').each((_, element) => {
     })
 
 })
-
-// Função para mostrar o total de paciente
-function carregarUsuarios() {
-  $.ajax({
-    url: `${URL_API}/users`,
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-    success: (res) => {
-      // Obtém os usuarios
-      const usuarios = res.users;
-
-      // Filtra apenas os pacientes (tipo_usuario === 5)
-      const pacientes = usuarios.filter((user) => user.tipo_usuario === 5);
-
-      // Mostra o total de pacientes
-      $("#totalPacientes").text(pacientes.length);
-    },
-  });
-}

@@ -55,6 +55,7 @@ function abledScroll(body) {
     $(body).css('overflow', 'auto');
 }
 
+// Função para carregar total de pacientes e o total de casos urgentes
 function carregarTotalPacitentes(pacientesText, casosUrgentesText) {
     $.ajax({
         url: `${URL_API}/load_painel`,
