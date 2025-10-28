@@ -120,7 +120,7 @@ $('.filtro-consulta').each((_, element) => {
     // Função on click
     $element.on('click', function () {
 
-        // Limpa o input
+        // Obtém o valor do like
         const like = $('#input-search-usuario').val();
 
         // Percorre todos os elementos do filtro consulta

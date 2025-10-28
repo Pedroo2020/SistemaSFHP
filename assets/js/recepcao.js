@@ -323,9 +323,12 @@ function recarregarConsultas() {
         }
     })
 
+    // Obtém o valor do like
+    const like = $('#input-search-usuario').val();
+
     // Caso situação exista, refaz a busca
     if (situacao) {
-        carregarConsultas(situacao);
+        carregarConsultas(situacao, like);
     }
     
     // Recarrega os dados do painel
@@ -333,9 +336,9 @@ function recarregarConsultas() {
 }
 
 // Função para carregar consultas
-function carregarConsultas(situacao) {
+function carregarConsultas(situacao, like) {
     $.ajax({
-        url: `${URL_API}/consultas/${situacao}`,
+        url: `${URL_API}/consultas/${situacao}${like ? `?s=${like}` : ''}`,
         headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
         },
@@ -502,6 +505,10 @@ $('.filtro-consulta').each((_, element) => {
 
     // Função on click
     $element.on('click', function () {
+
+        // Obtém o valor do like
+        const like = $('#input-search-usuario').val();
+
         // Percorre todos os elementos do filtro consulta
         $('.filtro-consulta').each((_, item) => {
             // Transforma em objeto jquery
@@ -517,13 +524,35 @@ $('.filtro-consulta').each((_, element) => {
             const situacao = $item.attr('sit');
 
             // Carrega as consultas
-            carregarConsultas(situacao);
+            carregarConsultas(situacao, like);
 
             // Adiciona a class active
             return $item.addClass('active');
         })
     })
 
+})
+
+// Evento input do input search
+$('#input-search-usuario').on('input', function () {
+
+    // Obtém o like
+    const like = $(this).val();
+
+    // Percorre todos os elementos do filtro consulta
+    $('.filtro-consulta').each((_, item) => {
+        // Transforma em objeto jquery
+        const $item = $(item);
+
+        // Verifica se o objeto é diferente do objeto clicado
+        if ($item.hasClass('active')) {
+            // Obtém a situação do filtro
+            const situacao = $item.attr('sit');
+            
+            // Carrega as consultas
+            carregarConsultas(situacao, like);
+        }
+    })
 })
 
 // Desabilitar ou habilitar inputs quando inativo
