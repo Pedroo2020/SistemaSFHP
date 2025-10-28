@@ -53,6 +53,16 @@
     <!-- Fim do Header -->
 
     <main>
+        <div id="div-loading">
+            <!-- From Uiverse.io by RaspberryBee -->
+            <div class="loading">
+                <svg height="48px" width="64px">
+                    <polyline id="back" points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24"></polyline>
+                    <polyline id="front" points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24"></polyline>
+                </svg>
+            </div>
+        </div>
+        
         <!-- Título e SubTítulo -->
         <section class="container-painel">
 
@@ -353,67 +363,26 @@
         <div class="overlay-modal-consultas">
             <div class="div-modal-consultas">
                 <div class="title-consultas">
-                    <h2>Consultas</h2>
+                    <h2 class="title-modal-consultas">Consultas</h2>
                     <i class="fa-solid fa-xmark" id="fechar-consultas"></i>
                 </div>
 
                 <div class="div-table-consultas">
-                    <table class="tabela">
+                    <table class="tabela" id="table-consultas">
                         <thead>
                             <tr>
                                 <th>Nome:</th>
-                                <th>Doutor:</th>
+                                <th>Recepcionista:</th>
+                                <th>Enfermeiro:</th>
+                                <th>Médico:</th>
                                 <th>Situação:</th>
-                                <th>SUS:</th>
                                 <th>Data:</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td data-label="Nome">Pedro Santos</td>
-                                <td data-label="Doutor">Carlos Ferreira</td>
-                                <td data-label="Situação">Concluída</td>
-                                <td data-label="SUS">123.456.789.10</td>
-                                <td data-label="Data">22/09/2025</td>
-                            </tr>
-                            <tr>
-                                <td data-label="Nome">Pedro Santos</td>
-                                <td data-label="Doutor">Carlos Ferreira</td>
-                                <td data-label="Situação">Concluída</td>
-                                <td data-label="SUS">123.456.789.10</td>
-                                <td data-label="Data">22/09/2025</td>
-                            </tr>
-                            <tr>
-                                <td data-label="Nome">Pedro Santos</td>
-                                <td data-label="Doutor">Carlos Ferreira</td>
-                                <td data-label="Situação">Concluída</td>
-                                <td data-label="SUS">123.456.789.10</td>
-                                <td data-label="Data">22/09/2025</td>
-                            </tr>
-                            <tr>
-                                <td data-label="Nome">Pedro Santos</td>
-                                <td data-label="Doutor">Carlos Ferreira</td>
-                                <td data-label="Situação">Concluída</td>
-                                <td data-label="SUS">123.456.789.10</td>
-                                <td data-label="Data">22/09/2025</td>
-                            </tr>
-                            <tr>
-                                <td data-label="Nome">Pedro Santos</td>
-                                <td data-label="Doutor">Carlos Ferreira</td>
-                                <td data-label="Situação">Concluída</td>
-                                <td data-label="SUS">123.456.789.10</td>
-                                <td data-label="Data">22/09/2025</td>
-                            </tr>
-                            <tr>
-                                <td data-label="Nome">Pedro Santos</td>
-                                <td data-label="Doutor">Carlos Ferreira</td>
-                                <td data-label="Situação">Concluída</td>
-                                <td data-label="SUS">123.456.789.10</td>
-                                <td data-label="Data">22/09/2025</td>
-                            </tr>
-
-                        </tbody>
+                        <tbody id="tbody-consultas"></tbody>
                     </table>
+
+                    <p id="consult-not-found">Não há nenhuma consulta cadastrada para esse paciente.</p>
                 </div>
             </div>
         </div>

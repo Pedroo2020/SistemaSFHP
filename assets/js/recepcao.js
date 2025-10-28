@@ -6,11 +6,11 @@ import { getNumber, alertMsg, abledScroll, disabledScroll, carregarTotalPacitent
 import { URL_API } from './urlAPI.js';
 
 // Ao carregar a página, adiciona as formatações ao input
-$(document).ready(() => {
-    formatCPF('#input-cpf');
-    formatCPF('#cpf-consulta');
+$(document).ready(async () => {
+    await formatCPF('#input-cpf');
+    await formatCPF('#cpf-consulta');
 
-    carregarTotalPacitentes($("#totalPacientes"), $("#casosUrgentes"), $("#tempoMedioEspera"));
+    await carregarTotalPacitentes($("#totalPacientes"), $("#casosUrgentes"), $("#tempoMedioEspera"));
 })
 
 // Obtém os botões
@@ -269,11 +269,28 @@ formConsulta.on('submit', function (e) {
     })
 })
 
+// Função para mostrar tela loading e desabilitar scroll
+function showLoading() {
+    $('#div-loading').css('display', 'flex');
+    // Desabilita o scroll
+    disabledScroll($(document.body));
+}
+
+// Função para mostrar tela loading e desabilitar scroll
+function hideLoading() {
+    $('#div-loading').hide();
+    // Habilita o scroll
+    abledScroll($(document.body));
+}
+
 // Carrega a tabela ao carregar a página
 $(document).ready(async () => {
 
     // Carrega as consultas na fase de entrada
     await carregarConsultas('1');
+    
+    // Retira a tela de loading
+    hideLoading();
 
 })
 

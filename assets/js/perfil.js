@@ -3,6 +3,7 @@ import { URL_API, socket } from "./urlAPI.js";
 
 // Redirecionar para a página correta
 function redirectWindow(typeUser) {
+
     // Obtém o tipo do usuário
     typeUser = parseInt(typeUser);
 
@@ -47,7 +48,7 @@ function redirectWindow(typeUser) {
 }
 
 // Ao carregar a página
-$(document).ready(() => {
+$(document).ready(async () => {
 
     // TESTANDO SOCKET
     socket.on("autenticado", (data) => {
@@ -63,7 +64,7 @@ $(document).ready(() => {
     }
 
     // Fetch em cadastro (GET)
-    $.ajax({
+    await $.ajax({
         url: `${URL_API}/cadastro`,
         headers: {
             Authorization: `Bearer ${token}`

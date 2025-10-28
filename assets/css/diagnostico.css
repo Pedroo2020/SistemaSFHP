@@ -140,6 +140,10 @@ main {
     margin-top: 25px;
 }
 
+.div-pai-triagem {
+    position: relative;
+}
+
 .div-dados-triagem p {
     width: auto;
 }
@@ -272,6 +276,57 @@ main {
     outline-color: var(--blue-dark);
 }
 
+/* Etiqueta de prioridade */
+.etiqueta-prioridade {
+    padding: 10px 15px;
+    width: 100%;
+    border-radius: 30px;
+    border: 2px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & p {
+        font-weight: 600;
+        font-size: 0.85rem;
+    }
+}
+
+/* Leve (Azul) */
+.leve {
+    color: var(--blue-protocol);
+    border-color: var(--blue-protocol);
+    background-color: var(--blue-fundo);
+}
+
+/* Pouco urgente (Verde) */
+.pouco-urgente {
+    color: var(--green-protocol);
+    border-color: var(--green-protocol);
+    background-color: var(--green-fundo);
+}
+
+/* Urgente (Amarelo) */
+.urgente {
+    color: var(--yellow-protocol);
+    border-color: var(--yellow-protocol);
+    background-color: var(--yellow-fundo);
+}
+
+/* Muito urgente (Laranja) */
+.muito-urgente {
+    color: var(--orange-protocol);
+    border-color: var(--orange-protocol);
+    background-color: var(--orange-fundo);
+}
+
+/* Risco de vida (Vermelho) */
+.risco-vida {
+    color: var(--red-protocol);
+    border-color: var(--red-protocol);
+    background-color: var(--red-fundo);
+}
+
 .dado-exibido {
     padding: 10px 0;
     border: none;
@@ -288,12 +343,35 @@ main {
     color: var(--blue-base);
 }
 
+.triagem-nao-cadastrada {
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: var(--white);
+    position: absolute;
+    top: 0;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+
+    & i {
+        font-size: 2rem;
+        color: var(--blue-dark);
+    }
+
+    & p {
+        text-align: center;
+    }
+}
+
 .niveis-dor {
     display: flex;
     justify-content: space-between;
     width: 100%;
     margin-top: 5px;
-    flex-wrap: wrap;
+    flex-wrap: wrap; 
 }
 
 .niveis-dor input[type="radio"] {
@@ -312,7 +390,7 @@ main {
     cursor: pointer;
 }
 
-.niveis-dor input[type="radio"]:checked+label {
+.niveis-dor input[type="radio"]:checked + label {
     background-color: var(--blue-dark);
     color: white;
     border-color: var(--blue-dark);
@@ -321,7 +399,8 @@ main {
 .div-title-dados-triagem {
     display: flex;
     align-items: center;
-    gap: 320px;
+    justify-content: space-between;
+    gap: 12px;
 }
 
 .div-alergia-medicamento {
@@ -593,7 +672,6 @@ main {
     .div-title-dados-triagem {
         display: flex;
         flex-direction: column;
-        gap: 0;
     }
 
     .div-alergia-medicamento {
@@ -614,7 +692,6 @@ main {
     .div-title-dados-triagem {
         display: flex;
         flex-direction: column;
-        gap: 0;
     }
 
     .div-alergia-medicamento {
@@ -635,7 +712,6 @@ main {
     .div-title-dados-triagem {
         display: flex;
         flex-direction: column;
-        gap: 0;
     }
 
     .div-alergia-medicamento {

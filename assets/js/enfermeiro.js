@@ -5,17 +5,34 @@ import { formatarMinutos } from './components/format.js';
 // Função para mostrar mensagens de alerta
 import { alertMsg, carregarTotalPacitentes } from './components/utils.js';
 
+// Função para mostrar tela loading e desabilitar scroll
+function showLoading() {
+    $('#div-loading').css('display', 'flex');
+    // Desabilita o scroll
+    disabledScroll($(document.body));
+}
+
+// Função para mostrar tela loading e desabilitar scroll
+function hideLoading() {
+    $('#div-loading').hide();
+    // Habilita o scroll
+    abledScroll($(document.body));
+}
+
 // Carrega a tabela ao carregar a página
 $(document).ready(async () => {
 
     // Carrega as consultas na fase de entrada
     await carregarConsultas(false, 1);
 
-    carregarTotalPacitentes($("#totalPacientes"), $("#casosUrgentes"), $("#tempoMedioEspera"));
+    await carregarTotalPacitentes($("#totalPacientes"), $("#casosUrgentes"), $("#tempoMedioEspera"));
 
     // Evento click
     addMoreDetailsMenu('#menu-entrada', '.details-entrada');
     addMoreDetailsMenu('#menu-triagem', '.details-triagem');
+
+    // Retira a tela de loading
+    hideLoading();
 
     // Obtém a mensagem
     const msg = localStorage.getItem('triagem-cadastrada');

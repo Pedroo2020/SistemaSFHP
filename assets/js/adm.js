@@ -159,12 +159,29 @@ function addUser(user) {
     $tbody.append($tr);
 }
 
+// Função para mostrar tela loading e desabilitar scroll
+function showLoading() {
+    $('#div-loading').css('display', 'flex');
+    // Desabilita o scroll
+    disabledScroll($(document.body));
+}
+
+// Função para mostrar tela loading e desabilitar scroll
+function hideLoading() {
+    $('#div-loading').hide();
+    // Habilita o scroll
+    abledScroll($(document.body));
+}
+
 // Puxar dados da API para montar a tabela
-$(document).ready(function () {
-    carregarUsuarios();
+$(document).ready(async function () {
+    await carregarUsuarios();
 
     // Carrega os dados do painel
-    carregarTotalPacitentes($("#totalPacientes"), $("#totalConsultas"), $("#tempoMedioEspera"), true);
+    await carregarTotalPacitentes($("#totalPacientes"), $("#totalConsultas"), $("#tempoMedioEspera"), true);
+
+    // Retira a tela de loading
+    hideLoading();
 });
 
 
@@ -232,6 +249,12 @@ $(document).on("click", ".icon-more-details", function () {
             // Seleciona sexo e tipo usuário
             $("#sexo-editar").val(sexos[user.sexo]).trigger("change");
             $("#tipo-user-editar").val(cargos[user.tipo_usuario]).trigger("change");
+
+            if (user.tipo_usuario === 5) {
+                $('#btn-ver-consultas').show();
+            } else {
+                $('#btn-ver-consultas').hide();
+            }
 
             // Campos extras
             $(".campo-extra-crm-editar").css("display", "none");
@@ -319,24 +342,27 @@ function alteraSelect(itens) {
 
         if (tipo === "Paciente") {
             campoSus.show();
-            $(".camp-lad-cpf").css('width', '100%')
+            $(".camp-lad-cpf").css('width', '100%');
+            $('#btn-ver-consultas').show();
         }
         else if (tipo === "Enfermeiro") {
             campoCOREN.show();
             campoSenha.show();
             $(".camp-lad-cpf").css('width', '50%')
+            $('#btn-ver-consultas').hide();
         }
         else if (tipo === "Medico") {
             campoCRM.show();
             campoSenha.show();
             $(".camp-lad-cpf").css('width', '50%')
+            $('#btn-ver-consultas').hide();
         } else {
             campoSenha.show();
             $(".camp-lad-cpf").css('width', '50%')
+            $('#btn-ver-consultas').hide();
         }
     });
 }
-
 
 // Mudar inputs dependendo do tipo usuário do modal de adicionar usuário
 $(document).ready(function () {
@@ -734,11 +760,50 @@ const modalTodasConsultas = $('.div-modal-consultas');
 const overlayModalConsultas = $('.overlay-modal-consultas')
 
 // Abrir modal todas as consultas
-botaoVerConsultas.click(() => {
+botaoVerConsultas.click(async () => {
+    // Obtém o cpf do paciente
+    const cpfPaciente = $('#old-cpf').val();
+
+    // Faz a requisição para obter as consultas
+    await $.ajax({
+        url: `${URL_API}/get_consultas?cpf=${cpfPaciente}`,
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+        },
+        success: async (res) => {
+            // Obtém a lista de consultas
+            const consultas = res.consultas;
+
+            if (!consultas.length) {
+                // Esconde a tabela de consultas
+                $('#table-consultas').hide();
+
+                // Mostra mensagem de nenhuma consulta encontrada
+                $('#consult-not-found').show();
+                return;
+            }
+
+            // Mostra a tabela de consultas
+            $('#table-consultas').show();
+            // Esconde mensagem de nenhuma consulta encontrada
+            $('#consult-not-found').hide();
+
+            // Limpa o tbody
+            $('#tbody-consultas').empty();
+            
+            await consultas.map((consulta) => criarLabelConsulta(consulta));
+
+            // Adicioona o evento click da label consulta
+            addEventClickLabelConsulta();
+        }
+    })
+
+    // Exibe os modais
     modalEditarUsuario.css('display', 'none');
     overlayModalConsultas.css('display', 'flex');
     modalTodasConsultas.css('display', 'flex');
     
+    // Desabilita o scroll
     disabledScroll();
 });
 
@@ -749,3 +814,70 @@ iconFecharConsultas.click(() => {
 
     abledScroll();
 });
+
+// Função para criar cada linha das consultas
+function criarLabelConsulta(consulta) {
+    // Cria a tr
+    const $tr = $('<tr></tr>')
+                        .attr('id_consulta', consulta.id_consulta)
+                        .addClass('etiqueta-consulta');
+
+    // Nome paciente
+    const $nomePaciente = $('<td></td>').text(consulta.paciente);
+
+    // Nome recepcionista
+    const $nomeRecepcionista = $('<td></td>').text(consulta.recepcionista);
+
+    // Nome enfermeiro
+    const $nomeEnfermeiro = $('<td></td>').text(consulta.enfermeiro);
+
+    // Nome médico
+    const $nomeMedico = $('<td></td>').text(consulta.medico);
+
+    // Situação
+    const $situacao = $('<td></td>').append(
+                                                $('<p></p>')
+                                                            .text(consulta.situacao)
+                                                            .addClass('situacao-consulta')
+                                                            .addClass(consulta.situacao === 'Alta' ? 'concluido' : 'em-andamento')
+                                            );
+
+    // Cria um objeto date
+    const date = new Date(consulta.data_entrada);
+
+    // Obtém ano, mes e dia
+    const ano = date.getFullYear();
+    const mes = String(date.getMonth() + 1).padStart(2, '0'); // meses começam em 0
+    const dia = String(date.getDate()).padStart(2, '0');
+
+    // Cria a string da data formatada
+    const dataFormatada = `${dia}/${mes}/${ano}`;
+
+    // Data entrada
+    const $dataEntrada = $('<td></td>').text(dataFormatada);
+
+    // Append em todas as colunas na $tr
+    $tr
+        .append($nomePaciente)
+        .append($nomeRecepcionista)
+        .append($nomeEnfermeiro)
+        .append($nomeMedico)
+        .append($situacao)
+        .append($dataEntrada)
+
+    // Adiciona a $tr
+    $('#tbody-consultas').append($tr);
+}
+
+// Função para adicionar o evento de clique a label de consulta
+function addEventClickLabelConsulta() {
+    
+    // Event click
+    $('.etiqueta-consulta').click(function() {
+        // Obtém o id da consulta
+        const idConsulta = $(this).attr('id_consulta');
+
+        window.location.href = `diagnostico.html?id_consulta=${idConsulta}`;
+    })
+
+}

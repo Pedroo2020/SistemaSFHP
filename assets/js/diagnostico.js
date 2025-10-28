@@ -5,17 +5,56 @@ import { formatarNumeroCPF, formatarNumeroTelefone, formatarPressaoArterial } fr
 // Função para calcular idade
 import { calcularIdade, alertMsg, abledScroll, disabledScroll } from './components/utils.js'
 
-// Chama ao carregar a página
-$(document).ready(function () {
-    carregarDadosUser();
-    carregarDadosTriagem();
-});
+// Função para mostrar tela loading e desabilitar scroll
+function showLoading() {
+    $('#div-loading').css('display', 'flex');
+    // Desabilita o scroll
+    disabledScroll($(document.body));
+}
 
-// Botão de voltar
-$('.btn-voltar').click(() => {
-    // Redireciona para perfil do enfermeiro
-    window.location.href = 'medico-perfil.html';
-})
+// Função para mostrar tela loading e desabilitar scroll
+function hideLoading() {
+    $('#div-loading').hide();
+    // Habilita o scroll
+    abledScroll($(document.body));
+}
+
+// Chama ao carregar a página
+$(document).ready(async function () {
+    await carregarDadosUser();
+    await carregarDadosTriagem();
+
+    // Verifica se está informando id consulta nos parâmetros
+    const urlParams = new URLSearchParams(window.location.search);
+    const idConsulta = urlParams.get("id_consulta");
+
+    // Caso esteja buscando pela consulta, busca pelo diagnóstico
+    if (idConsulta) {
+        await carregarDadosDiagnostico();
+
+        // Altera o título da página
+        $('#title-page').text('Informações da consulta');
+
+        // Altera o título do navegador
+        $('#title-nav').text('SFHP - Informações da consulta');
+
+        // Esconde elementos do header
+        $('#caminho-consulta').hide();
+        $('#span-consulta').hide();
+
+        // Muda o texto
+        $('#caminho-page').text('Informações da consulta');
+    }
+
+    // Botão de voltar
+    $('.btn-voltar').click(() => {
+        // Redireciona para perfil do enfermeiro
+        window.location.href = idConsulta ? 'administrador-perfil.html' : 'medico-perfil.html';
+    })
+
+    // Retira a tela de loading
+    hideLoading();
+});
 
 const sexos = {
     1: "Masculino",
@@ -26,16 +65,19 @@ const sexos = {
 function carregarDadosUser() {
     const urlParams = new URLSearchParams(window.location.search);
     const cpf = urlParams.get("cpf");
+    const idConsulta = urlParams.get("id_consulta");
 
-    if (!cpf) {
-        console.warn("CPF não informado na URL.");
+    if (!cpf && !idConsulta) {
+        window.location.href = 'medico-perfil.html';
         return;
     }
 
+    // Monta a url passando o parâmetro
+    const url = `${URL_API}/cadastro?${cpf ? `cpf=${cpf}` : `id_consulta=${idConsulta}`}`;
+
     $.ajax({
-        url: `${URL_API}/cadastro`,
+        url: url,
         method: "GET",
-        data: { cpf: cpf },
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         },
@@ -66,19 +108,22 @@ function carregarDadosUser() {
 }
 
 // Função para carregar os dados da triagem
-function carregarDadosTriagem() {
+async function carregarDadosTriagem() {
     const urlParams = new URLSearchParams(window.location.search);
     const cpf = urlParams.get("cpf");
+    const idConsulta = urlParams.get("id_consulta");
 
-    if (!cpf) {
-        console.warn("CPF não informado na URL.");
+    if (!cpf && !idConsulta) {
+        window.location.href = 'medico-perfil.html';
         return;
     }
 
-    $.ajax({
-        url: `${URL_API}/triagem`,
+    // Monta a url passando o parâmetro
+    const url = `${URL_API}/triagem?${cpf ? `cpf=${cpf}` : `id_consulta=${idConsulta}`}`;
+
+    await $.ajax({
+        url: url,
         method: "GET",
-        data: { cpf: cpf },
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         },
@@ -90,20 +135,34 @@ function carregarDadosTriagem() {
                 return;
             }
 
-            // ===== Preenche os campos =====
+            // ===== Preenche os campos ===== //
             $("#queixa-principal").text(triagem.queixa);
             $("#temperatura-paciente").text(triagem.temperatura ? triagem.temperatura + " °C" : "—");
             $("#pressao-arterial-paciente").text(formatarPressaoArterial(triagem.pressao || "—"));
             $("#frequencia-cardiaca-paciente").text(triagem.frequencia_cardiaca ? triagem.frequencia_cardiaca + " bpm" : "—");
             $("#saturacao-oxigenio-paciente").text(triagem.saturacao ? triagem.saturacao + "%" : "—");
-            $("#nivel_dor").text(triagem.nivel_dor || "—");
             $("#alegias-paciente").text(triagem.alergia || "—");
             $("#medicamentos-uso-paciente").text(triagem.medicamento_uso || "—");
 
-            var a = ['', 'Leve', 'Pouco urgente', 'Urgente', 'Muito Urgente', 'Risco de vida']
+            var a = ['', 'Leve', 'Pouco urgente', 'Urgente', 'Muito urgente', 'Risco de vida']
 
             var div = criarEtiquetaPrioridade(a[triagem.classificacao_risco])
             $("#prioridade").html(div)
+
+            // Obtém o nível de dor
+            const nivelDor = triagem.nivel_dor;
+
+            // Obtém a div pai dos inputs
+            const divInputsNivelDor = $('#nivel_dor');
+
+            // Percorre todos até achar o valor igual
+            divInputsNivelDor.find('input').each((index, input) => {
+                // Caso seja igual, marca como checked
+                if ($(input).val() === String(nivelDor)) {
+                    $(input).prop('checked', true);
+                    return false;
+                }
+            })
 
         },
         error: (err) => {
@@ -113,9 +172,72 @@ function carregarDadosTriagem() {
                 return window.location.href = "index.html";
             }
 
+            // Mostra mensagem de dados ainda não cadastrados
+            $('#triagem-nao-cadastrada').css('display', 'flex');
+
             alertMsg("Erro ao carregar dados da triagem.", "error", "#div-msg-modal");
         }
     });
+}
+
+// Função para carregar os dados do diagnóstico
+function carregarDadosDiagnostico() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const idConsulta = urlParams.get("id_consulta");
+
+    if (!idConsulta) {
+        window.location.href = 'administrador-perfil.html';
+        return;
+    }
+
+    // Monta a url passando o parâmetro
+    const url = `${URL_API}/diagnostico?id_consulta=${idConsulta}`;
+
+    $.ajax({
+        url: url,
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        },
+        success: (res) => {
+            // Obtém o diagnóstico
+            const diagnostico = res.diagnostico;
+
+            // ===== Preenche os campos e desabilita ===== //
+            $("#diagnostico")
+                .text(diagnostico.diagnostico)
+                .prop('disabled', true);
+            $("#receita")
+                .text(diagnostico.receita)
+                .prop('disabled', true);
+
+            // Esconde o botão de alta
+            $('#btn-alta').hide();
+        },
+        error: (err) => {
+            if (err.responseJSON?.logout) {
+                localStorage.clear();
+                localStorage.setItem("msg-logout", err.responseJSON.error);
+                return window.location.href = "index.html";
+            }
+
+            $("#diagnostico")
+                .text('Ainda não cadastrado.')
+            $("#receita")
+                .text('Ainda não cadastrado.')
+
+            alertMsg(err.responseJSON.error, "error", "#div-msg-modal");
+        }
+    });
+
+    // ===== Preenche os campos e desabilita ===== //
+    $("#diagnostico")
+        .prop('disabled', true);
+    $("#receita")
+        .prop('disabled', true);
+
+    // Esconde o botão de alta
+    $('#btn-alta').hide();
 }
 
 // Função para criar a etiqueta de prioridade

@@ -23,7 +23,7 @@
     <script type="module" src="assets/js/diagnostico.js" defer></script>
 
     <link rel="icon" href="assets/img/Logo-SFHP-Branca.png">
-    <title>SFHP - Página do Médico - Diagnóstico</title>
+    <title id="title-nav">SFHP - Página do Médico - Diagnóstico</title>
 </head>
 
 <body>
@@ -35,9 +35,9 @@
             <span class="pagina">
                 <p>SFHP</p>
                 <span>/</span>
-                <p>Página do Médico</p>
-                <span>/</span>
-                <p>Diagnóstico e Receita</p>
+                <p id="caminho-consulta">Página do Médico</p>
+                <span id="span-consulta">/</span>
+                <p id="caminho-page">Diagnóstico e Receita</p>
             </span>
         </div>
 
@@ -48,10 +48,18 @@
     </header>
 
     <main>
-
+        <div id="div-loading">
+            <!-- From Uiverse.io by RaspberryBee -->
+            <div class="loading">
+                <svg height="48px" width="64px">
+                    <polyline id="back" points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24"></polyline>
+                    <polyline id="front" points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24"></polyline>
+                </svg>
+            </div>
+        </div>
 
         <section class="container-painel">
-            <h2 class="title">Diagnóstico e Receita</h2>
+            <h2 class="title" id="title-page">Diagnóstico e Receita</h2>
 
             <button class="btn-voltar">
                 <i class="fa-solid fa-arrow-left icons-blocos2"></i>
@@ -63,7 +71,7 @@
 
             <div class="coluna-esquerda">
                 <div class="div-dados-usuario">
-                    <p class="title-div">Dados do Usuário:</p>
+                    <p class="title-div">Dados do paciente:</p>
 
                     <div class="campo-grupo">
                         <label>Nome completo:</label>
@@ -104,54 +112,70 @@
                     <div class="div-title-dados-triagem">
                         <p class="title-div">Dados da Triagem:</p>
 
-                        <p class="dado-exibido  etiqueta-prioridade" id="prioridade"></p>
+                        <p id="prioridade"></p>
                     </div>
 
+                    <div class="div-pai-triagem">
+                        <div class="triagem-nao-cadastrada" id="triagem-nao-cadastrada">
+                            <i class="fa-solid fa-lock"></i>
+                            <p>Triagem não cadastrada</p>
+                        </div>
 
-                    <div class="campos-linha">
-                        <div class="campo-grupo">
-                            <label title="Temperatura Corporal">Temp.:</label>
-                            <p class="dado-exibido" id="temperatura-paciente"></p>
-                        </div>
-                        <div class="campo-grupo">
-                            <label title="Pressão Arterial">P.Arterial:</label>
-                            <p class="dado-exibido" id="pressao-arterial-paciente"></p>
-                        </div>
-                        <div class="campo-grupo">
-                            <label title="Frequência Cardíaca">F.Cardíaca:</label>
-                            <p class="dado-exibido" id="frequencia-cardiaca-paciente"></p>
-                        </div>
-                        <div class="campo-grupo">
-                            <label title="Saturação de Oxigênio">Saturação O₂:</label>
-                            <p class="dado-exibido" id="saturacao-oxigenio-paciente"></p>
-                        </div>
-                    </div>
-
-                    <div class="campo-grupo">
-                        <label for="nivel_dor">Nível de dor (1 a 10):</label>
-                        <div class="niveis-dor" name="nivel_dor" id="nivel_dor">
-                            <input type="radio" id="dor1" name="nivel-dor" value="1" checked><label for="dor1">1</label>
-                            <input type="radio" id="dor2" name="nivel-dor" value="2"><label for="dor2">2</label>
-                            <input type="radio" id="dor3" name="nivel-dor" value="3"><label for="dor3">3</label>
-                            <input type="radio" id="dor4" name="nivel-dor" value="4"><label for="dor4">4</label>
-                            <input type="radio" id="dor5" name="nivel-dor" value="5"><label for="dor5">5</label>
-                            <input type="radio" id="dor6" name="nivel-dor" value="6"><label for="dor6">6</label>
-                            <input type="radio" id="dor7" name="nivel-dor" value="7"><label for="dor7">7</label>
-                            <input type="radio" id="dor8" name="nivel-dor" value="8"><label for="dor8">8</label>
-                            <input type="radio" id="dor9" name="nivel-dor" value="9"><label for="dor9">9</label>
-                            <input type="radio" id="dor10" name="nivel-dor" value="10"><label for="dor10">10</label>
-                        </div>
-                    </div>
-
-                    <div class="div-alergia-medicamento">
-                        <div class="campo-grupo">
-                            <label for="alergias">Alergias:</label>
-                            <p class="dado-exibido" id="alegias-paciente"></p>
+                        <div class="campos-linha">
+                            <div class="campo-grupo">
+                                <label title="Temperatura Corporal">Temp.:</label>
+                                <p class="dado-exibido" id="temperatura-paciente"></p>
+                            </div>
+                            <div class="campo-grupo">
+                                <label title="Pressão Arterial">P.Arterial:</label>
+                                <p class="dado-exibido" id="pressao-arterial-paciente"></p>
+                            </div>
+                            <div class="campo-grupo">
+                                <label title="Frequência Cardíaca">F.Cardíaca:</label>
+                                <p class="dado-exibido" id="frequencia-cardiaca-paciente"></p>
+                            </div>
+                            <div class="campo-grupo">
+                                <label title="Saturação de Oxigênio">Saturação O₂:</label>
+                                <p class="dado-exibido" id="saturacao-oxigenio-paciente"></p>
+                            </div>
                         </div>
 
                         <div class="campo-grupo">
-                            <label for="medicamento_uso">Medicamentos em Uso:</label>
-                            <p class="dado-exibido" id="medicamentos-uso-paciente"></p>
+                            <label for="nivel_dor">Nível de dor (1 a 10):</label>
+                            <div class="niveis-dor" name="nivel_dor" id="nivel_dor">
+                                <input type="radio" id="dor1" name="nivel-dor" value="1" disabled><label
+                                    for="dor1">1</label>
+                                <input type="radio" id="dor2" name="nivel-dor" value="2" disabled><label
+                                    for="dor2">2</label>
+                                <input type="radio" id="dor3" name="nivel-dor" value="3" disabled><label
+                                    for="dor3">3</label>
+                                <input type="radio" id="dor4" name="nivel-dor" value="4" disabled><label
+                                    for="dor4">4</label>
+                                <input type="radio" id="dor5" name="nivel-dor" value="5" disabled><label
+                                    for="dor5">5</label>
+                                <input type="radio" id="dor6" name="nivel-dor" value="6" disabled><label
+                                    for="dor6">6</label>
+                                <input type="radio" id="dor7" name="nivel-dor" value="7" disabled><label
+                                    for="dor7">7</label>
+                                <input type="radio" id="dor8" name="nivel-dor" value="8" disabled><label
+                                    for="dor8">8</label>
+                                <input type="radio" id="dor9" name="nivel-dor" value="9" disabled><label
+                                    for="dor9">9</label>
+                                <input type="radio" id="dor10" name="nivel-dor" value="10" disabled><label
+                                    for="dor10">10</label>
+                            </div>
+                        </div>
+
+                        <div class="div-alergia-medicamento">
+                            <div class="campo-grupo">
+                                <label for="alergias">Alergias:</label>
+                                <p class="dado-exibido" id="alegias-paciente"></p>
+                            </div>
+
+                            <div class="campo-grupo">
+                                <label for="medicamento_uso">Medicamentos em Uso:</label>
+                                <p class="dado-exibido" id="medicamentos-uso-paciente"></p>
+                            </div>
                         </div>
                     </div>
 
@@ -174,7 +198,7 @@
                 </div>
         </form>
 
-        <button class="btn-action">Alta</button>
+        <button class="btn-action" id="btn-alta">Alta</button>
 
         <div class="div-message"></div>
     </main>
