@@ -723,7 +723,7 @@ thead th {
 
 /* Início Responsivo */
 
-@media (max-width: 1178px) {
+@media (max-width: 1300px) {
     .bloco {
         width: calc(50% - 10px);
     }
@@ -731,6 +731,10 @@ thead th {
     .div-search {
         flex-direction: column;
         gap: 15px;
+    }
+
+    .aba-todos-usuarios {
+        margin-right: 20px;
     }
 
     .btn-add-user {
@@ -746,13 +750,14 @@ thead th {
     }
 }
 
-@media (max-width: 814px) {
+@media (max-width: 1028px) {
     .div-text-search {
         flex-direction: column;
         gap: 20px;
     }
 
     .container-filtro {
+        overflow-x: auto;
         width: 100%;
     }
 
@@ -819,15 +824,6 @@ thead th {
 
 @media (max-width: 670px) {
 
-    .container-filtro {
-        overflow-x: auto;
-    }
-
-    .aba-todos-usuarios {
-        width: fit-content;
-        justify-content: center;
-    }
-
     .filtro-consulta {
         width: 120px;
     }
@@ -855,7 +851,7 @@ thead th {
     }
 }
 
-@media (max-width: 550px) {
+@media (max-width: 560px) {
     .search-box {
         display: flex;
         width: 100%;
@@ -873,9 +869,7 @@ thead th {
         padding: 30px;
         padding-bottom: 60px;
     }
-}
 
-@media (max-width: 500px) {
     .bloco {
         width: 100%;
         flex-direction: column;

@@ -337,7 +337,7 @@ main {
     resize: none;
 
     &:disabled {
-        padding: 10px 0 0 0;
+        padding: 7px 0 0 0;
         border: none;
         background: transparent;
         color: var(--black);

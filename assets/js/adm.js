@@ -3,7 +3,7 @@ import { URL_API } from './urlAPI.js';
 // Função para calcular idade e remover caracteres nao numericos
 import { calcularIdade, getNumber, alertMsg, carregarTotalPacitentes } from './components/utils.js';
 // Funções para formatar
-import { formatCPF, formatTelefone, formatSUS, formatarNumeroCPF, formatarNumeroTelefone } from './components/format.js';
+import { formatCPF, formatTelefone, formatSUS, formatarNumeroCPF, formatarNumeroTelefone, formatarNumeroSUS } from './components/format.js';
 
 // Função para desabilitar o scroll
 function disabledScroll() {
@@ -35,9 +35,35 @@ fecharModalAdicionarUsuario.click(() => {
 });
 
 // Função para carregar os usuários
-function carregarUsuarios() {
+function carregarUsuarios(tipoUsuario, like) {
+
+    // Limpa a tabela antes de carregar novos dados
+    $('#table-usuarios').empty();
+
+    function addNotFound() {
+        // Adiciona uma mensagem de sem resultados encontrados
+        const userNotFound = $('<tr></tr>')
+            .append($('<td></td>')
+                .text('Nenhum resultado encontrado para essa busca')
+                .addClass('consultas-not-found')
+                .attr('colspan', 9))
+
+        // Adiciona a cédula a tabela
+        $('#table-usuarios').append(userNotFound);
+    }
+
+    let searchParams = []
+
+    if (tipoUsuario) {
+        searchParams.push(`t=${tipoUsuario}`)
+    }
+
+    if (like) {
+        searchParams.push(`s=${like}`)
+    }
+
     $.ajax({
-        url: `${URL_API}/users`,
+        url: `${URL_API}/users${searchParams ? `?${searchParams.join('&')}` : ""}`,
         headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
         },
@@ -46,23 +72,11 @@ function carregarUsuarios() {
             // Obtém os usuários
             const usuarios = res.users;
 
-            // Limpa a tabela antes de carregar novos dados
-            $('#table-usuarios').empty();
-
             if (usuarios.length > 0) {
                 // Carrega os usuários na tabela
                 usuarios.map((user) => addUser(user));
             } else {
-
-                // Adiciona uma mensagem de sem resultados encontrados
-                const userNotFound = $('<tr></tr>')
-                    .append($('<td></td>')
-                        .text('Nenhum resultado encontrado para essa busca')
-                        .addClass('consultas-not-found')
-                        .attr('colspan', 9))
-
-                // Adiciona a cédula a tabela
-                $('#table-usuários').append(userNotFound);
+                addNotFound();
             }
 
             // Obtém a data e hora atual
@@ -92,11 +106,68 @@ function carregarUsuarios() {
                 return window.location.href = 'index.html';
             }
 
-            // Exibe a mensagem
-            alertMsg(err.responseJSON.error, 'error', '#div-msg-modal');
+            // Adiciona mensagem de não encontrado
+            addNotFound();
         }
     })
 }
+
+// Filtro da consulta
+$('.filtro-consulta').each((_, element) => {
+    // Transforma em objeto jquery
+    const $element = $(element);
+
+    // Função on click
+    $element.on('click', function () {
+
+        // Limpa o input
+        const like = $('#input-search-usuario').val();
+
+        // Percorre todos os elementos do filtro consulta
+        $('.filtro-consulta').each((_, item) => {
+            // Transforma em objeto jquery
+            const $item = $(item);
+
+            // Verifica se o objeto é diferente do objeto clicado
+            if ($item[0] !== this) {
+                // Remove a class active
+                return $item.removeClass('active');
+            }
+
+            // Obtém a situação do filtro
+            const situacao = $item.attr('sit');
+
+            // Carrega as consultas
+            carregarUsuarios(situacao, like);
+
+            // Adiciona a class active
+            return $item.addClass('active');
+        })
+    })
+
+})
+
+// Evento input do input search
+$('#input-search-usuario').on('input', function () {
+
+    // Obtém o like
+    const like = $(this).val();
+
+    // Percorre todos os elementos do filtro consulta
+    $('.filtro-consulta').each((_, item) => {
+        // Transforma em objeto jquery
+        const $item = $(item);
+
+        // Verifica se o objeto é diferente do objeto clicado
+        if ($item.hasClass('active')) {
+            // Obtém a situação do filtro
+            const situacao = $item.attr('sit');
+            
+            // Carrega as consultas
+            carregarUsuarios(situacao, like);
+        }
+    })
+})
 
 // Função para adicionar os dados a tabela
 function addUser(user) {
@@ -133,8 +204,10 @@ function addUser(user) {
         .text(cargos[user.tipo_usuario])
         .addClass('td-string')
 
+    const susCorenCRMText = user.coren_crm_sus ? user.tipo_usuario == 5 ? formatarNumeroSUS(user.coren_crm_sus) : user.coren_crm_sus : '~';
+
     const susCorenCRM = $('<td></td>')
-        .text(user.coren_crm_sus ? user.coren_crm_sus : '~')
+        .text(susCorenCRMText)
         .addClass('td-numero')
 
     // Ícone de ação
@@ -292,7 +365,8 @@ $(document).on("click", ".icon-more-details", function () {
 
             } else if (tipo === "paciente") {
                 // Apenas número do SUS
-                $("#sus-editar").val(user.coren_crm_sus ?? "");
+                $("#sus-editar").val(formatarNumeroSUS(user.coren_crm_sus))
+                formatSUS($("#sus-editar"), user.coren_crm_sus);
             }
 
             // Abre o modal
@@ -790,7 +864,7 @@ botaoVerConsultas.click(async () => {
 
             // Limpa o tbody
             $('#tbody-consultas').empty();
-            
+
             await consultas.map((consulta) => criarLabelConsulta(consulta));
 
             // Adicioona o evento click da label consulta
@@ -802,7 +876,7 @@ botaoVerConsultas.click(async () => {
     modalEditarUsuario.css('display', 'none');
     overlayModalConsultas.css('display', 'flex');
     modalTodasConsultas.css('display', 'flex');
-    
+
     // Desabilita o scroll
     disabledScroll();
 });
@@ -819,8 +893,8 @@ iconFecharConsultas.click(() => {
 function criarLabelConsulta(consulta) {
     // Cria a tr
     const $tr = $('<tr></tr>')
-                        .attr('id_consulta', consulta.id_consulta)
-                        .addClass('etiqueta-consulta');
+        .attr('id_consulta', consulta.id_consulta)
+        .addClass('etiqueta-consulta');
 
     // Nome paciente
     const $nomePaciente = $('<td></td>').text(consulta.paciente);
@@ -836,11 +910,11 @@ function criarLabelConsulta(consulta) {
 
     // Situação
     const $situacao = $('<td></td>').append(
-                                                $('<p></p>')
-                                                            .text(consulta.situacao)
-                                                            .addClass('situacao-consulta')
-                                                            .addClass(consulta.situacao === 'Alta' ? 'concluido' : 'em-andamento')
-                                            );
+        $('<p></p>')
+            .text(consulta.situacao)
+            .addClass('situacao-consulta')
+            .addClass(consulta.situacao === 'Alta' ? 'concluido' : 'em-andamento')
+    );
 
     // Cria um objeto date
     const date = new Date(consulta.data_entrada);
@@ -871,9 +945,9 @@ function criarLabelConsulta(consulta) {
 
 // Função para adicionar o evento de clique a label de consulta
 function addEventClickLabelConsulta() {
-    
+
     // Event click
-    $('.etiqueta-consulta').click(function() {
+    $('.etiqueta-consulta').click(function () {
         // Obtém o id da consulta
         const idConsulta = $(this).attr('id_consulta');
 
