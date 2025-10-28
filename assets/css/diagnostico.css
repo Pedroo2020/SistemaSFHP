@@ -335,6 +335,13 @@ main {
 .dado-multilinha {
     height: 232px;
     resize: none;
+
+    &:disabled {
+        padding: 10px 0 0 0;
+        border: none;
+        background: transparent;
+        color: var(--black);
+    }
 }
 
 #classificacao-risco option {

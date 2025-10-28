@@ -382,7 +382,7 @@ form .campo input {
     display: none;
     flex-direction: column;
     gap: 20px;
-    background-color: var(--gray-100);
+    background-color: var(--white);
     padding: 50px;
     width: 90%;
     border-radius: 20px;
@@ -423,17 +423,17 @@ form .campo input {
 }
 
 .tabela thead th {
-    background-color: var(--gray-100);
+    background-color: var(--white);
     text-align: left;
     font-weight: bold;
     padding: 16px 15px;
 }
 
 .tabela tbody tr {
-    background-color: var(--gray-200);
+    background-color: var(--gray-100);
     cursor: pointer;
     &:hover {
-        background-color: var(--gray-250);
+        background-color: var(--gray-200);
     }
 }
 

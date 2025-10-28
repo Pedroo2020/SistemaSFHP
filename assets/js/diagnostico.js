@@ -22,7 +22,12 @@ function hideLoading() {
 // Chama ao carregar a página
 $(document).ready(async function () {
     await carregarDadosUser();
-    await carregarDadosTriagem();
+
+    try {
+        await carregarDadosTriagem();
+    } catch (err) {
+        console.warn("Erro ao carregar triagem:", err.responseJSON.error);
+    }
 
     // Verifica se está informando id consulta nos parâmetros
     const urlParams = new URLSearchParams(window.location.search);
@@ -174,8 +179,6 @@ async function carregarDadosTriagem() {
 
             // Mostra mensagem de dados ainda não cadastrados
             $('#triagem-nao-cadastrada').css('display', 'flex');
-
-            alertMsg("Erro ao carregar dados da triagem.", "error", "#div-msg-modal");
         }
     });
 }
