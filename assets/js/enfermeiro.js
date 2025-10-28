@@ -85,9 +85,12 @@ function recarregarConsultas() {
         }
     })
 
+    // Obtém o valor do like
+    const like = $('#input-search-usuario').val();
+
     // Caso situação exista, refaz a busca
     if (situacao) {
-        carregarConsultas(false, situacao);
+        carregarConsultas(false, situacao, like);
     }
 
     // Recarrega os dados do painel
@@ -95,10 +98,10 @@ function recarregarConsultas() {
 }
 
 // Função para carregar consultas
-function carregarConsultas(getConsultas, situacao) {
+function carregarConsultas(getConsultas, situacao, like) {
     return new Promise((resolve, reject) => {
         $.ajax({
-            url: `${URL_API}/consultas/${situacao}`,
+            url: `${URL_API}/consultas/${situacao}${like ? `?s=${like}` : ''}`,
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             },
@@ -159,6 +162,28 @@ function carregarConsultas(getConsultas, situacao) {
         });
     });
 }
+
+// Evento input do input search
+$('#input-search-usuario').on('input', function () {
+
+    // Obtém o like
+    const like = $(this).val();
+
+    // Percorre todos os elementos do filtro consulta
+    $('.filtro-consulta').each((_, item) => {
+        // Transforma em objeto jquery
+        const $item = $(item);
+
+        // Verifica se o objeto é diferente do objeto clicado
+        if ($item.hasClass('active')) {
+            // Obtém a situação do filtro
+            const situacao = $item.attr('sit');
+            
+            // Carrega as consultas
+            carregarConsultas(false, situacao, like);
+        }
+    })
+})
 
 // Função para adicionar os dados a tabela
 function addConsulta(consulta, situacao) {
