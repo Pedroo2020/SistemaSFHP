@@ -192,13 +192,29 @@
                 </div>
 
                 <div class="campo-grupo last">
-                    <label for="Receita">Receita:</label>
-                    <textarea class="input-triagem dado-multilinha" placeholder="Digite aqui a receita médica"
-                        id="receita" name="receita"></textarea>
+                    <label for="Receita">Receita paciente:</label>
+                    <textarea class="input-triagem dado-multilinha" placeholder="Digite aqui a receita médica para o paciente" id="receita" name="receita"></textarea>
+                </div>
+
+                <div class="campo-grupo last">
+                    <label for="Receita-enfermagem">Receita enfemagem:</label>
+                    <textarea class="input-triagem dado-multilinha" placeholder="Digite aqui a receita médica para a enfermaria" id="receita-enfermagem" name="receita-enfermagem"></textarea>
                 </div>
         </form>
 
         <button class="btn-action" id="btn-alta">Alta</button>
+
+        <div class="div-btns-pdf">
+            <button class="btn-export" type="button">
+                <i class="fa-solid fa-cloud-arrow-down"></i>
+                Receita paciente
+            </button>
+
+            <button class="btn-export" type="button">
+                <i class="fa-solid fa-cloud-arrow-down"></i>
+                Receita enfermagem
+            </button>
+        </div>
 
         <div class="div-message"></div>
     </main>
