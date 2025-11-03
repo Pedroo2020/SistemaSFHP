@@ -72,7 +72,7 @@ function getToday() {
 
 // Função para pegar a data de hoje
 function getTodayInputDate(inputDateStart, inputDateEnd) {
-    
+
     const hoje = getToday();
 
     // Atualiza os valores do input para hoje
@@ -83,48 +83,55 @@ function getTodayInputDate(inputDateStart, inputDateEnd) {
 // Função para carregar total de pacientes e o total de casos urgentes
 function carregarTotalPacitentes(blocoUmText, blocoDoisText, tempoMedioText, dateStart, dateEnd, isAdm) {
 
-    // Cria o objeto url
-    const url = new URLSearchParams();
+    // Promise para funcionar o await
+    return new Promise((resolve, reject) => {
+        // Cria o objeto url
+        const url = new URLSearchParams();
 
-    // Define os parâmetros i (início) e f (fim)
+        // Define os parâmetros i (início) e f (fim)
 
-    // VALOR FIXO NO CÓDIGO
-    url.set('i', dateStart);
-    url.set('f', dateEnd);
+        // VALOR FIXO NO CÓDIGO
+        url.set('i', dateStart);
+        url.set('f', dateEnd);
 
-    // Faz a requisição
-    $.ajax({
-        url: `${URL_API}/load_painel?${url}`,
-        headers: {
-            "Authorization": `Bearer ${localStorage.getItem("token")}`
-        },
-        success: (res) => {
+        // Faz a requisição
+        $.ajax({
+            url: `${URL_API}/load_painel?${url}`,
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            },
+            success: (res) => {
 
-            if (!isAdm) {
-                // Obtém os usuarios
-                const casosUrgentes = res.casos_urgentes;
-    
-                // Mostra o total de pacientes
-                blocoDoisText.text(casosUrgentes);
-            } else {
-                // Obtém os usuarios
-                const totalConsultas = res.total_consultas;
-    
-                // Mostra o total de pacientes
-                blocoDoisText.text(totalConsultas);
+                if (!isAdm) {
+                    // Obtém os usuarios
+                    const casosUrgentes = res.casos_urgentes;
+
+                    // Mostra o total de pacientes
+                    blocoDoisText.text(casosUrgentes);
+                } else {
+                    // Obtém os usuarios
+                    const totalConsultas = res.total_consultas;
+
+                    // Mostra o total de pacientes
+                    blocoDoisText.text(totalConsultas);
+                }
+
+                // Carrega o total de pacientes e tempo médio de espera
+                const tempoMedio = res.tempo_medio;
+                const totalPacientes = res.total_pacientes;
+
+                tempoMedioText.text(formatarTempo(tempoMedio));
+                blocoUmText.text(totalPacientes);
+
+                // Resolve a promise
+                resolve();
+            },
+            error: (err) => {
+                console.log(err);
+                reject(err);
             }
-
-            // Carrega o total de pacientes e tempo médio de espera
-            const tempoMedio = res.tempo_medio;
-            const totalPacientes = res.total_pacientes;
-            
-            tempoMedioText.text(formatarTempo(tempoMedio));
-            blocoUmText.text(totalPacientes);
-        },
-        error: (err) => {
-            console.log(err)
-        }
-    });
+        });
+    })
 }
 
 export { calcularIdade, getNumber, alertMsg, disabledScroll, abledScroll, getTodayInputDate, getToday, carregarTotalPacitentes };

@@ -69,78 +69,87 @@ function onChangeInputDate(inputDateStart, inputDateEnd) {
 // Função para carregar os usuários
 function carregarUsuarios(tipoUsuario, like) {
 
-    // Limpa a tabela antes de carregar novos dados
-    $('#table-usuarios').empty();
+    return new Promise((resolve, reject) => {
 
-    function addNotFound() {
-        // Adiciona uma mensagem de sem resultados encontrados
-        const userNotFound = $('<tr></tr>')
-            .append($('<td></td>')
-                .text('Nenhum resultado encontrado para essa busca')
-                .addClass('consultas-not-found')
-                .attr('colspan', 9))
+        // Limpa a tabela antes de carregar novos dados
+        $('#table-usuarios').empty();
 
-        // Adiciona a cédula a tabela
-        $('#table-usuarios').append(userNotFound);
-    }
+        function addNotFound() {
+            // Adiciona uma mensagem de sem resultados encontrados
+            const userNotFound = $('<tr></tr>')
+                .append($('<td></td>')
+                    .text('Nenhum resultado encontrado para essa busca')
+                    .addClass('consultas-not-found')
+                    .attr('colspan', 9))
 
-    let searchParams = []
-
-    if (tipoUsuario) {
-        searchParams.push(`t=${tipoUsuario}`)
-    }
-
-    if (like) {
-        searchParams.push(`s=${like}`)
-    }
-
-    $.ajax({
-        url: `${URL_API}/users${searchParams ? `?${searchParams.join('&')}` : ""}`,
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
-        },
-        success: (res) => {
-
-            // Obtém os usuários
-            const usuarios = res.users;
-
-            if (usuarios.length > 0) {
-                // Carrega os usuários na tabela
-                usuarios.map((user) => addUser(user));
-            } else {
-                addNotFound();
-            }
-
-            // Obtém a data e hora atual
-            const dataAtual = new Date()
-
-            // Formata a data em padrão brasileiro
-            const dataFormatada = dataAtual.toLocaleString("pt-BR", {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric",
-                hour: "2-digit",
-                minute: "2-digit",
-                hour12: false // mantém no formato 24h
-            });
-
-            // Atualiza a data e hora da última atualização
-            $('.last-att').text(`Última atualização: ${dataFormatada}`);
-        },
-        error: (err) => {
-            // Logout true     
-            if (err.responseJSON.logout) {
-                // Limpa o local storage
-                localStorage.clear();
-                // Salva a mensagem 
-                localStorage.setItem('msg-logout', err.responseJSON.error);
-                // Redireciona para login
-                return window.location.href = 'index.html';
-            }
-
-            // Adiciona mensagem de não encontrado
-            addNotFound();
+            // Adiciona a cédula a tabela
+            $('#table-usuarios').append(userNotFound);
         }
+
+        let searchParams = []
+
+        if (tipoUsuario) {
+            searchParams.push(`t=${tipoUsuario}`)
+        }
+
+        if (like) {
+            searchParams.push(`s=${like}`)
+        }
+
+        $.ajax({
+            url: `${URL_API}/users${searchParams ? `?${searchParams.join('&')}` : ""}`,
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            },
+            success: (res) => {
+
+                // Obtém os usuários
+                const usuarios = res.users;
+
+                if (usuarios.length > 0) {
+                    // Carrega os usuários na tabela
+                    usuarios.map((user) => addUser(user));
+                } else {
+                    addNotFound();
+                }
+
+                // Obtém a data e hora atual
+                const dataAtual = new Date()
+
+                // Formata a data em padrão brasileiro
+                const dataFormatada = dataAtual.toLocaleString("pt-BR", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false // mantém no formato 24h
+                });
+
+                // Atualiza a data e hora da última atualização
+                $('.last-att').text(`Última atualização: ${dataFormatada}`);
+            
+                // Resolve a promise
+                resolve();
+            },
+            error: (err) => {
+                // Logout true     
+                if (err.responseJSON.logout) {
+                    // Limpa o local storage
+                    localStorage.clear();
+                    // Salva a mensagem 
+                    localStorage.setItem('msg-logout', err.responseJSON.error);
+                    // Redireciona para login
+                    return window.location.href = 'index.html';
+                }
+
+                // Adiciona mensagem de não encontrado
+                addNotFound();
+
+                // Reject a promise
+                reject(err);
+            }
+        })
     })
 }
 

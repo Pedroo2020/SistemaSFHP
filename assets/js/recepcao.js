@@ -365,66 +365,74 @@ function recarregarConsultas() {
 
 // Função para carregar consultas
 function carregarConsultas(situacao, like) {
-    $.ajax({
-        url: `${URL_API}/consultas/${situacao}${like ? `?s=${like}` : ''}`,
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
-        },
-        success: (res) => {
-            // Obtém as consultas
-            const consultas = res.consultas;
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: `${URL_API}/consultas/${situacao}${like ? `?s=${like}` : ''}`,
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            },
+            success: (res) => {
+                // Obtém as consultas
+                const consultas = res.consultas;
 
-            // Limpa a tabela antes de carregar novos dados
-            $('#table-consultas').empty();
+                // Limpa a tabela antes de carregar novos dados
+                $('#table-consultas').empty();
 
-            if (consultas.length > 0) {
-                // Carrega as consultas na tabela
-                consultas.map((consulta) => addConsulta(consulta));
-            } else {
+                if (consultas.length > 0) {
+                    // Carrega as consultas na tabela
+                    consultas.map((consulta) => addConsulta(consulta));
+                } else {
 
-                // Adiciona uma mensagem de sem resultados encontrados
-                const consultasNotFound = $('<tr></tr>')
-                    .append($('<td></td>')
-                        .text('Nenhum resultado encontrado para essa busca')
-                        .addClass('consultas-not-found')
-                        .attr('colspan', 9))
+                    // Adiciona uma mensagem de sem resultados encontrados
+                    const consultasNotFound = $('<tr></tr>')
+                        .append($('<td></td>')
+                            .text('Nenhum resultado encontrado para essa busca')
+                            .addClass('consultas-not-found')
+                            .attr('colspan', 9))
 
-                // Adiciona a cédula a tabela
-                $('#table-consultas').append(consultasNotFound);
+                    // Adiciona a cédula a tabela
+                    $('#table-consultas').append(consultasNotFound);
 
+                }
+
+
+                // Obtém a data e hora atual
+                const dataAtual = new Date()
+
+                // Formata a data em padrão brasileiro
+                const dataFormatada = dataAtual.toLocaleString("pt-BR", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false // mantém no formato 24h
+                });
+
+                // Atualiza a data e hora da última atualização
+                $('.last-att').text(`Última atualização: ${dataFormatada}`);
+
+                // Resolve a promise
+                resolve();
+            },
+            error: (err) => {
+                // Logout true     
+                if (err.responseJSON.logout) {
+                    // Limpa o local storage
+                    localStorage.clear();
+                    // Salva a mensagem 
+                    localStorage.setItem('msg-logout', err.responseJSON.error);
+                    // Redireciona para login
+                    return window.location.href = 'index.html';
+                }
+
+                // Exibe mensagem de erro
+                alertMsg(err.responseJSON.error, 'error', '#div-msg-modal');
+
+                // Erro na promise
+                reject(err);
             }
-
-
-            // Obtém a data e hora atual
-            const dataAtual = new Date()
-
-            // Formata a data em padrão brasileiro
-            const dataFormatada = dataAtual.toLocaleString("pt-BR", {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric",
-                hour: "2-digit",
-                minute: "2-digit",
-                hour12: false // mantém no formato 24h
-            });
-
-            // Atualiza a data e hora da última atualização
-            $('.last-att').text(`Última atualização: ${dataFormatada}`);
-        },
-        error: (err) => {
-            // Logout true     
-            if (err.responseJSON.logout) {
-                // Limpa o local storage
-                localStorage.clear();
-                // Salva a mensagem 
-                localStorage.setItem('msg-logout', err.responseJSON.error);
-                // Redireciona para login
-                return window.location.href = 'index.html';
-            }
-
-            // Exibe mensagem de erro
-            alertMsg(err.responseJSON.error, 'error', '#div-msg-modal');
-        }
+        })
     })
 }
 

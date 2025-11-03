@@ -21,9 +21,8 @@ function hideLoading() {
 
 // Chama ao carregar a página
 $(document).ready(async function () {
-    await carregarDadosUser();
-
     try {
+        await carregarDadosUser();
         await carregarDadosTriagem();
     } catch (err) {
         console.warn("Erro ao carregar triagem:", err.responseJSON.error);
@@ -36,7 +35,7 @@ $(document).ready(async function () {
     // Caso esteja buscando pela consulta, busca pelo diagnóstico
     if (idConsulta) {
         await carregarDadosDiagnostico();
-
+        
         // Altera o título da página
         $('#title-page').text('Informações da consulta');
 
@@ -68,179 +67,221 @@ const sexos = {
 
 // Função para carregar os usuários
 function carregarDadosUser() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const cpf = urlParams.get("cpf");
-    const idConsulta = urlParams.get("id_consulta");
 
-    if (!cpf && !idConsulta) {
-        window.location.href = 'medico-perfil.html';
-        return;
-    }
+    return new Promise((resolve, reject) => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const cpf = urlParams.get("cpf");
+        const idConsulta = urlParams.get("id_consulta");
 
-    // Monta a url passando o parâmetro
-    const url = `${URL_API}/cadastro?${cpf ? `cpf=${cpf}` : `id_consulta=${idConsulta}`}`;
-
-    $.ajax({
-        url: url,
-        method: "GET",
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`
-        },
-        success: (res) => {
-
-            const user = res.user;
-
-            // ===== Preenche os campos =====
-            $("#nome-paciente").text(user.nome);
-            $("#cpf-paciente").text(formatarNumeroCPF(user.cpf));
-            $("#telefone-paciente").text(formatarNumeroTelefone(user.telefone));
-            $("#sexo-paciente").text(sexos[user.sexo]);
-
-            // Idade
-            const idade = calcularIdade(user.data_nascimento);
-            $("#idade-paciente").text(idade ? idade + " anos" : "—");
-        },
-        error: (err) => {
-            if (err.responseJSON?.logout) {
-                localStorage.clear();
-                localStorage.setItem("msg-logout", err.responseJSON.error);
-                return window.location.href = "index.html";
-            }
-
-            alertMsg("Erro ao carregar usuário.", "error", "#div-msg-modal");
+        if (!cpf && !idConsulta) {
+            window.location.href = 'medico-perfil.html';
+            return;
         }
-    });
+
+        // Monta a url passando o parâmetro
+        const url = `${URL_API}/cadastro?${cpf ? `cpf=${cpf}` : `id_consulta=${idConsulta}`}`;
+
+        $.ajax({
+            url: url,
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            },
+            success: (res) => {
+
+                const user = res.user;
+
+                // ===== Preenche os campos =====
+                $("#nome-paciente").text(user.nome);
+                $("#cpf-paciente").text(formatarNumeroCPF(user.cpf));
+                $("#telefone-paciente").text(formatarNumeroTelefone(user.telefone));
+                $("#sexo-paciente").text(sexos[user.sexo]);
+
+                // Idade
+                const idade = calcularIdade(user.data_nascimento);
+                $("#idade-paciente").text(idade ? idade + " anos" : "—");
+
+                // Sucesso
+                resolve();
+            },
+            error: (err) => {
+                if (err.responseJSON?.logout) {
+                    localStorage.clear();
+                    localStorage.setItem("msg-logout", err.responseJSON.error);
+                    return window.location.href = "index.html";
+                }
+
+                alertMsg("Erro ao carregar usuário.", "error", "#div-msg-modal");
+
+                // Erro
+                reject(err);
+            }
+        });
+    })
 }
 
 // Função para carregar os dados da triagem
 async function carregarDadosTriagem() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const cpf = urlParams.get("cpf");
-    const idConsulta = urlParams.get("id_consulta");
 
-    if (!cpf && !idConsulta) {
-        window.location.href = 'medico-perfil.html';
-        return;
-    }
+    return new Promise((resolve, reject) => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const cpf = urlParams.get("cpf");
+        const idConsulta = urlParams.get("id_consulta");
 
-    // Monta a url passando o parâmetro
-    const url = `${URL_API}/triagem?${cpf ? `cpf=${cpf}` : `id_consulta=${idConsulta}`}`;
-
-    await $.ajax({
-        url: url,
-        method: "GET",
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`
-        },
-        success: (res) => {
-            const triagem = res.triagem;
-
-            if (!triagem) {
-                console.warn("Nenhum dado de triagem encontrado.");
-                return;
-            }
-
-            // ===== Preenche os campos ===== //
-            $("#queixa-principal").text(triagem.queixa);
-            $("#temperatura-paciente").text(triagem.temperatura ? triagem.temperatura + " °C" : "—");
-            $("#pressao-arterial-paciente").text(formatarPressaoArterial(triagem.pressao || "—"));
-            $("#frequencia-cardiaca-paciente").text(triagem.frequencia_cardiaca ? triagem.frequencia_cardiaca + " bpm" : "—");
-            $("#saturacao-oxigenio-paciente").text(triagem.saturacao ? triagem.saturacao + "%" : "—");
-            $("#alegias-paciente").text(triagem.alergia || "—");
-            $("#medicamentos-uso-paciente").text(triagem.medicamento_uso || "—");
-
-            var a = ['', 'Leve', 'Pouco urgente', 'Urgente', 'Muito urgente', 'Risco de vida']
-
-            var div = criarEtiquetaPrioridade(a[triagem.classificacao_risco])
-            $("#prioridade").html(div)
-
-            // Obtém o nível de dor
-            const nivelDor = triagem.nivel_dor;
-
-            // Obtém a div pai dos inputs
-            const divInputsNivelDor = $('#nivel_dor');
-
-            // Percorre todos até achar o valor igual
-            divInputsNivelDor.find('input').each((index, input) => {
-                // Caso seja igual, marca como checked
-                if ($(input).val() === String(nivelDor)) {
-                    $(input).prop('checked', true);
-                    return false;
-                }
-            })
-
-        },
-        error: (err) => {
-            if (err.responseJSON?.logout) {
-                localStorage.clear();
-                localStorage.setItem("msg-logout", err.responseJSON.error);
-                return window.location.href = "index.html";
-            }
-
-            // Mostra mensagem de dados ainda não cadastrados
-            $('#triagem-nao-cadastrada').css('display', 'flex');
+        if (!cpf && !idConsulta) {
+            window.location.href = 'medico-perfil.html';
+            return;
         }
-    });
+
+        // Monta a url passando o parâmetro
+        const url = `${URL_API}/triagem?${cpf ? `cpf=${cpf}` : `id_consulta=${idConsulta}`}`;
+
+        $.ajax({
+            url: url,
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            },
+            success: (res) => {
+                const triagem = res.triagem;
+
+                if (!triagem) {
+                    console.warn("Nenhum dado de triagem encontrado.");
+                    return;
+                }
+
+                // ===== Preenche os campos ===== //
+                $("#queixa-principal").text(triagem.queixa);
+                $("#temperatura-paciente").text(triagem.temperatura ? triagem.temperatura + " °C" : "—");
+                $("#pressao-arterial-paciente").text(formatarPressaoArterial(triagem.pressao || "—"));
+                $("#frequencia-cardiaca-paciente").text(triagem.frequencia_cardiaca ? triagem.frequencia_cardiaca + " bpm" : "—");
+                $("#saturacao-oxigenio-paciente").text(triagem.saturacao ? triagem.saturacao + "%" : "—");
+                $("#alegias-paciente").text(triagem.alergia || "—");
+                $("#medicamentos-uso-paciente").text(triagem.medicamento_uso || "—");
+
+                var a = ['', 'Leve', 'Pouco urgente', 'Urgente', 'Muito urgente', 'Risco de vida']
+
+                var div = criarEtiquetaPrioridade(a[triagem.classificacao_risco])
+                $("#prioridade").html(div)
+
+                // Obtém o nível de dor
+                const nivelDor = triagem.nivel_dor;
+
+                // Obtém a div pai dos inputs
+                const divInputsNivelDor = $('#nivel_dor');
+
+                // Percorre todos até achar o valor igual
+                divInputsNivelDor.find('input').each((index, input) => {
+                    // Caso seja igual, marca como checked
+                    if ($(input).val() === String(nivelDor)) {
+                        $(input).prop('checked', true);
+                        return false;
+                    }
+                })
+
+                // Sucesso
+                resolve();
+            },
+            error: (err) => {
+                if (err.responseJSON?.logout) {
+                    localStorage.clear();
+                    localStorage.setItem("msg-logout", err.responseJSON.error);
+                    return window.location.href = "index.html";
+                }
+
+                // Mostra mensagem de dados ainda não cadastrados
+                $('#triagem-nao-cadastrada').css('display', 'flex');
+
+                // Erro
+                reject(err);
+            }
+        });
+    })
 }
 
 // Função para carregar os dados do diagnóstico
 function carregarDadosDiagnostico() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const idConsulta = urlParams.get("id_consulta");
 
-    if (!idConsulta) {
-        window.location.href = 'administrador-perfil.html';
-        return;
-    }
-
-    // Monta a url passando o parâmetro
-    const url = `${URL_API}/diagnostico?id_consulta=${idConsulta}`;
-
-    $.ajax({
-        url: url,
-        method: "GET",
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`
-        },
-        success: (res) => {
-            // Obtém o diagnóstico
-            const diagnostico = res.diagnostico;
-
-            // ===== Preenche os campos e desabilita ===== //
-            $("#diagnostico")
-                .text(diagnostico.diagnostico)
-                .prop('disabled', true);
-            $("#receita")
-                .text(diagnostico.receita)
-                .prop('disabled', true);
-
-            // Esconde o botão de alta
-            $('#btn-alta').hide();
-        },
-        error: (err) => {
-            if (err.responseJSON?.logout) {
-                localStorage.clear();
-                localStorage.setItem("msg-logout", err.responseJSON.error);
-                return window.location.href = "index.html";
-            }
-
-            $("#diagnostico")
-                .text('Ainda não cadastrado.')
-            $("#receita")
-                .text('Ainda não cadastrado.')
-
-            alertMsg(err.responseJSON.error, "error", "#div-msg-modal");
+    return new Promise((resolve, reject) => {
+    
+        const urlParams = new URLSearchParams(window.location.search);
+        const idConsulta = urlParams.get("id_consulta");
+    
+        if (!idConsulta) {
+            window.location.href = 'administrador-perfil.html';
+            return;
         }
-    });
+    
+        // Monta a url passando o parâmetro
+        const url = `${URL_API}/diagnostico?id_consulta=${idConsulta}`;
+    
+        $.ajax({
+            url: url,
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            },
+            success: (res) => {
+                // Obtém o diagnóstico
+                const diagnostico = res.diagnostico;
+    
+                // ===== Preenche os campos e desabilita ===== //
+                $("#diagnostico")
+                    .text(diagnostico.diagnostico)
+                    .prop('disabled', true);
+                $("#receita")
+                    .text(diagnostico.receita)
+                    .prop('disabled', true);
+                $("#enfermagem")
+                    .text(diagnostico.enfermagem || 'N/A')
+                    .prop('disabled', true);
+    
+                // Esconde o botão de alta e exibe os botões de exportar receita
+                $('#btn-alta').hide();
+                $('.div-btns-pdf').css('display', 'flex');
+    
+                // Não exibe o botão de exportar receita de enfermagem se não tiver receita
+                if (!diagnostico.enfermagem) {
+                    $('#btn-receita-enfermagem').hide();
+                }
+    
+                // Busca pela mensagem de sucesso no local storage
+                const msgSucesso = localStorage.getItem('diagnosticoCadastrado');
+                
+                // Exibe a mensagem de sucesso se tiver
+                if (msgSucesso) {
+                    alertMsg(msgSucesso, 'success', '.div-message');
+                    localStorage.removeItem('diagnosticoCadastrado');
+                }
 
-    // ===== Preenche os campos e desabilita ===== //
-    $("#diagnostico")
-        .prop('disabled', true);
-    $("#receita")
-        .prop('disabled', true);
+                // ===== Preenche os campos e desabilita ===== //
+                $("#diagnostico")
+                    .prop('disabled', true);
+                $("#receita")
+                    .prop('disabled', true);
+            
+                // Esconde o botão de alta
+                $('#btn-alta').hide();
+                
+                // Sucesso
+                resolve();
 
-    // Esconde o botão de alta
-    $('#btn-alta').hide();
+            },
+            error: (err) => {
+                if (err.responseJSON?.logout) {
+                    localStorage.clear();
+                    localStorage.setItem("msg-logout", err.responseJSON.error);
+                    return window.location.href = "index.html";
+                }
+    
+                // Redireciona para o perfil do administrador
+                window.location.href = 'administrador-perfil.html';
+
+                // Erro
+                reject(err);
+            }
+        });
+    })
 }
 
 // Função para criar a etiqueta de prioridade
@@ -336,6 +377,7 @@ function showInputEmpty() {
         return;
     }
 
+
     // Desfoca a textarea
     unfocusInput(receita);
 }
@@ -367,6 +409,7 @@ $('.formulario-container').on('submit', function (e) {
     const data = {
         diagnostico: formData.get('diagnostico'),
         receita: formData.get('receita'),
+        enfermagem: formData.get('enfermagem'),
         cpf: cpf
     }
 
@@ -380,11 +423,10 @@ $('.formulario-container').on('submit', function (e) {
         },
         data: JSON.stringify(data),
         success: (res) => {
-            // Salva a mensagem
-            localStorage.setItem('diagnostico-cadastrado', res.success);
+            // Exibe a mensagem de sucesso
+            localStorage.setItem('diagnosticoCadastrado', res.success);
 
-            // Redireciona para a página do enfermeiro
-            return window.location.href = 'medico-perfil.html';
+            return window.location.href = `diagnostico.html?id_consulta=${res.id_consulta}`;
         },
         error: (err) => {
             // Logout true     
@@ -392,7 +434,7 @@ $('.formulario-container').on('submit', function (e) {
                 // Limpa o local storage
                 localStorage.clear();
                 // Salva a mensagem 
-                localStorage.setItem('msg-logout', err.responseJSON.error);
+                localStorage.setItem('div-message', err.responseJSON.error);
                 // Redireciona para login
                 return window.location.href = 'index.html';
             }
@@ -405,3 +447,30 @@ $('.formulario-container').on('submit', function (e) {
         }
     })
 })
+
+// Evento de clique nos botões de exportação
+$('.btn-export').on('click', function (e) {
+    e.preventDefault();
+
+    // Obtém o token
+    const token = localStorage.getItem('token');
+
+    // Redireciona para login se não tiver token
+    if (!token) {
+        localStorage.clear();
+        return window.location.href = 'index.html';
+    }
+
+    // Obtém os parâmetros da URL (ex: ?id_consulta=5)
+    const urlParams = new URLSearchParams(window.location.search);
+    const idConsulta = urlParams.get("id_consulta");
+
+    // Identifica o tipo de receita que o botão representa
+    const tipo = $(this).data('tipo'); // "paciente" ou "enfermagem"
+
+    // Monta a URL da rota
+    const url = `${URL_API}/relatorio/receita/${tipo}/${idConsulta}`;
+
+    // Abre o pdf em uma nova aba
+    window.open(url, '_blank');
+});

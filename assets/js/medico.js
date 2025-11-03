@@ -58,6 +58,7 @@ $(document).ready(async () => {
     // Evento click
     addMoreDetailsMenu("#menu-entrada", ".details-entrada");
     addMoreDetailsMenu("#menu-diagnostico", ".details-diagnostico");
+    addMoreDetailsMenu("#menu-abrir-diagnostico", ".ver-details-diagnostico");
     
     // Retira a tela de loading
     hideLoading();
@@ -278,13 +279,14 @@ function addConsulta(consulta, situacao) {
     const iconAcao = $("<td></td>")
         .append(iconeMoreDetails)
         .attr("cpf", consulta.cpf)
+        .attr("id_consulta", consulta.id_consulta)
         .addClass("td-time")
         .addClass(
             situacao == 3
                 ? "details-entrada"
                 : situacao == 4
                     ? "details-diagnostico"
-                    : ""
+                    : situacao == 5 ? "ver-details-diagnostico" : ""
         ); // muda a class conforme a situação;
 
     // Adiciona os elementos ao tr
@@ -304,6 +306,7 @@ function addConsulta(consulta, situacao) {
 
 // Função para adicionar o menu de mais detalhes
 function addMoreDetailsMenu(menu, classIcon) {
+
     const $menu = $(menu);
 
     $(document).on("click", classIcon, function (e) {
@@ -313,6 +316,8 @@ function addMoreDetailsMenu(menu, classIcon) {
             $("#cpf-diagnostico").val($(this).attr("cpf"));
         } else if (menu === "#menu-entrada") {
             $("#cpf-entrada").val($(this).attr("cpf"));
+        } else if (menu === "#menu-abrir-diagnostico") {
+            $("#id-consulta-diagnostico").val($(this).attr("id_consulta"));
         }
 
         const btn = this;
@@ -494,8 +499,20 @@ $("#cadastrarDiagnostico").on("click", function () {
     let newUrl = `diagnostico.html?cpf=${encodeURIComponent(cpf)}`;
 
     // Redireciona para triagem
-    return (window.location.href = newUrl);
+    return window.location.href = newUrl;
 });
+
+// Função para abrir a tela de dianostico
+$('#abrirDiagnostico').on('click', function () {
+    // Obtém o id da consulta
+    const idConsulta = $('#id-consulta-diagnostico').val();
+
+    // Cria a url passado o id da consulta como parâmetro
+    let newUrl = `diagnostico.html?id_consulta=${idConsulta}`;
+
+    // Redireciona para o diagnostico cadastrado
+    return window.location.href = newUrl;
+})
 
 function startDiagnostico(cpf, idDivMsg) {
     // Obtém o token
