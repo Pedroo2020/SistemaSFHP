@@ -86,34 +86,34 @@ main {
 }
 
 
-/* From Uiverse.io by RaspberryBee */ 
+/* From Uiverse.io by RaspberryBee */
 .loading svg polyline {
-  fill: none;
-  stroke-width: 4.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+    fill: none;
+    stroke-width: 4.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 .loading svg polyline#back {
-  fill: none;
+    fill: none;
 }
 
 .loading svg polyline#front {
-  fill: none;
-  stroke: var(--blue-dark);
-  stroke-dasharray: 72, 216;
-  stroke-dashoffset: 288;
-  animation: dash_682 1s linear infinite;
+    fill: none;
+    stroke: var(--blue-dark);
+    stroke-dasharray: 72, 216;
+    stroke-dashoffset: 288;
+    animation: dash_682 1s linear infinite;
 }
 
 @keyframes dash_682 {
-  72.5% {
-    opacity: 0;
-  }
+    72.5% {
+        opacity: 0;
+    }
 
-  to {
-    stroke-dashoffset: 0;
-  }
+    to {
+        stroke-dashoffset: 0;
+    }
 }
 
 #div-loading {
@@ -211,6 +211,42 @@ main {
     & .last-att {
         font-size: 0.95rem;
         color: var(--gray-dark);
+    }
+}
+
+.container-filtro-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.div-container-last-att {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 15px;
+}
+
+.filtro-date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    & .div-input-date {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: inherit;
+
+        & input {
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: var(--gray-100);
+            font-size: 1rem;
+        }
     }
 }
 
@@ -742,6 +778,11 @@ thead th {
         width: 100%;
     }
 
+    .container-filtro-btn {
+        flex-direction: column-reverse;
+        align-items: flex-end;
+    }
+
 }
 
 @media (max-width: 960px) {
@@ -786,16 +827,29 @@ thead th {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 920px) {
 
     .header {
         padding: 10px;
+    }
+
+    .div-container-last-att {
+        align-items: flex-start;
     }
 
     .container-painel {
         flex-direction: column;
         align-items: flex-start !important;
         gap: 20px;
+    }
+
+    .div-container-last-att {
+        width: 100%;
+    }
+
+    .container-filtro-btn {
+        width: 100%;
+        align-items: center;
     }
 
     .container-btn {
@@ -935,10 +989,32 @@ thead th {
     }
 }
 
-@media (max-width: 376px) {
+@media (max-width: 480px) {
+
+    & .a {
+        & button {
+            font-size: 0.8rem !important;
+        }
+    }
 
     .last-att {
-        font-size: 0.85rem !important;
+        font-size: 0.8rem;
+    }
+
+    .filtro-date {
+        flex-direction: column;
+
+        & .div-input-date {
+            
+            & p {
+                font-size: 0.85rem;
+            }
+
+            & input {
+                font-size: 0.85rem;
+            }
+
+        }
     }
 }
 

@@ -1,17 +1,39 @@
 // Funções para formatar
 import { formatCPF, formatSUS, formatTelefone, formatarNumeroSUS, formatarNumeroTelefone, formatarMinutos, formatarNumeroCPF } from './components/format.js';
 // Fução para remover caracteres nao numericos
-import { getNumber, alertMsg, abledScroll, disabledScroll, carregarTotalPacitentes } from './components/utils.js';
+import { getNumber, alertMsg, abledScroll, disabledScroll, carregarTotalPacitentes, getTodayInputDate } from './components/utils.js';
 // Importa a URL da API
 import { URL_API } from './urlAPI.js';
 
-// Ao carregar a página, adiciona as formatações ao input
-$(document).ready(async () => {
-    await formatCPF('#input-cpf');
-    await formatCPF('#cpf-consulta');
 
-    await carregarTotalPacitentes($("#totalPacientes"), $("#casosUrgentes"), $("#tempoMedioEspera"));
-})
+// Função para adicionar os eventos on change aos inputs de data
+function onChangeInputDate(inputDateStart, inputDateEnd) {
+
+    inputDateStart.on('change', function () {
+
+        let dateInputStart = inputDateStart.val();
+        let dateInputEnd = inputDateEnd.val();
+
+        if (dateInputStart > dateInputEnd) {
+            inputDateStart.val(dateInputEnd);
+        }
+
+        recarregarConsultas();
+    })
+
+    inputDateEnd.on('change', function () {
+
+        let dateInputStart = inputDateStart.val();
+        let dateInputEnd = inputDateEnd.val();
+
+        if (dateInputEnd < dateInputStart) {
+            inputDateEnd.val(dateInputStart);
+        }
+
+        recarregarConsultas();
+    })
+
+}
 
 // Obtém os botões
 const botaoNovoPaciente = $('.btn-novo-paciente');
@@ -85,8 +107,8 @@ function buscarCPF(cpfOnlyNumber, showMsg) {
             if (!user.ativo) {
                 alertMsg('Usuário inativo.', 'error', '#div-msg-modal');
                 return;
-            } 
-            
+            }
+
             // Mensagem de sucesso
             if (showMsg) {
                 alertMsg('Usuário encontrado.', 'success', '#div-msg-modal');
@@ -270,13 +292,6 @@ formConsulta.on('submit', function (e) {
 })
 
 // Função para mostrar tela loading e desabilitar scroll
-function showLoading() {
-    $('#div-loading').css('display', 'flex');
-    // Desabilita o scroll
-    disabledScroll($(document.body));
-}
-
-// Função para mostrar tela loading e desabilitar scroll
 function hideLoading() {
     $('#div-loading').hide();
     // Habilita o scroll
@@ -288,7 +303,20 @@ $(document).ready(async () => {
 
     // Carrega as consultas na fase de entrada
     await carregarConsultas('1');
-    
+
+    // Adicionando os ventos on change aos inputs date
+    await onChangeInputDate($('#filtro-date-start'), $('#filtro-date-end'));
+
+    // Obtendo a data atual
+    await getTodayInputDate($('#filtro-date-start'), $('#filtro-date-end'));
+
+    // Função para carregar os dados do painel
+    await carregarTotalPacitentes($("#totalPacientes"), $("#casosUrgentes"), $("#tempoMedioEspera"), $('#filtro-date-start').val(), $('#filtro-date-end').val());
+
+    // Adiciona formatação aos inputs de cpf
+    await formatCPF('#input-cpf');
+    await formatCPF('#cpf-consulta');
+
     // Retira a tela de loading
     hideLoading();
 
@@ -330,9 +358,9 @@ function recarregarConsultas() {
     if (situacao) {
         carregarConsultas(situacao, like);
     }
-    
+
     // Recarrega os dados do painel
-    carregarTotalPacitentes($("#totalPacientes"), $("#casosUrgentes"), $("#tempoMedioEspera"));
+    carregarTotalPacitentes($("#totalPacientes"), $("#casosUrgentes"), $("#tempoMedioEspera"), $('#filtro-date-start').val(), $('#filtro-date-end').val());
 }
 
 // Função para carregar consultas
@@ -548,7 +576,7 @@ $('#input-search-usuario').on('input', function () {
         if ($item.hasClass('active')) {
             // Obtém a situação do filtro
             const situacao = $item.attr('sit');
-            
+
             // Carrega as consultas
             carregarConsultas(situacao, like);
         }
@@ -581,7 +609,7 @@ function ableDisableInputs(form, boolean) {
 }
 
 // Botão de ativar modo de edição
-$('#btn-edit-paciente').click( function () {
+$('#btn-edit-paciente').click(function () {
 
     if ($('#btn-edit-paciente').hasClass('on')) {
         // Desabilita a ediçaõ
@@ -614,7 +642,7 @@ function habilitarDesabilitarEdicao(editon, canceled) {
             .removeClass('off')
             .addClass('on')
             .text('Cancelar');
-            
+
         // Habilita os botões
         ableDisableInputs('#form-consulta', false);
 

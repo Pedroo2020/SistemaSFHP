@@ -3,14 +3,7 @@ import { URL_API } from './urlAPI.js';
 // Função para formatar os Minutos
 import { formatarMinutos } from './components/format.js';
 // Função para mostrar mensagens de alerta
-import { alertMsg, carregarTotalPacitentes } from './components/utils.js';
-
-// Função para mostrar tela loading e desabilitar scroll
-function showLoading() {
-    $('#div-loading').css('display', 'flex');
-    // Desabilita o scroll
-    disabledScroll($(document.body));
-}
+import { alertMsg, carregarTotalPacitentes, getTodayInputDate } from './components/utils.js';
 
 // Função para mostrar tela loading e desabilitar scroll
 function hideLoading() {
@@ -19,13 +12,49 @@ function hideLoading() {
     abledScroll($(document.body));
 }
 
+// Função para adicionar os eventos on change aos inputs de data
+function onChangeInputDate(inputDateStart, inputDateEnd) {
+    
+    inputDateStart.on('change', function() {
+
+        let dateInputStart = inputDateStart.val();
+        let dateInputEnd = inputDateEnd.val();
+
+        if (dateInputStart > dateInputEnd) {
+            inputDateStart.val(dateInputEnd);
+        }
+
+        recarregarConsultas();
+    })
+
+    inputDateEnd.on('change', function() {
+
+        let dateInputStart = inputDateStart.val();
+        let dateInputEnd = inputDateEnd.val();
+
+        if (dateInputEnd < dateInputStart) {
+            inputDateEnd.val(dateInputStart);
+        }
+
+        recarregarConsultas();
+    })
+    
+}
+
 // Carrega a tabela ao carregar a página
 $(document).ready(async () => {
 
     // Carrega as consultas na fase de entrada
     await carregarConsultas(false, 1);
 
-    await carregarTotalPacitentes($("#totalPacientes"), $("#casosUrgentes"), $("#tempoMedioEspera"));
+    // Adicionando os ventos on change aos inputs date
+    await onChangeInputDate($('#filtro-date-start'), $('#filtro-date-end'));
+
+    // Obtendo a data atual
+    await getTodayInputDate($('#filtro-date-start'), $('#filtro-date-end'));
+
+    // Função para carregar os dados do painel
+    await carregarTotalPacitentes($("#totalPacientes"), $("#casosUrgentes"), $("#tempoMedioEspera"), $('#filtro-date-start').val(), $('#filtro-date-end').val());
 
     // Evento click
     addMoreDetailsMenu('#menu-entrada', '.details-entrada');
@@ -94,7 +123,7 @@ function recarregarConsultas() {
     }
 
     // Recarrega os dados do painel
-    carregarTotalPacitentes($("#totalPacientes"), $("#casosUrgentes"), $("#tempoMedioEspera"));
+    carregarTotalPacitentes($("#totalPacientes"), $("#casosUrgentes"), $("#tempoMedioEspera"), $('#filtro-date-start').val(), $('#filtro-date-end').val());
 }
 
 // Função para carregar consultas

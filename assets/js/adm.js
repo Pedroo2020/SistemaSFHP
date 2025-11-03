@@ -1,7 +1,7 @@
 // Importa a URL da API
 import { URL_API } from './urlAPI.js';
 // Função para calcular idade e remover caracteres nao numericos
-import { calcularIdade, getNumber, alertMsg, carregarTotalPacitentes } from './components/utils.js';
+import { calcularIdade, getNumber, alertMsg, carregarTotalPacitentes, getTodayInputDate } from './components/utils.js';
 // Funções para formatar
 import { formatCPF, formatTelefone, formatSUS, formatarNumeroCPF, formatarNumeroTelefone, formatarNumeroSUS } from './components/format.js';
 
@@ -33,6 +33,38 @@ fecharModalAdicionarUsuario.click(() => {
     abledScroll();
     $('#modalNovoUsuario').find('input, textarea').val('');
 });
+
+
+// Função para adicionar os eventos on change aos inputs de data
+function onChangeInputDate(inputDateStart, inputDateEnd) {
+
+    inputDateStart.on('change', function () {
+
+        let dateInputStart = inputDateStart.val();
+        let dateInputEnd = inputDateEnd.val();
+
+        if (dateInputStart > dateInputEnd) {
+            inputDateStart.val(dateInputEnd);
+        }
+
+        // Função para carregar os dados do painel
+        carregarTotalPacitentes($("#totalPacientes"), $("#totalConsultas"), $("#tempoMedioEspera"), $('#filtro-date-start').val(), $('#filtro-date-end').val(), true);
+    })
+
+    inputDateEnd.on('change', function () {
+
+        let dateInputStart = inputDateStart.val();
+        let dateInputEnd = inputDateEnd.val();
+
+        if (dateInputEnd < dateInputStart) {
+            inputDateEnd.val(dateInputStart);
+        }
+
+        // Função para carregar os dados do painel
+        carregarTotalPacitentes($("#totalPacientes"), $("#totalConsultas"), $("#tempoMedioEspera"), $('#filtro-date-start').val(), $('#filtro-date-end').val(), true);
+    })
+
+}
 
 // Função para carregar os usuários
 function carregarUsuarios(tipoUsuario, like) {
@@ -162,7 +194,7 @@ $('#input-search-usuario').on('input', function () {
         if ($item.hasClass('active')) {
             // Obtém a situação do filtro
             const situacao = $item.attr('sit');
-            
+
             // Carrega as consultas
             carregarUsuarios(situacao, like);
         }
@@ -248,15 +280,21 @@ function hideLoading() {
 
 // Puxar dados da API para montar a tabela
 $(document).ready(async function () {
+    // Carrega a tabela de usuarios
     await carregarUsuarios();
 
-    // Carrega os dados do painel
-    await carregarTotalPacitentes($("#totalPacientes"), $("#totalConsultas"), $("#tempoMedioEspera"), true);
+    // Adicionando os ventos on change aos inputs date
+    await onChangeInputDate($('#filtro-date-start'), $('#filtro-date-end'));
+
+    // Obtendo a data atual
+    await getTodayInputDate($('#filtro-date-start'), $('#filtro-date-end'));
+
+    // Função para carregar os dados do painel
+    await carregarTotalPacitentes($("#totalPacientes"), $("#totalConsultas"), $("#tempoMedioEspera"), $('#filtro-date-start').val(), $('#filtro-date-end').val(), true);
 
     // Retira a tela de loading
     hideLoading();
 });
-
 
 // Clique no ícone "..." para abrir modal editar usuário
 $(document).on("click", ".icon-more-details", function () {

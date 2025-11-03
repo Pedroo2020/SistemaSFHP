@@ -56,9 +56,8 @@ function abledScroll(body) {
     $(body).css('overflow', 'auto');
 }
 
-// Função para carregar total de pacientes e o total de casos urgentes
-function carregarTotalPacitentes(blocoUmText, blocoDoisText, tempoMedioText, isAdm) {
-
+// Obter data de hoje
+function getToday() {
     // Cria um objeto date
     const date = new Date();
 
@@ -68,7 +67,21 @@ function carregarTotalPacitentes(blocoUmText, blocoDoisText, tempoMedioText, isA
     const dia = String(date.getDate()).padStart(2, '0');
 
     // Cria a string da data formatada
-    const hoje = `${ano}-${mes}-${dia}`;
+    return `${ano}-${mes}-${dia}`;
+}
+
+// Função para pegar a data de hoje
+function getTodayInputDate(inputDateStart, inputDateEnd) {
+    
+    const hoje = getToday();
+
+    // Atualiza os valores do input para hoje
+    inputDateEnd.val(hoje);
+    inputDateStart.val(hoje);
+}
+
+// Função para carregar total de pacientes e o total de casos urgentes
+function carregarTotalPacitentes(blocoUmText, blocoDoisText, tempoMedioText, dateStart, dateEnd, isAdm) {
 
     // Cria o objeto url
     const url = new URLSearchParams();
@@ -76,8 +89,8 @@ function carregarTotalPacitentes(blocoUmText, blocoDoisText, tempoMedioText, isA
     // Define os parâmetros i (início) e f (fim)
 
     // VALOR FIXO NO CÓDIGO
-    url.set('i', '2025-01-01');
-    url.set('f', hoje);
+    url.set('i', dateStart);
+    url.set('f', dateEnd);
 
     // Faz a requisição
     $.ajax({
@@ -114,4 +127,4 @@ function carregarTotalPacitentes(blocoUmText, blocoDoisText, tempoMedioText, isA
     });
 }
 
-export { calcularIdade, getNumber, alertMsg, disabledScroll, abledScroll, carregarTotalPacitentes };
+export { calcularIdade, getNumber, alertMsg, disabledScroll, abledScroll, getTodayInputDate, getToday, carregarTotalPacitentes };
