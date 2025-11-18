@@ -6,13 +6,6 @@ import { formatarNumeroCPF, formatarNumeroTelefone, formatarPressaoArterial } fr
 import { calcularIdade, alertMsg, abledScroll, disabledScroll } from './components/utils.js'
 
 // Função para mostrar tela loading e desabilitar scroll
-function showLoading() {
-    $('#div-loading').css('display', 'flex');
-    // Desabilita o scroll
-    disabledScroll($(document.body));
-}
-
-// Função para mostrar tela loading e desabilitar scroll
 function hideLoading() {
     $('#div-loading').hide();
     // Habilita o scroll
