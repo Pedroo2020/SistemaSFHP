@@ -528,7 +528,6 @@ function addConsulta(consulta) {
         .append(entrada)
         .append(tempoDecorrido)
         .append(etapa)
-        .append(iconAcao)
 
     // Adiciona ao tbody
     $tbody.append($tr);

@@ -393,7 +393,6 @@ main {
     border-radius: 50%;
     border: 1px solid var(--gray-300);
     transition: background-color 0.3s, border-color 0.3s;
-    cursor: pointer;
 }
 
 .niveis-dor input[type="radio"]:checked+label {
