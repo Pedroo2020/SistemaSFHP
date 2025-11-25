@@ -298,4 +298,94 @@ function formatarTempo(value) {
     return `${horas}h ${minutos}min`
 }
 
-export { formatCPF, formatSUS, formatTelefone, formatarNumeroSUS, formatarNumeroTelefone, formatarMinutos, maskInputTemperature, maskInputNumber, formatarNumeroCPF, formatarPressaoArterial, formatarTempo };
+function formatCOREN(el) {
+    let raw = el.val();
+    let before = raw; // valor antes da formatação
+
+    // Detecta se está apagando (inputType só funciona no jQuery >= 3.6)
+    let isDeleting = el.data("last") && el.data("last").length > raw.length;
+    el.data("last", raw);
+
+    // Remove qualquer caracter que não seja letra/número
+    let clean = raw.replace(/[^A-Za-z0-9]/g, "");
+
+    // UF (2 letras)
+    let uf = clean.match(/^[A-Za-z]{0,2}/)[0].toUpperCase();
+
+    // resto após UF
+    let rest = clean.slice(uf.length);
+
+    // números (6 máximo)
+    let nums = rest.replace(/[^0-9]/g, "").slice(0, 6);
+
+    // letras finais (3 máximo)
+    let letras = rest.replace(/[0-9]/g, "").slice(0, 3).toUpperCase();
+
+    // MONTA A FORMATAÇÃO
+    let out = "";
+
+    if (uf.length) out += uf;
+
+    if (nums.length) {
+        out += " ";
+
+        if (nums.length <= 3) {
+            out += nums;
+        } else {
+            out += nums.slice(0, 3) + "." + nums.slice(3);
+        }
+    }
+
+    // Só coloca "-" quando NÃO estiver apagando
+    if (!isDeleting && nums.length === 6) {
+        out += "-";
+    }
+
+    // Só coloca sufixo se o "-" existir
+    if (nums.length === 6 && !isDeleting) {
+        out += letras;
+    }
+
+    // Atualiza valor final
+    el.val(out);
+}
+
+function formatCRM(el) {
+    const prefix = "CRM/";
+    let val = el.val();
+    const input = el.get(0);
+
+    // Salva posição do cursor ANTES de formatar
+    let cursorPos = input.selectionStart;
+
+    // Impede apagar o prefixo
+    if (!val.startsWith(prefix)) {
+        val = prefix;
+    }
+
+    let rest = val.slice(prefix.length);
+
+    // UF: permite apagar normalmente
+    let uf = rest.replace(/[^A-Za-z]/g, "").toUpperCase().slice(0, 2);
+
+    // Números: até 6
+    let nums = rest.replace(/\D/g, "").slice(0, 6);
+
+    // Monta final
+    let final = prefix + uf + (uf.length === 2 ? " " : "") + nums;
+    el.val(final);
+
+    // ---- Correção DO CURSOR ----
+    // Se tentar entrar dentro do prefixo, joga para depois
+    if (cursorPos < prefix.length) {
+        cursorPos = prefix.length;
+    }
+
+    // Restaura cursor corretamente
+    setTimeout(() => {
+        input.setSelectionRange(cursorPos, cursorPos);
+    }, 0);
+}
+
+export { formatCPF, formatSUS, formatTelefone, formatarNumeroSUS, formatarNumeroTelefone, formatarMinutos, maskInputTemperature, maskInputNumber, formatarNumeroCPF, formatarPressaoArterial, formatarTempo, formatCOREN,
+formatCRM };

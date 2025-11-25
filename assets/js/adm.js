@@ -3,7 +3,7 @@ import { URL_API } from './urlAPI.js';
 // Função para calcular idade e remover caracteres nao numericos
 import { calcularIdade, getNumber, alertMsg, carregarTotalPacitentes, getTodayInputDate } from './components/utils.js';
 // Funções para formatar
-import { formatCPF, formatTelefone, formatSUS, formatarNumeroCPF, formatarNumeroTelefone, formatarNumeroSUS } from './components/format.js';
+import { formatCPF, formatTelefone, formatSUS, formatarNumeroCPF, formatarNumeroTelefone, formatarNumeroSUS, formatCOREN, formatCRM } from './components/format.js';
 
 // Função para desabilitar o scroll
 function disabledScroll() {
@@ -519,17 +519,50 @@ $(document).ready(function () {
 // Cadastrar Usuários
 $(document).ready(function () {
 
-    // Formtação do input de CPF
+    // Formatação CPF
     formatCPF($('#cpf-cadastro'));
     formatCPF($('#cpf-editar'));
 
-    // Formatação do input de Telefone
+    // Formatação Telefone
     formatTelefone($('#telefone-cadastro'));
     formatTelefone($('#telefone-editar'));
 
-    // Formatação do input do Número do Sus
+    // Formatação SUS
     formatSUS($('#sus-cadastro'));
     formatSUS($('#sus-editar'));
+
+    /* -----------------------------
+       COREN (ENFERMEIRO)
+    ----------------------------- */
+
+    // Formatação Coren - Cadastro
+    $('#coren-cadastro').on('input', function () {
+        formatCOREN($(this));
+    });
+
+    // Formatação Coren - Edição
+    $('#coren-editar').on('input', function () {
+        formatCOREN($(this));
+    });
+
+    /* -----------------------------
+       CRM (MÉDICO)
+    ----------------------------- */
+
+    // Formatação CRM - Cadastro
+    $('#crm-cadastro')
+        .val("CRM/")
+        .on('input', function () {
+            formatCRM($(this));
+        });
+
+    // Formatação CRM - Edição
+    $('#crm-editar')
+        .val("CRM/")
+        .on('input', function () {
+            formatCRM($(this));
+        });
+
 
     $("#form-cadastro").on("submit", function (e) {
         e.preventDefault();
