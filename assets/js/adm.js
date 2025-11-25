@@ -960,7 +960,7 @@ function criarLabelConsulta(consulta) {
         $('<p></p>')
             .text(consulta.situacao)
             .addClass('situacao-consulta')
-            .addClass(consulta.situacao === 'Alta' ? 'concluido' : 'em-andamento')
+            .addClass(consulta.situacao === 'Alta recebida' ? 'concluido' : 'em-andamento')
     );
 
     // Cria um objeto date
